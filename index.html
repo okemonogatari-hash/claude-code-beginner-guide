@@ -181,6 +181,18 @@ section{padding:100px 24px;position:relative}
 .faq-item.open .faq-q .arrow{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;background:var(--c-bg)}
 .faq-item.open .faq-a{max-height:600px}
+.faq-item.long.open .faq-a{max-height:2400px}
+.faq-quote{font-family:var(--font-serif);font-size:13.5px;line-height:1.95;color:var(--c-text);background:#fff;border-left:3px solid var(--c-accent);padding:12px 18px;margin:8px 0;border-radius:0 6px 6px 0}
+.faq-quote .ts{font-family:var(--font-en);font-size:11px;color:var(--c-accent-deep);letter-spacing:.06em;margin-right:6px;font-weight:600}
+.faq-quote em{color:var(--c-accent-deep);font-style:normal;font-weight:600;background:rgba(232,181,122,.15);padding:1px 4px;border-radius:3px}
+.faq-cautionbox{background:rgba(216,140,140,.08);border-left:3px solid var(--c-warn);padding:12px 18px;margin:14px 0;border-radius:0 6px 6px 0;font-size:13px;line-height:1.95;color:var(--c-text)}
+.faq-tablebox{margin:14px 0;background:#fff;border:1px solid var(--c-line);border-radius:6px;overflow:hidden}
+.faq-tablebox table{width:100%;border-collapse:collapse;font-size:13px}
+.faq-tablebox th,.faq-tablebox td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--c-line)}
+.faq-tablebox th{background:var(--c-bg);font-family:var(--font-serif);font-weight:500;color:var(--c-text);font-size:12.5px;letter-spacing:.04em}
+.faq-tablebox tr:last-child td{border-bottom:none}
+.faq-tablebox td:first-child{color:var(--c-text-sub);width:46%}
+.faq-tablebox td:last-child{font-weight:600;color:var(--c-main-deep)}
 .faq-a-inner{padding:18px 26px 22px;font-size:13.5px;line-height:2;color:var(--c-text);padding-left:60px;position:relative}
 .faq-a-inner::before{content:'A.';position:absolute;left:26px;top:14px;font-family:var(--font-serif);color:var(--c-accent-deep);font-size:20px;font-weight:500}
 
@@ -784,19 +796,100 @@ section{padding:100px 24px;position:relative}
         </div></div>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item long">
         <div class="faq-q"><span>「バイパス権限モード」ってオンにすべき？聞かれっぱなしで進まへん…</span><span class="arrow">+</span></div>
         <div class="faq-a"><div class="faq-a-inner">
-          学長は <strong>4/26のライブ</strong> でこう言うてたで〜🦁<br><br>
-          <strong>「普段パソコンの前におる時は『自動モード』、出かける時とか作業止まったら困る時は『許可をバイパスモード』にしとくと、もう一いち聞かれへん」</strong><br>
-          （※ 警告は色々されるけど、ま、出かける時とかはバイパス推奨やって）<br><br>
-          ⚠️ <strong>注意：MAXプラン限定の機能っぽい</strong>。学長も「プロプランやったらこの方法は使えへんぽい」って言うてた。プロプランの人は素直に「許可確認」モードのまま進めるんが安心やで〜。<br><br>
-          <strong>📍 もしモード選択肢に「バイパス」が出てへん時の出し方：</strong><br>
-          ① Claude（クロード）アプリの <strong>設定画面</strong> を開く<br>
-          ② 左メニューの <strong>「Claude Code」</strong> を選ぶ<br>
-          ③ <strong>「バイパス編集権限モード許可」</strong> にチェック<br>
-          ④ そしたら入力欄の下のモード選択肢に「バイパス」が出てくるで〜<br><br>
-          ソース：<a href="https://www.youtube.com/watch?v=G5ZKyxrs4lk&t=3202s" target="_blank" rel="noopener">両学長 4/26ライブ「日曜日AI使って遊ぶよ実演アリ」</a> の 00:53〜00:57 あたりや。
+
+          <div class="faq-cautionbox">
+            ⚠️ <strong>ここは慎重に判断したいとこやで。</strong> Claude Code界隈でも「便利」と「危ない」で意見が分かれてる話や。<br>
+            まず学長の生発言をそのまま読んで、自分のスタイルに合うか考えてから決めてな〜。
+          </div>
+
+          <p style="margin-top:14px;margin-bottom:6px;font-weight:600;color:var(--c-text);">🦁 学長の発言（4/26ライブ「日曜日AI使って遊ぶよ実演アリ」00:53〜00:58）</p>
+
+          <div class="faq-quote">
+            <span class="ts">00:54:18</span>これを、ま、許可をバイパスっていうのにするともう、あんまり聞かれなくなりますよ。<em>ただ、ま、結構警告はされますけどね</em>。
+          </div>
+
+          <div class="faq-quote">
+            <span class="ts">00:54:21</span>なんか、ま、<em>普段はパソコンの前にいる時とかで作業する時は、自動モードにしといて</em>、どうしても出ちゃうとか、作業止まったら困るとかだったら、ま、<em>許可をバイパスモードとかでいいのかな</em>と思いますけどね。
+          </div>
+
+          <div class="faq-quote">
+            <span class="ts">00:54:31</span>ま、<em>全部全バイパスモードが最近追加された</em>んですよ。今まではこれを直接黒コに言わないといけなかったんだけど、ま、いろんなモードができたので。
+          </div>
+
+          <div class="faq-quote">
+            <span class="ts">00:57:01</span>バイパス、許可をバイパスっていうのがこれにしとくと、ま、<em>出かける時とかあのビューっと言ってくれますけどね</em>。
+          </div>
+
+          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">📌 プラン別の話 ──「プロプランは使えへんぽい」→ 配信中に視聴者から訂正</p>
+
+          <p style="font-size:13px;color:var(--c-text-sub);margin-bottom:8px;">学長は最初「自動モードはMAXプラン限定かも」って言うてたんやけど、配信中に視聴者から指摘があってこう訂正してる👇</p>
+
+          <div class="faq-quote">
+            <span class="ts">00:57:18</span>あとは、あ、<em>自動はマックスプランだけなんや</em>。あ、そうなんや。これはマックスプランだけか。僕マックスプランにしてたからごめんね。じゃあ<em>プロプランやったらこの方法は使えへんぽい</em>。
+          </div>
+
+          <div class="faq-quote">
+            <span class="ts">00:57:58</span>ちょっと待ってよ。あ、<em>プロプランもできますよって言ってる</em>。プロプランもありがとう。情報教えてくれて。<em>プロプランでもできるってよかった</em>。
+          </div>
+
+          <div class="faq-quote">
+            <span class="ts">00:58:14</span>多分あのさっきの設定のところで設定してないからグレーアウトされてて使えないって勘違いがしちゃったのかな。<em>マックスプランじゃなくてもできるんですって</em>。多分設定で有効化になってなかったんだと思いますね。
+          </div>
+
+          <p style="font-size:13px;line-height:2;color:var(--c-text);margin-top:10px;">
+            → つまり <strong>プロプランでも、設定画面で「バイパス編集権限モード許可」にチェック入れたら使える</strong>、っていうのが配信中の最終結論や。
+          </p>
+
+          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">📋 学長おすすめ運用まとめ</p>
+
+          <div class="faq-tablebox">
+            <table>
+              <tr>
+                <th>シーン</th>
+                <th>おすすめモード</th>
+              </tr>
+              <tr>
+                <td>普段（パソコンの前にいる時）</td>
+                <td>自動モード</td>
+              </tr>
+              <tr>
+                <td>出かける時／作業止まったら困る時</td>
+                <td>許可をバイパスモード</td>
+              </tr>
+            </table>
+          </div>
+
+          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">⚠️ でも要注意（学長の生発言から拾える注意点）</p>
+
+          <ul style="font-size:13px;line-height:2.1;color:var(--c-text);padding-left:24px;margin-bottom:8px;">
+            <li><strong>「結構警告はされますけどね」</strong>（学長談）── 通知や警告がガンガン出る</li>
+            <li><strong>「最近追加されたんですよ」</strong>（学長談）── 新機能やからまだ動作が落ち着いてない可能性</li>
+            <li><strong>「出かける時とかあのビューっと言ってくれる」</strong>（学長談）── 出先のスマホとかにも通知来るかも</li>
+          </ul>
+
+          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">📍 設定方法（バイパスモードが選択肢に出ない時）</p>
+
+          <ol style="font-size:13px;line-height:2.1;color:var(--c-text);padding-left:24px;margin-bottom:14px;">
+            <li>Claude（クロード）アプリの <strong>設定画面</strong> を開く</li>
+            <li>左メニューの <strong>「Claude Code」</strong> を選ぶ</li>
+            <li><strong>「バイパス編集権限モード許可」</strong> にチェックを入れる</li>
+            <li>入力欄の下の選択肢に「バイパス」が出てくる</li>
+          </ol>
+
+          <div class="faq-cautionbox" style="border-left-color:var(--c-sub-deep);background:rgba(168,196,160,.1);">
+            🤔 <strong>おけもんからの一言</strong><br>
+            このモード、<strong>「便利」と「リスク」が表裏一体</strong>や。最初は安全側（許可確認）から始めて、慣れてきてから自動モード → 必要に応じてバイパスモード、っていう順番がおすすめやで。<br>
+            いきなりバイパスにすると「あれ、何が起きた？」が増えるからな〜。<strong>結局これは個人の判断に委ねられるところや</strong>。
+          </div>
+
+          <p style="font-size:12.5px;color:var(--c-text-sub);margin-top:16px;line-height:1.8;">
+            ソース：<a href="https://www.youtube.com/watch?v=G5ZKyxrs4lk&t=3202s" target="_blank" rel="noopener">両学長 4/26ライブ「日曜日AI使って遊ぶよ実演アリ」</a> の 00:53〜00:58 あたり。<br>
+            タイムスタンプ付きリンクなので、開いたら該当場面から再生されるで〜。
+          </p>
+
         </div></div>
       </div>
 
