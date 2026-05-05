@@ -3,656 +3,450 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code 触り出した人へ — 何から始めればいいの？</title>
+<title>公式30分セミナー｜虎の巻 別冊③</title>
+<meta name="description" content="Claude Codeを作った本人がAnthropic公式イベントで話した30分セミナーを、非エンジニア向けに翻訳した実践ガイド。「インストールはできた、で、何打てばいいの？」に答える5ステップ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #faf6f0;
-    --paper: #fff;
-    --ink: #2d2a26;
-    --muted: #7a756d;
-    --line: rgba(0,0,0,0.06);
-    --accent: #e17055;
-    --accent-soft: rgba(225,112,85,0.08);
-    --mint: #00b894;
-    --mint-soft: rgba(0,184,148,0.1);
-    --warn: #fdcb6e;
-    --warn-soft: rgba(253,203,110,0.15);
-    --rose: #e84393;
-    --rose-soft: rgba(232,67,147,0.08);
-    --sky: #74b9ff;
-    --sky-soft: rgba(116,185,255,0.12);
-    --sky-deep: #0984e3;
-    --honey-soft: rgba(253,203,110,0.18);
-    --shadow: 0 8px 30px rgba(0,0,0,0.06);
-    --radius: 20px;
-    --max: 880px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
-    background: var(--bg);
-    color: var(--ink);
-    line-height: 1.7;
-    padding: 24px 16px 80px;
-  }
-  .container { max-width: var(--max); margin: 0 auto; }
+:root{
+  --c-main:#7BAEC4;
+  --c-main-deep:#4F8CA8;
+  --c-accent:#E8B57A;
+  --c-accent-deep:#C28A45;
+  --c-sub:#A8C4A0;
+  --c-sub-deep:#759A6C;
+  --c-warn:#D88C8C;
+  --c-warn-deep:#B86A6A;
+  --c-bg:#FAF7F2;
+  --c-bg-soft:#F2EBDD;
+  --c-bg-deep:#EDE5D2;
+  --c-text:#3D3A35;
+  --c-text-sub:#7A7468;
+  --c-line:#E5DDC9;
+  --font-serif:'Noto Serif JP', serif;
+  --font-sans:'Noto Sans JP', sans-serif;
+  --font-en:'Inter', sans-serif;
+  --font-script:'Dancing Script', cursive;
+  --rainbow:linear-gradient(90deg,#7BAEC4 0%,#A8C4A0 35%,#E8D58A 65%,#E8B57A 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);color:var(--c-text);background:var(--c-bg);line-height:1.9;font-size:15px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:all .3s ease}
+p a, li a{color:var(--c-accent-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600}
+p a:hover, li a:hover{color:var(--c-accent);text-decoration-thickness:2px}
 
-  /* ヒーロー */
-  .hero {
-    background: linear-gradient(135deg, #fff8f0, #fff);
-    padding: 32px 28px;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    text-align: center;
-    margin-bottom: 28px;
-    border: 2px solid rgba(225,112,85,0.2);
-  }
-  .hero .badge {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 14px;
-    letter-spacing: 0.5px;
-  }
-  .hero h1 {
-    font-size: 26px;
-    font-weight: 800;
-    line-height: 1.4;
-    margin-bottom: 10px;
-  }
-  .hero .sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-  .hero .speaker {
-    font-size: 13px;
-    color: var(--accent);
-    font-weight: 600;
-  }
+/* ========== Header ========== */
+.header{position:fixed;top:0;left:0;width:100%;padding:16px 36px;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,242,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--c-line)}
+.logo{font-family:var(--font-serif);font-size:18px;font-weight:500;letter-spacing:.06em;color:var(--c-text)}
+.logo .mark{font-family:var(--font-script);font-size:26px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-right:6px}
+.back-link{font-size:13px;color:var(--c-text-sub);padding:8px 18px;border:1px solid var(--c-line);border-radius:999px;background:#fff;transition:all .3s}
+.back-link:hover{color:var(--c-main-deep);border-color:var(--c-main);transform:translateX(-3px)}
 
-  .section {
-    background: var(--paper);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    box-shadow: var(--shadow);
-    margin-bottom: 24px;
-  }
-  .section-title {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 18px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid var(--accent-soft);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-title .emoji { font-size: 24px; }
+/* ========== Hero ========== */
+.hero{position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#F2EBDD 0%,#E8DCC2 60%,#DCD0B8 100%);padding:140px 24px 80px;text-align:center}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:var(--rainbow);border-radius:50%;opacity:.18;filter:blur(80px)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;background:linear-gradient(135deg,#7BAEC4,#4F8CA8);border-radius:50%;opacity:.15;filter:blur(70px)}
+.hero-inner{position:relative;z-index:5;max-width:820px}
+.hero-emoji{font-size:48px;margin-bottom:16px;line-height:1}
+.hero-label{font-family:var(--font-en);font-size:11.5px;letter-spacing:.45em;color:var(--c-main-deep);margin-bottom:18px;text-transform:uppercase}
+.hero-script{font-family:var(--font-script);font-size:46px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px;line-height:1}
+.hero-title{font-family:var(--font-serif);font-size:34px;font-weight:500;letter-spacing:.05em;color:var(--c-text);line-height:1.6;margin-bottom:22px}
+.hero-title .em{background:linear-gradient(120deg,var(--c-main-deep),var(--c-accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:14.5px;color:var(--c-text-sub);line-height:2.1;letter-spacing:.04em;margin-bottom:24px}
+.hero-meta{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;font-size:12px;color:var(--c-text-sub);letter-spacing:.04em}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,.7);border:1px solid var(--c-line);border-radius:999px}
 
-  /* Claude Codeって何？ */
-  .what-is {
-    background: linear-gradient(135deg, var(--sky-soft), #fff);
-    border: 2px solid rgba(116,185,255,0.3);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-  .what-is h3 {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--sky-deep);
-    margin-bottom: 12px;
-  }
-  .what-is p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 10px;
-  }
-  .what-is .compare {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin-top: 14px;
-  }
-  @media (min-width: 720px) {
-    .what-is .compare { grid-template-columns: 1fr 1fr; }
-  }
-  .compare .box {
-    background: #fff;
-    padding: 12px 14px;
-    border-radius: 12px;
-    font-size: 13px;
-  }
-  .compare .box .label {
-    font-weight: 700;
-    color: var(--sky-deep);
-    font-size: 12px;
-    margin-bottom: 6px;
-  }
+/* ========== Section common ========== */
+section{padding:90px 24px;position:relative}
+.section-inner{max-width:920px;margin:0 auto}
+.chapter-tag{display:inline-block;font-family:var(--font-en);font-size:11px;letter-spacing:.3em;color:#fff;background:var(--c-main-deep);padding:5px 14px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
+.section-title{font-family:var(--font-serif);font-size:28px;font-weight:500;margin-bottom:14px;letter-spacing:.04em;line-height:1.5;color:var(--c-text)}
+.section-title .em{background:linear-gradient(120deg,var(--c-main-deep),var(--c-accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.section-lead{font-size:14.5px;color:var(--c-text-sub);line-height:2.1;margin-bottom:36px;max-width:760px}
+.section-head{margin-bottom:36px}
 
-  /* 7つのコツ */
-  .tips-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-  }
-  .tip-card {
-    background: linear-gradient(135deg, var(--paper), var(--accent-soft));
-    border: 1.5px solid rgba(225,112,85,0.15);
-    border-radius: 14px;
-    padding: 16px;
-  }
-  .tip-card .num {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 28px;
-    font-weight: 700;
-    font-size: 13px;
-    margin-bottom: 8px;
-  }
-  .tip-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .tip-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+/* ========== Claude Codeって何？ ========== */
+.intro-box{background:#fff;border:1px solid var(--c-line);border-radius:10px;padding:32px 36px;margin-top:24px;box-shadow:0 6px 18px rgba(79,140,168,.06)}
+.intro-box h4{font-family:var(--font-serif);font-size:18px;color:var(--c-main-deep);margin-bottom:14px;letter-spacing:.04em}
+.intro-box p{font-size:14.5px;line-height:2.1;color:var(--c-text);margin-bottom:14px}
+.intro-box p:last-child{margin-bottom:0}
+.intro-box .em{color:var(--c-accent-deep);font-weight:600}
+.compare-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+@media(min-width:680px){.compare-grid{grid-template-columns:1fr 1fr}}
+.compare-item{padding:18px 22px;background:var(--c-bg);border:1px solid var(--c-line);border-radius:8px}
+.compare-item .label{font-family:var(--font-serif);font-size:13px;color:var(--c-main-deep);font-weight:600;margin-bottom:6px;letter-spacing:.04em}
+.compare-item p{font-size:13.5px;line-height:1.9;color:var(--c-text);margin:0}
 
-  /* ★ メイン：5ステップ実践ガイド ★ */
-  .step-banner {
-    background: linear-gradient(135deg, #fff5e6, #ffe8d6);
-    border: 3px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 24px;
-    text-align: center;
-    margin-bottom: 24px;
-    box-shadow: 0 12px 40px rgba(225,112,85,0.12);
-  }
-  .step-banner .pill {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    padding: 6px 18px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  .step-banner h2 {
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  .step-banner .small {
-    font-size: 13px;
-    color: var(--muted);
-  }
+/* ========== 7つのコツ ========== */
+.tips-section{background:linear-gradient(180deg,#fff 0%,var(--c-bg) 100%)}
+.tips-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px}
+@media(min-width:680px){.tips-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:980px){.tips-grid{grid-template-columns:repeat(3,1fr)}}
+.tip-card{background:#fff;border:1px solid var(--c-line);border-radius:10px;padding:22px 24px;transition:all .3s;border-top:3px solid var(--c-main)}
+.tip-card:hover{box-shadow:0 14px 30px rgba(79,140,168,.08);transform:translateY(-2px)}
+.tip-card .num{font-family:var(--font-serif);font-size:24px;color:var(--c-main-deep);line-height:1;margin-bottom:8px;font-weight:500}
+.tip-card h4{font-family:var(--font-serif);font-size:15.5px;color:var(--c-text);margin-bottom:8px;letter-spacing:.04em;line-height:1.6}
+.tip-card p{font-size:13px;line-height:1.9;color:var(--c-text-sub)}
 
-  .step {
-    background: var(--paper);
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    margin-bottom: 20px;
-    border-left: 6px solid var(--accent);
-  }
-  .step-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 16px;
-  }
-  .step-header .step-num {
-    background: var(--accent);
-    color: #fff;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-  .step-header .step-title {
-    flex: 1;
-  }
-  .step-header h3 {
-    font-size: 18px;
-    font-weight: 800;
-    line-height: 1.4;
-    margin-bottom: 2px;
-  }
-  .step-header .step-tag {
-    font-size: 11px;
-    color: var(--mint);
-    font-weight: 700;
-  }
-  .step-body p {
-    font-size: 14px;
-    line-height: 1.8;
-    margin-bottom: 12px;
-  }
-  .step-body .try-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--accent);
-    margin-bottom: 8px;
-    margin-top: 16px;
-  }
-  .example-box {
-    background: #2d2a26;
-    color: #f5f1ea;
-    padding: 14px 16px;
-    border-radius: 10px;
-    font-family: "SF Mono", Menlo, Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.8;
-    margin-bottom: 8px;
-  }
-  .example-box .prompt {
-    color: #fdcb6e;
-  }
-  .example-list {
-    list-style: none;
-    padding: 0;
-  }
-  .example-list li {
-    background: var(--accent-soft);
-    padding: 10px 14px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    font-size: 13px;
-    border-left: 3px solid var(--accent);
-  }
-  .example-list li .you {
-    font-size: 11px;
-    color: var(--accent);
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
+/* ========== ステップ実践ガイド ========== */
+.steps-banner{background:linear-gradient(135deg,#FFF5E6 0%,#FAF0DD 100%);border-radius:10px;padding:36px 32px;margin-top:30px;text-align:center;border:1px solid var(--c-accent);box-shadow:0 12px 32px rgba(232,181,122,.12)}
+.steps-banner .pill{display:inline-block;font-family:var(--font-en);font-size:11px;letter-spacing:.3em;color:#fff;background:var(--c-accent-deep);padding:5px 14px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
+.steps-banner h3{font-family:var(--font-serif);font-size:24px;font-weight:500;color:var(--c-text);letter-spacing:.04em;margin-bottom:8px;line-height:1.6}
+.steps-banner p{font-size:13.5px;color:var(--c-text-sub);line-height:1.9}
 
-  /* キーバインド */
-  .keys-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  @media (min-width: 720px) {
-    .keys-grid { grid-template-columns: 1fr 1fr 1fr; }
-  }
-  .key-card {
-    background: #f8f6f1;
-    border-radius: 12px;
-    padding: 14px;
-    text-align: center;
-    border: 1.5px solid var(--line);
-  }
-  .key-card kbd {
-    display: inline-block;
-    background: #2d2a26;
-    color: #f5f1ea;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-family: "SF Mono", monospace;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
-  }
-  .key-card h4 {
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .key-card p {
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.5;
-  }
+.step-list{display:grid;grid-template-columns:1fr;gap:24px;margin-top:36px}
+.step{background:#fff;border:1px solid var(--c-line);border-radius:10px;padding:32px 32px;border-left:4px solid var(--c-main);transition:all .3s}
+.step:hover{box-shadow:0 14px 30px rgba(79,140,168,.06)}
+.step-head{display:flex;align-items:flex-start;gap:18px;margin-bottom:18px}
+.step-num{font-family:var(--font-serif);font-size:42px;color:var(--c-main-deep);line-height:1;flex-shrink:0;font-weight:500}
+.step-title-wrap{flex:1;padding-top:4px}
+.step-title{font-family:var(--font-serif);font-size:19px;color:var(--c-text);letter-spacing:.04em;line-height:1.6;margin-bottom:4px}
+.step-tag{font-family:var(--font-en);font-size:11px;color:var(--c-sub-deep);letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+.step-body p{font-size:14px;line-height:2.1;color:var(--c-text);margin-bottom:12px}
+.step-body p.note{font-size:13px;color:var(--c-text-sub);line-height:1.9}
 
-  /* Before/After */
-  .ba-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 12px;
-  }
-  @media (min-width: 720px) {
-    .ba-grid { grid-template-columns: 1fr 1fr; }
-  }
-  .ba-card {
-    border-radius: 14px;
-    padding: 16px;
-    border: 2px solid;
-  }
-  .ba-card.before {
-    background: #fef0f0;
-    border-color: rgba(232,67,147,0.3);
-  }
-  .ba-card.after {
-    background: #f0fdf4;
-    border-color: rgba(0,184,148,0.3);
-  }
-  .ba-card .ba-label {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    padding: 3px 10px;
-    border-radius: 10px;
-    display: inline-block;
-  }
-  .ba-card.before .ba-label { background: var(--rose); color: #fff; }
-  .ba-card.after .ba-label { background: var(--mint); color: #fff; }
-  .ba-card .you-said {
-    background: #fff;
-    padding: 10px 12px;
-    border-radius: 10px;
-    margin-bottom: 8px;
-    font-size: 13px;
-    line-height: 1.6;
-  }
-  .ba-card .arrow {
-    text-align: center;
-    font-size: 16px;
-    color: var(--muted);
-    margin: 6px 0;
-  }
-  .ba-card .result {
-    font-weight: 700;
-    text-align: center;
-    font-size: 13px;
-    padding: 8px;
-    border-radius: 10px;
-    margin-top: 6px;
-  }
-  .ba-card.before .result { background: rgba(232,67,147,0.12); color: var(--rose); }
-  .ba-card.after .result { background: rgba(0,184,148,0.15); color: var(--mint); }
+.try-label{font-family:var(--font-serif);font-size:14px;color:var(--c-main-deep);font-weight:500;margin:18px 0 10px;letter-spacing:.04em}
+.try-list{list-style:none;display:grid;gap:8px}
+.try-list li{background:var(--c-bg);border:1px solid var(--c-line);border-left:3px solid var(--c-accent);padding:12px 16px;border-radius:6px;font-size:13.5px;line-height:1.8;color:var(--c-text)}
+.try-list li .you{display:block;font-family:var(--font-en);font-size:10.5px;color:var(--c-accent-deep);letter-spacing:.15em;text-transform:uppercase;margin-bottom:4px;font-weight:600}
 
-  /* CLAUDE.mdの例 */
-  .md-example {
-    background: #2d2a26;
-    color: #f5f1ea;
-    padding: 16px;
-    border-radius: 10px;
-    font-family: "SF Mono", Menlo, monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    margin-top: 8px;
-  }
-  .md-example .comment { color: #7a756d; }
-  .md-example .heading { color: #fdcb6e; }
+.tip-line{margin-top:14px;padding:12px 16px;background:linear-gradient(135deg,#F2F8FB 0%,#fff 100%);border-radius:6px;border-left:3px solid var(--c-main);font-size:12.5px;color:var(--c-text-sub);line-height:1.9}
+.tip-line strong{color:var(--c-main-deep);font-weight:600}
 
-  /* 作った人の実例 */
-  .cases {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  @media (min-width: 720px) {
-    .cases { grid-template-columns: 1fr 1fr; }
-  }
-  .case-card {
-    background: linear-gradient(135deg, #fff, var(--honey-soft));
-    border: 1.5px solid rgba(253,203,110,0.4);
-    border-radius: 14px;
-    padding: 16px;
-  }
-  .case-card .case-tag {
-    display: inline-block;
-    background: var(--warn);
-    color: #2d2a26;
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-size: 11px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .case-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-  .case-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+/* Before/After */
+.ba-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}
+@media(min-width:720px){.ba-grid{grid-template-columns:1fr 1fr}}
+.ba-card{padding:22px 24px;border-radius:8px;border:1px solid}
+.ba-card.before{background:#FDF2F2;border-color:#F4D5D5}
+.ba-card.after{background:#F2F9F5;border-color:#D5E8DC}
+.ba-card .ba-label{display:inline-block;font-family:var(--font-en);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;padding:3px 10px;border-radius:999px;margin-bottom:12px}
+.ba-card.before .ba-label{background:var(--c-warn);color:#fff}
+.ba-card.after .ba-label{background:var(--c-sub-deep);color:#fff}
+.ba-card .you-said{background:#fff;padding:11px 14px;border-radius:6px;margin-bottom:10px;font-size:13px;line-height:1.8;border:1px solid rgba(0,0,0,0.04)}
+.ba-card .arrow{text-align:center;font-size:14px;color:var(--c-text-sub);margin:6px 0}
+.ba-card .result{text-align:center;font-size:13px;font-family:var(--font-serif);font-weight:500;padding:10px;border-radius:6px;margin-top:6px}
+.ba-card.before .result{background:rgba(216,140,140,0.12);color:var(--c-warn-deep)}
+.ba-card.after .result{background:rgba(117,154,108,0.15);color:var(--c-sub-deep)}
 
-  /* Q&A */
-  .qa {
-    background: var(--accent-soft);
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-  }
-  .qa .q {
-    font-weight: 700;
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: var(--accent);
-  }
-  .qa .a {
-    font-size: 13px;
-    line-height: 1.7;
-    padding-left: 16px;
-    border-left: 3px solid var(--accent);
-  }
+/* 便利キー */
+.keys-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+@media(min-width:680px){.keys-grid{grid-template-columns:repeat(3,1fr)}}
+.key-card{background:var(--c-bg);border:1px solid var(--c-line);border-radius:8px;padding:20px 18px;text-align:center}
+.key-card kbd{display:inline-block;background:var(--c-text);color:#fff;padding:7px 14px;border-radius:5px;font-family:var(--font-en);font-size:13px;font-weight:600;margin-bottom:10px;box-shadow:0 2px 0 rgba(0,0,0,0.15);letter-spacing:.04em}
+.key-card h4{font-family:var(--font-serif);font-size:14px;color:var(--c-text);margin-bottom:6px}
+.key-card p{font-size:12px;color:var(--c-text-sub);line-height:1.8}
 
-  /* チェックリスト */
-  .checklist {
-    background: linear-gradient(135deg, var(--mint-soft), #fff);
-    border: 2px solid rgba(0,184,148,0.3);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-  .checklist h3 {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--mint);
-    margin-bottom: 14px;
-  }
-  .checklist ul { list-style: none; padding: 0; }
-  .checklist li {
-    padding: 8px 0 8px 32px;
-    position: relative;
-    font-size: 14px;
-    border-bottom: 1px dashed rgba(0,184,148,0.2);
-  }
-  .checklist li:last-child { border-bottom: none; }
-  .checklist li::before {
-    content: "☐";
-    position: absolute;
-    left: 4px;
-    top: 8px;
-    font-size: 18px;
-    color: var(--mint);
-    font-weight: 700;
-  }
+/* CLAUDE.mdサンプル */
+.md-example{background:var(--c-text);color:#F4F0E5;padding:22px 26px;border-radius:8px;font-family:var(--font-en);font-size:12.5px;line-height:1.9;margin-top:14px;overflow-x:auto}
+.md-example .heading{color:var(--c-accent)}
+.md-example .comment{color:var(--c-text-sub)}
 
-  .footer-msg {
-    text-align: center;
-    padding: 28px 20px;
-    background: linear-gradient(135deg, #fff8f0, #ffe8d6);
-    border-radius: var(--radius);
-    margin-top: 16px;
-  }
-  .footer-msg .heart { font-size: 32px; margin-bottom: 10px; }
-  .footer-msg p {
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.7;
-  }
-  .footer-msg .small {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 12px;
-    font-weight: 400;
-  }
-  .meta {
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    margin-top: 20px;
-  }
+/* リベシティ向けカード */
+.libe-card{margin-top:22px;padding:22px 24px;background:linear-gradient(135deg,#FFF8E7 0%,#fff 100%);border:1px dashed var(--c-accent);border-radius:10px}
+.libe-card .label{font-family:var(--font-serif);font-size:14px;color:var(--c-accent-deep);font-weight:600;margin-bottom:8px}
+.libe-card p{font-size:13.5px;line-height:2;color:var(--c-text);margin:0}
+.libe-card .arrow-link{display:inline-block;margin-top:6px;color:var(--c-accent-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* ========== 実例 ========== */
+.cases-section{background:#fff}
+.cases-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:30px}
+@media(min-width:720px){.cases-grid{grid-template-columns:1fr 1fr}}
+.case-card{background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border:1px solid var(--c-line);border-left:4px solid var(--c-accent);border-radius:8px;padding:22px 24px}
+.case-card .case-tag{display:inline-block;font-family:var(--font-en);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:var(--c-accent-deep);background:#FFF5E6;padding:4px 12px;border-radius:999px;margin-bottom:10px}
+.case-card h4{font-family:var(--font-serif);font-size:15.5px;color:var(--c-text);margin-bottom:8px;line-height:1.6}
+.case-card p{font-size:13px;line-height:1.9;color:var(--c-text-sub)}
+
+/* ========== Q&A ========== */
+.qa-section{background:linear-gradient(180deg,var(--c-bg) 0%,#fff 100%)}
+.qa-list{display:grid;gap:14px;margin-top:30px}
+.qa-item{background:#fff;border:1px solid var(--c-line);border-radius:8px;padding:22px 26px}
+.qa-item .q{font-family:var(--font-serif);font-size:15px;color:var(--c-main-deep);font-weight:500;margin-bottom:10px;letter-spacing:.04em;line-height:1.6}
+.qa-item .a{font-size:13.5px;line-height:2;color:var(--c-text);padding-left:16px;border-left:3px solid var(--c-accent)}
+.qa-item .a strong{color:var(--c-accent-deep);font-weight:600}
+
+/* ========== チェックリスト ========== */
+.checklist{background:linear-gradient(135deg,#F2F9F5 0%,#fff 100%);border:1px solid #D5E8DC;border-radius:10px;padding:32px 36px;margin-top:36px;border-left:4px solid var(--c-sub-deep)}
+.checklist h4{font-family:var(--font-serif);font-size:18px;color:var(--c-sub-deep);margin-bottom:18px;letter-spacing:.04em}
+.checklist ul{list-style:none}
+.checklist li{font-size:14px;line-height:2;padding:8px 0 8px 28px;position:relative;border-bottom:1px dashed rgba(117,154,108,0.2);color:var(--c-text)}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'☐';position:absolute;left:4px;top:9px;color:var(--c-sub-deep);font-size:16px;font-weight:700}
+.checklist li .day{font-family:var(--font-en);font-size:11px;color:var(--c-sub-deep);letter-spacing:.1em;font-weight:600;text-transform:uppercase;margin-right:10px}
+
+/* ========== Final ========== */
+.final{padding:80px 24px;background:linear-gradient(135deg,#F2EBDD 0%,#E8DCC2 100%);text-align:center;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:var(--rainbow);border-radius:50%;opacity:.18;filter:blur(70px)}
+.final-inner{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.final .hero-script{font-size:38px;margin-bottom:14px}
+.final h2{font-family:var(--font-serif);font-size:24px;font-weight:500;letter-spacing:.04em;line-height:1.7;margin-bottom:18px;color:var(--c-text)}
+.final p{font-size:14px;color:var(--c-text-sub);margin-bottom:30px;line-height:2;letter-spacing:.04em}
+.final-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;background:var(--c-main-deep);color:#fff;border-radius:999px;font-size:13.5px;letter-spacing:.12em;box-shadow:0 10px 28px rgba(79,140,168,.3);transition:all .3s;font-weight:500}
+.final-cta:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(79,140,168,.4)}
+
+/* ========== Footer ========== */
+.footer{padding:50px 24px 26px;background:var(--c-text);color:#fff;text-align:center}
+.footer-logo{font-family:var(--font-serif);font-size:18px;margin-bottom:12px}
+.footer-logo .mark{font-family:var(--font-script);font-size:24px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-right:6px}
+.footer p{font-size:12px;opacity:.7;line-height:1.9;margin-bottom:6px}
+.footer-bottom{padding-top:22px;margin-top:24px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;opacity:.55;font-family:var(--font-en);letter-spacing:.15em}
+
+/* ========== Responsive ========== */
+@media (max-width:760px){
+  .header{padding:14px 18px}
+  .hero{padding:120px 18px 60px;min-height:auto}
+  .hero-script{font-size:34px}
+  .hero-title{font-size:22px}
+  section{padding:60px 18px}
+  .section-title{font-size:21px}
+  .intro-box{padding:24px 22px}
+  .step{padding:24px 22px}
+  .step-head{gap:14px}
+  .step-num{font-size:32px}
+  .step-title{font-size:17px}
+  .checklist{padding:24px 22px}
+}
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- ヒーロー -->
-  <div class="hero">
-    <span class="badge">🚀 Claude Code はじめてガイド</span>
-    <h1>Claude Code 触り出したけど<br>「何したらいいの？」って人へ</h1>
-    <p class="sub">公式セミナー（Anthropic・2026-04-19・30分）の中身を、初心者向けに翻訳した実践ガイド</p>
-    <p class="speaker">登壇：Claude Codeを作った本人（ボリスさん／Anthropic技術スタッフ）</p>
+<!-- =================== Header =================== -->
+<header class="header">
+  <div class="logo"><span class="mark">claude</span> Code 別冊③</div>
+  <a href="index.html" class="back-link">← 本編にもどる</a>
+</header>
+
+<!-- =================== Hero =================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-emoji">📺✨</div>
+    <div class="hero-label">Bonus Chapter / Official 30min Seminar</div>
+    <div class="hero-script">From the creator.</div>
+    <h1 class="hero-title">
+      Claude Code を作った人が<br>
+      <span class="em">「触り出した人へ」</span>に<br>
+      30分で教えてくれた7つのコツ
+    </h1>
+    <p class="hero-sub">
+      Anthropic公式イベントの30分セミナーを、<strong>非エンジニア向けに翻訳</strong>した実践ガイド。<br>
+      「インストールはできた、で、何打てばいいの？」に答えるかたちで、<br>
+      今日からすぐ動ける5ステップにまとめ直してるで〜。
+    </p>
+    <div class="hero-meta">
+      <span>🎙 登壇：Claude Codeを作った本人</span>
+      <span>📅 2026-04-19 Anthropic公式</span>
+    </div>
   </div>
+</section>
 
-  <!-- Claude Codeって何？ -->
-  <div class="what-is">
-    <h3>📖 そもそも Claude Code って何？</h3>
-    <p>**ターミナル（黒い画面）で動くAIアシスタント**。コードを書くだけじゃなくて、ファイルを調べたり、調べ物したり、Gitを操作したり、メールを下書きしたり、なんでも頼める。</p>
-    <div class="compare">
-      <div class="box">
-        <div class="label">これまでのAI</div>
-        コードの「次の1行」を予測して補完してくれる
-      </div>
-      <div class="box">
-        <div class="label">Claude Code</div>
-        「機能まるごと作って」「バグ直して」が頼める
+<!-- =================== Claude Codeって何？ =================== -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 01</span>
+      <h2 class="section-title">そもそも <span class="em">Claude Code</span> って何？</h2>
+      <p class="section-lead">
+        Claude Codeは、<strong>ターミナル（黒い画面）で動くAIアシスタント</strong>。<br>
+        コードを書くだけじゃなくて、ファイル整理・調べ物・文章作成・Gitの操作・メールの下書きまで、なんでも頼める。
+      </p>
+    </div>
+
+    <div class="intro-box">
+      <h4>🪄 これまでのAIとはちょっと違う</h4>
+      <div class="compare-grid">
+        <div class="compare-item">
+          <div class="label">これまでのAI</div>
+          <p>コードの「次の1行」を予測して補完してくれる</p>
+        </div>
+        <div class="compare-item">
+          <div class="label">Claude Code</div>
+          <p>「機能まるごと作って」「バグ直して」「このフォルダ整理して」が頼める</p>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- 7つのコツ一覧 -->
-  <div class="section">
-    <div class="section-title"><span class="emoji">🎯</span>Claude Codeを作った人が教えてくれた7つのコツ（全体像）</div>
+<!-- =================== 7つのコツ全体像 =================== -->
+<section class="tips-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 02</span>
+      <h2 class="section-title">作った人が教えてくれた <span class="em">7つのコツ</span>（全体像）</h2>
+      <p class="section-lead">
+        セミナーで紹介された7つのコツを、まずはぜんぶ俯瞰してみよう。<br>
+        この後のセクションで「今日からこの順番でやってみよう」っていう実践5ステップに整理し直すから、ここはサラッと眺めるだけでOK。
+      </p>
+    </div>
+
     <div class="tips-grid">
-      <div class="tip-card"><div class="num">1</div><h4>最初の準備をしよう</h4><p>画面の見た目・ショートカット・声入力の設定をしておく</p></div>
-      <div class="tip-card"><div class="num">2</div><h4>まず「質問」から始めよう</h4><p>いきなり頼まず、聞くだけ。「これってどうなってる？」</p></div>
-      <div class="tip-card"><div class="num">3</div><h4>動く前に「作戦」を聞こう</h4><p>大きい仕事は「先にどう進める？」と確認してから動かす</p></div>
-      <div class="tip-card"><div class="num">4</div><h4>自分の道具を教えよう</h4><p>普段使うツール（Notion等）をAIに繋ぐ</p></div>
-      <div class="tip-card"><div class="num">5</div><h4>背景情報をまとめよう</h4><p>「うちの前提」をメモにしておくと毎回説明しなくて済む</p></div>
-      <div class="tip-card"><div class="num">6</div><h4>便利キーを覚えよう</h4><p>「許可」「覚えて」「止まって」を一発で押せる</p></div>
-      <div class="tip-card"><div class="num">7</div><h4>同時に何個も動かそう</h4><p>慣れたら複数のAIに同時並行で仕事させる</p></div>
+      <div class="tip-card">
+        <div class="num">壱</div>
+        <h4>最初の準備をしよう</h4>
+        <p>画面の見た目・ショートカット・声入力の設定をしておく</p>
+      </div>
+      <div class="tip-card">
+        <div class="num">弐</div>
+        <h4>まず「質問」から始めよう</h4>
+        <p>いきなり頼まず、聞くだけ。「これってどうなってる？」</p>
+      </div>
+      <div class="tip-card">
+        <div class="num">参</div>
+        <h4>動く前に「作戦」を聞こう</h4>
+        <p>大きい仕事は「先にどう進める？」と確認してから動かす</p>
+      </div>
+      <div class="tip-card">
+        <div class="num">肆</div>
+        <h4>自分の道具を教えよう</h4>
+        <p>普段使うツール（Notion等）をAIに繋ぐ</p>
+      </div>
+      <div class="tip-card">
+        <div class="num">伍</div>
+        <h4>背景情報をまとめよう</h4>
+        <p>「うちの前提」をメモにしておくと毎回説明しなくて済む</p>
+      </div>
+      <div class="tip-card">
+        <div class="num">陸</div>
+        <h4>便利キーを覚えよう</h4>
+        <p>「許可」「覚えて」「止まって」を一発で押せる</p>
+      </div>
+      <div class="tip-card" style="border-top-color:var(--c-accent);">
+        <div class="num" style="color:var(--c-accent-deep);">漆</div>
+        <h4>同時に何個も動かそう</h4>
+        <p>慣れたら複数のAIに同時並行で仕事させる</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ★ メイン：5ステップ実践ガイド ★ -->
-  <div class="step-banner">
-    <span class="pill">⭐ ここがメイン</span>
-    <h2>今日からこの順番でやってみよう</h2>
-    <p class="small">5つのステップ。1日1個でも、1週間で全部回せる量にしてある</p>
-  </div>
-
-  <!-- STEP 1 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">1</div>
-      <div class="step-title">
-        <h3>まず「質問」だけしてみる</h3>
-        <div class="step-tag">📅 今日やる / 5分</div>
-      </div>
+<!-- =================== 実践5ステップ =================== -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 03</span>
+      <h2 class="section-title">今日からこの順番で <span class="em">やってみよう</span></h2>
+      <p class="section-lead">
+        7つを「今日やる→今週やる→慣れたらやる」の5ステップに並べ直してる。<br>
+        1日1個でも、1週間で全部回せる量にしてあるから、気負わずひとつずつ進めてみてね。
+      </p>
     </div>
-    <div class="step-body">
-      <p>Claude Codeを開いたら、何かを<b>作らせる前に「聞くだけ」</b>から始めよう。これが一番の上達への近道、って<b>Claude Codeを作った人</b>も言ってる。Anthropic（Claudeを作った会社）では新人さんがコレやって、慣れる期間が2〜3週間→2〜3日になった。</p>
-      <p style="font-size:13px;color:var(--muted);">Claude Codeはコード以外にも使える。フォルダの中身を把握させたり、文章を整理させたり、なんでも聞ける。<b>難しい話は要らないから、まずは「自分の身の回り」のことを聞いてみよう</b>。</p>
 
-      <div class="try-label">▼ コード書かない人にもおすすめの質問例（コピーしてOK）</div>
-      <ul class="example-list">
-        <li><div class="you">質問例①</div>このフォルダの中、何が入ってるか教えて</li>
-        <li><div class="you">質問例②</div>このファイル、何が書いてあるか3行で要約して</li>
-        <li><div class="you">質問例③</div>このフォルダの中で、似たような内容のファイルある？</li>
-        <li><div class="you">質問例④</div>最近このフォルダ、何の作業してたか教えて</li>
-        <li><div class="you">質問例⑤</div>このフォルダ、整理した方がいいファイルある？</li>
-      </ul>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：いきなり「○○作って」じゃなく、まず「○○ってどうなってる？」。これだけで「あ、こいつ何ができるか分かってきた」感覚が掴める。<br>※ Claude Codeは開いた**フォルダの中身**を見れる状態になってるから、「このフォルダ」って言うだけで通じるよ。</p>
+    <div class="steps-banner">
+      <span class="pill">Practice Roadmap</span>
+      <h3>5つのステップ、1つずつ。</h3>
+      <p>難しい話は飛ばして大丈夫。まずは Step 1「質問だけ」から始めてみよう。</p>
     </div>
-  </div>
 
-  <!-- STEP 2 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">2</div>
-      <div class="step-title">
-        <h3>大きい仕事は「先に作戦聞いて」と言う</h3>
-        <div class="step-tag">📅 今日やる / 1分で覚えられる</div>
-      </div>
-    </div>
-    <div class="step-body">
-      <p>頼み方を <b>「○○して」→「○○したい、先に進め方教えて」</b> に変えるだけ。これでAIが暴走して見当違いのものを作っちゃう事故が激減する。</p>
+    <div class="step-list">
 
-      <div class="ba-grid">
-        <div class="ba-card before">
-          <span class="ba-label">❌ いきなり頼む</span>
-          <div class="you-said">このフォルダ、整理して</div>
-          <div class="arrow">↓</div>
-          <div class="you-said">（勝手に大量のファイルを移動・削除）<br>整理しました！</div>
-          <div class="arrow">↓</div>
-          <div class="result">「えっ、それ消さないで…」<br>元に戻す作業発生</div>
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">1</div>
+          <div class="step-title-wrap">
+            <h3 class="step-title">まず「質問」だけしてみる</h3>
+            <div class="step-tag">📅 今日やる / 5分</div>
+          </div>
         </div>
-        <div class="ba-card after">
-          <span class="ba-label">⭕️ 先に作戦を聞く</span>
-          <div class="you-said">このフォルダを整理したい。<b>先にどう整理するか教えて</b></div>
-          <div class="arrow">↓</div>
-          <div class="you-said">①古い下書きは「過去」フォルダへ<br>②画像は「素材」フォルダへ<br>③重複ファイルは…</div>
-          <div class="arrow">↓</div>
-          <div class="you-said">「②と③だけお願い、①はそのまま」</div>
-          <div class="arrow">↓</div>
-          <div class="result">意図通りにスッキリ整理 ✨</div>
+        <div class="step-body">
+          <p>Claude Codeを開いたら、何かを<strong>作らせる前に「聞くだけ」</strong>から始めよう。これが一番の上達への近道、って<strong>Claude Codeを作った人</strong>も言ってる。Anthropic（Claudeを作った会社）では新人さんがコレやって、慣れる期間が2〜3週間→2〜3日になった。</p>
+          <p class="note">Claude Codeはコード以外にも使える。フォルダの中身を把握させたり、文章を整理させたり、なんでも聞ける。<strong>難しい話は要らないから、まずは「自分の身の回り」のことを聞いてみよう</strong>。</p>
+
+          <div class="try-label">▼ コード書かない人にもおすすめの質問例（コピーしてOK）</div>
+          <ul class="try-list">
+            <li><span class="you">質問例 ①</span>このフォルダの中、何が入ってるか教えて</li>
+            <li><span class="you">質問例 ②</span>このファイル、何が書いてあるか3行で要約して</li>
+            <li><span class="you">質問例 ③</span>このフォルダの中で、似たような内容のファイルある？</li>
+            <li><span class="you">質問例 ④</span>最近このフォルダ、何の作業してたか教えて</li>
+            <li><span class="you">質問例 ⑤</span>このフォルダ、整理した方がいいファイルある？</li>
+          </ul>
+          <div class="tip-line">💡 <strong>ポイント：</strong>いきなり「○○作って」じゃなく、まず「○○ってどうなってる？」。これだけで「あ、こいつ何ができるか分かってきた」感覚が掴める。Claude Codeは開いた<strong>フォルダの中身</strong>を見れる状態になってるから、「このフォルダ」って言うだけで通じるよ。</div>
         </div>
       </div>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：「考えてから動いて」ってお願いするだけ。プランモード等の特別な機能は不要。</p>
-    </div>
-  </div>
 
-  <!-- STEP 3 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">3</div>
-      <div class="step-title">
-        <h3>便利キー、3つだけ覚える</h3>
-        <div class="step-tag">📅 明日やる / 体に染み込ませる</div>
-      </div>
-    </div>
-    <div class="step-body">
-      <p>全部覚えなくていい。<b>この3つだけ</b>覚えれば作業速度が一気に上がる。</p>
-      <div class="keys-grid">
-        <div class="key-card">
-          <kbd>Shift + Tab</kbd>
-          <h4>毎回の確認をスキップ</h4>
-          <p>AIの編集を全部自動承認。テスト書かせる時とか便利</p>
+      <!-- STEP 2 -->
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">2</div>
+          <div class="step-title-wrap">
+            <h3 class="step-title">大きい仕事は「先に作戦聞いて」と言う</h3>
+            <div class="step-tag">📅 今日やる / 1分で覚えられる</div>
+          </div>
         </div>
-        <div class="key-card">
-          <kbd>#</kbd>
-          <h4>「これ覚えて」</h4>
-          <p>#を打って文字書くと、AIが永続的に覚えてくれる</p>
-        </div>
-        <div class="key-card">
-          <kbd>Esc</kbd>
-          <h4>止まって・やり直し</h4>
-          <p>AIが暴走したら即停止。2回押すと履歴に戻れる</p>
-        </div>
-      </div>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 おまけ：<kbd style="background:#2d2a26;color:#f5f1ea;padding:2px 6px;border-radius:4px;font-size:11px;">!</kbd> でターミナルコマンドが直接打てる、<kbd style="background:#2d2a26;color:#f5f1ea;padding:2px 6px;border-radius:4px;font-size:11px;">Ctrl+R</kbd> でAIが見てる全画面を見せてくれる。</p>
-    </div>
-  </div>
+        <div class="step-body">
+          <p>頼み方を <strong>「○○して」→「○○したい、先に進め方教えて」</strong> に変えるだけ。これでAIが暴走して見当違いのものを作っちゃう事故が激減する。</p>
 
-  <!-- STEP 4 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">4</div>
-      <div class="step-title">
-        <h3>「うちの前提」をメモにまとめる（CLAUDE.md）</h3>
-        <div class="step-tag">📅 今週中にやる / 15分</div>
+          <div class="ba-grid">
+            <div class="ba-card before">
+              <span class="ba-label">❌ いきなり頼む</span>
+              <div class="you-said">このフォルダ、整理して</div>
+              <div class="arrow">↓</div>
+              <div class="you-said">（勝手に大量のファイルを移動・削除）<br>整理しました！</div>
+              <div class="arrow">↓</div>
+              <div class="result">「えっ、それ消さないで…」<br>元に戻す作業発生</div>
+            </div>
+            <div class="ba-card after">
+              <span class="ba-label">⭕ 先に作戦を聞く</span>
+              <div class="you-said">このフォルダを整理したい。<strong>先にどう整理するか教えて</strong></div>
+              <div class="arrow">↓</div>
+              <div class="you-said">①古い下書きは「過去」フォルダへ<br>②画像は「素材」フォルダへ<br>③重複ファイルは…</div>
+              <div class="arrow">↓</div>
+              <div class="you-said">「②と③だけお願い、①はそのまま」</div>
+              <div class="arrow">↓</div>
+              <div class="result">意図通りにスッキリ整理 ✨</div>
+            </div>
+          </div>
+          <div class="tip-line">💡 <strong>ポイント：</strong>「考えてから動いて」ってお願いするだけ。プランモード等の特別な機能は不要。</div>
+        </div>
       </div>
-    </div>
-    <div class="step-body">
-      <p>使うフォルダの中に <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;">CLAUDE.md</code> ってファイル（メモ帳でOK）を置いとくと、AIが毎回最初に読んでくれる。<b>「毎回これ説明するのめんどい」を全部ここに書いとく</b>。</p>
 
-      <div class="try-label">▼ コード書かない人なら、こんな感じで書く</div>
-      <div class="md-example">
-<span class="heading"># このフォルダについて</span>
+      <!-- STEP 3 -->
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">3</div>
+          <div class="step-title-wrap">
+            <h3 class="step-title">便利キー、3つだけ覚える</h3>
+            <div class="step-tag">📅 明日やる / 体に染み込ませる</div>
+          </div>
+        </div>
+        <div class="step-body">
+          <p>全部覚えなくていい。<strong>この3つだけ</strong>覚えれば作業速度が一気に上がる。</p>
+          <div class="keys-grid">
+            <div class="key-card">
+              <kbd>Shift + Tab</kbd>
+              <h4>毎回の確認をスキップ</h4>
+              <p>AIの編集を全部自動承認。テスト書かせる時とか便利</p>
+            </div>
+            <div class="key-card">
+              <kbd>#</kbd>
+              <h4>「これ覚えて」</h4>
+              <p>#を打って文字書くと、AIが永続的に覚えてくれる</p>
+            </div>
+            <div class="key-card">
+              <kbd>Esc</kbd>
+              <h4>止まって・やり直し</h4>
+              <p>AIが暴走したら即停止。2回押すと履歴に戻れる</p>
+            </div>
+          </div>
+          <div class="tip-line">💡 <strong>おまけ：</strong> <kbd style="background:var(--c-text);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;font-family:var(--font-en);">!</kbd> でターミナルコマンドが直接打てる、<kbd style="background:var(--c-text);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;font-family:var(--font-en);">Ctrl+R</kbd> でAIが見てる全画面を見せてくれる。</div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">4</div>
+          <div class="step-title-wrap">
+            <h3 class="step-title">「うちの前提」をメモにまとめる（CLAUDE.md）</h3>
+            <div class="step-tag">📅 今週中にやる / 15分</div>
+          </div>
+        </div>
+        <div class="step-body">
+          <p>使うフォルダの中に <code style="background:var(--c-bg);padding:2px 8px;border-radius:4px;font-family:var(--font-en);color:var(--c-main-deep);font-size:13px;">CLAUDE.md</code> ってファイル（メモ帳でOK）を置いとくと、AIが毎回最初に読んでくれる。<strong>「毎回これ説明するのめんどい」を全部ここに書いとく</strong>。</p>
+
+          <div class="try-label">▼ コード書かない人なら、こんな感じで書く</div>
+          <div class="md-example"><span class="heading"># このフォルダについて</span>
 ブログ記事の下書き置き場。
 Obsidianで管理してて、毎日書いてる。
 
@@ -667,106 +461,147 @@ Obsidianで管理してて、毎日書いてる。
 <span class="heading"># よく使う作業</span>
 - 下書きの誤字チェック
 - タイトル案を5つ出してもらう
-- 文章の要約
-      </div>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：難しい言葉でなくていい。「人間に説明するつもりで普通の日本語」で書いてOK。最初は5〜10行でも全然十分。「触ってほしくないもの」を書いとくと事故が減る。</p>
+- 文章の要約</div>
 
-      <div style="margin-top:16px;padding:14px 16px;background:linear-gradient(135deg, #fff8e7, #fff);border:2px dashed rgba(225,112,85,0.4);border-radius:12px;">
-        <p style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px;">🪄 リベシティの会員さんへ</p>
-        <p style="font-size:12px;line-height:1.7;color:var(--ink);">学長が紹介してる「<b>魔法の呪文</b>」を CLAUDE.md に貼り付けてる人が多いよ。AIの暴走を防ぐ安全装置として、これも合わせて入れておくのがおすすめ✨<br>👉 <a href="gakucho-magic-spell.html" style="color:var(--accent);font-weight:700;text-decoration:underline;">別冊②：学長の魔法の呪文 ── CLAUDE.mdに貼っとく安全装置</a></p>
+          <div class="tip-line">💡 <strong>ポイント：</strong>難しい言葉でなくていい。「人間に説明するつもりで普通の日本語」で書いてOK。最初は5〜10行でも全然十分。「触ってほしくないもの」を書いとくと事故が減る。</div>
+
+          <div class="libe-card">
+            <div class="label">🪄 リベシティの会員さんへ</div>
+            <p>学長が紹介してる「<strong>魔法の呪文</strong>」をCLAUDE.mdに貼り付けてる人が多いよ。AIの暴走を防ぐ安全装置として、これも合わせて入れておくのがおすすめ✨<br>👉 <a href="gakucho-magic-spell.html" class="arrow-link">別冊②：学長の魔法の呪文 ── CLAUDE.mdに貼っとく安全装置</a></p>
+          </div>
+        </div>
       </div>
+
+      <!-- STEP 5 -->
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">5</div>
+          <div class="step-title-wrap">
+            <h3 class="step-title">慣れてきたら、同時に何個も動かす</h3>
+            <div class="step-tag">📅 来週やる / 慣れてから</div>
+          </div>
+        </div>
+        <div class="step-body">
+          <p>1個のClaude Codeじゃなくて、<strong>黒い画面を複数開いて並列で走らせる</strong>。1人が文章書いてる間に、もう1人が資料まとめてる、みたいな状態。AIアシスタント版の「複数の自分」が作れる。</p>
+          <p>最初はタブを2つ開いて、別々の作業を頼んでみる。例：タブ①で「ブログ記事の下書き」／タブ②で「リサーチ依頼」みたいに。</p>
+          <div class="tip-line">💡 <strong>ポイント：</strong>いきなりやらない。STEP 1〜4が体に染みてからでいい。慣れる前にやると「どっちで何頼んだっけ？」と混乱しがち。</div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- STEP 5 -->
-  <div class="step">
-    <div class="step-header">
-      <div class="step-num">5</div>
-      <div class="step-title">
-        <h3>慣れてきたら、同時に何個も動かす</h3>
-        <div class="step-tag">📅 来週やる / 慣れてから</div>
-      </div>
+<!-- =================== 作った人の実例 =================== -->
+<section class="cases-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 04</span>
+      <h2 class="section-title">作った人本人がいつもやってる <span class="em">使い方</span></h2>
+      <p class="section-lead">
+        セミナー中、登壇者本人が「自分はこう使ってる」と紹介していた具体例を4つピックアップ。<br>
+        テクニックというより「ふだん使い」の参考に。
+      </p>
     </div>
-    <div class="step-body">
-      <p>1個のClaude Codeじゃなくて、<b>黒い画面を複数開いて並列で走らせる</b>。1人が文章書いてる間に、もう1人が資料まとめてる、みたいな状態。AIアシスタント版の「複数の自分」が作れる。</p>
-      <p style="font-size:13px;">最初はタブを2つ開いて、別々の作業を頼んでみる。例：タブ①で「ブログ記事の下書き」／タブ②で「リサーチ依頼」みたいに。</p>
-      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：いきなりやらない。STEP 1〜4が体に染みてからでいい。慣れる前にやると「どっちで何頼んだっけ？」と混乱しがち。</p>
-    </div>
-  </div>
 
-  <!-- 作った人の実例 -->
-  <div class="section">
-    <div class="section-title"><span class="emoji">💼</span>Claude Codeを作った人本人がいつもやってる使い方</div>
-    <div class="cases">
+    <div class="cases-grid">
       <div class="case-card">
         <span class="case-tag">毎週月曜</span>
-        <h4>「今週何やった？」を<br>AIにまとめさせる</h4>
-        <p>作った人本人も、定例ミーティング前に「今週どんな作業した？」と聞いてAIにまとめさせて、そのまま報告書にコピペしてる</p>
+        <h4>「今週何やった？」をAIにまとめさせる</h4>
+        <p>作った人本人も、定例ミーティング前に「今週どんな作業した？」と聞いてAIにまとめさせて、そのまま報告書にコピペしてる。</p>
       </div>
       <div class="case-card">
         <span class="case-tag">面倒な作業</span>
-        <h4>3単語で<br>面倒な工程をまとめて頼む</h4>
-        <p>「保存して、共有して、報告も出して」みたいに3単語だけ。AIが流れを汲んで全部やってくれる</p>
+        <h4>3単語で面倒な工程をまとめて頼む</h4>
+        <p>「保存して、共有して、報告も出して」みたいに3単語だけ。AIが流れを汲んで全部やってくれる。</p>
       </div>
       <div class="case-card">
         <span class="case-tag">画像で指示</span>
-        <h4>デザインの絵を見せて<br>「これ作って」</h4>
-        <p>画像をドラッグ&ドロップ。AIが見て→作って→スクショで確認→直す、をループ。だいたい3周で完成</p>
+        <h4>デザインの絵を見せて「これ作って」</h4>
+        <p>画像をドラッグ&ドロップ。AIが見て→作って→スクショで確認→直す、をループ。だいたい3周で完成。</p>
       </div>
       <div class="case-card">
         <span class="case-tag">声で指示</span>
-        <h4>キーボード叩かず<br>声で話しかける</h4>
-        <p>Macの音声入力をオン。「もう一人のエンジニアに話しかけるみたいに」AIに喋ってる、と作った人本人が紹介してた</p>
+        <h4>キーボード叩かず、声で話しかける</h4>
+        <p>Macの音声入力をオン。「もう一人のエンジニアに話しかけるみたいに」AIに喋ってる、と作った人本人が紹介してた。</p>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Q&A -->
-  <div class="section">
-    <div class="section-title"><span class="emoji">❓</span>会場からのQ&A（全3問）</div>
-    <div class="qa">
-      <div class="q">Q1. 作るときに一番難しかったのは？</div>
-      <div class="a">「AIが命令を実行する時の安全装置」が一番難しかった。毎回確認すると面倒、勝手に動くと危ない。安全と便利のバランスをとる仕組み作りが大変だった。</div>
+<!-- =================== Q&A =================== -->
+<section class="qa-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 05</span>
+      <h2 class="section-title">会場からの <span class="em">Q&A（全3問）</span></h2>
+      <p class="section-lead">
+        セミナー終盤に行われた質疑応答。短いやり取りやけど、開発の裏話と気になるポイントが詰まってる。
+      </p>
     </div>
-    <div class="qa">
-      <div class="q">Q2. 画像とか写真もAIに渡せる？</div>
-      <div class="a">渡せます。最初から対応してます。①ドラッグ&ドロップ ②ファイルパスを渡す ③コピー&ペースト の3パターン全部OK。デザイン画像を渡して「これ作って」とよく使う。</div>
+
+    <div class="qa-list">
+      <div class="qa-item">
+        <div class="q">Q1. 作るときに一番難しかったのは？</div>
+        <div class="a">「AIが命令を実行する時の<strong>安全装置</strong>」が一番難しかった。毎回確認すると面倒、勝手に動くと危ない。安全と便利のバランスをとる仕組み作りが大変だった。</div>
+      </div>
+      <div class="qa-item">
+        <div class="q">Q2. 画像とか写真もAIに渡せる？</div>
+        <div class="a">渡せます。最初から対応してます。①ドラッグ&ドロップ ②ファイルパスを渡す ③コピー&ペースト の3パターン全部OK。デザイン画像を渡して「これ作って」とよく使う。</div>
+      </div>
+      <div class="qa-item">
+        <div class="q">Q3. AI研究そのものにも使ってる？</div>
+        <div class="a">めちゃくちゃ使ってます。Anthropic社内では技術職の<strong>約8割が毎日Claude Code使ってる</strong>。研究者もエンジニアも両方。データ分析用のメモ帳ファイル（Jupyter Notebook）の編集にも使えます。</div>
+      </div>
     </div>
-    <div class="qa">
-      <div class="q">Q3. AI研究そのものにも使ってる？</div>
-      <div class="a">めちゃくちゃ使ってます。Anthropic社内では技術職の<b>約8割が毎日Claude Code使ってる</b>。研究者もエンジニアも両方。データ分析用のメモ帳ファイル（Jupyter Notebook）の編集にも使えます。</div>
+  </div>
+</section>
+
+<!-- =================== 1週間チャレンジ =================== -->
+<section>
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="chapter-tag">Section 06</span>
+      <h2 class="section-title">1週間 <span class="em">チャレンジ</span> ・チェックリスト</h2>
+      <p class="section-lead">
+        最後に、5ステップを「1週間でぜんぶ触る」スケジュールに落とし込んでみた。<br>
+        印刷したり、メモアプリにコピーして、毎日チェックを入れていくと体に馴染むよ。
+      </p>
+    </div>
+
+    <div class="checklist">
+      <h4>📝 1週間で全ステップを体験する</h4>
+      <ul>
+        <li><span class="day">Day 1</span>何か質問だけしてみる（コードに触らない）</li>
+        <li><span class="day">Day 2</span>「先に作戦聞いて」を1回使ってみる</li>
+        <li><span class="day">Day 3</span>Shift+Tab・#・Esc を1回ずつ使ってみる</li>
+        <li><span class="day">Weekend</span>CLAUDE.md を10行だけ書いてみる</li>
+        <li><span class="day">Next week</span>ターミナル2つ開いて並列で動かしてみる</li>
+      </ul>
     </div>
   </div>
+</section>
 
-  <!-- 1週間チェックリスト -->
-  <div class="checklist">
-    <h3>📝 1週間チャレンジ・チェックリスト</h3>
-    <ul>
-      <li>初日：何か質問だけしてみる（コードに触らない）</li>
-      <li>2日目：「先に作戦聞いて」を1回使ってみる</li>
-      <li>3日目：Shift+Tab・#・Esc を1回ずつ使ってみる</li>
-      <li>週末：CLAUDE.md を10行だけ書いてみる</li>
-      <li>来週：ターミナル2つ開いて並列で動かしてみる</li>
-    </ul>
+<!-- =================== Final =================== -->
+<section class="final">
+  <div class="final-inner">
+    <div class="hero-script">See you in the chat.</div>
+    <h2>難しい話は飛ばしてOK。<br>まずは「質問だけ」から始めてみて☺️</h2>
+    <p>
+      それだけでもう、AIと働くスタートラインに立ててるよ。<br>
+      気になるとこあったら、いつでも本編に戻ってきてね。
+    </p>
+    <a href="index.html" class="final-cta">← 虎の巻 本編にもどる</a>
   </div>
+</section>
 
-  <!-- 締め -->
-  <div class="footer-msg">
-    <div class="heart">🌷</div>
-    <p>難しい話は飛ばしてOK。<br>まず「質問だけ」から始めてみて☺️</p>
-    <p class="small">それだけでもう、AIと働くスタートラインに立ててるよ</p>
-  </div>
+<!-- =================== Footer =================== -->
+<footer class="footer">
+  <div class="footer-logo"><span class="mark">claude</span> Code 別冊③</div>
+  <p>元動画：Mastering Claude Code in 30 minutes（Anthropic公式・2026-04-19）</p>
+  <p>はじめての Claude Code（虎の巻）／ 別冊③：公式30分セミナー</p>
+  <div class="footer-bottom">© 2026 Okemonogatari ／ Designed by Kyochan ✿</div>
+</footer>
 
-  <div style="text-align:center;margin-top:24px;">
-    <a href="index.html" style="display:inline-block;padding:12px 28px;background:#fff;border:2px solid var(--accent);color:var(--accent);border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;">← 虎の巻 本編に戻る</a>
-  </div>
-
-  <div class="meta">
-    元動画：Mastering Claude Code in 30 minutes（Anthropic公式・2026-04-19）<br>
-    🎨 きょうちゃん図解 / 2026-05-05<br>
-    📘 はじめての Claude Code（虎の巻）別冊③
-  </div>
-
-</div>
 </body>
 </html>
