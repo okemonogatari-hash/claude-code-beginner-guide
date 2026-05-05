@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 触り出した人へ — 何から始めればいいの？</title>
+<style>
+  :root {
+    --bg: #faf6f0;
+    --paper: #fff;
+    --ink: #2d2a26;
+    --muted: #7a756d;
+    --line: rgba(0,0,0,0.06);
+    --accent: #e17055;
+    --accent-soft: rgba(225,112,85,0.08);
+    --mint: #00b894;
+    --mint-soft: rgba(0,184,148,0.1);
+    --warn: #fdcb6e;
+    --warn-soft: rgba(253,203,110,0.15);
+    --rose: #e84393;
+    --rose-soft: rgba(232,67,147,0.08);
+    --sky: #74b9ff;
+    --sky-soft: rgba(116,185,255,0.12);
+    --sky-deep: #0984e3;
+    --honey-soft: rgba(253,203,110,0.18);
+    --shadow: 0 8px 30px rgba(0,0,0,0.06);
+    --radius: 20px;
+    --max: 880px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 24px 16px 80px;
+  }
+  .container { max-width: var(--max); margin: 0 auto; }
+
+  /* ヒーロー */
+  .hero {
+    background: linear-gradient(135deg, #fff8f0, #fff);
+    padding: 32px 28px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    margin-bottom: 28px;
+    border: 2px solid rgba(225,112,85,0.2);
+  }
+  .hero .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .hero .sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .hero .speaker {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .section {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid var(--accent-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .emoji { font-size: 24px; }
+
+  /* Claude Codeって何？ */
+  .what-is {
+    background: linear-gradient(135deg, var(--sky-soft), #fff);
+    border: 2px solid rgba(116,185,255,0.3);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .what-is h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--sky-deep);
+    margin-bottom: 12px;
+  }
+  .what-is p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+  .what-is .compare {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  @media (min-width: 720px) {
+    .what-is .compare { grid-template-columns: 1fr 1fr; }
+  }
+  .compare .box {
+    background: #fff;
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+  }
+  .compare .box .label {
+    font-weight: 700;
+    color: var(--sky-deep);
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  /* 7つのコツ */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+  .tip-card {
+    background: linear-gradient(135deg, var(--paper), var(--accent-soft));
+    border: 1.5px solid rgba(225,112,85,0.15);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .tip-card .num {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  .tip-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .tip-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* ★ メイン：5ステップ実践ガイド ★ */
+  .step-banner {
+    background: linear-gradient(135deg, #fff5e6, #ffe8d6);
+    border: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 40px rgba(225,112,85,0.12);
+  }
+  .step-banner .pill {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .step-banner h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .step-banner .small {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .step {
+    background: var(--paper);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    border-left: 6px solid var(--accent);
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .step-header .step-num {
+    background: var(--accent);
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .step-header .step-title {
+    flex: 1;
+  }
+  .step-header h3 {
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.4;
+    margin-bottom: 2px;
+  }
+  .step-header .step-tag {
+    font-size: 11px;
+    color: var(--mint);
+    font-weight: 700;
+  }
+  .step-body p {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+  }
+  .step-body .try-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+    margin-top: 16px;
+  }
+  .example-box {
+    background: #2d2a26;
+    color: #f5f1ea;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+  .example-box .prompt {
+    color: #fdcb6e;
+  }
+  .example-list {
+    list-style: none;
+    padding: 0;
+  }
+  .example-list li {
+    background: var(--accent-soft);
+    padding: 10px 14px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-left: 3px solid var(--accent);
+  }
+  .example-list li .you {
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  /* キーバインド */
+  .keys-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 720px) {
+    .keys-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .key-card {
+    background: #f8f6f1;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    border: 1.5px solid var(--line);
+  }
+  .key-card kbd {
+    display: inline-block;
+    background: #2d2a26;
+    color: #f5f1ea;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-family: "SF Mono", monospace;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+  }
+  .key-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .key-card p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Before/After */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  @media (min-width: 720px) {
+    .ba-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .ba-card {
+    border-radius: 14px;
+    padding: 16px;
+    border: 2px solid;
+  }
+  .ba-card.before {
+    background: #fef0f0;
+    border-color: rgba(232,67,147,0.3);
+  }
+  .ba-card.after {
+    background: #f0fdf4;
+    border-color: rgba(0,184,148,0.3);
+  }
+  .ba-card .ba-label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  .ba-card.before .ba-label { background: var(--rose); color: #fff; }
+  .ba-card.after .ba-label { background: var(--mint); color: #fff; }
+  .ba-card .you-said {
+    background: #fff;
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .ba-card .arrow {
+    text-align: center;
+    font-size: 16px;
+    color: var(--muted);
+    margin: 6px 0;
+  }
+  .ba-card .result {
+    font-weight: 700;
+    text-align: center;
+    font-size: 13px;
+    padding: 8px;
+    border-radius: 10px;
+    margin-top: 6px;
+  }
+  .ba-card.before .result { background: rgba(232,67,147,0.12); color: var(--rose); }
+  .ba-card.after .result { background: rgba(0,184,148,0.15); color: var(--mint); }
+
+  /* CLAUDE.mdの例 */
+  .md-example {
+    background: #2d2a26;
+    color: #f5f1ea;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+  .md-example .comment { color: #7a756d; }
+  .md-example .heading { color: #fdcb6e; }
+
+  /* 作った人の実例 */
+  .cases {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 720px) {
+    .cases { grid-template-columns: 1fr 1fr; }
+  }
+  .case-card {
+    background: linear-gradient(135deg, #fff, var(--honey-soft));
+    border: 1.5px solid rgba(253,203,110,0.4);
+    border-radius: 14px;
+    padding: 16px;
+  }
+  .case-card .case-tag {
+    display: inline-block;
+    background: var(--warn);
+    color: #2d2a26;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .case-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .case-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* Q&A */
+  .qa {
+    background: var(--accent-soft);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .qa .q {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .qa .a {
+    font-size: 13px;
+    line-height: 1.7;
+    padding-left: 16px;
+    border-left: 3px solid var(--accent);
+  }
+
+  /* チェックリスト */
+  .checklist {
+    background: linear-gradient(135deg, var(--mint-soft), #fff);
+    border: 2px solid rgba(0,184,148,0.3);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .checklist h3 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--mint);
+    margin-bottom: 14px;
+  }
+  .checklist ul { list-style: none; padding: 0; }
+  .checklist li {
+    padding: 8px 0 8px 32px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px dashed rgba(0,184,148,0.2);
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    font-size: 18px;
+    color: var(--mint);
+    font-weight: 700;
+  }
+
+  .footer-msg {
+    text-align: center;
+    padding: 28px 20px;
+    background: linear-gradient(135deg, #fff8f0, #ffe8d6);
+    border-radius: var(--radius);
+    margin-top: 16px;
+  }
+  .footer-msg .heart { font-size: 32px; margin-bottom: 10px; }
+  .footer-msg p {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.7;
+  }
+  .footer-msg .small {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 12px;
+    font-weight: 400;
+  }
+  .meta {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ヒーロー -->
+  <div class="hero">
+    <span class="badge">🚀 Claude Code はじめてガイド</span>
+    <h1>Claude Code 触り出したけど<br>「何したらいいの？」って人へ</h1>
+    <p class="sub">公式セミナー（Anthropic・2026-04-19・30分）の中身を、初心者向けに翻訳した実践ガイド</p>
+    <p class="speaker">登壇：Claude Codeを作った本人（ボリスさん／Anthropic技術スタッフ）</p>
+  </div>
+
+  <!-- Claude Codeって何？ -->
+  <div class="what-is">
+    <h3>📖 そもそも Claude Code って何？</h3>
+    <p>**ターミナル（黒い画面）で動くAIアシスタント**。コードを書くだけじゃなくて、ファイルを調べたり、調べ物したり、Gitを操作したり、メールを下書きしたり、なんでも頼める。</p>
+    <div class="compare">
+      <div class="box">
+        <div class="label">これまでのAI</div>
+        コードの「次の1行」を予測して補完してくれる
+      </div>
+      <div class="box">
+        <div class="label">Claude Code</div>
+        「機能まるごと作って」「バグ直して」が頼める
+      </div>
+    </div>
+  </div>
+
+  <!-- 7つのコツ一覧 -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">🎯</span>Claude Codeを作った人が教えてくれた7つのコツ（全体像）</div>
+    <div class="tips-grid">
+      <div class="tip-card"><div class="num">1</div><h4>最初の準備をしよう</h4><p>画面の見た目・ショートカット・声入力の設定をしておく</p></div>
+      <div class="tip-card"><div class="num">2</div><h4>まず「質問」から始めよう</h4><p>いきなり頼まず、聞くだけ。「これってどうなってる？」</p></div>
+      <div class="tip-card"><div class="num">3</div><h4>動く前に「作戦」を聞こう</h4><p>大きい仕事は「先にどう進める？」と確認してから動かす</p></div>
+      <div class="tip-card"><div class="num">4</div><h4>自分の道具を教えよう</h4><p>普段使うツール（Notion等）をAIに繋ぐ</p></div>
+      <div class="tip-card"><div class="num">5</div><h4>背景情報をまとめよう</h4><p>「うちの前提」をメモにしておくと毎回説明しなくて済む</p></div>
+      <div class="tip-card"><div class="num">6</div><h4>便利キーを覚えよう</h4><p>「許可」「覚えて」「止まって」を一発で押せる</p></div>
+      <div class="tip-card"><div class="num">7</div><h4>同時に何個も動かそう</h4><p>慣れたら複数のAIに同時並行で仕事させる</p></div>
+    </div>
+  </div>
+
+  <!-- ★ メイン：5ステップ実践ガイド ★ -->
+  <div class="step-banner">
+    <span class="pill">⭐ ここがメイン</span>
+    <h2>今日からこの順番でやってみよう</h2>
+    <p class="small">5つのステップ。1日1個でも、1週間で全部回せる量にしてある</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">
+        <h3>まず「質問」だけしてみる</h3>
+        <div class="step-tag">📅 今日やる / 5分</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>Claude Codeを開いたら、何かを<b>作らせる前に「聞くだけ」</b>から始めよう。これが一番の上達への近道、って<b>Claude Codeを作った人</b>も言ってる。Anthropic（Claudeを作った会社）では新人さんがコレやって、慣れる期間が2〜3週間→2〜3日になった。</p>
+      <p style="font-size:13px;color:var(--muted);">Claude Codeはコード以外にも使える。フォルダの中身を把握させたり、文章を整理させたり、なんでも聞ける。<b>難しい話は要らないから、まずは「自分の身の回り」のことを聞いてみよう</b>。</p>
+
+      <div class="try-label">▼ コード書かない人にもおすすめの質問例（コピーしてOK）</div>
+      <ul class="example-list">
+        <li><div class="you">質問例①</div>このフォルダの中、何が入ってるか教えて</li>
+        <li><div class="you">質問例②</div>このファイル、何が書いてあるか3行で要約して</li>
+        <li><div class="you">質問例③</div>このフォルダの中で、似たような内容のファイルある？</li>
+        <li><div class="you">質問例④</div>最近このフォルダ、何の作業してたか教えて</li>
+        <li><div class="you">質問例⑤</div>このフォルダ、整理した方がいいファイルある？</li>
+      </ul>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：いきなり「○○作って」じゃなく、まず「○○ってどうなってる？」。これだけで「あ、こいつ何ができるか分かってきた」感覚が掴める。<br>※ Claude Codeは開いた**フォルダの中身**を見れる状態になってるから、「このフォルダ」って言うだけで通じるよ。</p>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">
+        <h3>大きい仕事は「先に作戦聞いて」と言う</h3>
+        <div class="step-tag">📅 今日やる / 1分で覚えられる</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>頼み方を <b>「○○して」→「○○したい、先に進め方教えて」</b> に変えるだけ。これでAIが暴走して見当違いのものを作っちゃう事故が激減する。</p>
+
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <span class="ba-label">❌ いきなり頼む</span>
+          <div class="you-said">このフォルダ、整理して</div>
+          <div class="arrow">↓</div>
+          <div class="you-said">（勝手に大量のファイルを移動・削除）<br>整理しました！</div>
+          <div class="arrow">↓</div>
+          <div class="result">「えっ、それ消さないで…」<br>元に戻す作業発生</div>
+        </div>
+        <div class="ba-card after">
+          <span class="ba-label">⭕️ 先に作戦を聞く</span>
+          <div class="you-said">このフォルダを整理したい。<b>先にどう整理するか教えて</b></div>
+          <div class="arrow">↓</div>
+          <div class="you-said">①古い下書きは「過去」フォルダへ<br>②画像は「素材」フォルダへ<br>③重複ファイルは…</div>
+          <div class="arrow">↓</div>
+          <div class="you-said">「②と③だけお願い、①はそのまま」</div>
+          <div class="arrow">↓</div>
+          <div class="result">意図通りにスッキリ整理 ✨</div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：「考えてから動いて」ってお願いするだけ。プランモード等の特別な機能は不要。</p>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">
+        <h3>便利キー、3つだけ覚える</h3>
+        <div class="step-tag">📅 明日やる / 体に染み込ませる</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>全部覚えなくていい。<b>この3つだけ</b>覚えれば作業速度が一気に上がる。</p>
+      <div class="keys-grid">
+        <div class="key-card">
+          <kbd>Shift + Tab</kbd>
+          <h4>毎回の確認をスキップ</h4>
+          <p>AIの編集を全部自動承認。テスト書かせる時とか便利</p>
+        </div>
+        <div class="key-card">
+          <kbd>#</kbd>
+          <h4>「これ覚えて」</h4>
+          <p>#を打って文字書くと、AIが永続的に覚えてくれる</p>
+        </div>
+        <div class="key-card">
+          <kbd>Esc</kbd>
+          <h4>止まって・やり直し</h4>
+          <p>AIが暴走したら即停止。2回押すと履歴に戻れる</p>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 おまけ：<kbd style="background:#2d2a26;color:#f5f1ea;padding:2px 6px;border-radius:4px;font-size:11px;">!</kbd> でターミナルコマンドが直接打てる、<kbd style="background:#2d2a26;color:#f5f1ea;padding:2px 6px;border-radius:4px;font-size:11px;">Ctrl+R</kbd> でAIが見てる全画面を見せてくれる。</p>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">
+        <h3>「うちの前提」をメモにまとめる（CLAUDE.md）</h3>
+        <div class="step-tag">📅 今週中にやる / 15分</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>使うフォルダの中に <code style="background:#f0f0f0;padding:2px 6px;border-radius:4px;">CLAUDE.md</code> ってファイル（メモ帳でOK）を置いとくと、AIが毎回最初に読んでくれる。<b>「毎回これ説明するのめんどい」を全部ここに書いとく</b>。</p>
+
+      <div class="try-label">▼ コード書かない人なら、こんな感じで書く</div>
+      <div class="md-example">
+<span class="heading"># このフォルダについて</span>
+ブログ記事の下書き置き場。
+Obsidianで管理してて、毎日書いてる。
+
+<span class="heading"># 触ってほしくないもの</span>
+- 「過去」フォルダの中身は絶対消さないで
+- 画像ファイル（.png .jpg）は移動しないで
+
+<span class="heading"># 文章を書く時のお願い</span>
+- 横文字は最小限で、素朴な日本語にして
+- 箇条書き並べるより、自然な会話っぽく
+
+<span class="heading"># よく使う作業</span>
+- 下書きの誤字チェック
+- タイトル案を5つ出してもらう
+- 文章の要約
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：難しい言葉でなくていい。「人間に説明するつもりで普通の日本語」で書いてOK。最初は5〜10行でも全然十分。「触ってほしくないもの」を書いとくと事故が減る。</p>
+
+      <div style="margin-top:16px;padding:14px 16px;background:linear-gradient(135deg, #fff8e7, #fff);border:2px dashed rgba(225,112,85,0.4);border-radius:12px;">
+        <p style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px;">🪄 リベシティの会員さんへ</p>
+        <p style="font-size:12px;line-height:1.7;color:var(--ink);">学長が紹介してる「<b>魔法の呪文</b>」を CLAUDE.md に貼り付けてる人が多いよ。AIの暴走を防ぐ安全装置として、これも合わせて入れておくのがおすすめ✨<br>👉 <a href="gakucho-magic-spell.html" style="color:var(--accent);font-weight:700;text-decoration:underline;">別冊②：学長の魔法の呪文 ── CLAUDE.mdに貼っとく安全装置</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">
+        <h3>慣れてきたら、同時に何個も動かす</h3>
+        <div class="step-tag">📅 来週やる / 慣れてから</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <p>1個のClaude Codeじゃなくて、<b>黒い画面を複数開いて並列で走らせる</b>。1人が文章書いてる間に、もう1人が資料まとめてる、みたいな状態。AIアシスタント版の「複数の自分」が作れる。</p>
+      <p style="font-size:13px;">最初はタブを2つ開いて、別々の作業を頼んでみる。例：タブ①で「ブログ記事の下書き」／タブ②で「リサーチ依頼」みたいに。</p>
+      <p style="margin-top:12px;font-size:12px;color:var(--muted);">💡 ポイント：いきなりやらない。STEP 1〜4が体に染みてからでいい。慣れる前にやると「どっちで何頼んだっけ？」と混乱しがち。</p>
+    </div>
+  </div>
+
+  <!-- 作った人の実例 -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">💼</span>Claude Codeを作った人本人がいつもやってる使い方</div>
+    <div class="cases">
+      <div class="case-card">
+        <span class="case-tag">毎週月曜</span>
+        <h4>「今週何やった？」を<br>AIにまとめさせる</h4>
+        <p>作った人本人も、定例ミーティング前に「今週どんな作業した？」と聞いてAIにまとめさせて、そのまま報告書にコピペしてる</p>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">面倒な作業</span>
+        <h4>3単語で<br>面倒な工程をまとめて頼む</h4>
+        <p>「保存して、共有して、報告も出して」みたいに3単語だけ。AIが流れを汲んで全部やってくれる</p>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">画像で指示</span>
+        <h4>デザインの絵を見せて<br>「これ作って」</h4>
+        <p>画像をドラッグ&ドロップ。AIが見て→作って→スクショで確認→直す、をループ。だいたい3周で完成</p>
+      </div>
+      <div class="case-card">
+        <span class="case-tag">声で指示</span>
+        <h4>キーボード叩かず<br>声で話しかける</h4>
+        <p>Macの音声入力をオン。「もう一人のエンジニアに話しかけるみたいに」AIに喋ってる、と作った人本人が紹介してた</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q&A -->
+  <div class="section">
+    <div class="section-title"><span class="emoji">❓</span>会場からのQ&A（全3問）</div>
+    <div class="qa">
+      <div class="q">Q1. 作るときに一番難しかったのは？</div>
+      <div class="a">「AIが命令を実行する時の安全装置」が一番難しかった。毎回確認すると面倒、勝手に動くと危ない。安全と便利のバランスをとる仕組み作りが大変だった。</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q2. 画像とか写真もAIに渡せる？</div>
+      <div class="a">渡せます。最初から対応してます。①ドラッグ&ドロップ ②ファイルパスを渡す ③コピー&ペースト の3パターン全部OK。デザイン画像を渡して「これ作って」とよく使う。</div>
+    </div>
+    <div class="qa">
+      <div class="q">Q3. AI研究そのものにも使ってる？</div>
+      <div class="a">めちゃくちゃ使ってます。Anthropic社内では技術職の<b>約8割が毎日Claude Code使ってる</b>。研究者もエンジニアも両方。データ分析用のメモ帳ファイル（Jupyter Notebook）の編集にも使えます。</div>
+    </div>
+  </div>
+
+  <!-- 1週間チェックリスト -->
+  <div class="checklist">
+    <h3>📝 1週間チャレンジ・チェックリスト</h3>
+    <ul>
+      <li>初日：何か質問だけしてみる（コードに触らない）</li>
+      <li>2日目：「先に作戦聞いて」を1回使ってみる</li>
+      <li>3日目：Shift+Tab・#・Esc を1回ずつ使ってみる</li>
+      <li>週末：CLAUDE.md を10行だけ書いてみる</li>
+      <li>来週：ターミナル2つ開いて並列で動かしてみる</li>
+    </ul>
+  </div>
+
+  <!-- 締め -->
+  <div class="footer-msg">
+    <div class="heart">🌷</div>
+    <p>難しい話は飛ばしてOK。<br>まず「質問だけ」から始めてみて☺️</p>
+    <p class="small">それだけでもう、AIと働くスタートラインに立ててるよ</p>
+  </div>
+
+  <div style="text-align:center;margin-top:24px;">
+    <a href="index.html" style="display:inline-block;padding:12px 28px;background:#fff;border:2px solid var(--accent);color:var(--accent);border-radius:999px;font-weight:700;font-size:14px;text-decoration:none;">← 虎の巻 本編に戻る</a>
+  </div>
+
+  <div class="meta">
+    元動画：Mastering Claude Code in 30 minutes（Anthropic公式・2026-04-19）<br>
+    🎨 きょうちゃん図解 / 2026-05-05<br>
+    📘 はじめての Claude Code（虎の巻）別冊③
+  </div>
+
+</div>
+</body>
+</html>
