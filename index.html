@@ -33,6 +33,7 @@
 html{scroll-behavior:smooth}
 body{font-family:var(--font-sans);color:var(--c-text);background:var(--c-bg);line-height:1.9;font-size:15px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none;transition:all .3s ease}
+a:focus-visible, button:focus-visible{outline:3px solid rgba(79,140,168,.45);outline-offset:4px}
 /* 本文中のリンクは「ぱっと見でリンクと分かる」見た目にする */
 .step a, .step p a, .tip a, .fix a, .step-card a, .step-card p a{color:var(--c-accent-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600}
 .step a:hover, .step p a:hover, .tip a:hover, .fix a:hover, .step-card a:hover, .step-card p a:hover{color:var(--c-accent);text-decoration-thickness:2px}
@@ -44,6 +45,7 @@ a{color:inherit;text-decoration:none;transition:all .3s ease}
 .logo .mark{font-family:var(--font-script);font-size:26px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-right:6px}
 .nav{display:flex;gap:24px;align-items:center;font-size:12.5px;letter-spacing:.04em;color:var(--c-text-sub)}
 .nav a:hover{color:var(--c-main-deep)}
+.mobile-quick-nav{display:none}
 
 /* ========== Hero ========== */
 .hero{position:relative;min-height:96vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#F2EBDD 0%,#E8DCC2 60%,#DCD0B8 100%);padding:120px 24px 80px}
@@ -174,10 +176,11 @@ section{padding:100px 24px;position:relative}
 .faq-list{max-width:840px;margin:40px auto 0}
 .faq-item{background:#fff;border-radius:6px;margin-bottom:12px;overflow:hidden;border:1px solid var(--c-line);transition:all .3s}
 .faq-item:hover{border-color:var(--c-main)}
-.faq-q{padding:20px 26px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none}
-.faq-q span{display:flex;align-items:flex-start;gap:14px;font-size:14.5px;font-weight:500;color:var(--c-text);letter-spacing:.02em;line-height:1.6}
-.faq-q span::before{content:'Q.';font-family:var(--font-serif);color:var(--c-main-deep);font-size:20px;font-weight:500;flex-shrink:0}
-.faq-q .arrow{color:var(--c-main-deep);transition:transform .3s;font-size:18px;flex-shrink:0;margin-left:14px}
+.faq-q{width:100%;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;border:0;background:transparent;font-family:inherit;text-align:left}
+.faq-q span:not(.arrow){display:flex;align-items:flex-start;gap:14px;font-size:14.5px;font-weight:500;color:var(--c-text);letter-spacing:.02em;line-height:1.6}
+.faq-q span:not(.arrow)::before{content:'Q.';font-family:var(--font-serif);color:var(--c-main-deep);font-size:20px;font-weight:500;flex-shrink:0}
+.faq-q .arrow{display:inline-flex;align-items:center;justify-content:center;color:var(--c-main-deep);transition:transform .3s;font-size:18px;flex-shrink:0;margin-left:14px;line-height:1}
+.faq-q .arrow::before{content:none}
 .faq-item.open .faq-q .arrow{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;background:var(--c-bg)}
 .faq-item.open .faq-a{max-height:600px}
@@ -244,6 +247,10 @@ section{padding:100px 24px;position:relative}
 .chapter-nav a{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--c-text-sub);padding:10px 18px;background:#fff;border:1px solid var(--c-line);border-radius:999px;transition:all .3s}
 .chapter-nav a:hover{color:var(--c-main-deep);border-color:var(--c-main);transform:translateY(-2px)}
 
+/* ========== Bonus Cards ========== */
+.bonus-card{display:block;background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:transform .3s ease, box-shadow .3s ease;text-decoration:none;color:inherit;position:relative;overflow:hidden}
+.bonus-card:hover{transform:translateY(-4px);box-shadow:0 18px 38px rgba(79,140,168,.14)}
+
 /* ========== Footer ========== */
 .footer{padding:60px 24px 30px;background:var(--c-text);color:#fff}
 .footer-inner{max-width:1080px;margin:0 auto;text-align:center}
@@ -254,8 +261,12 @@ section{padding:100px 24px;position:relative}
 
 /* ========== Responsive ========== */
 @media (max-width:900px){
+  body{padding-bottom:72px}
   .header{padding:14px 20px}
   .nav{display:none}
+  .mobile-quick-nav{position:fixed;left:12px;right:12px;bottom:12px;z-index:1001;display:flex;justify-content:center;gap:8px;padding:8px;background:rgba(250,247,242,.94);border:1px solid var(--c-line);border-radius:999px;box-shadow:0 10px 28px rgba(61,58,53,.12);backdrop-filter:blur(12px)}
+  .mobile-quick-nav a{flex:1;display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 8px;border-radius:999px;font-size:12px;color:var(--c-text-sub);background:#fff;border:1px solid transparent;white-space:nowrap}
+  .mobile-quick-nav a:hover,.mobile-quick-nav a:focus-visible{color:var(--c-main-deep);border-color:var(--c-main);background:var(--c-bg)}
   .hero{padding:100px 20px 60px;min-height:auto}
   .hero-script{font-size:38px}
   .hero-title{font-size:24px}
@@ -275,6 +286,7 @@ section{padding:100px 24px;position:relative}
   .final-cta .hero-script{font-size:34px}
   .install-step{grid-template-columns:1fr;gap:8px;padding:22px}
   .install-step .num{font-size:28px}
+  .bonus-card{padding:26px 24px}
 }
 </style>
 </head>
@@ -290,6 +302,13 @@ section{padding:100px 24px;position:relative}
     <a href="#ch6">救命キット</a>
   </nav>
 </header>
+
+<nav class="mobile-quick-nav" aria-label="スマホ用ショートカット">
+  <a href="#toc">目次</a>
+  <a href="#ch3">最初</a>
+  <a href="#ch6">FAQ</a>
+  <a href="#ch7">別冊</a>
+</nav>
 
 <!-- =================== Hero =================== -->
 <section class="hero">
@@ -769,36 +788,36 @@ section{padding:100px 24px;position:relative}
     <div class="faq-list">
 
       <div class="faq-item">
-        <div class="faq-q"><span>Claude Codeって、ChatGPTと何が違うの？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-01"><span>Claude Codeって、ChatGPTと何が違うの？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-01"><div class="faq-a-inner">
           ChatGPTは「チャット画面の中だけで動く・記憶喪失気味のAI」やで。Claude Codeは「あんたのパソコンの中に住み込んで、代わりに動いてくれるお手伝いさん」や。ChatGPTは「提案する人」、Claude Codeは「実行する人」って覚えとったらええんよ〜。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>デスクトップ版とウェブ版、どっち使えばいいの？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-02"><span>デスクトップ版とウェブ版、どっち使えばいいの？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-02"><div class="faq-a-inner">
           最初はデスクトップ版（Claude Codeアプリ）でええで。ウェブ版はチャットだけで、パソコンの中身は触れんからな。見分け方はな、アドレスバー（URL）が見えてたらウェブ版、見えてへんかったらアプリ版や。覚えとき。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>「フォルダを選んでください」って出た。どこにする？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-03"><span>「フォルダを選んでください」って出た。どこにする？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-03"><div class="faq-a-inner">
           どこでもええで〜。デスクトップに「今日の日付」でフォルダ新規作成して、それを選ぶのがいっちゃんシンプルやな。決めんでも動くけど、最初は「今日この箱で仕事してな」って決めた方が、何が作られたか追えるから楽やで。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>「許可しますか？」が連発する。全部許可していいの？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-04"><span>「許可しますか？」が連発する。全部許可していいの？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-04"><div class="faq-a-inner">
           基本、全部「はい」「許可」でええで。爆発せんから安心しいや。Claudeはな、大事な操作（削除とか）は必ずもう一回確認してくれるんや。「ネットワーク外部通信許可」だけは、最初オフのままが安心やで。
         </div></div>
       </div>
 
       <div class="faq-item long">
-        <div class="faq-q"><span>「バイパス権限モード」ってオンにすべき？聞かれっぱなしで進まへん…</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-05"><span>「バイパス権限モード」ってオンにすべき？聞かれっぱなしで進まへん…</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-05"><div class="faq-a-inner">
 
           <div class="faq-cautionbox">
             ⚠️ <strong>ここは慎重に判断したいとこやで。</strong> Claude Code界隈でも「便利」と「危ない」で意見が分かれてる話や。<br>
@@ -894,57 +913,57 @@ section{padding:100px 24px;position:relative}
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>クロコちゃんが英語で話してきた、どうしよう</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-06"><span>クロコちゃんが英語で話してきた、どうしよう</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-06"><div class="faq-a-inner">
           気にせず進めてええで〜。困ったら「日本語で答えて」って打ったら切り替わるからな。CLAUDE.mdっていうファイルに「日本語で答えて」って書いといたら、毎回設定せんでよくなるで。これは便利やな。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>新しいチャットを始めたら、前の話を忘れちゃう？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-07"><span>新しいチャットを始めたら、前の話を忘れちゃう？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-07"><div class="faq-a-inner">
           チャット内の会話は忘れるんよ（ChatGPTと同じやな）。ただな、フォルダの中に作ったメモ・日記・CLAUDE.mdとかの「紙（ファイル）」はずっと残っとるから、新しいチャットでも「この中に何が入っとるか見て」って頼んだら思い出してくれるで。これがClaude Codeの強みやな〜。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>動きが遅くなった／上限が心配</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-08"><span>動きが遅くなった／上限が心配</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-08"><div class="faq-a-inner">
           <strong>/clear</strong>（全消し）か <strong>/compact</strong>（要約して継続）を使ってな。話が長くなるとAIの精度も落ちるから、テーマが変わったらclearするのが基本やで。トークン上限は5時間ごとにリセットされるから安心しいや。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>作ったファイル、どこに保存されてるの？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-09"><span>作ったファイル、どこに保存されてるの？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-09"><div class="faq-a-inner">
           最初に指定したフォルダの中にあるで。ファインダー（Mac）／エクスプローラー（Windows）で見に行けるからな。わからんくなったら「さっき作ったファイル、どこに置いた？」ってClaudeに聞いたら教えてくれるで〜。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>プラン（課金）はどれを選べばいい？無料で使える？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-10"><span>プラン（課金）はどれを選べばいい？無料で使える？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-10"><div class="faq-a-inner">
           月20ドル（Pro）でええで。僕もな、「月20ドルで十分や」って言うとる。無料枠は厳しいから、最初から月額プランがオススメやな。クレジットカードはプリペイドでも登録できるで。月3000円弱で「遊び道具／仕事道具」として余裕で元取れるから、安心して投資したらええ。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>クロコが永遠に動き続ける／同じことを繰り返す</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-11"><span>クロコが永遠に動き続ける／同じことを繰り返す</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-11"><div class="faq-a-inner">
           ESCキー、もしくは画面の「停止」ボタンで止めたらええで。「あれ、動きが変やな」って思ったら3分以内に止めるのがコツやで。どうしても直らんときは、新しいチャットで指示し直すのが早いな。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>音声入力で指示してる人を見るけど、どうやってる？</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-12"><span>音声入力で指示してる人を見るけど、どうやってる？</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-12"><div class="faq-a-inner">
           Mac / iPhone純正の音声入力か、AquaVoice（コマンド長押しで音声→AIが整形してくれるやつ）が定番やで。語順がぐちゃぐちゃでもAIが汲み取ってくれるから、初心者ほど音声入力がオススメやな。マイクはな、AirPodsより有線のApple純正イヤホンマイク（3000円）の方が圧倒的に高性能や、って複数の先輩リベ仲間が言うとる。これは買いやで。
         </div></div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q"><span>何に使ったらいいか分からない</span><span class="arrow">+</span></div>
-        <div class="faq-a"><div class="faq-a-inner">
+        <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-13"><span>何に使ったらいいか分からない</span><span class="arrow" aria-hidden="true">+</span></button>
+        <div class="faq-a" id="faq-answer-13"><div class="faq-a-inner">
           まずは「フォルダ整理／パソコン掃除」「綺麗なホームページ作り」「日記・ブログ・SNS下書き」あたりから始めたらええで。僕の「フォルダ整理から始めたらええ」っちゅうのが初手の鉄則やからな。アイデアが浮かばんときは、身の回りの「これ困ったわ〜」「めんどくさいな〜」を1つ思い出して、Claudeに相談してみ。きっと何か出てくるで。
         </div></div>
       </div>
@@ -1128,7 +1147,7 @@ section{padding:100px 24px;position:relative}
 
     <div style="margin-top:30px;display:grid;grid-template-columns:1fr;gap:18px;">
 
-      <a href="gakucho-pdm-style.html" style="display:block;background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:all .3s;text-decoration:none;color:inherit;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 18px 38px rgba(79,140,168,.14)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 28px rgba(79,140,168,.08)'">
+      <a href="gakucho-pdm-style.html" class="bonus-card">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:var(--rainbow)"></div>
         <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
           <div>
@@ -1143,7 +1162,7 @@ section{padding:100px 24px;position:relative}
         </div>
       </a>
 
-      <a href="gakucho-magic-spell.html" style="display:block;background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:all .3s;text-decoration:none;color:inherit;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 18px 38px rgba(79,140,168,.14)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 28px rgba(79,140,168,.08)'">
+      <a href="gakucho-magic-spell.html" class="bonus-card">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#E8B57A 0%,#A8C4A0 100%)"></div>
         <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
           <div>
@@ -1158,7 +1177,7 @@ section{padding:100px 24px;position:relative}
         </div>
       </a>
 
-      <a href="boris-seminar-30min.html" style="display:block;background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:all .3s;text-decoration:none;color:inherit;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 18px 38px rgba(79,140,168,.14)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 28px rgba(79,140,168,.08)'">
+      <a href="boris-seminar-30min.html" class="bonus-card">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#7BAEC4 0%,#E8B57A 100%)"></div>
         <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
           <div>
@@ -1173,7 +1192,7 @@ section{padding:100px 24px;position:relative}
         </div>
       </a>
 
-      <a href="gakucho-live-may4-cases.html" style="display:block;background:linear-gradient(135deg,#fff 0%,#FAF7F2 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:all .3s;text-decoration:none;color:inherit;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 18px 38px rgba(79,140,168,.14)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 28px rgba(79,140,168,.08)'">
+      <a href="gakucho-live-may4-cases.html" class="bonus-card">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#E8B57A 0%,#759A6C 100%)"></div>
         <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
           <div>
@@ -1189,7 +1208,7 @@ section{padding:100px 24px;position:relative}
       </a>
 
 
-      <a href="libecity-learning-links.html" style="display:block;background:linear-gradient(135deg,#fff 0%,#F8FBF9 100%);border-radius:12px;padding:32px 36px;border:1px solid var(--c-line);box-shadow:0 10px 28px rgba(79,140,168,.08);transition:all .3s;text-decoration:none;color:inherit;position:relative;overflow:hidden;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 18px 38px rgba(79,140,168,.14)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 28px rgba(79,140,168,.08)'">
+      <a href="libecity-learning-links.html" class="bonus-card">
         <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#4F8CA8 0%,#759A6C 100%)"></div>
         <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;">
           <div>
@@ -1249,8 +1268,10 @@ window.addEventListener('scroll', () => {
 
 // FAQ toggle
 document.querySelectorAll('.faq-item').forEach(item => {
-  item.querySelector('.faq-q').addEventListener('click', () => {
-    item.classList.toggle('open');
+  const trigger = item.querySelector('.faq-q');
+  trigger.addEventListener('click', () => {
+    const isOpen = item.classList.toggle('open');
+    trigger.setAttribute('aria-expanded', String(isOpen));
   });
 });
 </script>
