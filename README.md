@@ -28,7 +28,7 @@
 | 別冊2 | `gakucho-magic-spell.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/gakucho-magic-spell.html | 初心者がそのまま使える依頼文・呪文集 |
 | 別冊3 | `boris-seminar-30min.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/boris-seminar-30min.html | Anthropic公式30分セミナーの初心者向け整理 |
 | 別冊4 | `gakucho-live-may4-cases.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/gakucho-live-may4-cases.html | AIで稼ぐ実例集。学長ライブ5/4ベース |
-| 別冊5 | `libecity-learning-links.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/libecity-learning-links.html | リベシティ宿題リスト、Claude部、ノウハウ図書館への学習導線 |
+| 別冊5 | `libecity-learning-links.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/libecity-learning-links.html | リベシティ宿題リスト、AI初心者サポートチャット投稿ログ、ノウハウ図書館への学習導線 |
 
 ---
 
@@ -98,6 +98,7 @@ claude-code-beginner-guide/
 | v1.2 | 2026-05-05 | 別冊3「公式30分セミナー」を追加 |
 | v1.3 | 2026-05-05 | 別冊4「AIで稼ぐ実例集」を追加 |
 | v1.4 | 2026-05-07 | 共同編集ルール、素材リンク集、別冊5「リベシティ学習リンク集」を追加 |
+| v1.5 | 2026-05-07 | 別冊5のトンマナ整備、AI初心者サポートチャットの記事投稿ログを追加 |
 
 ---
 
