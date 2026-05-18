@@ -1,6 +1,6 @@
 # 参照元リンク集
 
-最終更新: 2026-05-07
+最終更新: 2026-05-18
 
 このファイルは、虎の巻本編・別冊・今後の追記候補に使う素材リンクをまとめる場所です。リベシティ内リンクはログインが必要なものがあります。
 
@@ -23,6 +23,15 @@
 | ClaudeCoworkの導入手順を超シンプルに画像付きでまとめました | https://library.libecity.com/articles/01KN1S73724GJW8RV3TW9B0QSM | 不安が強い初心者向けの補助リンク |
 | 電気工事士がClaudeで約190万円を泥臭く稼いだ話 | https://library.libecity.com/articles/01KQQ8BG8CX09MC2NSPMMJS340 | 別冊4の代表事例。全文転載せず、構造とリンクで扱う |
 | 電気工事士がClaudeでAI社員20人を雇って稼いだ話 | https://library.libecity.com/articles/01KQQ6D3Q80REAKBZPAY2WK3BZ | 関連事例。必要時に別冊4へ追加候補 |
+
+## ノウハウ図書館おすすめ記事（オフ会・作業会向け）
+
+| 追加日 | 記事 | リンク | 虎の巻での使い方 |
+|---|---|---|---|
+| 2026-05-18 | 電気工事士がClaudeで約190万円を泥臭く稼いだ話 | https://library.libecity.com/articles/01KQQ8BG8CX09MC2NSPMMJS340 | オフ会本命。各自の本業・副業から、明日見せられる1枚を作る |
+| 2026-05-18 | コピペ地獄から解放！メルカリ出品をClaude Coworkに丸投げしたらここまでできた！ | https://library.libecity.com/articles/01KMPP14FCXZWZPRP9Z847B59T | 不用品販売・せどり向け。タイトル、説明文、相場メモ、価格案づくり |
+| 2026-05-18 | AIオンチがClaude Coworkで勤務表作ってみた！ | https://library.libecity.com/articles/01KP8H7K02YM3H5ETW4Q06WZX9 | 介護・医療・シフト系業務のテンプレ化、ルール整理の入口 |
+| 2026-05-18 | ChatGPTでInstagramフィード投稿案を出す方法 | https://library.libecity.com/articles/01HNWHAK4KF05JM39A8GZRVY5R | SNS発信向け。投稿構成、キャッチコピー、本文案づくり |
 
 ## AI初心者サポートチャットで紹介された記事
 
