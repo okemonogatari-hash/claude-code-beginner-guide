@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>別冊⑥ 毎日の学長ライブを自動でテキスト化＆要約しちゃう仕組み | Claude Code 初心者向け虎の巻</title>
+<meta name="description" content="Claude Codeと公式の仕組みを組み合わせると、毎朝の学長ライブを自動でテキスト化→要約→AI活用事例集まで作れる、を実例で紹介。詳しい仕組みは別途相談。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--main:#b58a4a;--main-deep:#8a6a30;--accent:#e8b57a;--sub:#a98c5a;--ink:#2f2a24;--muted:#746d64;--paper:#fbfaf7;--line:#ead9bf}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#fdfaf2 0%,#fbfaf7 44%,#fff 100%);color:var(--ink);line-height:1.9}
+a{color:var(--main-deep);font-weight:700;text-underline-offset:4px}
+.wrap{width:min(1040px,92vw);margin:0 auto}
+header{padding:64px 0 34px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--main-deep);font-weight:900;margin-bottom:14px}
+h1{font-family:"Noto Serif JP",serif;font-size:clamp(28px,4.6vw,48px);line-height:1.3;letter-spacing:0;color:var(--ink)}
+.lead{margin-top:22px;font-size:16px;color:var(--muted);max-width:760px}
+.back{display:inline-flex;align-items:center;margin-top:26px;padding:10px 18px;border:1px solid var(--line);border-radius:999px;background:#fff;text-decoration:none;color:var(--ink);font-size:14px}
+main{padding:42px 0 60px}
+section{padding:36px 0;border-bottom:1px solid var(--line)}
+h2{font-family:"Noto Serif JP",serif;font-size:24px;line-height:1.45;margin-bottom:18px;color:var(--ink)}
+h3{font-family:"Noto Serif JP",serif;font-size:19px;line-height:1.5;margin:18px 0 8px;color:var(--ink)}
+p{margin:.7em 0}
+.callout{background:#fff8ed;border-left:4px solid var(--accent);padding:18px 22px;border-radius:8px;color:#6b5742;margin:18px 0}
+.callout strong{color:var(--main-deep)}
+.flow{display:grid;gap:14px;margin-top:22px}
+.step{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 24px;box-shadow:0 8px 22px rgba(181,138,74,.08);position:relative}
+.step .num{display:inline-block;font-family:"Noto Serif JP",serif;font-weight:900;color:#fff;background:var(--main);border-radius:999px;width:30px;height:30px;line-height:30px;text-align:center;font-size:14px;margin-right:10px}
+.step h3{display:inline;font-size:18px;margin:0}
+.step p{font-size:15px;color:#4a4540;margin-top:8px}
+.merits{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:20px}
+.merit{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px 22px}
+.merit h3{font-size:17px;margin-bottom:6px;color:var(--main-deep)}
+.merit p{font-size:14px;color:#4a4540;margin:0}
+.softnote{background:#fffaf0;border:1px dashed var(--line);border-radius:10px;padding:22px 24px;color:#4a4540;margin-top:22px}
+.softnote h3{margin-top:0;color:var(--main-deep)}
+ul{padding-left:1.3em}
+li{margin:.35em 0}
+footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
+@media(max-width:640px){header{padding-top:42px}.step{padding:18px 20px}.back{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Bonus Chapter 06 / Auto Workflow</div>
+    <h1>毎日の学長ライブを<br>自動でテキスト化＆要約しちゃう仕組み</h1>
+    <p class="lead">2時間の学長ライブ動画を、毎朝1〜2分で「全文テキスト」「要約ノート」「AI活用事例集」に変えてObsidianに保存している実例の紹介です。技術の詳しい話は省いて、「こんなことができるんですよ〜」のイメージを掴んでもらう別冊。</p>
+    <a class="back" href="index.html">← 本編に戻る</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>📺 そもそも何が起きてるんか</h2>
+    <p>毎朝の学長ライブ（約2時間・7万〜8万字レベル）を、毎日この流れで自動処理しています。</p>
+
+    <div class="callout">
+      <strong>合言葉一言：</strong>
+      YouTubeの字幕って、動画を再生せんでも<strong>テキストだけで直接ダウンロード</strong>できるんです。それを Claude Code に「読んで要約と活用事例まとめて」って投げるだけで、2時間ライブが1〜2分で要約と事例集にまとまります🎬
+    </div>
+
+    <p>具体的には毎日この5ステップが、Claude Code 側の自動処理で勝手に回っています。</p>
+
+    <div class="flow">
+      <div class="step">
+        <span class="num">1</span><h3>今日の学長ライブを見つける</h3>
+        <p>YouTube公式の窓口（API）に「両学長チャンネルの新着動画リスト見せて」と問い合わせ。タイトルに「【M月D日8時30分まで】」が入っているのが学長ライブの目印なので、当日分を一発で識別します。</p>
+      </div>
+
+      <div class="step">
+        <span class="num">2</span><h3>字幕（テキスト全文）をダウンロード</h3>
+        <p>YouTube動画には自動生成された字幕データが必ず置いてあります。これを<strong>動画じゃなくてテキストとして直接</strong>取得。今日のライブだと2,544個の発話・約7万5千文字が、タイムスタンプ付きで降ってきます。所要時間は数秒。</p>
+      </div>
+
+      <div class="step">
+        <span class="num">3</span><h3>分身Claudeに「読んで要約してね」と丸投げ</h3>
+        <p>7万字を全部1人で抱えるとしんどいので、別のClaudeを呼び出して仕事を委任。「要約ノート」と「AI活用事例集」の2ファイルを並行して作ってもらいます。書き終わったら、見落としチェックのために<strong>もう一度全文を読み直す</strong>2パス運用までセットでお願い済み。</p>
+      </div>
+
+      <div class="step">
+        <span class="num">4</span><h3>Obsidian（自分の第二脳）に保存</h3>
+        <p>原液（全文テキスト）／要約ノート／活用事例集の3点セットが、決まったフォルダ・決まったファイル名で自動保存。ノート間のリンクも自動で張ってくれます。<strong>毎日この処理が積み上がっていくので、自分専用の「学長ライブ図書館」が育っていく</strong>感覚。</p>
+      </div>
+
+      <div class="step">
+        <span class="num">5</span><h3>LINEに「終わったよ」と通知</h3>
+        <p>処理が完了したらLINEに「✅要約済 ✅事例N件」と一言だけ届く。外出先でも結果だけ確認できる仕組み。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🌟 これで何が嬉しいんか</h2>
+    <div class="merits">
+      <div class="merit">
+        <h3>毎朝のインプットが資産になる</h3>
+        <p>「聞いて終わり」じゃなくて、テキスト・要約・事例集として残るので、後から検索もリンクも引用も自由自在。</p>
+      </div>
+      <div class="merit">
+        <h3>2時間の動画 → 1〜2分で要点把握</h3>
+        <p>忙しい日はライブ見られなくても、要約だけ読めば追いつける。気になった所だけ原液に戻って深掘りも可能。</p>
+      </div>
+      <div class="merit">
+        <h3>AI活用事例だけを抜き出して蓄積</h3>
+        <p>視聴者からの「やってみた報告」を毎日コツコツ拾うことで、コーチング・営業・発信の<strong>ネタの宝箱</strong>になっていきます。</p>
+      </div>
+      <div class="merit">
+        <h3>同じ仕組みは他にも応用可能</h3>
+        <p>YouTube動画・Zoom録画・長文記事など、「長くて読むのしんどい素材」は全部この流れで処理できます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🤖 ざっくり言うと</h2>
+    <p>裏では <strong>公式のYouTubeの仕組み × Pythonの便利な道具 × Claude Code の自動処理</strong> を組み合わせているだけです。難しいプログラムを毎日書いてるわけじゃなくて、<strong>「これを毎朝やっといて」って一度仕込めば、あとは勝手に回り続ける</strong>のがClaude Code の楽しいところ。</p>
+
+    <div class="callout">
+      <strong>ひとことで言うと：</strong> 「Claude Code に毎朝の宿題を覚えてもらう」感覚です。<br>
+      一度教えれば、おけもんが何もしなくても毎日学長ライブを聞いて・要約して・整理しておいてくれる。
+    </div>
+  </section>
+
+  <section>
+    <h2>🛠 詳しく知りたい人へ</h2>
+    <div class="softnote">
+      <h3>仕組みの中身（API・自動処理の組み方など）は、ややこしいので別途相談で🙏</h3>
+      <p>このページは「こんなことができるんですよ〜」を伝えるためのもの。実際の組み方は、使うサービスやアカウント設定・好みの保存先によって変わるので、興味ある方は<strong>個別に声かけてもらうのが早い</strong>です。</p>
+      <ul>
+        <li>「自分のYouTubeチャンネルでもやりたい」</li>
+        <li>「Zoom録画とかPodcastにも応用したい」</li>
+        <li>「Obsidian じゃなくて Notion / Google Drive に保存したい」</li>
+        <li>「業務の議事録テキスト化も自動化したい」</li>
+      </ul>
+      <p>用途によって組み方が変わるので、まずは「何を／どこに溜めたいか」を一緒に整理するところからお話ししましょ〜。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>📘 Claude Code 初心者向け虎の巻 / 別冊⑥ Auto Workflow</p>
+    <p style="margin-top:6px;">本編：<a href="index.html">虎の巻トップへ戻る</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
