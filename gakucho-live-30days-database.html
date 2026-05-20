@@ -91,6 +91,25 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
   .cta-btns{flex-direction:column}
   .cta-btn{width:100%;text-align:center}
 }
+
+/* === v1.6 DB Controls === */
+.db-controls{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;box-shadow:0 8px 22px rgba(181,138,74,.06);display:grid;grid-template-columns:auto auto auto 1fr auto;gap:18px;align-items:center}
+.ctrl-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctrl-label{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.ctrl-btns{display:flex;gap:6px;flex-wrap:wrap}
+.ctrl-btn{font-size:12.5px;padding:7px 14px;background:#fbfaf7;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+.ctrl-btn:hover{background:#fff8ed;border-color:var(--accent)}
+.ctrl-btn.active{background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;border-color:var(--main)}
+.ctrl-search{min-width:200px}
+.ctrl-input{font-size:13.5px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fbfaf7;width:100%;font-family:inherit;color:var(--ink);transition:.2s}
+.ctrl-input:focus{outline:none;border-color:var(--main);background:#fff;box-shadow:0 0 0 3px rgba(181,138,74,.12)}
+.ctrl-status{text-align:right;white-space:nowrap}
+.db-count{font-family:"Noto Serif JP",serif;font-size:14px;color:var(--main-deep);font-weight:700;background:#fff8ed;padding:6px 14px;border-radius:999px;border:1px solid var(--accent)}
+.db-row.hidden{display:none}
+@media(max-width:900px){
+  .db-controls{grid-template-columns:1fr;gap:14px}
+  .ctrl-status{text-align:left}
+}
 </style>
 </head>
 <body>
@@ -104,6 +123,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
       <div class="metric"><span class="v">30</span><span class="l">日分カバー</span></div>
       <div class="metric"><span class="v">≒125分</span><span class="l">平均長</span></div>
       <div class="metric"><span class="v">毎日</span><span class="l">休配信なし</span></div>
+      <div class="metric" style="border-left:2px solid var(--accent);padding-left:18px;margin-left:6px"><span class="v" style="font-size:18px;color:var(--accent-deep);font-family:'Noto Sans JP',sans-serif">🎛 フィルタ可</span><span class="l">月／キーワード／保存状況</span></div>
     </div>
     <a class="back" href="index.html">← 本編にもどる</a>
   </div>
@@ -175,6 +195,40 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
       <strong>📌 ここで見えてること：</strong> 毎日の朝ライブが、配信されたその日のうちに「全文テキスト＋要約」になって、自分のObsidian Vaultに保存されてる、っていう状態。<br>
       これが <strong>Claude Code × YouTube Data API v3 × 自動要約</strong> の組み合わせで実現してるよ。仕組み詳細は <a href="gakucho-live-auto-process.html">別冊⑥</a> へ。
     </div>
+        <!-- v1.6 インタラクティブ DB コントロール -->
+    <div class="db-controls">
+      <div class="ctrl-group">
+        <label class="ctrl-label">🔄 並び順</label>
+        <div class="ctrl-btns">
+          <button class="ctrl-btn active" data-sort="desc">⬇ 新しい順</button>
+          <button class="ctrl-btn" data-sort="asc">⬆ 古い順</button>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">📅 月</label>
+        <div class="ctrl-btns">
+          <button class="ctrl-btn active" data-month="all">全部</button>
+          <button class="ctrl-btn" data-month="4">4月</button>
+          <button class="ctrl-btn" data-month="5">5月</button>
+        </div>
+      </div>
+      <div class="ctrl-group">
+        <label class="ctrl-label">🏷 保存状況</label>
+        <div class="ctrl-btns">
+          <button class="ctrl-btn active" data-status="all">全部</button>
+          <button class="ctrl-btn" data-status="yaku">📝 要約あり</button>
+          <button class="ctrl-btn" data-status="gen">📜 原液あり</button>
+          <button class="ctrl-btn" data-status="none">⚠ 未保存</button>
+        </div>
+      </div>
+      <div class="ctrl-group ctrl-search">
+        <label class="ctrl-label">🔍 キーワード検索</label>
+        <input type="text" class="ctrl-input" id="db-search" placeholder="例：AI / Codex / 副業 / 住宅ローン…" autocomplete="off">
+      </div>
+      <div class="ctrl-status">
+        <span id="db-count" class="db-count">29本表示中</span>
+      </div>
+    </div>
     <div class="table-wrap">
       <table>
         <thead>
@@ -185,7 +239,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
           </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr class="db-row" data-date="2026-05-20" data-month="5" data-status="yakugen" data-keyword="【投資のレジェンド断言】『債券はほとんどの人に必要ない』5つの理由&amp;みんなai使ってる？googleから新たなai&amp;リベ大アニマルレスキュー、リアルシェルターも作っていくで【5月20日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">20</span></div>
             <div class="d-wd">（水）</div>
@@ -201,7 +255,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 133分 ／ 🎬 VBiO9Fx1F1s ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-19" data-month="5" data-status="yakugen" data-keyword="【2028年予測】住宅ローン金利1.7%へ｜月1〜2万円の返済増に備える方法【5月19日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">19</span></div>
             <div class="d-wd">（火）</div>
@@ -217,7 +271,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 120分 ／ 🎬 KpdINTPTFGY ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-18" data-month="5" data-status="yakugen" data-keyword="【韓国の憂鬱】韓国の株価指数がヤバい。若者に投資ブーム&amp;28年ぶりの平和な家族外食｜行動したら人生は変えられる、を体現したリベ民の手紙【5月18日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">18</span></div>
             <div class="d-wd">（月）</div>
@@ -233,7 +287,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 115分 ／ 🎬 Py4Q4GFxcJE ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-17" data-month="5" data-status="gen" data-keyword="【初心者歓迎】お金の基本、なんでも聞いてや&amp;リベの大規模イベントがあったよ！まったり雑談ライブ【5月17日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">17</span></div>
             <div class="d-wd">（日）</div>
@@ -249,7 +303,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 137分 ／ 🎬 nPyEt3egQec ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-16" data-month="5" data-status="gen" data-keyword="貯金100万円未満→資産2400万円｜あるリベ民の人生再起の物語&amp;今日は大型イベントでみんなに会えるの楽しみ【5月16日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">16</span></div>
             <div class="d-wd">（土）</div>
@@ -265,7 +319,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 112分 ／ 🎬 X_Umi6ALYZg ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-15" data-month="5" data-status="yakugen" data-keyword="学長aiが選んだ今週のお金ニュース、ぜんぶまとめて学長コメント【5月15日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">15</span></div>
             <div class="d-wd">（金）</div>
@@ -281,7 +335,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 121分 ／ 🎬 m3s2NruzDEQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-14" data-month="5" data-status="yakugen" data-keyword="【2兆円の隠れ増税】気づいてる？インフレで進む『ステルス増税』の正体&amp;なんでも無料で使おうとするあなたへ【損する。笑】【5月14日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">14</span></div>
             <div class="d-wd">（木）</div>
@@ -297,7 +351,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 121分 ／ 🎬 bwLC9aERFGo ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-13" data-month="5" data-status="yakugen" data-keyword="【衝撃】お金持ちほど資産運用に失敗する理由&amp;マネーフォワード連携再開し出してるよん【5月13日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">13</span></div>
             <div class="d-wd">（水）</div>
@@ -313,7 +367,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 120分 ／ 🎬 z36-uF98weQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-12" data-month="5" data-status="yakugen" data-keyword="祝☆チャンネル登録900万人&amp;会社員を辞めて看護学校へ。リベが教えてくれたのは『お金』だけじゃなかった【5月12日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">12</span></div>
             <div class="d-wd">（火）</div>
@@ -329,7 +383,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 116分 ／ 🎬 UFH0C9hPlCc ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-11" data-month="5" data-status="yakugen" data-keyword="【研究で判明】コレ見るだけで貯金額が2倍になる方法【5月11日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">11</span></div>
             <div class="d-wd">（月）</div>
@@ -345,7 +399,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 123分 ／ 🎬 B5xyTO2q7B4 ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-10" data-month="5" data-status="yakugen" data-keyword="母の日やし、ワシがどんなお金の教育を受けて育ったか話すで【5月10日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">10</span></div>
             <div class="d-wd">（日）</div>
@@ -361,7 +415,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 146分 ／ 🎬 Q9tyYK5ABLE ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-09" data-month="5" data-status="yakugen" data-keyword="【稼ぐ力アップ実例集】「借金まみれ・自己破産寸前から月収50万円へ。リベシティで人生が変わった編集者の話」&amp;マネーフォワードが障害出てるけど、気にしなくてええよ。笑【5月9日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">9</span></div>
             <div class="d-wd">（土）</div>
@@ -377,7 +431,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 132分 ／ 🎬 J3KTL6z_0Pg ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-08" data-month="5" data-status="yakugen" data-keyword="【稼ぐ力アップ実例集】『一体何屋かわからん』と笑える状態に。おむすび屋が1年でこうなった【5月8日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">8</span></div>
             <div class="d-wd">（金）</div>
@@ -393,7 +447,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 136分 ／ 🎬 3rWcTmZh2No ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-07" data-month="5" data-status="yakugen" data-keyword="学長が今月から高配当株投資を始めるとしたら？日経平均とtopixの違い&amp;claudecode(クロコ)使ってる人に朗報！トークン制限が大幅に緩和されたよ【5月7日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">7</span></div>
             <div class="d-wd">（木）</div>
@@ -409,7 +463,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 114分 ／ 🎬 vssft_vWMWo ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-06" data-month="5" data-status="yakugen" data-keyword="学長ai musicプロデューサーとしてデビュー！お金がっぽがっぽ儲けるんだ！笑【5月6日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">6</span></div>
             <div class="d-wd">（水）</div>
@@ -425,7 +479,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 121分 ／ 🎬 B9pbukjH3-c ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-05" data-month="5" data-status="yakugen" data-keyword="aiを使って架空のアーティストで4億稼いだ方法【5月5日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">5</span></div>
             <div class="d-wd">（火）</div>
@@ -441,7 +495,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 128分 ／ 🎬 zAPIn3W18sM ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-04" data-month="5" data-status="yakugen" data-keyword="aiで稼ぐ人は何をしてる？所得アップの実例集【5月4日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">4</span></div>
             <div class="d-wd">（月）</div>
@@ -457,7 +511,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 154分 ／ 🎬 OGDT4pCArEU ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-03" data-month="5" data-status="yakugen" data-keyword="公共wi-fiは避けた方が良い？パスワードは定期変更した方が良い？意外とやりがちな、実はやらなくて良い時代遅れのセキュリティ対策6選【5月3日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">3</span></div>
             <div class="d-wd">（日）</div>
@@ -473,7 +527,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 139分 ／ 🎬 uZrbUlGgvHQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-02" data-month="5" data-status="yakugen" data-keyword="資産を89.2%の確率で増やす方法&amp;idecoの手数料がアップ。1回105円→月120円に。idecoや新nisaよりも先にやること【5月2日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">2</span></div>
             <div class="d-wd">（土）</div>
@@ -489,7 +543,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 137分 ／ 🎬 33-gyoZMSZI ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-05-01" data-month="5" data-status="yakugen" data-keyword="5月スタートだよ！ai時代のおすすめ副業19選について語る&amp;【重要】高額療養費、8月から変わります。自己負担の月額上限引き上げと、年間上限を新設&amp;お手紙読むよ【5月1日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">5/</span><span class="d-d">1</span></div>
             <div class="d-wd">（金）</div>
@@ -505,7 +559,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 134分 ／ 🎬 Heo9-VrA9T8 ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-30" data-month="4" data-status="gen" data-keyword="aiを使って副業で稼いでいく実践講座【4月30日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">30</span></div>
             <div class="d-wd">（木）</div>
@@ -521,7 +575,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 116分 ／ 🎬 -ssSWIt4008 ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-28" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】【2026年版】ai時代に対応　リベ大おすすめの副業18選【4月28日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">28</span></div>
             <div class="d-wd">（火）</div>
@@ -537,7 +591,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 146分 ／ 🎬 UUDHEIdtYEg ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-27" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】 【要注意！】ただでさえ少ない退職金、インフレでさらに価値減少！20年で3割目減り。どうすれば良い？【4月27日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">27</span></div>
             <div class="d-wd">（月）</div>
@@ -553,7 +607,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 122分 ／ 🎬 8XrZWCWbxjg ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-26" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】 【実演アリ】今日は日曜日なので、ai使って視聴者のみんなと一緒に遊ぶよー！何でも最初は遊びから学ぶのが楽しくて良いね。ai以外の質問も歓迎【4月26日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">26</span></div>
             <div class="d-wd">（日）</div>
@@ -569,7 +623,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 139分 ／ 🎬 G5ZKyxrs4lk ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-25" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】 ai時代の稼ぎ方　主婦でも会社員でも、稼ぐチャンスが無限にあるよ。たとえば、あれとか、それとか。【4月25日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">25</span></div>
             <div class="d-wd">（土）</div>
@@ -585,7 +639,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 143分 ／ 🎬 sRjTWgzrDSE ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-24" data-month="4" data-status="yakugen" data-keyword="【家計改善/収入アップライブ】会員の82.9%が資産アップを実感してるリベシティで、一緒にaiとお金の知識を身につけよう！あ、aiまた進化しました。【4月24日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">24</span></div>
             <div class="d-wd">（金）</div>
@@ -598,10 +652,10 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
           </td>
           <td class="title">
             <a href="https://www.youtube.com/watch?v=xDuP7PHahAE" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】会員の82.9%が資産アップを実感してるリベシティで、一緒にAIとお金の知識を身につけよう！あ、AIまた進化しました。【4月24日</a>
-            <div class="meta-line">⏱ 101分 ／ 🎬 xDuP7PHahAE ／ <span class="vlink vlink-gen">📜 原液</span></div>
+            <div class="meta-line">⏱ 101分 ／ 🎬 xDuP7PHahAE ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-23" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】学長と一緒にaiで遊ぼう&amp;aiを使って稼いだ事例や、どうやって使えば良いかをみんなで共有するの会【4月23日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">23</span></div>
             <div class="d-wd">（木）</div>
@@ -617,7 +671,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 122分 ／ 🎬 zYnRVhR--n8 ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-22" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】【なぜ金持ちが少ない？】fp資格、その弱点&amp;お金持ちチャンス到来！わからんか？aiだよ、ai【4月22日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">22</span></div>
             <div class="d-wd">（水）</div>
@@ -633,7 +687,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
             <div class="meta-line">⏱ 134分 ／ 🎬 RiQGcRWWsSA ／ <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
         </tr>
-        <tr>
+        <tr class="db-row" data-date="2026-04-21" data-month="4" data-status="gen" data-keyword="【家計改善/収入アップライブ】【必ずやろう】お金持ちになるための定期点検 手数料をチェックしよう&amp;リベ大アニマルレスキュースタート【4月21日8時30分まで】">
           <td class="date">
             <div class="d-md"><span class="d-m">4/</span><span class="d-d">21</span></div>
             <div class="d-wd">（火）</div>
@@ -672,9 +726,61 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
 <footer>
   <div class="wrap">
     <p>制作：おけもんカンパニー（はるかCEO × あおいCDO）／データソース：両学長 リベラルアーツ大学（YouTube Data API v3 経由・JST換算）</p>
-    <p style="margin-top:8px">© 2026 Okemon Company  ·  Bonus Chapter 07 / Live Database  ·  v1.6-mock (29本収録 / 📝要約 18 / 📜原液 29 / ⚠未保存 0 / 更新: 2026-05-20 15:57)</p>
+    <p style="margin-top:8px">© 2026 Okemon Company  ·  Bonus Chapter 07 / Live Database  ·  v1.6-interactive (29本収録 / 📝要約 19 / 📜原液 29 / ⚠未保存 0 / 更新: 2026-05-20 16:00)</p>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  const state = {sort:'desc', month:'all', status:'all', keyword:''};
+  const tbody = document.querySelector('.table-wrap tbody');
+  const rows = Array.from(tbody.querySelectorAll('.db-row'));
+  const countEl = document.getElementById('db-count');
+  const totalRows = rows.length;
+
+  function apply(){
+    // ソート
+    rows.sort((a,b)=>{
+      const da = a.dataset.date, db = b.dataset.date;
+      return state.sort==='desc' ? db.localeCompare(da) : da.localeCompare(db);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+    // フィルタ
+    let visible = 0;
+    rows.forEach(r=>{
+      let show = true;
+      if(state.month!=='all' && r.dataset.month!==state.month) show = false;
+      if(state.status!=='all'){
+        const st = r.dataset.status;
+        if(state.status==='yaku' && !st.includes('yaku')) show = false;
+        if(state.status==='gen' && !st.includes('gen')) show = false;
+        if(state.status==='none' && st!=='none') show = false;
+      }
+      if(state.keyword && !r.dataset.keyword.includes(state.keyword.toLowerCase())) show = false;
+      r.classList.toggle('hidden', !show);
+      if(show) visible++;
+    });
+    countEl.textContent = visible===totalRows ? `${totalRows}本表示中` : `${visible} / ${totalRows} 本表示中`;
+  }
+
+  document.querySelectorAll('.ctrl-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const group = btn.parentElement;
+      group.querySelectorAll('.ctrl-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      if(btn.dataset.sort) state.sort = btn.dataset.sort;
+      if(btn.dataset.month) state.month = btn.dataset.month;
+      if(btn.dataset.status) state.status = btn.dataset.status;
+      apply();
+    });
+  });
+  document.getElementById('db-search').addEventListener('input', e=>{
+    state.keyword = e.target.value.trim();
+    apply();
+  });
+})();
+</script>
 
 </body>
 </html>
