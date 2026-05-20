@@ -4,27 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>別冊⑦ 学長ライブ 30日分データベース | Claude Code 初心者向け虎の巻</title>
-<meta name="description" content="Claude Codeで毎朝自動取得している学長ライブの直近30日分実物データベース。配信日・タイトル・YouTubeリンク・要約・キーワードを一覧化。">
+<meta name="description" content="Claude Code × YouTube Data API v3 で毎朝自動取得している学長朝ライブの直近30日分実物データベース。29本の配信日・タイトル・YouTubeリンク・要約／原液Vault保存状況。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
-:root{--main:#b58a4a;--main-deep:#8a6a30;--accent:#e8b57a;--accent-deep:#c89758;--sub:#a98c5a;--ink:#2f2a24;--muted:#746d64;--paper:#fbfaf7;--line:#ead9bf;--ribbon:#d68f4a}
+:root{--main:#b58a4a;--main-deep:#8a6a30;--accent:#e8b57a;--accent-deep:#c89758;--ink:#2f2a24;--muted:#746d64;--line:#ead9bf;--ribbon:#d68f4a;--yaku:#7BAEC4;--gen:#A8C4A0}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#fdfaf2 0%,#fbfaf7 44%,#fff 100%);color:var(--ink);line-height:1.9}
+body{font-family:"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#fdfaf2 0%,#fbfaf7 44%,#fff 100%);color:var(--ink);line-height:1.85}
 a{color:var(--main-deep);font-weight:700;text-underline-offset:4px;text-decoration:none}
 a:hover{color:var(--accent-deep);text-decoration:underline}
-.wrap{width:min(1080px,94vw);margin:0 auto}
+.wrap{width:min(1120px,94vw);margin:0 auto}
 header{padding:64px 0 38px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
 header::before{content:"";position:absolute;top:-40px;right:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(232,181,122,.2),transparent 70%);border-radius:50%}
 .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--main-deep);font-weight:900;margin-bottom:14px}
-h1{font-family:"Noto Serif JP",serif;font-size:clamp(28px,4.8vw,48px);line-height:1.3;color:var(--ink);position:relative;z-index:2}
+h1{font-family:"Noto Serif JP",serif;font-size:clamp(28px,4.8vw,46px);line-height:1.3;color:var(--ink);position:relative;z-index:2}
 .title-em{background:linear-gradient(180deg,transparent 60%,#f8e5c4 60%);padding:0 4px}
-.lead{margin-top:22px;font-size:16px;color:var(--muted);max-width:780px;position:relative;z-index:2}
-.metrics{display:flex;gap:28px;flex-wrap:wrap;margin-top:24px}
+.lead{margin-top:22px;font-size:16px;color:var(--muted);max-width:800px;position:relative;z-index:2}
+.metrics{display:flex;gap:32px;flex-wrap:wrap;margin-top:24px}
 .metric{display:flex;flex-direction:column;gap:4px}
-.metric .v{font-family:"Noto Serif JP",serif;font-size:32px;font-weight:900;color:var(--main-deep);line-height:1}
+.metric .v{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:900;color:var(--main-deep);line-height:1}
 .metric .l{font-size:12px;color:var(--muted);letter-spacing:.06em}
 .back{display:inline-flex;align-items:center;margin-top:30px;padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;transition:.3s}
 .back:hover{background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none}
@@ -32,61 +32,78 @@ main{padding:42px 0 60px}
 section{padding:42px 0;border-bottom:1px solid var(--line)}
 h2{font-family:"Noto Serif JP",serif;font-size:26px;line-height:1.45;margin-bottom:8px;color:var(--ink);display:flex;align-items:center;gap:10px}
 .h2-sub{font-size:14px;color:var(--muted);margin-bottom:24px;font-weight:400}
-h3{font-family:"Noto Serif JP",serif;font-size:18px;line-height:1.55;margin:10px 0 8px;color:var(--ink)}
 .callout{background:#fff8ed;border-left:4px solid var(--accent);padding:18px 22px;border-radius:8px;color:#6b5742;margin:22px 0;font-size:14.5px}
 .callout strong{color:var(--main-deep)}
+/* Highlights */
+.highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:24px}
+.hl-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 22px rgba(181,138,74,.08);transition:.3s;display:flex;flex-direction:column}
+.hl-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(181,138,74,.16)}
+.hl-thumb-wrap{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#000}
+.hl-thumb-wrap img{width:100%;height:100%;object-fit:cover;transition:.5s}
+.hl-card:hover .hl-thumb-wrap img{transform:scale(1.05)}
+.hl-duration{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.8);color:#fff;font-size:11px;padding:3px 8px;border-radius:4px;font-weight:700}
+.hl-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.hl-date{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.04em;margin-bottom:6px}
+.hl-card h3{font-family:"Noto Serif JP",serif;font-size:15px;line-height:1.55;margin:0;color:var(--ink)}
+.hl-card h3 a{color:var(--ink);font-weight:700}
+.hl-card h3 a:hover{color:var(--main-deep);text-decoration:none}
 /* Table */
 .table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 22px rgba(181,138,74,.08)}
-table{width:100%;border-collapse:collapse;min-width:760px;font-size:14px}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:14px}
 thead{background:linear-gradient(135deg,var(--main),var(--accent-deep))}
 thead th{color:#fff;padding:14px 12px;font-weight:700;text-align:left;font-size:13px;letter-spacing:.04em}
 tbody tr{border-top:1px solid var(--line);transition:.2s}
 tbody tr:hover{background:#fff8ed}
-tbody td{padding:14px 12px;vertical-align:top}
-.date{white-space:nowrap;min-width:90px}
-.d-month{font-size:11px;color:var(--muted);display:block}
-.d-day{font-family:"Noto Serif JP",serif;font-size:24px;font-weight:900;color:var(--main-deep);line-height:1}
-.d-wd{font-size:11px;color:var(--muted);display:block;margin-top:2px}
-.title{min-width:280px}
-.ytlink{color:var(--ink);font-weight:600;font-size:14.5px;line-height:1.5;display:block}
-.ytlink:hover{color:var(--main-deep)}
-.tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
-.tag{font-size:11px;background:#fff5e1;color:#8b5a1a;padding:3px 9px;border-radius:999px;border:1px solid #f0d8a8}
-.duration{white-space:nowrap;text-align:center;color:var(--muted);font-size:13px;min-width:80px}
-.summary{color:#4a4540;font-size:13.5px;line-height:1.75;min-width:200px}
-.muted{color:#a99c8a;font-style:italic}
-/* Highlights */
-.highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:24px}
-.highlight-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px;box-shadow:0 8px 22px rgba(181,138,74,.08);transition:.3s;position:relative;overflow:hidden}
-.highlight-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(181,138,74,.16)}
-.highlight-card::before{content:"⭐";position:absolute;top:14px;right:14px;font-size:20px;opacity:.5}
-.hl-date{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.06em;margin-bottom:8px}
-.highlight-card h3{margin:0 0 10px;font-size:16px;line-height:1.55}
-.highlight-card p{font-size:13.5px;color:#4a4540;line-height:1.75;margin:0}
+tbody td{padding:14px 12px;vertical-align:middle}
+.date{white-space:nowrap;min-width:80px;text-align:center}
+.d-md{font-family:"Noto Serif JP",serif;font-size:22px;font-weight:900;color:var(--main-deep);line-height:1;letter-spacing:-.02em}
+.d-m{font-size:14px;color:var(--muted)}
+.d-wd{font-size:11px;color:var(--muted);margin-top:4px}
+.d-time{font-size:11px;color:var(--muted);margin-top:2px}
+.thumb{width:174px;padding-right:8px}
+.thumb img{width:160px;height:90px;object-fit:cover;border-radius:6px;display:block;transition:.3s}
+.thumb a:hover img{transform:scale(1.04);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.title{min-width:380px}
+.ytlink{color:var(--ink);font-weight:600;font-size:14.5px;line-height:1.55;display:block}
+.ytlink:hover{color:var(--main-deep);text-decoration:none}
+.meta-line{margin-top:8px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.vlink{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:700;letter-spacing:.02em}
+.vlink-yaku{background:#e6f0f5;color:#4F8CA8;border:1px solid #c5dde7}
+.vlink-gen{background:#ebf2e7;color:#587b50;border:1px solid #cbdcc1}
+.vlink-none{background:#fff0e0;color:#a67238;border:1px solid #f0d8a8}
 /* CTA */
 .cta-block{background:linear-gradient(135deg,#fff8ed,#fdf0dc);border-radius:18px;padding:32px 36px;text-align:center;margin-top:28px}
-.cta-block h3{font-size:20px;margin-bottom:10px}
+.cta-block h3{font-size:20px;margin-bottom:10px;font-family:"Noto Serif JP",serif}
 .cta-block p{color:#4a4540;font-size:14.5px;margin-bottom:18px}
 .cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
 .cta-btn{display:inline-block;padding:12px 26px;background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;border-radius:999px;font-weight:700;font-size:14px;transition:.3s;text-decoration:none}
-.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(138,106,48,.3);color:#fff}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(138,106,48,.3);color:#fff;text-decoration:none}
 .cta-btn.alt{background:#fff;color:var(--main-deep);border:1.5px solid var(--main)}
 .cta-btn.alt:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
-@media(max-width:640px){header{padding-top:42px}.metrics{gap:18px}.metric .v{font-size:24px}h2{font-size:22px}.back{width:100%;justify-content:center}.cta-block{padding:24px 22px}.cta-btns{flex-direction:column}.cta-btn{width:100%;text-align:center}}
+@media(max-width:680px){
+  header{padding-top:42px}
+  .metrics{gap:18px}
+  .metric .v{font-size:24px}
+  .thumb{display:none}
+  .table-wrap table{min-width:0;font-size:13px}
+  .cta-block{padding:24px 22px}
+  .cta-btns{flex-direction:column}
+  .cta-btn{width:100%;text-align:center}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <div class="eyebrow">Bonus Chapter 07 / Live Database</div>
-    <h1>学長ライブ <span class="title-em">30日分データベース</span><br>これ全部、毎朝勝手に取れてるんやで〜</h1>
-    <p class="lead">別冊⑥で紹介した「自動で取れる仕組み」の <strong>実物アウトプット</strong> です。Claude Code に頼んで毎朝の学長ライブを自動でテキスト化＆要約した、直近30日分の生データ。1本2時間級の動画たちが、こんな形でぜんぶ一覧できる引き出しになります。</p>
+    <div class="eyebrow">Bonus Chapter 07 / Live Database (mock)</div>
+    <h1>学長ライブ <span class="title-em">30日分データベース</span><br>これ全部、毎朝勝手に取れてるんやで〜🦁</h1>
+    <p class="lead">別冊⑥で紹介した「自動で取れる仕組み」の <strong>実物アウトプット</strong> やで。Claude Code に頼んで毎朝の学長ライブを<strong>YouTube Data API v3 経由で自動取得</strong>。配信日・タイトル・動画リンクが瞬時に並ぶ "毎日続いてる証拠" データベース。</p>
     <div class="metrics">
-      <div class="metric"><span class="v">19</span><span class="l">本のライブ</span></div>
+      <div class="metric"><span class="v">29</span><span class="l">本の朝ライブ</span></div>
       <div class="metric"><span class="v">30</span><span class="l">日分カバー</span></div>
-      <div class="metric"><span class="v">全文</span><span class="l">テキスト化済み</span></div>
-      <div class="metric"><span class="v">≒1〜2分</span><span class="l">毎朝の処理時間</span></div>
+      <div class="metric"><span class="v">≒125分</span><span class="l">平均長</span></div>
+      <div class="metric"><span class="v">毎日</span><span class="l">休配信なし</span></div>
     </div>
     <a class="back" href="index.html">← 本編にもどる</a>
   </div>
@@ -98,279 +115,539 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
     <h2>🌟 直近のハイライト5本</h2>
     <p class="h2-sub">特にリベ民に響いた・Claude Code関連で重要だった回をピックアップ。</p>
     <div class="highlights">
-    <article class="highlight-card">
-      <div class="hl-date">5月19日（火）</div>
-      <h3><a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener">【2028年予測】住宅ローン金利1.7%へ｜月1〜2万円の返済増に備える方法</a></h3>
-      <p>住宅ローン1.7%予測＋Codex勉強会ポイント対応化</p>
+    <article class="hl-card">
+      <a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener" class="hl-thumb-wrap">
+        <img loading="lazy" src="https://i.ytimg.com/vi/KpdINTPTFGY/mqdefault.jpg" alt="">
+        <span class="hl-duration">120分</span>
+      </a>
+      <div class="hl-body">
+        <div class="hl-date">5月19日（火） 08:47〜</div>
+        <h3><a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener">【2028年予測】 住宅ローン金利1.7%へ｜月1〜2万円の返済増に備える方法</a></h3>
+      </div>
     </article>
-    <article class="highlight-card">
-      <div class="hl-date">5月7日（木）</div>
-      <h3><a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener">高配当株投資とClaudeCode朗報</a></h3>
-      <p>高配当株投資とClaudeCode朗報</p>
+    <article class="hl-card">
+      <a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener" class="hl-thumb-wrap">
+        <img loading="lazy" src="https://i.ytimg.com/vi/vssft_vWMWo/mqdefault.jpg" alt="">
+        <span class="hl-duration">114分</span>
+      </a>
+      <div class="hl-body">
+        <div class="hl-date">5月7日（木） 08:41〜</div>
+        <h3><a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener">学長が今月から高配当株投資を始めるとしたら？日経平均とTOPIXの違い ／ ClaudeCode(クロコ)使ってる人に朗</a></h3>
+      </div>
     </article>
-    <article class="highlight-card">
-      <div class="hl-date">5月5日（火）</div>
-      <h3><a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener">AIを使って架空のアーティストで4億稼いだ方法【5月5日8時30分まで】</a></h3>
-      <p>タイトル通り**AI活用が本日の主題**。海外で「音楽経験ゼロの人がSuno AIで架空のアーティストを作って4億円稼いだ」という事例を入り口に、**音楽×AI・架空アーティスト×AI・AIアバター×AI**の3領域でいま誰でも入れる稼ぎの現場を学長自らデモを交えて解説。学長は配信中にHeyGenで「フリー素材おじさん</p>
+    <article class="hl-card">
+      <a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener" class="hl-thumb-wrap">
+        <img loading="lazy" src="https://i.ytimg.com/vi/zAPIn3W18sM/mqdefault.jpg" alt="">
+        <span class="hl-duration">128分</span>
+      </a>
+      <div class="hl-body">
+        <div class="hl-date">5月5日（火） 08:57〜</div>
+        <h3><a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener">AIを使って架空のアーティストで4億稼いだ方法</a></h3>
+      </div>
     </article>
-    <article class="highlight-card">
-      <div class="hl-date">5月4日（月）</div>
-      <h3><a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener">AIで稼ぐ人は何をしてる？所得アップの実例集【5月4日8時30分まで】</a></h3>
-      <p>AIで稼ぐ第一歩は「自分の作業を効率化して時間を空ける」こと。そこから先で実際に売上を立てた事例として、リベシティ会員の電気工事士さんが**朝の学長ライブを聞いた直後にClaude Codeでチラシ＋ホームページを量産→本業の現場でドロ臭く営業→2社で約190万円を受注**した話を紹介。スキルより**売り先（予算のある</p>
+    <article class="hl-card">
+      <a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener" class="hl-thumb-wrap">
+        <img loading="lazy" src="https://i.ytimg.com/vi/OGDT4pCArEU/mqdefault.jpg" alt="">
+        <span class="hl-duration">154分</span>
+      </a>
+      <div class="hl-body">
+        <div class="hl-date">5月4日（月） 09:21〜</div>
+        <h3><a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener">AIで稼ぐ人は何をしてる？所得アップの実例集</a></h3>
+      </div>
     </article>
-    <article class="highlight-card">
-      <div class="hl-date">5月1日（金）</div>
-      <h3><a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener">5月スタートだよ！AI時代のおすすめ副業19選について語る&amp;【重要】高額療養費、8月から変わります。自己負担の月額上限引き上げと、年間上限を新設&amp;お手紙読むよ【</a></h3>
-      <p>GW初日の朝ライブ。**メインは2本立て：①高額療養費制度が2026年8月から大きく変わる（月額上限引き上げ＋年間上限新設）こと、②AI時代のおすすめ副業19選**。学長メッセージは一貫して「公的保険があるから民間保険はいらない／AIは魔法じゃないが時代を変える道具で、使わない選択肢はない」。お手紙コーナーでは、**リ</p>
+    <article class="hl-card">
+      <a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener" class="hl-thumb-wrap">
+        <img loading="lazy" src="https://i.ytimg.com/vi/Heo9-VrA9T8/mqdefault.jpg" alt="">
+        <span class="hl-duration">134分</span>
+      </a>
+      <div class="hl-body">
+        <div class="hl-date">5月1日（金） 09:04〜</div>
+        <h3><a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener">【重要】 5月スタートだよ！AI時代のおすすめ副業19選について語る ／ 高額療養費、8月から変わります。自己</a></h3>
+      </div>
     </article>
     </div>
   </section>
 
   <section>
     <h2>📋 30日分まるごと一覧</h2>
-    <p class="h2-sub">配信日の新しい順。タイトルクリックでYouTube動画へ直接ジャンプ。</p>
+    <p class="h2-sub">配信日の新しい順。タイトル or サムネのクリックでYouTube動画へ直接ジャンプ。</p>
     <div class="callout">
       <strong>📌 ここで見えてること：</strong> 毎日の朝ライブが、配信されたその日のうちに「全文テキスト＋要約」になって、自分のObsidian Vaultに保存されてる、っていう状態。<br>
-      これが <strong>Claude Code × 公式の文字起こし機能の組み合わせ</strong> で実現してます。仕組み詳細は <a href="gakucho-live-auto-process.html">別冊⑥</a> へ。
+      これが <strong>Claude Code × YouTube Data API v3 × 自動要約</strong> の組み合わせで実現してるよ。仕組み詳細は <a href="gakucho-live-auto-process.html">別冊⑥</a> へ。
     </div>
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
             <th>配信日</th>
-            <th>タイトル ／ キーワード</th>
-            <th>長さ</th>
-            <th>要約・一言</th>
+            <th></th>
+            <th>タイトル ／ 情報</th>
           </tr>
         </thead>
         <tbody>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">20</span>
-            <span class="d-wd">（水）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">20</span></div>
+            <div class="d-wd">（水）</div>
+            <div class="d-time">09:03〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=VBiO9Fx1F1s" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/VBiO9Fx1F1s/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=VBiO9Fx1F1s" target="_blank" rel="noopener" class="ytlink">📺 債券不要5理由とAI活用事例</a>
-            <div class="tags"><span class="tag">#債券</span><span class="tag">#AI活用事例</span></div>
+            <a href="https://www.youtube.com/watch?v=VBiO9Fx1F1s" target="_blank" rel="noopener" class="ytlink">【投資のレジェンド断言】『債券はほとんどの人に必要ない』5つの理由&amp;みんなAI使ってる？Googleから新たなAI&amp;リベ大アニマルレスキュー、リアルシェルターも</a>
+            <div class="meta-line">⏱ 133分 ／ 🎬 VBiO9Fx1F1s ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">19</span>
-            <span class="d-wd">（火）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">19</span></div>
+            <div class="d-wd">（火）</div>
+            <div class="d-time">08:47〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/KpdINTPTFGY/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener" class="ytlink">📺 【2028年予測】住宅ローン金利1.7%へ｜月1〜2万円の返済増に備える方法</a>
-            <div class="tags"><span class="tag">#住宅ローン金利</span><span class="tag">#2028年予測</span><span class="tag">#Codex</span><span class="tag">#スキル強化月間</span></div>
+            <a href="https://www.youtube.com/watch?v=KpdINTPTFGY" target="_blank" rel="noopener" class="ytlink">【2028年予測】住宅ローン金利1.7%へ｜月1〜2万円の返済増に備える方法【5月19日8時30分まで】</a>
+            <div class="meta-line">⏱ 120分 ／ 🎬 KpdINTPTFGY ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">18</span>
-            <span class="d-wd">（月）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">18</span></div>
+            <div class="d-wd">（月）</div>
+            <div class="d-time">08:42〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=Py4Q4GFxcJE" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/Py4Q4GFxcJE/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=Py4Q4GFxcJE" target="_blank" rel="noopener" class="ytlink">📺 韓国経済とリベ民の手紙</a>
-            <div class="tags"><span class="tag">#韓国経済</span><span class="tag">#リベ民の手紙</span><span class="tag">#投資ブーム</span><span class="tag">#メンタル</span></div>
+            <a href="https://www.youtube.com/watch?v=Py4Q4GFxcJE" target="_blank" rel="noopener" class="ytlink">【韓国の憂鬱】韓国の株価指数がヤバい。若者に投資ブーム&amp;28年ぶりの平和な家族外食｜行動したら人生は変えられる、を体現したリベ民の手紙【5月18日8時30分まで</a>
+            <div class="meta-line">⏱ 115分 ／ 🎬 Py4Q4GFxcJE ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>1時間55分</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">15</span>
-            <span class="d-wd">（金）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">17</span></div>
+            <div class="d-wd">（日）</div>
+            <div class="d-time">09:06〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=nPyEt3egQec" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/nPyEt3egQec/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=m3s2NruzDEQ" target="_blank" rel="noopener" class="ytlink">📺 今週のお金ニュース</a>
-            <div class="tags"><span class="tag">#お金ニュース</span><span class="tag">#学長AI</span><span class="tag">#リスク許容度</span><span class="tag">#住宅ローン</span></div>
+            <a href="https://www.youtube.com/watch?v=nPyEt3egQec" target="_blank" rel="noopener" class="ytlink">【初心者歓迎】お金の基本、なんでも聞いてや&amp;リベの大規模イベントがあったよ！まったり雑談ライブ【5月17日8時30分まで】</a>
+            <div class="meta-line">⏱ 137分 ／ 🎬 nPyEt3egQec ／ <span class="vlink vlink-none">⚠ 未保存</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">14</span>
-            <span class="d-wd">（木）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">16</span></div>
+            <div class="d-wd">（土）</div>
+            <div class="d-time">08:37〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=X_Umi6ALYZg" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/X_Umi6ALYZg/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=bwLC9aERFGo" target="_blank" rel="noopener" class="ytlink">📺 2兆円ステルス増税</a>
-            <div class="tags"><span class="tag">#ステルス増税</span><span class="tag">#インフレ</span><span class="tag">#お金の知識</span><span class="tag">#サブスク</span></div>
+            <a href="https://www.youtube.com/watch?v=X_Umi6ALYZg" target="_blank" rel="noopener" class="ytlink">貯金100万円未満→資産2400万円｜あるリベ民の人生再起の物語&amp;今日は大型イベントでみんなに会えるの楽しみ【5月16日8時30分まで】</a>
+            <div class="meta-line">⏱ 112分 ／ 🎬 X_Umi6ALYZg ／ <span class="vlink vlink-none">⚠ 未保存</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">13</span>
-            <span class="d-wd">（水）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">15</span></div>
+            <div class="d-wd">（金）</div>
+            <div class="d-time">08:48〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=m3s2NruzDEQ" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/m3s2NruzDEQ/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=z36-uF98weQ" target="_blank" rel="noopener" class="ytlink">📺 お金持ち資産運用とマネフォ再開</a>
-            <div class="tags"><span class="tag">#資産運用</span><span class="tag">#お金持ち心理</span><span class="tag">#インデックス投資</span><span class="tag">#マネーフォワード</span></div>
+            <a href="https://www.youtube.com/watch?v=m3s2NruzDEQ" target="_blank" rel="noopener" class="ytlink">学長AIが選んだ今週のお金ニュース、ぜんぶまとめて学長コメント【5月15日8時30分まで】</a>
+            <div class="meta-line">⏱ 121分 ／ 🎬 m3s2NruzDEQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">12</span>
-            <span class="d-wd">（火）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">14</span></div>
+            <div class="d-wd">（木）</div>
+            <div class="d-time">08:47〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=bwLC9aERFGo" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/bwLC9aERFGo/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=UFH0C9hPlCc" target="_blank" rel="noopener" class="ytlink">📺 チャンネル登録900万人</a>
-            <div class="tags"><span class="tag">#900万人達成</span><span class="tag">#看護学校</span><span class="tag">#貯蓄型保険</span><span class="tag">#遺言書</span></div>
+            <a href="https://www.youtube.com/watch?v=bwLC9aERFGo" target="_blank" rel="noopener" class="ytlink">【2兆円の隠れ増税】気づいてる？インフレで進む『ステルス増税』の正体&amp;なんでも無料で使おうとするあなたへ【損する。笑】【5月14日8時30分まで】</a>
+            <div class="meta-line">⏱ 121分 ／ 🎬 bwLC9aERFGo ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">11</span>
-            <span class="d-wd">（月）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">13</span></div>
+            <div class="d-wd">（水）</div>
+            <div class="d-time">08:46〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=z36-uF98weQ" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/z36-uF98weQ/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=B5xyTO2q7B4" target="_blank" rel="noopener" class="ytlink">📺 貯金額2倍にする方法</a>
-            <div class="tags"><span class="tag">#貯金</span><span class="tag">#行動経済学</span><span class="tag">#AI活用</span></div>
+            <a href="https://www.youtube.com/watch?v=z36-uF98weQ" target="_blank" rel="noopener" class="ytlink">【衝撃】お金持ちほど資産運用に失敗する理由&amp;マネーフォワード連携再開し出してるよん【5月13日8時30分まで】</a>
+            <div class="meta-line">⏱ 120分 ／ 🎬 z36-uF98weQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">10</span>
-            <span class="d-wd">（日）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">12</span></div>
+            <div class="d-wd">（火）</div>
+            <div class="d-time">08:44〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=UFH0C9hPlCc" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/UFH0C9hPlCc/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=Q9tyYK5ABLE" target="_blank" rel="noopener" class="ytlink">📺 母の日お金の教育</a>
-            <div class="tags"><span class="tag">#金融教育</span><span class="tag">#母の日</span><span class="tag">#商売</span><span class="tag">#お金の教育</span></div>
+            <a href="https://www.youtube.com/watch?v=UFH0C9hPlCc" target="_blank" rel="noopener" class="ytlink">祝☆チャンネル登録900万人&amp;会社員を辞めて看護学校へ。リベが教えてくれたのは『お金』だけじゃなかった【5月12日8時30分まで】</a>
+            <div class="meta-line">⏱ 116分 ／ 🎬 UFH0C9hPlCc ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">9</span>
-            <span class="d-wd">（土）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">11</span></div>
+            <div class="d-wd">（月）</div>
+            <div class="d-time">08:47〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=B5xyTO2q7B4" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/B5xyTO2q7B4/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=J3KTL6z_0Pg" target="_blank" rel="noopener" class="ytlink">📺 借金まみれ→月収50万編集者</a>
-            <div class="tags"><span class="tag">#稼ぐ力</span><span class="tag">#編集者再起</span><span class="tag">#マネーフォワード障害</span><span class="tag">#自己破産</span></div>
+            <a href="https://www.youtube.com/watch?v=B5xyTO2q7B4" target="_blank" rel="noopener" class="ytlink">【研究で判明】コレ見るだけで貯金額が2倍になる方法【5月11日8時30分まで】</a>
+            <div class="meta-line">⏱ 123分 ／ 🎬 B5xyTO2q7B4 ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">8</span>
-            <span class="d-wd">（金）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">10</span></div>
+            <div class="d-wd">（日）</div>
+            <div class="d-time">09:13〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=Q9tyYK5ABLE" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/Q9tyYK5ABLE/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=3rWcTmZh2No" target="_blank" rel="noopener" class="ytlink">📺 【稼ぐ力アップ実例集】『一体何屋かわからん』と笑える状態に。おむすび屋が1年でこうなった</a>
-            <div class="tags"><span class="tag">#リベシティ</span><span class="tag">#稼ぐ力</span><span class="tag">#店舗ビジネス</span><span class="tag">#スモールスタート</span></div>
+            <a href="https://www.youtube.com/watch?v=Q9tyYK5ABLE" target="_blank" rel="noopener" class="ytlink">母の日やし、ワシがどんなお金の教育を受けて育ったか話すで【5月10日8時30分まで】</a>
+            <div class="meta-line">⏱ 146分 ／ 🎬 Q9tyYK5ABLE ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">7</span>
-            <span class="d-wd">（木）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">9</span></div>
+            <div class="d-wd">（土）</div>
+            <div class="d-time">08:59〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=J3KTL6z_0Pg" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/J3KTL6z_0Pg/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener" class="ytlink">📺 高配当株投資とClaudeCode朗報</a>
-            <div class="tags"></div>
+            <a href="https://www.youtube.com/watch?v=J3KTL6z_0Pg" target="_blank" rel="noopener" class="ytlink">【稼ぐ力アップ実例集】「借金まみれ・自己破産寸前から月収50万円へ。リベシティで人生が変わった編集者の話」&amp;マネーフォワードが障害出てるけど、気にしなくてええよ</a>
+            <div class="meta-line">⏱ 132分 ／ 🎬 J3KTL6z_0Pg ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">6</span>
-            <span class="d-wd">（水）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">8</span></div>
+            <div class="d-wd">（金）</div>
+            <div class="d-time">09:04〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=3rWcTmZh2No" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/3rWcTmZh2No/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=B9pbukjH3-c" target="_blank" rel="noopener" class="ytlink">📺 学長AI Musicプロデューサーとしてデビュー！お金がっぽがっぽ儲けるんだ！笑【5月6日8時30分まで】</a>
-            <div class="tags"><span class="tag">#AI Music</span><span class="tag">#スノーAI</span><span class="tag">#DistroKid</span><span class="tag">#ディストロキット</span></div>
+            <a href="https://www.youtube.com/watch?v=3rWcTmZh2No" target="_blank" rel="noopener" class="ytlink">【稼ぐ力アップ実例集】『一体何屋かわからん』と笑える状態に。おむすび屋が1年でこうなった【5月8日8時30分まで】</a>
+            <div class="meta-line">⏱ 136分 ／ 🎬 3rWcTmZh2No ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>約2時間1分</span></td>
-          <td class="summary">5/5の「AI架空アーティストで4億稼ぐ」回の流れで、**学長本人がついにAI Musicプロデューサーとしてデビュー**。Suno AIで作った楽曲「夏風ペダル」を、世界中の音楽配信プラットフォームに一括登録できる **DistroKid（ディストロキット）** に Claude Code 経由でほぼ全自動アップロード。Spotify／Apple Musi</td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">5</span>
-            <span class="d-wd">（火）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">7</span></div>
+            <div class="d-wd">（木）</div>
+            <div class="d-time">08:41〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/vssft_vWMWo/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener" class="ytlink">📺 AIを使って架空のアーティストで4億稼いだ方法【5月5日8時30分まで】</a>
-            <div class="tags"><span class="tag">#AI音楽</span><span class="tag">#SunoAI</span><span class="tag">#HeyGen</span><span class="tag">#架空アーティスト</span></div>
+            <a href="https://www.youtube.com/watch?v=vssft_vWMWo" target="_blank" rel="noopener" class="ytlink">学長が今月から高配当株投資を始めるとしたら？日経平均とTOPIXの違い&amp;ClaudeCode(クロコ)使ってる人に朗報！トークン制限が大幅に緩和されたよ【5月7</a>
+            <div class="meta-line">⏱ 114分 ／ 🎬 vssft_vWMWo ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>約2時間（朝6:43〜8:50過ぎ）</span></td>
-          <td class="summary">タイトル通り**AI活用が本日の主題**。海外で「音楽経験ゼロの人がSuno AIで架空のアーティストを作って4億円稼いだ」という事例を入り口に、**音楽×AI・架空アーティスト×AI・AIアバター×AI**の3領域でいま誰でも入れる稼ぎの現場を学長自らデモを交えて解説。学長は配信中にHeyGenで「フリー素材おじさん」を喋らせる動画を裏で生成して見せ、**</td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">4</span>
-            <span class="d-wd">（月）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">6</span></div>
+            <div class="d-wd">（水）</div>
+            <div class="d-time">08:49〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=B9pbukjH3-c" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/B9pbukjH3-c/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener" class="ytlink">📺 AIで稼ぐ人は何をしてる？所得アップの実例集【5月4日8時30分まで】</a>
-            <div class="tags"><span class="tag">#AIで稼ぐ</span><span class="tag">#所得アップ</span><span class="tag">#実例集</span><span class="tag">#ClaudeCode</span></div>
+            <a href="https://www.youtube.com/watch?v=B9pbukjH3-c" target="_blank" rel="noopener" class="ytlink">学長AI Musicプロデューサーとしてデビュー！お金がっぽがっぽ儲けるんだ！笑【5月6日8時30分まで】</a>
+            <div class="meta-line">⏱ 121分 ／ 🎬 B9pbukjH3-c ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>2時間34分</span></td>
-          <td class="summary">AIで稼ぐ第一歩は「自分の作業を効率化して時間を空ける」こと。そこから先で実際に売上を立てた事例として、リベシティ会員の電気工事士さんが**朝の学長ライブを聞いた直後にClaude Codeでチラシ＋ホームページを量産→本業の現場でドロ臭く営業→2社で約190万円を受注**した話を紹介。スキルより**売り先（予算のあるブルーワーカー・職人・法人）**を間違え</td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">3</span>
-            <span class="d-wd">（日）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">5</span></div>
+            <div class="d-wd">（火）</div>
+            <div class="d-time">08:57〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/zAPIn3W18sM/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=uZrbUlGgvHQ" target="_blank" rel="noopener" class="ytlink">📺 公共Wi-Fiは避けた方が良い？パスワードは定期変更した方が良い？意外とやりがちな、実はやらなくて良い時代遅れのセキュリ</a>
-            <div class="tags"><span class="tag">#セキュリティ</span><span class="tag">#AI活用</span><span class="tag">#リベシティ</span></div>
+            <a href="https://www.youtube.com/watch?v=zAPIn3W18sM" target="_blank" rel="noopener" class="ytlink">AIを使って架空のアーティストで4億稼いだ方法【5月5日8時30分まで】</a>
+            <div class="meta-line">⏱ 128分 ／ 🎬 zAPIn3W18sM ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">2</span>
-            <span class="d-wd">（土）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">4</span></div>
+            <div class="d-wd">（月）</div>
+            <div class="d-time">09:21〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/OGDT4pCArEU/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=33-gyoZMSZI" target="_blank" rel="noopener" class="ytlink">📺 資産を89.2%の確率で増やす方法&amp;iDeCoの手数料がアップ。1回105円→月120円に。iDeCoや新NISAよりも</a>
-            <div class="tags"><span class="tag">#資産形成</span><span class="tag">#iDeCo</span><span class="tag">#新NISA</span><span class="tag">#ライフプラン</span></div>
+            <a href="https://www.youtube.com/watch?v=OGDT4pCArEU" target="_blank" rel="noopener" class="ytlink">AIで稼ぐ人は何をしてる？所得アップの実例集【5月4日8時30分まで】</a>
+            <div class="meta-line">⏱ 154分 ／ 🎬 OGDT4pCArEU ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>約2時間17分</span></td>
-          <td class="summary">リベシティで1年以上活動している人の **89.2%が資産増** という統計を提示し、「金持ちが集まってるからじゃない、入った後に年々差がつくからだ」と説明。後半は **iDeCoの手数料が月120円に値上げ** のニュースをきっかけに、「枝葉のニュースに振り回されるな、まずライフプランを組め」と本質に引き戻す回。家賃値上げ通知の断り方（普通借家契約は値上げ</td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">5月</span><span class="d-day">1</span>
-            <span class="d-wd">（金）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">3</span></div>
+            <div class="d-wd">（日）</div>
+            <div class="d-time">09:07〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=uZrbUlGgvHQ" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/uZrbUlGgvHQ/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener" class="ytlink">📺 5月スタートだよ！AI時代のおすすめ副業19選について語る&amp;【重要】高額療養費、8月から変わります。自己負担の月額上限引</a>
-            <div class="tags"><span class="tag">#AI副業19選</span><span class="tag">#高額療養費改正</span><span class="tag">#公的保険</span><span class="tag">#ClaudeCode</span></div>
+            <a href="https://www.youtube.com/watch?v=uZrbUlGgvHQ" target="_blank" rel="noopener" class="ytlink">公共Wi-Fiは避けた方が良い？パスワードは定期変更した方が良い？意外とやりがちな、実はやらなくて良い時代遅れのセキュリティ対策6選【5月3日8時30分まで】</a>
+            <div class="meta-line">⏱ 139分 ／ 🎬 uZrbUlGgvHQ ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary">GW初日の朝ライブ。**メインは2本立て：①高額療養費制度が2026年8月から大きく変わる（月額上限引き上げ＋年間上限新設）こと、②AI時代のおすすめ副業19選**。学長メッセージは一貫して「公的保険があるから民間保険はいらない／AIは魔法じゃないが時代を変える道具で、使わない選択肢はない」。お手紙コーナーでは、**リベシティ入会から数ヶ月でリベ市場出展や蕎</td>
         </tr>
         <tr>
           <td class="date">
-            <span class="d-month">3月</span><span class="d-day">29</span>
-            <span class="d-wd">（日）</span>
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">2</span></div>
+            <div class="d-wd">（土）</div>
+            <div class="d-time">09:07〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=33-gyoZMSZI" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/33-gyoZMSZI/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
           </td>
           <td class="title">
-            <a href="https://www.youtube.com/watch?v=uRjVf5z95Kw" target="_blank" rel="noopener" class="ytlink">📺 【家計改善/収入アップライブ】AIだけでECサイトを作り、たった1ヶ月で35万達成した人の話</a>
-            <div class="tags"></div>
+            <a href="https://www.youtube.com/watch?v=33-gyoZMSZI" target="_blank" rel="noopener" class="ytlink">資産を89.2%の確率で増やす方法&amp;iDeCoの手数料がアップ。1回105円→月120円に。iDeCoや新NISAよりも先にやること【5月2日8時30分まで】</a>
+            <div class="meta-line">⏱ 137分 ／ 🎬 33-gyoZMSZI ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
           </td>
-          <td class="duration"><span>—</span></td>
-          <td class="summary"><span class="muted">要約は別途</span></td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">5/</span><span class="d-d">1</span></div>
+            <div class="d-wd">（金）</div>
+            <div class="d-time">09:04〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/Heo9-VrA9T8/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=Heo9-VrA9T8" target="_blank" rel="noopener" class="ytlink">5月スタートだよ！AI時代のおすすめ副業19選について語る&amp;【重要】高額療養費、8月から変わります。自己負担の月額上限引き上げと、年間上限を新設&amp;お手紙読むよ【</a>
+            <div class="meta-line">⏱ 134分 ／ 🎬 Heo9-VrA9T8 ／ <span class="vlink vlink-yaku">📝 要約</span> <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">30</span></div>
+            <div class="d-wd">（木）</div>
+            <div class="d-time">08:42〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=-ssSWIt4008" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/-ssSWIt4008/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=-ssSWIt4008" target="_blank" rel="noopener" class="ytlink">AIを使って副業で稼いでいく実践講座【4月30日8時30分まで】</a>
+            <div class="meta-line">⏱ 116分 ／ 🎬 -ssSWIt4008 ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">28</span></div>
+            <div class="d-wd">（火）</div>
+            <div class="d-time">09:12〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=UUDHEIdtYEg" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/UUDHEIdtYEg/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=UUDHEIdtYEg" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】【2026年版】AI時代に対応　リベ大おすすめの副業18選【4月28日8時30分まで】</a>
+            <div class="meta-line">⏱ 146分 ／ 🎬 UUDHEIdtYEg ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">27</span></div>
+            <div class="d-wd">（月）</div>
+            <div class="d-time">08:50〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=8XrZWCWbxjg" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/8XrZWCWbxjg/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=8XrZWCWbxjg" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】 【要注意！】ただでさえ少ない退職金、インフレでさらに価値減少！20年で3割目減り。どうすれば良い？【4月27日8時30分まで】</a>
+            <div class="meta-line">⏱ 122分 ／ 🎬 8XrZWCWbxjg ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">26</span></div>
+            <div class="d-wd">（日）</div>
+            <div class="d-time">09:08〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=G5ZKyxrs4lk" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/G5ZKyxrs4lk/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=G5ZKyxrs4lk" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】 【実演アリ】今日は日曜日なので、AI使って視聴者のみんなと一緒に遊ぶよー！何でも最初は遊びから学ぶのが楽しくて良いね。AI以外の</a>
+            <div class="meta-line">⏱ 139分 ／ 🎬 G5ZKyxrs4lk ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">25</span></div>
+            <div class="d-wd">（土）</div>
+            <div class="d-time">09:09〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=sRjTWgzrDSE" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/sRjTWgzrDSE/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=sRjTWgzrDSE" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】 AI時代の稼ぎ方　主婦でも会社員でも、稼ぐチャンスが無限にあるよ。たとえば、あれとか、それとか。【4月25日8時30分まで】</a>
+            <div class="meta-line">⏱ 143分 ／ 🎬 sRjTWgzrDSE ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">24</span></div>
+            <div class="d-wd">（金）</div>
+            <div class="d-time">08:29〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=xDuP7PHahAE" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/xDuP7PHahAE/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=xDuP7PHahAE" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】会員の82.9%が資産アップを実感してるリベシティで、一緒にAIとお金の知識を身につけよう！あ、AIまた進化しました。【4月24日</a>
+            <div class="meta-line">⏱ 101分 ／ 🎬 xDuP7PHahAE ／ <span class="vlink vlink-gen">📜 原液</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">23</span></div>
+            <div class="d-wd">（木）</div>
+            <div class="d-time">08:49〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=zYnRVhR--n8" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/zYnRVhR--n8/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=zYnRVhR--n8" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】学長と一緒にAIで遊ぼう&amp;AIを使って稼いだ事例や、どうやって使えば良いかをみんなで共有するの会【4月23日8時30分まで】</a>
+            <div class="meta-line">⏱ 122分 ／ 🎬 zYnRVhR--n8 ／ <span class="vlink vlink-none">⚠ 未保存</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">22</span></div>
+            <div class="d-wd">（水）</div>
+            <div class="d-time">08:59〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=RiQGcRWWsSA" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/RiQGcRWWsSA/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=RiQGcRWWsSA" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】【なぜ金持ちが少ない？】FP資格、その弱点&amp;お金持ちチャンス到来！わからんか？AIだよ、AI【4月22日8時30分まで】</a>
+            <div class="meta-line">⏱ 134分 ／ 🎬 RiQGcRWWsSA ／ <span class="vlink vlink-none">⚠ 未保存</span></div>
+          </td>
+        </tr>
+        <tr>
+          <td class="date">
+            <div class="d-md"><span class="d-m">4/</span><span class="d-d">21</span></div>
+            <div class="d-wd">（火）</div>
+            <div class="d-time">08:47〜</div>
+          </td>
+          <td class="thumb">
+            <a href="https://www.youtube.com/watch?v=RUWdqWKWmNo" target="_blank" rel="noopener">
+              <img loading="lazy" src="https://i.ytimg.com/vi/RUWdqWKWmNo/mqdefault.jpg" alt="" width="160" height="90">
+            </a>
+          </td>
+          <td class="title">
+            <a href="https://www.youtube.com/watch?v=RUWdqWKWmNo" target="_blank" rel="noopener" class="ytlink">【家計改善/収入アップライブ】【必ずやろう】お金持ちになるための定期点検 手数料をチェックしよう&amp;リベ大アニマルレスキュースタート【4月21日8時30分まで】</a>
+            <div class="meta-line">⏱ 123分 ／ 🎬 RUWdqWKWmNo ／ <span class="vlink vlink-none">⚠ 未保存</span></div>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -379,7 +656,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
 
   <section>
     <h2>🛠 こんな仕組み、自分も作りたいって人へ</h2>
-    <p>このデータベースは、特別なものを買ったわけやなくて、ふだん使ってる Claude Code に毎朝の動画URLを渡して「いつもの流れで処理して〜」って頼んでるだけ。仕組みの中身は別冊⑥に詳しく書いてあります。</p>
+    <p>このデータベースは、特別なものを買ったわけやなくて、ふだん使ってる Claude Code に「いつもの流れで処理して〜」って頼んでるだけ。仕組みの全体図は別冊⑥で紹介してます🌷</p>
     <div class="cta-block">
       <h3>🌷 「これ俺もやってみたい」って思ったら</h3>
       <p>仕組みの全体図と、毎朝のフローを解説してる別冊⑥へ。詳しい設定の話は別途相談で対応します。</p>
@@ -394,8 +671,8 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
 
 <footer>
   <div class="wrap">
-    <p>制作：おけもんカンパニー（はるかCEO × あおいCDO）／データソース：両学長 リベラルアーツ大学</p>
-    <p style="margin-top:8px">© 2026 Okemon Company  ·  Bonus Chapter 07 / Live Database  ·  v1.6-mock</p>
+    <p>制作：おけもんカンパニー（はるかCEO × あおいCDO）／データソース：両学長 リベラルアーツ大学（YouTube Data API v3 経由・JST換算）</p>
+    <p style="margin-top:8px">© 2026 Okemon Company  ·  Bonus Chapter 07 / Live Database  ·  v1.6-mock (29本収録・最終更新: 2026-05-20)</p>
   </div>
 </footer>
 
