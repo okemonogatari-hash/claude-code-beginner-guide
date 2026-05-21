@@ -640,15 +640,6 @@ section{padding:100px 24px;position:relative}
       <div class="install-step">
         <span class="num">1</span>
         <div>
-          <h5>公式サイトでアカウント作ろか</h5>
-          <p><a href="https://claude.ai" target="_blank" rel="noopener"><strong>claude.ai</strong></a> にアクセスして、メアドでサインアップやで。Googleアカウントでもログインできるから楽やで〜。</p>
-          <p class="tip">claude.ai を開いただけやと「ウェブ版」やで。Claude Codeはこれとは別物。次のステップに進んでな。</p>
-        </div>
-      </div>
-
-      <div class="install-step">
-        <span class="num">2</span>
-        <div>
           <h5>デスクトップアプリをダウンロードや</h5>
           <p><a href="https://claude.com/download" target="_blank" rel="noopener"><strong>claude.com/download</strong></a> にアクセス → 自分のOS（Mac／Windows／Linux／iOS／Android）用のアプリをダウンロードしてインストールや。</p>
           <p class="tip">アドレスバー（URL）が見えてたらWeb版、見えてへんかったらアプリ版。これが見分け方やで。覚えとき。</p>
@@ -656,16 +647,17 @@ section{padding:100px 24px;position:relative}
       </div>
 
       <div class="install-step">
-        <span class="num">3</span>
+        <span class="num">2</span>
         <div>
-          <h5>アプリ開いてサインインや</h5>
-          <p>アプリを起動して、さっき作ったアカウントでログインしたらええ。</p>
+          <h5>アプリ起動 → <span style="background:linear-gradient(180deg,transparent 60%,#fde8b8 60%);">Googleアカウントでログイン（おすすめ）</span></h5>
+          <p>アプリを起動したらログイン画面が出るで。<strong>「Continue with Google」</strong> でGoogleアカウントを選ぶだけで一発や。アカウント作成のメアド認証もせんでええから、これがいっちゃん楽やで〜🌷</p>
+          <p class="tip">メアドで新規登録したい人は「Sign up」からでもOKやけど、Google連携の方が早いし安全。後から連携追加もできるからな。</p>
           <p class="tip">アプリ画面の左上に「Claude Code」のメニューがあったら成功やで〜。</p>
         </div>
       </div>
 
       <div class="install-step">
-        <span class="num">4</span>
+        <span class="num">3</span>
         <div>
           <h5>「フォルダを選んでください」が出たら</h5>
           <p>デスクトップに今日の日付（例：<strong>2026-04-30</strong>）でフォルダ新規作成して、それを選んだらええで。<br>
@@ -675,11 +667,13 @@ section{padding:100px 24px;position:relative}
       </div>
 
       <div class="install-step">
-        <span class="num">5</span>
+        <span class="num">4</span>
         <div>
-          <h5>プランは月20ドル（Pro）でええで</h5>
-          <p>無料枠は厳しめやから、最初から月額プランがオススメや。月3000円弱で「遊び道具／仕事道具」として余裕で元が取れるで。</p>
+          <h5>プランは月20ドル（Pro）以上が必要やで</h5>
+          <p><strong style="color:#b86a6a;">⚠ 重要：Claude Code は無料プランでは使えへんで〜。</strong> Pro（月20ドル≒月3,000円弱）以上の有料プラン契約が前提や。<br>
+          ChatGPTの無料版みたいに「とりあえずタダで触ってみる」はできひん仕様。最初から月額プラン入って、「遊び道具／仕事道具」として使い倒すスタンスがオススメやで。</p>
           <p class="tip">クレジットカードはプリペイドでもいけるからな。従量課金やないから、上限は決まっとる。安心してええよ。</p>
+          <p class="tip">プラン詳細は「<a href="#faq-answer-10">FAQ：プランはどれを選べばいい？</a>」で深掘りしてるから見てな。</p>
         </div>
       </div>
     </div>
@@ -1203,7 +1197,13 @@ section{padding:100px 24px;position:relative}
       <div class="faq-item">
         <button class="faq-q" type="button" aria-expanded="false" aria-controls="faq-answer-10"><span>プラン（課金）はどれを選べばいい？無料で使える？</span><span class="arrow" aria-hidden="true">+</span></button>
         <div class="faq-a" id="faq-answer-10"><div class="faq-a-inner">
-          月20ドル（Pro）でええで。僕もな、「月20ドルで十分や」って言うとる。無料枠は厳しいから、最初から月額プランがオススメやな。クレジットカードはプリペイドでも登録できるで。月3000円弱で「遊び道具／仕事道具」として余裕で元取れるから、安心して投資したらええ。
+          <div style="background:#fff5f5; border-left:4px solid #b86a6a; padding:14px 18px; border-radius:8px; margin-bottom:12px;">
+            <strong style="color:#8b1a1a;">⚠ 大前提：Claude Code は無料プランでは使えへん。</strong><br>
+            <span style="font-size:13px; color:#5a3030;">無料アカウントでログインできるんはチャット版の「claude.ai」だけ。Claude Code（パソコンの中で動くやつ）は <strong>Pro 以上の有料プラン</strong> が必須や。</span>
+          </div>
+          月20ドル（<strong>Pro</strong>）からスタートでええで。僕も「月20ドルで十分や」って言うとる。月3,000円弱で「遊び道具／仕事道具」として余裕で元取れるから、最初は Pro で全然OK。<br>
+          もっとガッツリ使いたい人は <strong>Max（月100ドル）</strong> 以上に上げると、長時間タスクを裏で動かす <code>auto</code>モード（<a href="#faq-answer-05">FAQ-05参照</a>）も解禁されるで。<br>
+          クレジットカードはプリペイドでも登録できるで。従量課金やないから、上限は決まっとる。安心してええよ。
         </div></div>
       </div>
 
