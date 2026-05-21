@@ -1034,7 +1034,95 @@ section{padding:100px 24px;position:relative}
             → つまり <strong>プロプランでも、設定画面で「バイパス編集権限モード許可」にチェック入れたら使える</strong>、っていうのが配信中の最終結論や。
           </p>
 
-          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">📋 学長おすすめ運用まとめ</p>
+          <!-- v1.7.1 追記：2026-05-21 時点の公式仕様反映 -->
+          <div style="background:linear-gradient(135deg, #f0f7fb, #e6f0f5); border-left:5px solid #4F8CA8; padding:20px 24px; border-radius:12px; margin:24px 0;">
+            <p style="font-weight:700; color:#2a5670; margin-bottom:12px; font-size:15px;">📅 2026-05-21 時点での最新仕様（公式ドキュメント確認済）</p>
+            <p style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; font-size:14px;">
+              学長の4/26配信のあとに <strong>新しく整理された情報</strong>がいくつかあるねん。<br>
+              実は学長が混乱してた「自動モード」と「バイパス権限モード」、<strong>これ別物</strong>やったんよ〜🌷
+            </p>
+
+            <p style="font-weight:700; color:#2a5670; margin: 16px 0 8px; font-size:14px;">🌳 現在の Permission モード（6種類）</p>
+
+            <div style="overflow-x:auto; margin-bottom:14px;">
+              <table style="width:100%; border-collapse:collapse; font-size:13px; background:#fff; border-radius:8px; overflow:hidden;">
+                <thead>
+                  <tr style="background:#4F8CA8; color:#fff;">
+                    <th style="padding:10px 12px; text-align:left;">モード</th>
+                    <th style="padding:10px 12px; text-align:left;">自動で許可される範囲</th>
+                    <th style="padding:10px 12px; text-align:center; white-space:nowrap;">Pro</th>
+                    <th style="padding:10px 12px; text-align:center; white-space:nowrap;">Max</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-top:1px solid #d8e4ec;">
+                    <td style="padding:10px 12px;"><code>default</code></td>
+                    <td style="padding:10px 12px;">読み取りのみ</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                  </tr>
+                  <tr style="border-top:1px solid #d8e4ec; background:#f9fcfd;">
+                    <td style="padding:10px 12px;"><code>acceptEdits</code></td>
+                    <td style="padding:10px 12px;">＋ファイル編集・一般的なBash（<code>mkdir</code>等）</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                  </tr>
+                  <tr style="border-top:1px solid #d8e4ec;">
+                    <td style="padding:10px 12px;"><code>plan</code></td>
+                    <td style="padding:10px 12px;">読み取り（計画立案専用）</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                  </tr>
+                  <tr style="border-top:1px solid #d8e4ec; background:#fef9ec;">
+                    <td style="padding:10px 12px;"><strong><code>auto</code></strong><br><span style="font-size:11px; color:#8b6914;">学長の言う「自動モード」</span></td>
+                    <td style="padding:10px 12px;"><strong>全部 ＋ 裏で分類器が安全チェック</strong></td>
+                    <td style="padding:10px 12px; text-align:center; color:#c0392b; font-weight:700;">❌</td>
+                    <td style="padding:10px 12px; text-align:center;">✅<br><span style="font-size:10px;">(Opus 4.7限定)</span></td>
+                  </tr>
+                  <tr style="border-top:1px solid #d8e4ec;">
+                    <td style="padding:10px 12px;"><code>dontAsk</code></td>
+                    <td style="padding:10px 12px;">事前承認したツールのみ（CI向け）</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                  </tr>
+                  <tr style="border-top:1px solid #d8e4ec; background:#fbeded;">
+                    <td style="padding:10px 12px;"><strong><code>bypassPermissions</code></strong><br><span style="font-size:11px; color:#8b1a1a;">学長の言う「バイパス権限モード」</span></td>
+                    <td style="padding:10px 12px;"><strong>全部（チェック完全スキップ）</strong></td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                    <td style="padding:10px 12px; text-align:center;">✅</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">🎯 学長発言の最終訳：</p>
+            <ul style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; padding-left:20px; font-size:13.5px;">
+              <li><strong>「自動モードはMaxプランだけ」</strong> ← これは <code>auto</code> モードの話。<strong>正しい</strong>（今もPro不可）</li>
+              <li><strong>「バイパスはプロプランでもできる」</strong> ← これは <code>bypassPermissions</code> モードの話。<strong>正しい</strong>（全プラン可）</li>
+              <li>つまり <strong>学長が混乱したのは、自動モードとバイパスモードを同じだと思ってたから</strong>。実は別物🌟</li>
+            </ul>
+
+            <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">🌷 プラン別の現実的おすすめ運用</p>
+            <ul style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; padding-left:20px; font-size:13.5px;">
+              <li><strong>Pro ユーザ</strong> → 普段は <code>acceptEdits</code> モード（読み取り＋ファイル編集が自動）／長時間放置なら <code>bypassPermissions</code>（要・隔離環境）</li>
+              <li><strong>Max ユーザ</strong> → 普段は <code>auto</code> モード（分類器が裏で安全チェックしながら全自動・最強）</li>
+              <li>初心者は <strong>まず通常 <code>default</code> モードのまま使い、慣れたら呪文（別冊②）＋<code>acceptEdits</code> へ進む</strong> のが安全</li>
+            </ul>
+
+            <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">⚙️ モード切り替え方法</p>
+            <ul style="line-height:1.95; color:#3d4f5c; padding-left:20px; font-size:13.5px;">
+              <li><strong>セッション中</strong>：<code>Shift + Tab</code> でモードをサイクル（default → acceptEdits → plan）</li>
+              <li><strong>起動時</strong>：<code>claude --permission-mode acceptEdits</code> など</li>
+              <li><strong>永続設定</strong>：<code>~/.claude/settings.json</code> の <code>"permissions": { "defaultMode": "acceptEdits" }</code></li>
+              <li><strong>bypassPermissions 起動</strong>：<code>claude --dangerously-skip-permissions</code>（隔離環境のみ推奨）</li>
+            </ul>
+
+            <p style="font-size:12px; color:#6a7a85; margin-top:14px; padding-top:12px; border-top:1px dashed #c5d5dd;">
+              📚 出典：<a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener" style="color:#4F8CA8;">公式ドキュメント「Permission modes」</a>（2026-05-21 確認）
+            </p>
+          </div>
+
+          <p style="margin-top:18px;margin-bottom:6px;font-weight:600;color:var(--c-text);">📋 学長おすすめ運用まとめ（4/26時点）</p>
 
           <div class="faq-tablebox">
             <table>
@@ -1044,11 +1132,11 @@ section{padding:100px 24px;position:relative}
               </tr>
               <tr>
                 <td>普段（パソコンの前にいる時）</td>
-                <td>自動モード</td>
+                <td>自動モード <code>auto</code>（※Maxプランのみ）</td>
               </tr>
               <tr>
                 <td>出かける時／作業止まったら困る時</td>
-                <td>許可をバイパスモード</td>
+                <td>許可をバイパスモード <code>bypassPermissions</code>（全プラン可）</td>
               </tr>
             </table>
           </div>
