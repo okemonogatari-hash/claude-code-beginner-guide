@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>で、なに作る？ ── Claude Code入れたけど何作ればいいか思いつかない人へ｜虎の巻 別冊⑧</title>
+<meta name="description" content="Claude Codeをインストールしたのに「で、なに作ったらいいの？」で止まってしまった人へ。学長ライブで報告された実例を5パターンに整理して、明日から手が動く入口集にまとめた別冊。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-main:#7BAEC4;
+  --c-main-deep:#4F8CA8;
+  --c-accent:#E8B57A;
+  --c-accent-deep:#C28A45;
+  --c-sub:#A8C4A0;
+  --c-sub-deep:#759A6C;
+  --c-warn:#D88C8C;
+  --c-warn-deep:#B86A6A;
+  --c-bg:#FAF7F2;
+  --c-bg-soft:#F2EBDD;
+  --c-bg-deep:#EDE5D2;
+  --c-text:#3D3A35;
+  --c-text-sub:#7A7468;
+  --c-line:#E5DDC9;
+  --font-serif:'Noto Serif JP', serif;
+  --font-sans:'Noto Sans JP', sans-serif;
+  --font-en:'Inter', sans-serif;
+  --font-script:'Dancing Script', cursive;
+  --rainbow:linear-gradient(90deg,#7BAEC4 0%,#A8C4A0 35%,#E8D58A 65%,#E8B57A 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);color:var(--c-text);background:var(--c-bg);line-height:1.9;font-size:15px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none;transition:all .3s ease}
+p a, li a{color:var(--c-accent-deep);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;font-weight:600}
+p a:hover, li a:hover{color:var(--c-accent);text-decoration-thickness:2px}
+
+/* ========== Header ========== */
+.header{position:fixed;top:0;left:0;width:100%;padding:16px 36px;z-index:1000;display:flex;justify-content:space-between;align-items:center;background:rgba(250,247,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--c-line)}
+.logo{font-family:var(--font-serif);font-size:18px;font-weight:500;letter-spacing:.06em;color:var(--c-text)}
+.logo .mark{font-family:var(--font-script);font-size:26px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-right:6px}
+.back-link{font-size:13px;color:var(--c-text-sub);padding:8px 18px;border:1px solid var(--c-line);border-radius:999px;background:#fff;transition:all .3s}
+.back-link:hover{color:var(--c-main-deep);border-color:var(--c-main);transform:translateX(-3px)}
+
+/* ========== Hero ========== */
+.hero{position:relative;min-height:78vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,#F2EBDD 0%,#E8DCC2 60%,#DCD0B8 100%);padding:140px 24px 80px;text-align:center}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:var(--rainbow);border-radius:50%;opacity:.18;filter:blur(80px)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;background:linear-gradient(135deg,#A8C4A0,#759A6C);border-radius:50%;opacity:.15;filter:blur(70px)}
+.hero-inner{position:relative;z-index:5;max-width:820px}
+.hero-emoji{font-size:54px;margin-bottom:14px;line-height:1}
+.hero-label{font-family:var(--font-en);font-size:11.5px;letter-spacing:.45em;color:var(--c-main-deep);margin-bottom:18px;text-transform:uppercase}
+.hero-script{font-family:var(--font-script);font-size:46px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:14px;line-height:1.1}
+.hero-title{font-family:var(--font-serif);font-size:38px;font-weight:500;letter-spacing:.05em;color:var(--c-text);line-height:1.55;margin-bottom:22px}
+.hero-title .em{background:linear-gradient(120deg,var(--c-main-deep),var(--c-accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.hero-sub{font-size:14.5px;color:var(--c-text-sub);line-height:2.1;letter-spacing:.04em;margin-bottom:24px}
+.hero-meta{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;font-size:12px;color:var(--c-text-sub);letter-spacing:.04em}
+.hero-meta span{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,.7);border:1px solid var(--c-line);border-radius:999px}
+
+/* ========== Section common ========== */
+section{padding:90px 24px;position:relative}
+.section-inner{max-width:920px;margin:0 auto}
+.chapter-tag{display:inline-block;font-family:var(--font-en);font-size:11px;letter-spacing:.3em;color:#fff;background:var(--c-main-deep);padding:5px 14px;border-radius:999px;margin-bottom:14px;text-transform:uppercase}
+.section-title{font-family:var(--font-serif);font-size:28px;font-weight:500;margin-bottom:14px;letter-spacing:.04em;line-height:1.5;color:var(--c-text)}
+.section-title .em{background:linear-gradient(120deg,var(--c-main-deep),var(--c-accent-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:700}
+.section-lead{font-size:14.5px;color:var(--c-text-sub);line-height:2.1;margin-bottom:36px;max-width:760px}
+.section-head{margin-bottom:36px}
+
+/* ========== Q&A セクション ========== */
+.qa-section{background:linear-gradient(180deg,var(--c-bg) 0%,#fff 100%)}
+.qa-card{background:#fff;border:1px solid var(--c-line);border-radius:14px;padding:36px 40px;margin-top:24px;box-shadow:0 10px 30px rgba(123,174,196,.06)}
+.qa-card .q{font-family:var(--font-serif);font-size:18px;color:var(--c-main-deep);font-weight:700;margin-bottom:18px;line-height:1.7;letter-spacing:.04em}
+.qa-card .q::before{content:'Q. ';color:var(--c-accent-deep);margin-right:4px}
+.qa-card .a{font-size:15px;color:var(--c-text);line-height:2.05;margin-bottom:20px}
+.qa-card .a::before{content:'A. ';color:var(--c-sub-deep);font-weight:700;margin-right:4px}
+.qa-card .a strong{color:var(--c-accent-deep);background:linear-gradient(transparent 60%,#FFE9C7 60%);font-weight:700}
+
+.diff-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:24px}
+@media(min-width:780px){.diff-grid{grid-template-columns:repeat(2,1fr)}}
+.diff-card{background:var(--c-bg);border:1px solid var(--c-line);border-radius:10px;padding:22px 24px;border-left:4px solid var(--c-sub)}
+.diff-card h4{font-family:var(--font-serif);font-size:16px;color:var(--c-text);margin-bottom:8px;line-height:1.5;letter-spacing:.04em}
+.diff-card h4 .icon{margin-right:6px}
+.diff-card p{font-size:13.5px;color:var(--c-text-sub);line-height:1.95;margin:0}
+.diff-card p strong{color:var(--c-sub-deep);font-weight:700}
+
+.game-callout{margin-top:30px;padding:28px 32px;background:linear-gradient(135deg,#FFF8E7 0%,#FAF7F2 100%);border:1px dashed var(--c-accent);border-radius:12px;text-align:center}
+.game-callout .ribbon{font-family:var(--font-en);font-size:11px;letter-spacing:.3em;color:var(--c-accent-deep);text-transform:uppercase;margin-bottom:10px;font-weight:700}
+.game-callout p{font-family:var(--font-serif);font-size:17px;color:var(--c-text);line-height:1.9;letter-spacing:.04em}
+.game-callout p strong{color:var(--c-accent-deep);background:linear-gradient(transparent 60%,#FFE9C7 60%);font-weight:700}
+
+/* ========== おけもん使い方 ========== */
+.usage-section{background:#fff}
+.usage-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px}
+@media(min-width:680px){.usage-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.usage-grid{grid-template-columns:repeat(3,1fr)}}
+.usage-card{background:var(--c-bg);border:1px solid var(--c-line);border-radius:10px;padding:22px 22px 20px;transition:all .3s}
+.usage-card:hover{box-shadow:0 14px 30px rgba(123,174,196,.1);transform:translateY(-2px);border-color:var(--c-main)}
+.usage-card .icon{font-size:28px;line-height:1;margin-bottom:10px}
+.usage-card h4{font-family:var(--font-serif);font-size:15px;color:var(--c-text);margin-bottom:8px;line-height:1.55;letter-spacing:.03em}
+.usage-card p{font-size:12.5px;color:var(--c-text-sub);line-height:1.9;margin:0}
+.usage-card .badge{display:inline-block;margin-top:10px;padding:3px 10px;background:#fff;color:var(--c-main-deep);font-size:10.5px;border-radius:999px;font-family:var(--font-en);letter-spacing:.08em;border:1px solid var(--c-line);font-weight:600}
+
+.usage-note{margin-top:28px;padding:20px 24px;background:var(--c-bg);border:1px solid var(--c-line);border-radius:10px;font-size:13.5px;color:var(--c-text-sub);line-height:2}
+.usage-note strong{color:var(--c-main-deep);font-weight:700}
+
+/* ========== 5パターン入口 ========== */
+.entry-section{background:linear-gradient(180deg,#fff 0%,var(--c-bg) 100%)}
+.entry-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:34px}
+@media(min-width:680px){.entry-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:980px){.entry-grid{grid-template-columns:repeat(3,1fr)}}
+.entry-card{background:#fff;border:1px solid var(--c-line);border-radius:12px;padding:30px 28px;border-top:4px solid var(--c-main);transition:all .3s;display:flex;flex-direction:column;text-align:left}
+.entry-card:hover{box-shadow:0 18px 40px rgba(79,140,168,.12);transform:translateY(-4px)}
+.entry-card .icon{font-size:38px;line-height:1;margin-bottom:14px}
+.entry-card h4{font-family:var(--font-serif);font-size:18px;color:var(--c-text);margin-bottom:10px;line-height:1.5;letter-spacing:.04em;font-weight:700}
+.entry-card .e-sub{font-size:12.5px;color:var(--c-accent-deep);font-weight:700;margin-bottom:10px;letter-spacing:.04em}
+.entry-card p{font-size:13.5px;color:var(--c-text-sub);line-height:1.95;margin-bottom:14px;flex-grow:1}
+.entry-card .e-cta{font-family:var(--font-en);font-size:11.5px;color:var(--c-main-deep);letter-spacing:.15em;font-weight:600;border-top:1px dashed var(--c-line);padding-top:12px}
+
+/* ========== Pattern Detail ========== */
+.pattern-section{padding-bottom:60px}
+.pattern-section + .pattern-section{padding-top:30px;border-top:1px dashed var(--c-line)}
+.pattern-head{display:flex;align-items:center;gap:18px;margin-bottom:14px;flex-wrap:wrap}
+.pattern-head .icon{font-size:42px;line-height:1}
+.pattern-head .pattern-num{font-family:var(--font-en);font-size:12px;letter-spacing:.3em;color:var(--c-accent-deep);text-transform:uppercase;font-weight:700}
+.pattern-head h3{font-family:var(--font-serif);font-size:26px;color:var(--c-text);line-height:1.4;letter-spacing:.04em;font-weight:700;margin-top:4px}
+.pattern-lead{font-size:14.5px;color:var(--c-text-sub);line-height:2.05;margin-bottom:30px;max-width:760px}
+
+.case-list{display:grid;gap:18px;margin-top:24px}
+.case{background:#fff;border:1px solid var(--c-line);border-radius:10px;padding:24px 26px;border-left:4px solid var(--c-accent);position:relative;transition:all .3s}
+.case:hover{box-shadow:0 12px 28px rgba(232,181,122,.1)}
+.case-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:12px;flex-wrap:wrap}
+.case-num{font-family:var(--font-serif);font-size:30px;color:var(--c-accent-deep);line-height:1;font-weight:500;flex-shrink:0}
+.case-title-wrap{flex:1;min-width:200px;padding-top:2px}
+.case-title{font-family:var(--font-serif);font-size:17px;color:var(--c-text);letter-spacing:.04em;line-height:1.55;margin-bottom:6px;font-weight:700}
+.case-tags{display:flex;flex-wrap:wrap;gap:6px}
+.case-tag{font-family:var(--font-en);font-size:10.5px;letter-spacing:.1em;color:var(--c-accent-deep);background:#FFF5E6;padding:3px 10px;border-radius:999px;font-weight:600;text-transform:uppercase}
+.case-tag.amount{background:#F2F9F5;color:var(--c-sub-deep)}
+.case-tag.scene{background:#EAF3F7;color:var(--c-main-deep)}
+.case-body p{font-size:13.5px;line-height:2;color:var(--c-text);margin-bottom:8px}
+.case-body p strong{color:var(--c-accent-deep);font-weight:700}
+.case-source{font-family:var(--font-en);font-size:11px;color:var(--c-text-sub);letter-spacing:.08em;margin-top:6px;font-weight:500}
+
+.prompt-block{margin-top:24px;padding:22px 24px;background:#FAF3E8;border:1px solid var(--c-line);border-radius:10px}
+.prompt-block .label{font-family:var(--font-serif);font-size:13px;color:var(--c-accent-deep);font-weight:700;margin-bottom:10px;letter-spacing:.04em}
+.prompt-block .prompt{font-family:'Hiragino Mincho ProN','Yu Mincho',var(--font-serif);font-size:14px;line-height:2.05;color:var(--c-text);background:#fff;padding:18px 20px;border:1px dashed var(--c-line);border-radius:8px;white-space:pre-wrap}
+
+.try-block{margin-top:22px;padding:22px 24px;background:#F1F7F3;border:1px solid #DBE6DC;border-radius:10px}
+.try-block .label{font-family:var(--font-serif);font-size:13px;color:var(--c-sub-deep);font-weight:700;margin-bottom:12px;letter-spacing:.04em}
+.try-block ol{padding-left:22px;list-style:none;counter-reset:try}
+.try-block ol li{counter-increment:try;font-size:13.5px;line-height:2;color:var(--c-text);position:relative;padding-left:32px;margin-bottom:6px}
+.try-block ol li::before{content:counter(try);position:absolute;left:0;top:5px;width:22px;height:22px;background:var(--c-sub-deep);color:#fff;border-radius:50%;font-family:var(--font-en);font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* ========== 学長語録 ========== */
+.quotes-section{background:linear-gradient(180deg,var(--c-bg) 0%,#fff 100%)}
+.quotes-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px}
+.quote-card{background:#fff;border:1px solid var(--c-line);border-left:4px solid var(--c-accent);border-radius:8px;padding:24px 28px;position:relative}
+.quote-card::before{content:'❝';position:absolute;top:8px;right:18px;font-family:var(--font-serif);font-size:48px;color:var(--c-bg-deep);line-height:1}
+.quote-card .quote{font-family:var(--font-serif);font-size:16px;line-height:1.9;color:var(--c-text);font-weight:500;letter-spacing:.04em;margin-bottom:10px}
+.quote-card .quote .em{color:var(--c-accent-deep);font-weight:700}
+.quote-card .source{font-family:var(--font-en);font-size:11.5px;color:var(--c-text-sub);letter-spacing:.1em;font-weight:500}
+
+/* ========== 3ステップ ========== */
+.todo-section{background:#fff}
+.todo-list{display:grid;gap:20px;margin-top:30px}
+.todo-card{background:linear-gradient(135deg,#F2EBDD 0%,#fff 100%);border:1px solid var(--c-line);border-radius:12px;padding:28px 32px;display:grid;grid-template-columns:80px 1fr;gap:22px;align-items:start}
+@media(max-width:680px){.todo-card{grid-template-columns:60px 1fr;gap:16px;padding:24px 22px}}
+.todo-card .step-num{font-family:var(--font-serif);font-size:48px;color:var(--c-accent-deep);line-height:1;font-weight:700;text-align:center}
+@media(max-width:680px){.todo-card .step-num{font-size:36px}}
+.todo-card .body h4{font-family:var(--font-serif);font-size:18px;color:var(--c-text);margin-bottom:8px;letter-spacing:.04em;line-height:1.55;font-weight:700}
+.todo-card .body p{font-size:13.5px;line-height:2;color:var(--c-text-sub)}
+
+/* ========== 関連リンク ========== */
+.related-links{margin-top:36px;padding:26px 30px;background:linear-gradient(135deg,#F2EBDD 0%,#fff 100%);border:1px solid var(--c-line);border-radius:10px}
+.related-links h4{font-family:var(--font-serif);font-size:15px;color:var(--c-text);margin-bottom:14px;letter-spacing:.04em;font-weight:700}
+.related-links ul{list-style:none;display:grid;gap:10px}
+.related-links li{font-size:13.5px;line-height:1.8}
+.related-links li a{color:var(--c-main-deep);font-weight:600;text-decoration:none}
+.related-links li a:hover{color:var(--c-accent-deep);text-decoration:underline}
+.related-links li .arrow{display:inline-block;margin-right:6px;color:var(--c-accent-deep)}
+
+/* ========== Final ========== */
+.final{padding:80px 24px;background:linear-gradient(135deg,#F2EBDD 0%,#E8DCC2 100%);text-align:center;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:var(--rainbow);border-radius:50%;opacity:.18;filter:blur(70px)}
+.final-inner{position:relative;z-index:2;max-width:680px;margin:0 auto}
+.final .hero-script{font-size:38px;margin-bottom:14px}
+.final h2{font-family:var(--font-serif);font-size:24px;font-weight:500;letter-spacing:.04em;line-height:1.7;margin-bottom:18px;color:var(--c-text)}
+.final p{font-size:14px;color:var(--c-text-sub);margin-bottom:30px;line-height:2;letter-spacing:.04em}
+.final-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;background:var(--c-main-deep);color:#fff;border-radius:999px;font-size:13.5px;letter-spacing:.12em;box-shadow:0 10px 28px rgba(79,140,168,.3);transition:all .3s;font-weight:500}
+.final-cta:hover{transform:translateY(-3px);box-shadow:0 16px 38px rgba(79,140,168,.4)}
+
+/* ========== Footer ========== */
+.footer{padding:50px 24px 26px;background:var(--c-text);color:#fff;text-align:center}
+.footer-logo{font-family:var(--font-serif);font-size:18px;margin-bottom:12px}
+.footer-logo .mark{font-family:var(--font-script);font-size:24px;background:var(--rainbow);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-right:6px}
+.footer p{font-size:12px;opacity:.7;line-height:1.9;margin-bottom:6px}
+.footer-bottom{padding-top:22px;margin-top:24px;border-top:1px solid rgba(255,255,255,.15);font-size:11px;opacity:.55;font-family:var(--font-en);letter-spacing:.15em}
+
+/* ========== Responsive ========== */
+@media (max-width:760px){
+  .header{padding:14px 18px}
+  .hero{padding:120px 18px 60px;min-height:auto}
+  .hero-script{font-size:34px}
+  .hero-title{font-size:24px}
+  section{padding:60px 18px}
+  .section-title{font-size:21px}
+  .qa-card{padding:26px 24px}
+  .qa-card .q{font-size:16px}
+  .quote-card{padding:20px 22px}
+  .quote-card .quote{font-size:14.5px}
+  .case{padding:22px 20px}
+  .case-num{font-size:24px}
+  .case-title{font-size:15.5px}
+  .pattern-head h3{font-size:22px}
+  .prompt-block, .try-block{padding:18px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- =================== Header =================== -->
+<header class="header">
+  <div class="logo"><span class="mark">claude</span> Code 別冊⑧</div>
+  <a href="index.html" class="back-link">← 本編にもどる</a>
+</header>
+
+<!-- =================== Hero =================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-emoji">🤔💡</div>
+    <div class="hero-label">Bonus Chapter 08 / What to build</div>
+    <div class="hero-script">Stuck? Let's go.</div>
+    <h1 class="hero-title">
+      で、<span class="em">なに作る？</span><br>
+      ── Claude Code 入れたけど、<br>
+      何作ったらええか思いつかん人へ
+    </h1>
+    <p class="hero-sub">
+      「インストールはした。チュートリアルもなんとなく動かした。<br>
+      でも、で？ 何を作ったらええの？」<br>
+      この問いで止まっている人、ほんまに多いです。<br>
+      この別冊は、<strong>学長ライブで報告されたリアル事例</strong>を 5つの入口に整理して、<br>
+      明日から手が動くようにまとめた処方箋やで。
+    </p>
+    <div class="hero-meta">
+      <span>📚 学長ライブ5月分20本+から抽出</span>
+      <span>🎯 5パターン入口型</span>
+      <span>💬 FAQ 2問つき</span>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Section 1: Q&A 育成ゲーム論 =================== -->
+<section class="qa-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-tag">Q & A — Foundation</div>
+      <h2 class="section-title">これ、<span class="em">普通のチャットAIでも良くない？</span></h2>
+      <p class="section-lead">
+        実はこの質問、虎の巻チャットでも、Claude Code初心者オフ会でも、毎回出てくる超頻出ど真ん中の疑問。<br>
+        ここをハッキリさせとくと、「で、なに作る？」の答えも自然に見えてくるんよ。
+      </p>
+    </div>
+
+    <div class="qa-card">
+      <p class="q">これってチャットAIでもできるんちゃう？ Claude Code でやる意味って何？</p>
+      <p class="a">
+        できること自体は重なるところもある。けど Claude Code を使う一番の意味は、<strong>「自分の成果物」と「自分専用に育ったAI」がどんどん積み上がっていく</strong>こと。<br><br>
+        一言で言うと <strong>育成ゲーム</strong>。<br>
+        チャットは「相談してその場で消える」、Claude Code は「相談して、形にして、自分のフォルダに残る」。<br>
+        やればやるほど、自分の中に「使える資産」が増えていく感覚。
+      </p>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <h4><span class="icon">📦</span>成果物が形に残る</h4>
+          <p>HP・LP・ツール・図解・診断シート・スプシ整形…<strong>触ったぶんだけ自分のフォルダに溜まる</strong>。あとから「あれ作ったやつ流用しよ」が効く。</p>
+        </div>
+        <div class="diff-card">
+          <h4><span class="icon">🧠</span>自分用にAIを育てられる</h4>
+          <p>自分の文体・好み・業界用語・口グセを覚えさせていける。<strong>新人スタッフを育てる感覚</strong>。3ヶ月後には「分かってくれる相棒」になってる。</p>
+        </div>
+        <div class="diff-card">
+          <h4><span class="icon">🔁</span>繰り返しが効く（型化できる）</h4>
+          <p>一度やった作業を「次もこの型で」って指示できる。<strong>毎月の請求書整理・SNS投稿・議事録まとめ</strong>みたいな繰り返し系が、毎回1分で済むようになる。</p>
+        </div>
+        <div class="diff-card">
+          <h4><span class="icon">🔗</span>横断して動ける</h4>
+          <p>フォルダ／ブラウザ／Notion／メール／カレンダー…<strong>普段使ってるツールを直接さわれる</strong>。「貼り付けて聞いて、コピペで戻す」のあの行ったり来たりが消える。</p>
+        </div>
+      </div>
+
+      <div class="game-callout">
+        <div class="ribbon">★ Key Insight</div>
+        <p>
+          チャットAI = <strong>レンタル文房具</strong>。<br>
+          Claude Code = <strong>自分の机・自分の道具箱・育てていく秘書</strong>。<br>
+          だから、いじればいじるほど面白くなる。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Section 2: おけもんの使い方 =================== -->
+<section class="usage-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-tag">Real Use — What I make</div>
+      <h2 class="section-title">で、<span class="em">この虎の巻書いてる人</span>は、何に使ってるん？</h2>
+      <p class="section-lead">
+        「他の人が何に使ってるか」が一番のヒントになる、ってよく言われるので、<br>
+        この虎の巻を書いてる本人が<strong>毎日Claude Codeで何を作ってるか</strong>、ざっと並べておくね。<br>
+        全部「最初は思いつかなかった」けど、触ってるうちに「あ、これ作れるやん」になって育ってきたもの。
+      </p>
+    </div>
+
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="icon">📝</div>
+        <h4>個人の強み診断シート自動生成</h4>
+        <p>コーチング後にお客さんにお渡しする「あなたの強み・キャッチコピー集」を、対話ログから15分で1ファイルに整える仕組み。</p>
+        <span class="badge">Coaching</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🌐</div>
+        <h4>業種別LP（ホームページ）量産</h4>
+        <p>整骨院・カフェ・士業…と業種とテイスト言うだけで、画像込みの1ファイルHTMLが出てくる。下書きが一瞬で「人に見せられる形」になる。</p>
+        <span class="badge">LP</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🎬</div>
+        <h4>YouTube動画 → 自動文字起こし＆要約</h4>
+        <p>気になる動画のURLを投げると、字幕を取ってきて、要約と気づきメモを保存。「動画見る時間が無い問題」を解決。</p>
+        <span class="badge">Auto</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🦁</div>
+        <h4>毎朝の学長ライブを自動でDB化</h4>
+        <p>朝のライブ約2時間分が、毎日10:30に「全文テキスト＋要約＋AI活用事例」になってフォルダに溜まる。詳しくは別冊⑥参照。</p>
+        <span class="badge">Daily</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">✅</div>
+        <h4>自分専用タスク管理ダッシュボード</h4>
+        <p>市販のToDoアプリだと自分のADHD気味な脳と相性が悪かったので、自分の動き方に合わせて作った1ファイルHTML＋JSON。</p>
+        <span class="badge">Custom</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🎨</div>
+        <h4>HTMLで図解・しおり・解説資料</h4>
+        <p>セミナー内容・ツール紹介・キャラ紹介などを、紙の本みたいなレイアウトで1ファイルに。GitHub Pages で公開してURLで配れる。</p>
+        <span class="badge">Visual</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">📚</div>
+        <h4>ノウハウ図書館の事例リサーチ自動化</h4>
+        <p>テーマ指定で、図書館の関連記事を巡回して、要約＋活用アイデアを構造化保存。発信ネタ・顧客提案のストック作りに。</p>
+        <span class="badge">Research</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🎯</div>
+        <h4>求人ページ → 広告バナーコピー自動生成</h4>
+        <p>求人URLを投げると、職種・年収・人物像を抽出 → 広告コピー3案＋テイスト指示まで生成。スプシ貼付OKのTSV形式で出力。</p>
+        <span class="badge">Marketing</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🗣</div>
+        <h4>議事録・会議録の要点抽出</h4>
+        <p>1〜2時間の文字起こしを「決定事項／TODO／気になる発言」の3枠で1枚にまとめる。担当者別の連絡文章まで下書きさせる。</p>
+        <span class="badge">Meeting</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">💰</div>
+        <h4>家計の見える化ツール</h4>
+        <p>銀行CSVを投げると、勘定科目で仕分けされて、月次収支が見えるようになる仕組み。市販家計簿の自分カスタマイズ版。</p>
+        <span class="badge">Money</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🔍</div>
+        <h4>過去会話の検索ツール</h4>
+        <p>「あれ、いつ話したっけ？」を解決。Claude Codeで自分の過去ログから1秒で該当会話を引き出す自前ツール。</p>
+        <span class="badge">Memory</span>
+      </div>
+      <div class="usage-card">
+        <div class="icon">🤖</div>
+        <h4>役割を持たせたAIを使い分け</h4>
+        <p>「コーチングの相談相手」「経理の数字チェッカー」「発信ネタ出し」など、用途別に小さなAI設定（スキル）を作って呼び出す。</p>
+        <span class="badge">Skills</span>
+      </div>
+    </div>
+
+    <div class="usage-note">
+      <strong>共通してるのは何？</strong> ぜんぶ「最初から作ろうと思って作った」もんじゃない。<br>
+      「これめんどくさいな」「もう一回やりたいな」って思った瞬間に Claude Code に話しかけて、その場で形にしてきたものばっかり。<br>
+      <strong>「めんどくさい！」が一番の燃料</strong>。これに勝るネタは無い。
+    </div>
+  </div>
+</section>
+
+<!-- =================== Section 3: 5パターン入口 =================== -->
+<section class="entry-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-tag">5 Entry Points</div>
+      <h2 class="section-title">学長ライブから抽出した、<span class="em">5つの入口</span></h2>
+      <p class="section-lead">
+        2026年5月の学長ライブで報告された <strong>リベ民のリアル成功事例 30件超</strong> を、初心者がパッと選びやすいように 5つに分類した。<br>
+        どれかピンと来たやつから手を動かしてみ。理屈考えるより、選んで1個試すほうが100倍早い。
+      </p>
+    </div>
+
+    <div class="entry-grid">
+      <a href="#pattern1" class="entry-card">
+        <div class="icon">🏠</div>
+        <div class="e-sub">Pattern 01</div>
+        <h4>本業 × HP・LP</h4>
+        <p>自分の現場・業界の知識を AI と組み合わせて、ホームページや LP を作る。すでに人脈がある業界相手なら最速で受注に繋がる。電気工事士ゆさん190万事例の入口。</p>
+        <div class="e-cta">▸ 詳しく見る</div>
+      </a>
+      <a href="#pattern2" class="entry-card">
+        <div class="icon">🤖</div>
+        <div class="e-sub">Pattern 02</div>
+        <h4>めんどくさいを自動化</h4>
+        <p>「毎月の繰り返し作業」「コピペ仕事」を Claude Code に任せる。住所連携・シフト作成・固定費管理…地味だけど、効果がデカいやつ。</p>
+        <div class="e-cta">▸ 詳しく見る</div>
+      </a>
+      <a href="#pattern3" class="entry-card">
+        <div class="icon">📝</div>
+        <div class="e-sub">Pattern 03</div>
+        <h4>書類・資料を量産</h4>
+        <p>履歴書・図解・チラシ・SNS投稿テンプレ。「同じものを大量に作る」「フォーマットに沿って作る」系。30秒で書籍レベルの図解が出てくる時代。</p>
+        <div class="e-cta">▸ 詳しく見る</div>
+      </a>
+      <a href="#pattern4" class="entry-card">
+        <div class="icon">🧠</div>
+        <div class="e-sub">Pattern 04</div>
+        <h4>相談相手にする</h4>
+        <p>経営判断・契約解約の交渉文・健康相談・賃貸更新…<strong>学長本人もこれをやってる</strong>。「人に聞きづらいこと」を 24時間相談できる相棒として使う。</p>
+        <div class="e-cta">▸ 詳しく見る</div>
+      </a>
+      <a href="#pattern5" class="entry-card">
+        <div class="icon">🎵</div>
+        <div class="e-sub">Pattern 05</div>
+        <h4>遊ぶ・売る（音楽・画像）</h4>
+        <p>Suno AI で曲、ChatGPT で画像、HeyGen でアバター動画。学長の「夏風ペダル」は YouTube Music で 2万回再生超え。遊びから入って収益化までの導線。</p>
+        <div class="e-cta">▸ 詳しく見る</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Pattern 1: 本業×HP =================== -->
+<section class="pattern-section" id="pattern1">
+  <div class="section-inner">
+    <div class="pattern-head">
+      <div class="icon">🏠</div>
+      <div>
+        <div class="pattern-num">Pattern 01</div>
+        <h3>本業 × HP・LP ── 自分の現場の知識が一番の武器</h3>
+      </div>
+    </div>
+    <p class="pattern-lead">
+      非エンジニアでも、自分の業界の常識・お客さんの困りごとを知ってる時点で、ホームページ制作の <strong>提案力としては既にプロ</strong> や。学長ライブで「190万円受注」「クリニックHP受注」「3.5時間でEC連携」など連続報告。共通点は「営業前に成果物の試作版を見せる」。
+    </p>
+
+    <div class="case-list">
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">01</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">電気工事士ゆさん、Claude Codeで約190万円受注</h4>
+            <div class="case-tags">
+              <span class="case-tag amount">¥1,900,000</span>
+              <span class="case-tag">本業×AI</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>電気工事士のゆさんが、学長ライブ視聴をきっかけにClaude Code を触り始めて 1ヶ月。<strong>同業者向けに「電気工事士のHPサンプル」を AI で作って見せて回り</strong>、2社合計で約190万円の制作受注。学長コメント「営業前に成果物の試作版を見せる」が決まり手。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-04</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">02</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">おむすび屋さんが Claude Code で HP自作 → クリニックHP受注</h4>
+            <div class="case-tags">
+              <span class="case-tag">本業×AI</span>
+              <span class="case-tag scene">他業界へ横展開</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>大阪のおむすび屋さん夫婦。<strong>開店半年で毎月赤字</strong>だったが、Claude Code を触って自分の店の HP を自作 → お客さんに見せてたら、ご縁あって <strong>クリニックの HP 制作を受注</strong>。「一体何屋かわからん」状態で年明けから毎月黒字化。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-08</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">03</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">機械音痴の主婦が 3.5時間で「HP公開＋EC自動連携」</h4>
+            <div class="case-tags">
+              <span class="case-tag amount">外注なら50万円相当</span>
+              <span class="case-tag scene">スキルマーケット活用</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>完全初心者の主婦が、リベシティ内のスキルマーケットで Claude Code 達人に <strong>3.5時間の個別講習</strong> を依頼。横について教えてもらいながら、HP立ち上げ＋「商品が売れたら住所がヤマトに自動で渡る仕組み」まで完成。学長コメント：<strong>「外注したら最低でも50万円・12ヶ月かかる仕事」</strong>。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-01</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="label">🎙 試しの1個目プロンプト</div>
+      <div class="prompt">私は◯◯（自分の職業・本業）をしています。同業者向けの紹介ページを1枚のHTMLファイルで作りたいです。
+盛り込みたい内容は次の3つです：
+・自分の業界で「お客さんが一番困ってること」
+・自分が他と違うところ（強み・実績・人柄）
+・問い合わせ方法（LINE or メール）
+
+落ち着いた清潔感のあるデザインで、スマホでも見やすくしてください。
+画像は使わずに、文字とレイアウトだけで「ちゃんとしてそう感」を出してほしいです。</div>
+    </div>
+
+    <div class="try-block">
+      <div class="label">🌱 今日やる3ステップ</div>
+      <ol>
+        <li>自分の本業で「お客さんに一番聞かれる質問」を3つ書き出す</li>
+        <li>上のプロンプトを Claude Code に投げて1枚HTMLを作ってもらう</li>
+        <li>できた HP のスクショを、同業の知り合い1人に見せて感想もらう</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Pattern 2: 自動化 =================== -->
+<section class="pattern-section" id="pattern2">
+  <div class="section-inner">
+    <div class="pattern-head">
+      <div class="icon">🤖</div>
+      <div>
+        <div class="pattern-num">Pattern 02</div>
+        <h3>めんどくさいを自動化 ── 一番「効いてる」と感じやすい入口</h3>
+      </div>
+    </div>
+    <p class="pattern-lead">
+      派手な事例より、地味で毎日効くやつ。<strong>「毎月やってるアレ」「毎週やってるアレ」</strong> を1個でも自動化できると、Claude Code を入れた価値を即体感できる。初心者にイチオシの入口。
+    </p>
+
+    <div class="case-list">
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">01</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">「商品売れたら、購入者住所がヤマトに自動で連携される」仕組み</h4>
+            <div class="case-tags">
+              <span class="case-tag">EC自動化</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>機械音痴の主婦さんが、リベシティの市場でモノを売る → <strong>注文データから黒猫ヤマトの送り状に住所を自動で流す</strong> 仕組みを、Claude Code 達人と一緒に組み立てた。「外注なら50万円・12ヶ月の仕事」を3.5時間で。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-01</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">02</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">介護職員さんがシフト作成を Claude Code で自動化</h4>
+            <div class="case-tags">
+              <span class="case-tag">業務効率化</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>毎月「希望休 → シフト調整」がパズルだった現場で、<strong>条件をAIに教えてシフト表をたたき出す</strong> 仕組みを構築。職場で導入できなくても、家で前提検討するだけでも頭の負担が激減する系。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-03</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">03</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">クロード契約1ヶ月で「地味な業務効率化」を量産</h4>
+            <div class="case-tags">
+              <span class="case-tag">ノーハウト感</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>視聴者報告：1ヶ月使い込んで、自分の仕事の「めんどくさい」を1個ずつ自動化していった。本人コメント：<strong>「ノーハウト感（=AI とのキャッチボール感）と、クロコに聞くことの大事さを実感」</strong>。最初の1個ができれば、2個目3個目は加速する。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-02</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="label">🎙 試しの1個目プロンプト</div>
+      <div class="prompt">最近、自分の仕事で「これ毎回めんどくさいな…」と感じているのが、◯◯です。
+（例：毎月の請求書をスプシに転記する／お客さんへの定型メール返信／週次の売上集計）
+
+この作業を、できるだけ手を動かさないで終わらせたいです。
+いきなり全自動化しなくていいので、まず「半分だけ楽になる仕組み」のアイデアを3つ提案してください。
+そのあと、一番簡単に試せそうな1個から一緒に作っていきたいです。</div>
+    </div>
+
+    <div class="try-block">
+      <div class="label">🌱 今日やる3ステップ</div>
+      <ol>
+        <li>「毎月／毎週やってる、ちょっとめんどくさい作業」を1個書き出す</li>
+        <li>上のプロンプトを投げて、AI と一緒に「楽にする案」を3つ出してもらう</li>
+        <li>一番簡単そうなやつから、その場で半分だけ実装する（完璧目指さない）</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Pattern 3: 書類量産 =================== -->
+<section class="pattern-section" id="pattern3">
+  <div class="section-inner">
+    <div class="pattern-head">
+      <div class="icon">📝</div>
+      <div>
+        <div class="pattern-num">Pattern 03</div>
+        <h3>書類・資料を量産 ── 「同じものを何回も作る」系は AI の独壇場</h3>
+      </div>
+    </div>
+    <p class="pattern-lead">
+      履歴書・図解・チラシ・SNS投稿テンプレ・ライフプラン試算…。<strong>フォーマットが決まってる仕事ほど AI が爆速で代わりになる</strong>。学長が「副業19選の図解を30秒で生成」した話は象徴的。
+    </p>
+
+    <div class="case-list">
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">01</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">学長が「副業19選チラシ」を AI で30秒生成</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">書籍レベル品質</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>ライブで使う「リベ大おすすめ副業19選」の図解を、テキスト構造を整えてから AI に投げて <strong>約30秒で完成</strong>。視聴者から「綺麗な図ですね、書籍に載ってる図ですか？」と質問されるレベル。微調整は手で。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-01・05-04</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">02</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">おむすび屋さんがスレッズ毎日投稿テンプレで集客</h4>
+            <div class="case-tags">
+              <span class="case-tag">SNS量産</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>ノウハウ図書館で「スレッズ」記事を読む → 翌日から投稿開始 → <strong>翌日からスレッズ経由のお客さんが毎日来店</strong>。「毎日投稿」の最大の壁は「ネタ切れ・労力」。AI で投稿テンプレを量産すれば、毎日投稿が現実的になる。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-08</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">03</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">コードが書けない人が「10年後の日本株増配シミュレーションアプリ」</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">ノーコード</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>視聴者報告：<strong>コードを書けないまま</strong>、Claude Code と相談しながら投資シミュレーションアプリを作成 → ノウハウ図書館で公開まで。「資料・ツール」の境界が AI で消えつつある。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-15</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="label">🎙 試しの1個目プロンプト</div>
+      <div class="prompt">私が普段「同じフォーマットで何回も書いてるもの」が、◯◯です。
+（例：お客さんへの提案メール／月次の振り返りレポート／SNSの集客投稿）
+
+毎回ゼロから書くのが大変なので、次の2つを一緒に作りたいです：
+1. 自分が書きたい「型（テンプレート）」を、1ファイルにまとめる
+2. その型に沿って、新しいネタを入れたら出力できるようにする
+
+私の文体は「◯◯（例：少しくだけた・関西弁混ぜ気味・絵文字適度）」です。
+まずは型の叩き台を出してください。</div>
+    </div>
+
+    <div class="try-block">
+      <div class="label">🌱 今日やる3ステップ</div>
+      <ol>
+        <li>「毎回似たような内容で作ってる書類／投稿／メール」を1種類選ぶ</li>
+        <li>過去に書いたサンプルを2〜3個コピペで AI に渡して、型を抽出してもらう</li>
+        <li>新しいネタを1個入れて、型に沿った下書きを作らせてみる</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Pattern 4: 相談相手 =================== -->
+<section class="pattern-section" id="pattern4">
+  <div class="section-inner">
+    <div class="pattern-head">
+      <div class="icon">🧠</div>
+      <div>
+        <div class="pattern-num">Pattern 04</div>
+        <h3>相談相手にする ── 学長本人もこの使い方をしてる</h3>
+      </div>
+    </div>
+    <p class="pattern-lead">
+      「人に聞きづらいこと」「夜中に頭がぐるぐるすること」「専門家に聞くほどでもないけど判断したいこと」。<br>
+      <strong>学長自身がライブの中で何度も「これ、AIに聞いた」</strong>と公開しているのが、この使い方。
+    </p>
+
+    <div class="case-list">
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">01</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">学長が「ライブ配信のペース配分」を Claude に相談</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">経営判断の壁打ち</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>朝ライブ4年継続中で体力の限界を感じていた学長が、AI に「どのペースが正解か」を相談。<strong>「魂を燃やして4年で終わるより、ペース調整しながら20年続けた方が、全体として救える人の総量は多い」</strong> という長期視点のアドバイスを取得。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-18</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">02</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">仕組み預金の解約理由をライブ中にその場で AI に聞く（学長実演）</h4>
+            <div class="case-tags">
+              <span class="case-tag">契約・交渉文</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>「楽天の仕組み預金、原則解約不可って言われたけどどう交渉する？」とライブ中に Claude に質問 → <strong>相続・差押え・人道的事情・納税資金不足 等の交渉ロジックを提示</strong>。AI自身が「実態ベースに1番近いやつがいいよ」とコメント。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-08</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">03</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">賃貸更新の値上げ判断にAIを使った視聴者</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">日常の決断</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>「更新時に家賃 1,500円上がる、どうすべき？」を AI に相談 → <strong>「1,500円ならサインしてしまった方がいい」</strong> のアドバイス取得 → 後日学長に念のため確認、学長判断と一致。「ググるのは面倒・人に聞くのは大袈裟」な決断にハマる。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-15</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="label">🎙 試しの1個目プロンプト</div>
+      <div class="prompt">今ちょっと判断に迷ってることがあって、相談に乗ってほしいです。
+
+状況：◯◯（例：解約したいサービスがあるけど引き止められる／契約更新で値上げを言われている／転職するか迷っている）
+
+私の立場：◯◯（例：会社員／個人事業主／介護中）
+譲れない条件：◯◯（例：月の出費を増やしたくない／時間を増やしたい）
+
+結論を急がず、まず「自分が見落としてそうな観点」を3〜5個出してください。
+そのあとで、私が次に取るべき具体的なアクションを1〜3個に絞って提案してほしいです。</div>
+    </div>
+
+    <div class="try-block">
+      <div class="label">🌱 今日やる3ステップ</div>
+      <ol>
+        <li>今ちょっと頭の片隅で「どうしようかな…」って引っかかってる事を1個書き出す</li>
+        <li>上のプロンプトに状況を入れて、AI に「観点出し → 行動案」をもらう</li>
+        <li>提案された行動案のうち、5分でできる1個だけ今日中にやる</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Pattern 5: 遊ぶ&売る =================== -->
+<section class="pattern-section" id="pattern5">
+  <div class="section-inner">
+    <div class="pattern-head">
+      <div class="icon">🎵</div>
+      <div>
+        <div class="pattern-num">Pattern 05</div>
+        <h3>遊ぶ・売る ── 音楽・画像・動画は、遊んでるうちに収益化に化ける</h3>
+      </div>
+    </div>
+    <p class="pattern-lead">
+      Suno AI で曲、ChatGPT で画像、HeyGen でアバター動画。<strong>「遊んでるだけ」のはずが、気付いたら売上になってる人が続出</strong>。学長自身も「夏風ペダル」を作って YouTube Music で 2万回再生超えに。
+    </p>
+
+    <div class="case-list">
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">01</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">学長の AI 楽曲「夏風ペダル」が YouTube Music で2万回再生</h4>
+            <div class="case-tags">
+              <span class="case-tag amount">2万回 / 単曲</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>学長が <strong>「学生時代に自転車を漕いでる時のエモいシーンが思い出せる感じで」と3行</strong> 投げて生成 → 後日 Claude Code で各種配信プラットフォームに自動登録 → 結果、Apple Music・Spotify・YouTube Music 等に配信、YouTube Music だけで 2万回再生。視聴者の犬さんは類似手法で月20万円。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-01・05-05・05-11</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">02</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">ChatGPTで作ったLINEスタンプが、ついに身内以外に売れた瞬間</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">初収益</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>視聴者報告：ChatGPT で LINE スタンプを作って LINE スタンプストアに登録 → <strong>数十円だけど、初めて他人に売れた</strong>。学長コメント：「自分で作ったものが人に売れたって嬉しいでしょ。初めて自分で取った小さなお魚」。最初の成功体験の威力。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-11</p>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div class="case-num">03</div>
+          <div class="case-title-wrap">
+            <h4 class="case-title">学長が ChatGPT に自分の写真を投げて「老け顔」を生成</h4>
+            <div class="case-tags">
+              <span class="case-tag scene">遊び実演</span>
+            </div>
+          </div>
+        </div>
+        <div class="case-body">
+          <p>「ChatGPTに『老けさせて』って言ったら、すごい老けた顔が出てきた。130億年生きてるみたいな…」とライブで公開。<strong>こういう「ふざけて遊んでみる」が、AI に対する心理的距離を一気に縮める</strong>のが効く。</p>
+          <p class="case-source">📅 学長ライブ 2026-05-11</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="prompt-block">
+      <div class="label">🎙 試しの1個目プロンプト（音楽）</div>
+      <div class="prompt">Suno AI で曲を作ってみたいです。
+作りたい雰囲気：◯◯（例：学生時代に自転車漕いでた夏のエモいシーン／カフェで開店前に流したい静かな朝の曲／自分の店のテーマソング）
+
+ジャンル：◯◯（例：日本語のシティポップ／英詞のローファイ／応援ソング）
+長さ：1〜2分くらい
+
+歌詞のテーマと、Suno AI に投げるプロンプト案を3パターン出してください。
+プロンプトはそのまま貼って使える形でお願いします。</div>
+    </div>
+
+    <div class="try-block">
+      <div class="label">🌱 今日やる3ステップ</div>
+      <ol>
+        <li>「自分が好きな世界観・雰囲気」を3行で書き出す（具体的な情景でOK）</li>
+        <li>上のプロンプトを Claude Code に投げて、Suno 向けプロンプトを3案もらう</li>
+        <li>そのうち1個を Suno AI に投げて、1曲だけ生成してみる（無料枠でOK）</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 学長語録 =================== -->
+<section class="quotes-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-tag">Live Quotes</div>
+      <h2 class="section-title">迷ったら戻ってくる<span class="em">学長語録 5選</span></h2>
+      <p class="section-lead">
+        5月の学長ライブから、「Claude Code 触り始めた人が迷子になったら戻ってくる」価値のある名言を 5つピックアップ。
+      </p>
+    </div>
+
+    <div class="quotes-grid">
+      <div class="quote-card">
+        <p class="quote">東大を主席で卒業したよりもさらに賢い人が、月3,000〜15,000円で雇えるわけですよ。<span class="em">雇う以外の選択ないやんっていうね。</span></p>
+        <p class="source">— 2026-05-12 学長ライブ</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote">トークンなんて気にすんじゃねえ、<span class="em">ジャブジャブ使うんじゃねえ。</span>気にしながら使うってあんまりいけてない。</p>
+        <p class="source">— 2026-05-12 学長ライブ</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote">Python? 別に触らなくても大丈夫ですよ。クロコがやってくれるから、<span class="em">バイブコーディングでもう作れますよ。</span></p>
+        <p class="source">— 2026-05-12 学長ライブ</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote">提案資料じゃなくて、<span class="em">動くプロトタイプを見せに行く。</span>営業前に成果物の試作版を見せる、これが受注率を一気に上げる。</p>
+        <p class="source">— 2026-05-04 学長ライブ（電気工事士ゆさん事例より）</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote">皆さんの主役は皆さん自身。AIの言う通りに全部動く人生じゃなくて、<span class="em">あくまで相談役・ブレーン・実行のサポートとして使う。</span></p>
+        <p class="source">— 2026-05-18 学長ライブ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================== 今日やる3ステップ =================== -->
+<section class="todo-section">
+  <div class="section-inner">
+    <div class="section-head">
+      <div class="chapter-tag">Tonight's Action</div>
+      <h2 class="section-title">読んで終わらせない。<span class="em">今日中にこの3つ</span>だけ。</h2>
+      <p class="section-lead">
+        どのパターンに進むか決まらなくても、この 3つだけは今日中にやっておくと、明日からの目線が変わる。
+      </p>
+    </div>
+
+    <div class="todo-list">
+      <div class="todo-card">
+        <div class="step-num">01</div>
+        <div class="body">
+          <h4>「自分のめんどくさい」を1個、紙かメモに書き出す</h4>
+          <p>仕事でも家のことでも趣味でもOK。「これ毎月めんどいな」「もう一回やりたくないな」って思うやつを1個だけ。<strong>これが Claude Code との関係を始める第一歩</strong>。Claude Code は、めんどくさいネタが大好物。</p>
+        </div>
+      </div>
+      <div class="todo-card">
+        <div class="step-num">02</div>
+        <div class="body">
+          <h4>Claude Code に「これどうにかしてほしい」と素直に話す</h4>
+          <p>キレイな指示文を書こうとしないで、口で言うようにそのまま打つ。<strong>「これ毎月やっててマジ嫌なんやけど、なんとかできる？」</strong>でいい。AI 側から逆に質問してくれるから、答えていけば自然に形になる。</p>
+        </div>
+      </div>
+      <div class="todo-card">
+        <div class="step-num">03</div>
+        <div class="body">
+          <h4>できたものをスクショして、1人だけに見せる</h4>
+          <p>家族・友達・リベ仲間 誰でもOK。「これAIで作ったんやけど」って LINE で送るだけ。<strong>「自分が作ったものに反応がもらえる」</strong>体験が、次のネタを引き寄せる。学長の言う「ちっちゃなお魚」だ。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="related-links">
+      <h4>📚 もっと事例見たくなったら</h4>
+      <ul>
+        <li><span class="arrow">▸</span><a href="gakucho-live-30days-database.html">別冊⑦ 学長ライブ30daysデータベース</a> — 過去30日分の学長ライブ事例を全件横断検索できるDB</li>
+        <li><span class="arrow">▸</span><a href="gakucho-live-may4-cases.html">別冊④ AIで稼ぐ実例集（学長ライブ5/4）</a> — 電気工事士ゆさん190万円ほか6事例の深掘り</li>
+        <li><span class="arrow">▸</span><a href="gakucho-live-auto-process.html">別冊⑥ 毎日の学長ライブを自動でテキスト化＆要約しちゃう仕組み</a></li>
+        <li><span class="arrow">▸</span><a href="libecity-learning-links.html">別冊⑤ リベシティ宿題リスト・ノウハウ図書館リンク集</a></li>
+        <li><span class="arrow">▸</span><a href="index.html">本編 Claude Code 初心者向け虎の巻</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =================== Final =================== -->
+<section class="final">
+  <div class="final-inner">
+    <div class="hero-script">Let's build.</div>
+    <h2>「Claude Code 入れて、なに作る？」<br>の正解は、<br>あなたの "めんどくさい" の中にしか無い。</h2>
+    <p>
+      この別冊で紹介した5パターンは、ぜんぶ <strong>普通の人の「めんどくさい」</strong> から始まったやつや。<br>
+      電気工事士のゆさんも、おむすび屋さんも、機械音痴の主婦さんも、最初は同じスタート地点におった。<br>
+      Claude Code は、あんたの「めんどくさい」を一緒に解いてくれる相棒や。<br>
+      今夜、1個だけ話しかけてみよか。
+    </p>
+    <a href="index.html" class="final-cta">本編に戻る →</a>
+  </div>
+</section>
+
+<!-- =================== Footer =================== -->
+<footer class="footer">
+  <div class="footer-logo"><span class="mark">claude</span> Code 初心者向け虎の巻</div>
+  <p>別冊⑧ で、なに作る？ ── Claude Code入れたけど何作ればいいか思いつかない人へ</p>
+  <p>素材：両学長ライブ 2026-05-01 〜 05-21 / 学長ライブ AI活用事例集 20本+</p>
+  <p>制作：おけもん × みずやん共同編集 — 学長ライブ・ノウハウ図書館・リベ仲間の知恵を集約</p>
+  <div class="footer-bottom">VERSION 1.0 — 2026-05-21</div>
+</footer>
+
+</body>
+</html>
