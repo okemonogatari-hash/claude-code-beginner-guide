@@ -145,9 +145,36 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
       <li>
         <strong>youtube-transcript-api</strong> (Pythonライブラリ)<br>
         動画のIDを指定して、YouTubeのサーバーから自動生成された字幕テキスト（タイムスタンプ付き）を数秒で取得するために使用します。<br>
-        🔗 <a href="https://github.com/jdepoortere/youtube-transcript-api" target="_blank" rel="noopener">youtube-transcript-api (GitHub)</a>
+        🔗 <a href="https://github.com/jdepoix/youtube-transcript-api" target="_blank" rel="noopener">youtube-transcript-api (GitHub)</a>
       </li>
     </ul>
+
+    <h3>🔑 APIキーはどうやって取るの？</h3>
+    <p>YouTube Data API v3 を使うためのAPIキーは、Googleの公式開発用サイトから無料で取得できます。具体的な手順は以下の通りです。</p>
+    <div class="softnote" style="margin-top:14px; background:#fcfbf9; border-color:#e2d4c0;">
+      <ol style="padding-left:1.5em; line-height:1.8;">
+        <li>
+          <strong>Google Cloudにアクセスする</strong><br>
+          Googleアカウントにログインした状態で、<a href="https://console.cloud.google.com/" target="_blank" rel="noopener">Google Cloud コンソール</a> にアクセスします。
+        </li>
+        <li>
+          <strong>プロジェクトを作る</strong><br>
+          画面の左上（または上部中央）にあるプロジェクト選択メニューから<strong>「新しいプロジェクト」</strong>を作成します（名前は「YouTube-Live-Getter」など何でもOKです）。
+        </li>
+        <li>
+          <strong>YouTube APIを有効化する</strong><br>
+          左上のメニュー（三本線マーク）から<strong>「APIとサービス」 ＞ 「ライブラリ」</strong>に進み、検索窓で「YouTube Data API v3」を探して、<strong>「有効にする」</strong>ボタンをクリックします。
+        </li>
+        <li>
+          <strong>APIキーを発行する</strong><br>
+          有効化した後、左メニューの<strong>「認証情報」</strong>に進み、画面上部の<strong>「＋ 認証情報を作成」 ＞ 「APIキー」</strong>をクリックすると、一瞬でキー（英数字の長い文字列）が発行されます。これをコピーして自分のプログラムに設定します。
+        </li>
+        <li>
+          <strong>【重要】キーを制限する（鍵をかける）</strong><br>
+          作成したAPIキーの設定画面を開き、「キーの制限」項目で「APIの制限」にチェックを入れ、リストから「YouTube Data API v3」を選択して保存します。こうすることで、万が一キーが漏洩してもYouTube以外の機能には使えなくなるため安全性が格段に上がります！
+        </li>
+      </ol>
+    </div>
 
     <h3>💰 お金はかかる？有料・無料のハナシ</h3>
     <p>気になるコストについてまとめました。結論から言うと、<strong>データ（字幕）の取得部分については完全無料</strong>で運用可能です！</p>
