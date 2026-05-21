@@ -150,7 +150,7 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
     </ul>
 
     <h3>💰 お金はかかる？有料・無料のハナシ</h3>
-    <p>気になるコストについてまとめました。結論から言うと、<strong>データ取得部分については完全無料</strong>で運用可能です！</p>
+    <p>気になるコストについてまとめました。結論から言うと、<strong>データ（字幕）の取得部分については完全無料</strong>で運用可能です！</p>
     
     <div class="softnote" style="margin-top:14px; background:#fafbfd; border-color:#d0e2ec;">
       <ul>
@@ -163,15 +163,18 @@ footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
           ライブラリ自体も無料で、YouTubeの字幕データを取得する際にも追加コストはかかりません。
         </li>
         <li>
-          <strong>ClaudeのAPI使用料：従量課金（有料）</strong><br>
-          取得した7万文字以上のテキストをClaudeに読み込ませて要約してもらう際、Claude API（またはClaude Code）のトークン使用量に応じた料金が発生します。目安として、<strong>ライブ1回あたり数円〜数十円程度</strong>です（月額でも数百円レベル）。
+          <strong>Claudeの利用料金：プランや使い方で変わります</strong><br>
+          実はおけもんは現在、APIキーを使った従量課金ではなく、<strong>Claudeのサブスクリプション（Maxプランなど）の範囲内</strong>で要約をお願いしているため、追加のお金はかかっていません！✨<br>
+          ただし、一般のProプランなどで長文（約7万〜8万文字）の要約をお願いする場合、<strong>1回で多くの利用枠（トークン）を消費してしまう可能性</strong>があります。「メッセージの上限にすぐ達して、しばらく使えなくなっちゃった…」ということが起きるかもしれないので、チャットの残数には注意してくださいね。
         </li>
       </ul>
     </div>
     
     <div class="callout" style="background:#fff5f5; border-left:4px solid #e53e3e; color:#742a2a;">
-      <strong>🔑 セキュリティ上の超重要注意点！</strong><br>
-      Google Cloudで発行した <strong>APIキー</strong> は、絶対にGitHubなどの公開リポジトリにアップロードしないでください。全世界に公開されて不正利用されると、思わぬ高額請求などの被害を被る可能性があります。APIキーはローカルの <code>.env</code> ファイルなどに隠し、Gitの管理から外す（<code>.gitignore</code> に追加する）設定を徹底してください。
+      <strong>🔑 カギ（APIキー）の取り扱いには超注意！</strong><br>
+      Googleから発行される「APIキー」は、プログラムを動かすための「暗証番号」のようなものです。<br>
+      <strong>インターネット上に誰でも見られる状態で、プログラムや設定ファイルを絶対にアップロード（公開）しないでください！</strong><br>
+      もしネット上にさらしてしまうと、悪い人にその暗証番号を盗まれて勝手に使われてしまい、後からGoogleから高額な請求が来るような大きなトラブルに繋がる危険があります。暗証番号（APIキー）は自分のパソコンの中だけに厳重に隠しておきましょう！
     </div>
   </section>
 
