@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>別冊⑨ オフ会アーカイブ | Claude Code 初心者向け虎の巻</title>
+<meta name="description" content="2026年4月〜現在まで、おけもんが主催・共催してきたClaude Code関連オフ会・シェア会・勉強会のアーカイブ。33本開催・延べ200名以上が体験。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--main:#b58a4a;--main-deep:#8a6a30;--accent:#e8b57a;--accent-deep:#c89758;--ink:#2f2a24;--muted:#746d64;--line:#ead9bf;--ribbon:#d68f4a;--yaku:#7BAEC4;--gen:#A8C4A0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",sans-serif;background:linear-gradient(180deg,#fdfaf2 0%,#fbfaf7 44%,#fff 100%);color:var(--ink);line-height:1.85}
+a{color:var(--main-deep);font-weight:700;text-underline-offset:4px;text-decoration:none}
+a:hover{color:var(--accent-deep);text-decoration:underline}
+.wrap{width:min(1120px,94vw);margin:0 auto}
+header{padding:64px 0 38px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+header::before{content:"";position:absolute;top:-40px;right:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(232,181,122,.2),transparent 70%);border-radius:50%}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--main-deep);font-weight:900;margin-bottom:14px}
+h1{font-family:"Noto Serif JP",serif;font-size:clamp(28px,4.8vw,46px);line-height:1.3;color:var(--ink);position:relative;z-index:2}
+.title-em{background:linear-gradient(180deg,transparent 60%,#f8e5c4 60%);padding:0 4px}
+.lead{margin-top:22px;font-size:16px;color:var(--muted);max-width:800px;position:relative;z-index:2}
+.metrics{display:flex;gap:32px;flex-wrap:wrap;margin-top:24px}
+.metric{display:flex;flex-direction:column;gap:4px}
+.metric .v{font-family:"Noto Serif JP",serif;font-size:34px;font-weight:900;color:var(--main-deep);line-height:1}
+.metric .l{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.back{display:inline-flex;align-items:center;margin-top:30px;padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;transition:.3s}
+.back:hover{background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none}
+main{padding:42px 0 60px}
+section{padding:42px 0;border-bottom:1px solid var(--line)}
+h2{font-family:"Noto Serif JP",serif;font-size:26px;line-height:1.45;margin-bottom:8px;color:var(--ink);display:flex;align-items:center;gap:10px}
+.h2-sub{font-size:14px;color:var(--muted);margin-bottom:24px;font-weight:400}
+.callout{background:#fff8ed;border-left:4px solid var(--accent);padding:18px 22px;border-radius:8px;color:#6b5742;margin:22px 0;font-size:14.5px}
+.callout strong{color:var(--main-deep)}
+.highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:24px}
+.hl-card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 8px 22px rgba(181,138,74,.08);transition:.3s;display:flex;flex-direction:column}
+.hl-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(181,138,74,.16)}
+.hl-body{padding:18px 20px;flex:1;display:flex;flex-direction:column;gap:10px}
+.hl-date{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.04em}
+.hl-card h3{font-family:"Noto Serif JP",serif;font-size:15.5px;line-height:1.55;color:var(--ink)}
+.hl-card p{font-size:13.5px;color:var(--muted);line-height:1.7}
+.hl-foot{margin-top:auto;font-size:12px;color:var(--muted);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.hl-foot .n{background:#fff8ed;color:var(--main-deep);padding:3px 9px;border-radius:999px;font-weight:700}
+.hl-foot .place{background:#e6f0f5;color:#4F8CA8;padding:3px 9px;border-radius:999px;font-weight:700}
+.table-wrap{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 22px rgba(181,138,74,.08)}
+table{width:100%;border-collapse:collapse;min-width:820px;font-size:14px}
+thead{background:linear-gradient(135deg,var(--main),var(--accent-deep))}
+thead th{color:#fff;padding:14px 12px;font-weight:700;text-align:left;font-size:13px;letter-spacing:.04em}
+tbody tr{border-top:1px solid var(--line);transition:.2s}
+tbody tr:hover{background:#fff8ed}
+tbody td{padding:14px 12px;vertical-align:top}
+.date{white-space:nowrap;min-width:80px;text-align:center}
+.d-md{font-family:"Noto Serif JP",serif;font-size:22px;font-weight:900;color:var(--main-deep);line-height:1;letter-spacing:-.02em}
+.d-m{font-size:14px;color:var(--muted)}
+.d-wd{font-size:11px;color:var(--muted);margin-top:4px}
+.title-cell{min-width:340px}
+.tname{color:var(--ink);font-weight:700;font-size:14.5px;line-height:1.55;display:block;margin-bottom:6px}
+.tsum{font-size:12.5px;color:var(--muted);line-height:1.65}
+.meta-line{margin-top:8px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tag{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:700;letter-spacing:.02em}
+.tag-saved{background:#ebf2e7;color:#587b50;border:1px solid #cbdcc1}
+.tag-summary{background:#fff0e0;color:#a67238;border:1px solid #f0d8a8}
+.tag-place{background:#e6f0f5;color:#4F8CA8;border:1px solid #c5dde7}
+.tag-n{background:#fff8ed;color:var(--main-deep);border:1px solid var(--accent)}
+.cta-block{background:linear-gradient(135deg,#fff8ed,#fdf0dc);border-radius:18px;padding:32px 36px;text-align:center;margin-top:28px}
+.cta-block h3{font-size:20px;margin-bottom:10px;font-family:"Noto Serif JP",serif}
+.cta-block p{color:#4a4540;font-size:14.5px;margin-bottom:18px}
+.cta-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+.cta-btn{display:inline-block;padding:12px 26px;background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;border-radius:999px;font-weight:700;font-size:14px;transition:.3s;text-decoration:none}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(138,106,48,.3);color:#fff;text-decoration:none}
+.cta-btn.alt{background:#fff;color:var(--main-deep);border:1.5px solid var(--main)}
+.cta-btn.alt:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.privacy-box{background:#f5f0e6;border-radius:14px;padding:24px 28px;margin:22px 0}
+.privacy-box h3{font-size:16px;margin-bottom:10px;color:var(--main-deep)}
+.privacy-box ul{margin:8px 0 0 20px;font-size:13.5px;color:var(--muted);line-height:1.9}
+footer{padding:34px 0 56px;color:var(--muted);font-size:13px;text-align:center}
+@media(max-width:680px){header{padding-top:42px}.metrics{gap:18px}.metric .v{font-size:24px}.table-wrap table{min-width:0;font-size:13px}.cta-block{padding:24px 22px}.cta-btns{flex-direction:column}.cta-btn{width:100%;text-align:center}}
+/* Controls */
+.db-controls{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 18px;box-shadow:0 8px 22px rgba(181,138,74,.06);display:grid;grid-template-columns:auto auto 1fr auto;gap:18px;align-items:center}
+.ctrl-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ctrl-label{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.ctrl-btns{display:flex;gap:6px;flex-wrap:wrap}
+.ctrl-btn{font-size:12.5px;padding:7px 14px;background:#fbfaf7;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-weight:600;cursor:pointer;transition:.2s;font-family:inherit}
+.ctrl-btn:hover{background:#fff8ed;border-color:var(--accent)}
+.ctrl-btn.active{background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;border-color:var(--main)}
+.ctrl-search{min-width:200px}
+.ctrl-input{font-size:13.5px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:#fbfaf7;width:100%;font-family:inherit;color:var(--ink);transition:.2s}
+.ctrl-input:focus{outline:none;border-color:var(--main);background:#fff;box-shadow:0 0 0 3px rgba(181,138,74,.12)}
+.ctrl-status{text-align:right;white-space:nowrap}
+.db-count{font-family:"Noto Serif JP",serif;font-size:14px;color:var(--main-deep);font-weight:700;background:#fff8ed;padding:6px 14px;border-radius:999px;border:1px solid var(--accent)}
+.db-row.hidden{display:none}
+@media(max-width:900px){.db-controls{grid-template-columns:1fr;gap:14px}.ctrl-status{text-align:left}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Bonus Chapter 09 / Offkai Archive</div>
+    <h1>オフ会・シェア会 <span class="title-em">アーカイブ</span><br>こんな仲間と一緒に育ってきました🌳</h1>
+    <p class="lead">2026年4月〜現在まで、おけもんが主催・共催してきたClaude Code関連オフ会・シェア会・勉強会の<strong>全記録</strong>。これは「読む資料」じゃなくて、「<strong>こういう仲間と一緒に試してきた現場</strong>」の証。各回で出た質問が虎の巻のFAQに昇格していく、生きた素材集です。</p>
+    <div class="metrics">
+      <div class="metric"><div class="v">33</div><div class="l">開催数</div></div>
+      <div class="metric"><div class="v">201+</div><div class="l">延べ参加者(主催含)</div></div>
+      <div class="metric"><div class="v">23</div><div class="l">4月開催</div></div>
+      <div class="metric"><div class="v">10</div><div class="l">5月開催</div></div>
+      <div class="metric"><div class="v">7</div><div class="l">トランスクリプト原液保存</div></div>
+    </div>
+    <a href="index.html" class="back">← 虎の巻 本編に戻る</a>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+<section>
+  <h2>📚 このアーカイブを作る理由</h2>
+  <p class="h2-sub">ただ「やった記録」ではなく「<strong>次の人がここから学ぶ素材</strong>」として残します</p>
+  <div class="callout">
+    <strong>🎤 おけもんから</strong>：「どのオフ会で誰が来て、どんなことして、どんな質問してたか — それを残していきたい。共有版は個人情報は伏せるけど、現場の声は次の仲間の役に立つから」<br><br>
+    実際、<strong>5/18クロコオフ会で出た「許可ダイアログ難民」現象</strong>は、虎の巻本編の<strong>権限モード章格上げ</strong>のトリガーになりました。アーカイブは虎の巻FAQを育てる<strong>生きた酵母</strong>です。
+  </div>
+  <div class="privacy-box">
+    <h3>🔒 個人情報の扱い</h3>
+    <ul>
+      <li>このページは<strong>共有用</strong>（伏字版）：参加者は人数表示のみ、固有名詞はニックネーム化</li>
+      <li>原液（トランスクリプト＋実名＋背景）はおけもん内部Vaultにのみ保存</li>
+      <li>個別オフ会の質問・困りごとは、参加者個人を特定できない形に加工してから掲載</li>
+      <li>参加者本人が「載せていいよ」と明言した固有名詞のみ表示（KIDさん・たすきさん等）</li>
+    </ul>
+  </div>
+</section>
+<section>
+  <h2>✨ 詳細レポート公開中（7本）</h2>
+  <p class="h2-sub">トランスクリプト原液まで保存済みのオフ会。質問・気づき・印象的シーンを今後個別ページで公開していきます</p>
+  <div class="highlights">
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-04-10（金）</div>
+        <h3>Claude Code入門オフ会（朝カフェ会形式）</h3>
+        <p>朝カフェ会形式で、初心者〜中級者の参加者がClaude Codeの基本操作を実際に触りながら学んだ。「コードが書けないと無理」という先入観が払拭された。20ドルのクレジットボーナス配布（期限4/17）。</p>
+        <div class="hl-foot">
+          <span class="n">6名</span>
+          <span class="place">オンライン/未記録</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-04-18（土）</div>
+        <h3>Claude Code 神戸 初心者オフ会</h3>
+        <p>超初心者向けオフ会。Macでの環境セットアップからフォルダ整理・HP作成・ブラウザ自動操作まで一通り体験。学長推しで参加した人が多数。「先が見えた」「ウェブデザイナーになれる気がした」感想。</p>
+        <div class="hl-foot">
+          <span class="n">7名</span>
+          <span class="place">神戸</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-04-29（水）</div>
+        <h3>Claude Code 初心者導入オフ会（クロコちゃん）</h3>
+        <p>インストールから自動化デモ、ファイル操作、ホームページ作成まで体験。クロコちゃん命名の原典。チャットGPTとの違いは「成果物をパソコン内のファイルとして残せる点」。</p>
+        <div class="hl-foot">
+          <span class="n">4名</span>
+          <span class="place">オンライン/未記録</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-05-15（金）</div>
+        <h3>AIシェア会（KID・たすき・早苗・りか・稔）</h3>
+        <p>全員がClaude CodeまたはCodexを使い始め、実務活用が急速に進行。KIDはGW3日間で空手道場HP刷新＋北海道森林組合からHP依頼。Codexのブラウザ・PC操作自動化進化、LINEメッセージ送信デモ。たすきは『レベル上げより実…</p>
+        <div class="hl-foot">
+          <span class="n">8名</span>
+          <span class="place">オンライン/未記録</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-05-18（月）</div>
+        <h3>Claude Code初心者オフ会 with おけもん（クロコオフ会）</h3>
+        <p>8名参加。多くは既にダウンロード済みで以前より層が進んでいる傾向。Chrome拡張SNSフォロー自動操作、魔法の呪文設定、旅行プラン・HP作成デモ。Claude Codeは『育成ゲーム』で情報蓄積で精度が上がる考え方を共有。**改修ヒント原…</p>
+        <div class="hl-foot">
+          <span class="n">8名</span>
+          <span class="place">オンライン/未記録</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-05-20（水）</div>
+        <h3>Claude Code 初心者オフ会 with ごっちゃん・マイ・マサユキ・のべっきー</h3>
+        <p>デスクトップアプリ導入から旅行しおりHP作成・共有まで実際に手を動かしながら進行。全員がClaude Codeダウンロード完了、旅行しおりHPをCloudflareで共有状態まで到達。副業応用としてクラウドワークス自動応募や文字起こし自動化…</p>
+        <div class="hl-foot">
+          <span class="n">6名</span>
+          <span class="place">梅田</span>
+        </div>
+      </div>
+    </div>
+    <div class="hl-card">
+      <div class="hl-body">
+        <div class="hl-date">2026-05-21（木）</div>
+        <h3>Claude in Chrome シェア会（さらり・りぃた・KID）</h3>
+        <p>Claude in Chromeのデモを中心にチャット型AIとClaude Codeの違いを実演解説。さらりさんは有料課金中もデスクトップアプリ未導入と判明→今回でダウンロード完了。KIDさんは空手HP制作で活用済、Chrome操作はチャッ…</p>
+        <div class="hl-foot">
+          <span class="n">8名</span>
+          <span class="place">オンライン/未記録</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <h2>📋 全33本一覧</h2>
+  <p class="h2-sub">時系列・場所・取得状況でフィルタ可能。クリックで詳細展開（順次追加）</p>
+  <div class="db-controls">
+    <div class="ctrl-group">
+      <span class="ctrl-label">期間</span>
+      <div class="ctrl-btns">
+        <button class="ctrl-btn active" data-filter="period" data-value="all">すべて</button>
+        <button class="ctrl-btn" data-filter="period" data-value="2026-04">2026-04</button>
+        <button class="ctrl-btn" data-filter="period" data-value="2026-05">2026-05</button>
+      </div>
+    </div>
+    <div class="ctrl-group">
+      <span class="ctrl-label">取得</span>
+      <div class="ctrl-btns">
+        <button class="ctrl-btn active" data-filter="saved" data-value="all">すべて</button>
+        <button class="ctrl-btn" data-filter="saved" data-value="saved">✅ 原液保存済</button>
+        <button class="ctrl-btn" data-filter="saved" data-value="summary">📝 要約のみ</button>
+      </div>
+    </div>
+    <div class="ctrl-search">
+      <input type="text" class="ctrl-input" id="ctrlSearch" placeholder="🔍 タイトル・要約内をキーワード検索">
+    </div>
+    <div class="ctrl-status"><span class="db-count" id="dbCount">33 件</span></div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>日付</th><th>オフ会名・概要</th><th>場所</th><th>人数</th><th>状態</th></tr>
+      </thead>
+      <tbody>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="Claude Code活用 初心者オフ会 ブラウザ操作・自動化・コンテンツ作成をライブデモで紹介。参加者個別の課題（カレンダー移行、YouTube BGM、業務自動化、ハンドメイド販売）に合わせて壁打ち。">
+          <td class="date"><div class="d-md">5/21</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code活用 初心者オフ会</span><div class="tsum">ブラウザ操作・自動化・コンテンツ作成をライブデモで紹介。参加者個別の課題（カレンダー移行、YouTube BGM、業務自動化、ハンドメイド販売）に合わせて壁打ち。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">2名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="Claude Code 初心者オフ会 with リベシティ リベシティ会員5名参加。ブラウザ自動操作・リサーチ・HP生成などを実際に体験。フォロー自動化・DM送信・オフィス予約・メルカリ出品・旅行計画ページ生成まで実演。">
+          <td class="date"><div class="d-md">5/21</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初心者オフ会 with リベシティ</span><div class="tsum">リベシティ会員5名参加。ブラウザ自動操作・リサーチ・HP生成などを実際に体験。フォロー自動化・DM送信・オフィス予約・メルカリ出品・旅行計画ページ生成まで実演。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="saved" data-search="Claude in Chrome シェア会（さらり・りぃた・KID） Claude in Chromeのデモを中心にチャット型AIとClaude Codeの違いを実演解説。さらりさんは有料課金中もデスクトップアプリ未導入と判明→今回でダウンロード完了。KIDさんは空手HP制作で活用済、Chrome操作はチャット側で試みたためできていなかったと気づき。">
+          <td class="date"><div class="d-md">5/21</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude in Chrome シェア会（さらり・りぃた・KID）</span><div class="tsum">Claude in Chromeのデモを中心にチャット型AIとClaude Codeの違いを実演解説。さらりさんは有料課金中もデスクトップアプリ未導入と判明→今回でダウンロード完了。KIDさんは空手HP制作で活用済、Chrome操作はチャット側で試みたためできていなかったと気づき。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="saved" data-search="Claude Code 初心者オフ会 with ごっちゃん・マイ・マサユキ・のべっきー デスクトップアプリ導入から旅行しおりHP作成・共有まで実際に手を動かしながら進行。全員がClaude Codeダウンロード完了、旅行しおりHPをCloudflareで共有状態まで到達。副業応用としてクラウドワークス自動応募や文字起こし自動化も紹介。">
+          <td class="date"><div class="d-md">5/20</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初心者オフ会 with ごっちゃん・マイ・マサユキ・のべっきー</span><div class="tsum">デスクトップアプリ導入から旅行しおりHP作成・共有まで実際に手を動かしながら進行。全員がClaude Codeダウンロード完了、旅行しおりHPをCloudflareで共有状態まで到達。副業応用としてクラウドワークス自動応募や文字起こし自動化も紹介。</div></td>
+          <td><span class="tag tag-place">梅田</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="Claude Code ハンズオン オフ会 ハンズオン形式で約2時間体験。インストール・初期設定・魔法の呪文投入・旅行計画LP作成・フォロー自動化まで実際に手を動かして体験。">
+          <td class="date"><div class="d-md">5/20</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code ハンズオン オフ会</span><div class="tsum">ハンズオン形式で約2時間体験。インストール・初期設定・魔法の呪文投入・旅行計画LP作成・フォロー自動化まで実際に手を動かして体験。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="saved" data-search="Claude Code初心者オフ会 with おけもん（クロコオフ会） 8名参加。多くは既にダウンロード済みで以前より層が進んでいる傾向。Chrome拡張SNSフォロー自動操作、魔法の呪文設定、旅行プラン・HP作成デモ。Claude Codeは『育成ゲーム』で情報蓄積で精度が上がる考え方を共有。**改修ヒント原典：許可ダイアログ難民が5回以上発生→権限モード章格上げの根拠。**">
+          <td class="date"><div class="d-md">5/18</div><div class="d-wd">月曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code初心者オフ会 with おけもん（クロコオフ会）</span><div class="tsum">8名参加。多くは既にダウンロード済みで以前より層が進んでいる傾向。Chrome拡張SNSフォロー自動操作、魔法の呪文設定、旅行プラン・HP作成デモ。Claude Codeは『育成ゲーム』で情報蓄積で精度が上がる考え方を共有。**改修ヒント原典：許可ダイアログ難民が5回以上発生→権限モード章格上げの根拠。**</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="saved" data-search="AIシェア会（KID・たすき・早苗・りか・稔） 全員がClaude CodeまたはCodexを使い始め、実務活用が急速に進行。KIDはGW3日間で空手道場HP刷新＋北海道森林組合からHP依頼。Codexのブラウザ・PC操作自動化進化、LINEメッセージ送信デモ。たすきは『レベル上げより実践・提供先を決めることが先』とアドバイス。">
+          <td class="date"><div class="d-md">5/15</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">AIシェア会（KID・たすき・早苗・りか・稔）</span><div class="tsum">全員がClaude CodeまたはCodexを使い始め、実務活用が急速に進行。KIDはGW3日間で空手道場HP刷新＋北海道森林組合からHP依頼。Codexのブラウザ・PC操作自動化進化、LINEメッセージ送信デモ。たすきは『レベル上げより実践・提供先を決めることが先』とアドバイス。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="名古屋AIオフ会 — 副業・ツール活用 関西からStrengthsFinderコーチ・AI活用のおけもんとクラゲさんが参加、名古屋メンバーと合流。Claude Code・Gemini・AntiGravityの使い分けや副業展開が話題。後半はワードウルフで盛り上がり。">
+          <td class="date"><div class="d-md">5/7</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">名古屋AIオフ会 — 副業・ツール活用</span><div class="tsum">関西からStrengthsFinderコーチ・AI活用のおけもんとクラゲさんが参加、名古屋メンバーと合流。Claude Code・Gemini・AntiGravityの使い分けや副業展開が話題。後半はワードウルフで盛り上がり。</div></td>
+          <td><span class="tag tag-place">名古屋</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="Claude Code 初心者オフ会 梅田 梅田オフィス開催。テキスト作成・ファイル整理・容量確保・HP作成・Chrome自動化まで一通り体験。AIエージェントへの役割付与（プロジェクトマネージャー的な使い方）への関心が特に高い。">
+          <td class="date"><div class="d-md">5/1</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初心者オフ会 梅田</span><div class="tsum">梅田オフィス開催。テキスト作成・ファイル整理・容量確保・HP作成・Chrome自動化まで一通り体験。AIエージェントへの役割付与（プロジェクトマネージャー的な使い方）への関心が特に高い。</div></td>
+          <td><span class="tag tag-place">梅田</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-05" data-saved="summary" data-search="Claude Code オフ会 大阪 ゼロから触れることを目標に、セットアップからアプリ作成・HP作成・ブラウザ自動操作まで体験。Todoアプリ・日記テキストファイル・旅行HPを実際に作成。「面白いと思ったことから触るのが一番」。">
+          <td class="date"><div class="d-md">5/1</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code オフ会 大阪</span><div class="tsum">ゼロから触れることを目標に、セットアップからアプリ作成・HP作成・ブラウザ自動操作まで体験。Todoアプリ・日記テキストファイル・旅行HPを実際に作成。「面白いと思ったことから触るのが一番」。</div></td>
+          <td><span class="tag tag-place">大阪</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code ハンズオン オフ会（梅田） 梅田開催。チャット型AIとエージェント型AIの違いを解説、ファイル作成・アプリ作成・フォルダ整理・HP作成・ブラウザ自動操作を体験。ゆかさん（保健師）とAI導入支援の仕事の話が具体的に進んだ。">
+          <td class="date"><div class="d-md">4/30</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code ハンズオン オフ会（梅田）</span><div class="tsum">梅田開催。チャット型AIとエージェント型AIの違いを解説、ファイル作成・アプリ作成・フォルダ整理・HP作成・ブラウザ自動操作を体験。ゆかさん（保健師）とAI導入支援の仕事の話が具体的に進んだ。</div></td>
+          <td><span class="tag tag-place">梅田</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="saved" data-search="Claude Code 初心者導入オフ会（クロコちゃん） インストールから自動化デモ、ファイル操作、ホームページ作成まで体験。クロコちゃん命名の原典。チャットGPTとの違いは「成果物をパソコン内のファイルとして残せる点」。">
+          <td class="date"><div class="d-md">4/29</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初心者導入オフ会（クロコちゃん）</span><div class="tsum">インストールから自動化デモ、ファイル操作、ホームページ作成まで体験。クロコちゃん命名の原典。チャットGPTとの違いは「成果物をパソコン内のファイルとして残せる点」。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code活用事例共有・実践ノウハウ交換 Filmoraプロジェクトファイル生成、YouTubeリサーチ、BGMチャンネル自動化など自動化事例を共有。スキル化・メモリ・チャットセッション管理・APIキー・Claude in Chromeを解説。">
+          <td class="date"><div class="d-md">4/24</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code活用事例共有・実践ノウハウ交換</span><div class="tsum">Filmoraプロジェクトファイル生成、YouTubeリサーチ、BGMチャンネル自動化など自動化事例を共有。スキル化・メモリ・チャットセッション管理・APIキー・Claude in Chromeを解説。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code 初期導入サポート会 全員がデスクトップアプリ版セットアップ完了。SNSフォロー・オフィス予約・ファイル整理をリアルタイムデモ。トークンは5時間ごとリセット＋週間制限を解説。">
+          <td class="date"><div class="d-md">4/23</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初期導入サポート会</span><div class="tsum">全員がデスクトップアプリ版セットアップ完了。SNSフォロー・オフィス予約・ファイル整理をリアルタイムデモ。トークンは5時間ごとリセット＋週間制限を解説。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Color Therapy & StrengthsFinder Offkai カラーセラピー体験とストレングスファインダー解説の少人数オフ会。「与えれば余る」が行動指針として共有。">
+          <td class="date"><div class="d-md">4/23</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Color Therapy & StrengthsFinder Offkai</span><div class="tsum">カラーセラピー体験とストレングスファインダー解説の少人数オフ会。「与えれば余る」が行動指針として共有。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="saved" data-search="Claude Code 神戸 初心者オフ会 超初心者向けオフ会。Macでの環境セットアップからフォルダ整理・HP作成・ブラウザ自動操作まで一通り体験。学長推しで参加した人が多数。「先が見えた」「ウェブデザイナーになれる気がした」感想。">
+          <td class="date"><div class="d-md">4/18</div><div class="d-wd">土曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 神戸 初心者オフ会</span><div class="tsum">超初心者向けオフ会。Macでの環境セットアップからフォルダ整理・HP作成・ブラウザ自動操作まで一通り体験。学長推しで参加した人が多数。「先が見えた」「ウェブデザイナーになれる気がした」感想。</div></td>
+          <td><span class="tag tag-place">神戸</span></td>
+          <td><span class="tag tag-n">7名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="読書オフ会 — 本紹介＆アプリ制作 本の紹介・語り合い中心。Participant 1が会中にClaude Codeで本棚アプリをリアルタイム制作、楽天ブックスAPI活用も試行。">
+          <td class="date"><div class="d-md">4/17</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">読書オフ会 — 本紹介＆アプリ制作</span><div class="tsum">本の紹介・語り合い中心。Participant 1が会中にClaude Codeで本棚アプリをリアルタイム制作、楽天ブックスAPI活用も試行。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code 入門・生徒管理システム検討 ピアノ・エレクトーン教室（生徒54名）運営の参加者が、スケジュール・生徒情報管理の課題を解決するため参加。Claude Codeで生徒管理システム叩き台を作成、Dispatchでスマホ遠隔操作も設定。">
+          <td class="date"><div class="d-md">4/17</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 入門・生徒管理システム検討</span><div class="tsum">ピアノ・エレクトーン教室（生徒54名）運営の参加者が、スケジュール・生徒情報管理の課題を解決するため参加。Claude Codeで生徒管理システム叩き台を作成、Dispatchでスマホ遠隔操作も設定。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code活用・AI実務導入 勉強会 Claude Codeを使ったHP制作・仮想チーム運用・案件応募自動化など実務組み込み事例が中心。ポートフォリオサイト制作デモも実施。Cursorより自由度がある評価。">
+          <td class="date"><div class="d-md">4/15</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code活用・AI実務導入 勉強会</span><div class="tsum">Claude Codeを使ったHP制作・仮想チーム運用・案件応募自動化など実務組み込み事例が中心。ポートフォリオサイト制作デモも実施。Cursorより自由度がある評価。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="KIDさんとミーティング（Claude Codeデモ） KIDさん・むらさきにClaude Codeをデモ形式で紹介。空手教室HP刷新・生徒管理ダッシュボード・旅のしおり・健康管理アプリなど複数ユースケース実演。KIDさんは課金＋空手HP制作モニター依頼で合意。">
+          <td class="date"><div class="d-md">4/15</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">KIDさんとミーティング（Claude Codeデモ）</span><div class="tsum">KIDさん・むらさきにClaude Codeをデモ形式で紹介。空手教室HP刷新・生徒管理ダッシュボード・旅のしおり・健康管理アプリなど複数ユースケース実演。KIDさんは課金＋空手HP制作モニター依頼で合意。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="StrengthsFinder Offkai with Himawari & Friends ストレングスファインダーをテーマにしたオフ会。資質は「良い・悪い」ではなく思考・行動・感情の特性であり、自分の取扱説明書として活用するという認識で一致。終盤にClaude Codeの話題も。">
+          <td class="date"><div class="d-md">4/13</div><div class="d-wd">月曜</div></td>
+          <td class="title-cell"><span class="tname">StrengthsFinder Offkai with Himawari & Friends</span><div class="tsum">ストレングスファインダーをテーマにしたオフ会。資質は「良い・悪い」ではなく思考・行動・感情の特性であり、自分の取扱説明書として活用するという認識で一致。終盤にClaude Codeの話題も。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="saved" data-search="Claude Code入門オフ会（朝カフェ会形式） 朝カフェ会形式で、初心者〜中級者の参加者がClaude Codeの基本操作を実際に触りながら学んだ。「コードが書けないと無理」という先入観が払拭された。20ドルのクレジットボーナス配布（期限4/17）。">
+          <td class="date"><div class="d-md">4/10</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code入門オフ会（朝カフェ会形式）</span><div class="tsum">朝カフェ会形式で、初心者〜中級者の参加者がClaude Codeの基本操作を実際に触りながら学んだ。「コードが書けないと無理」という先入観が払拭された。20ドルのクレジットボーナス配布（期限4/17）。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-saved">✅ 原液</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code Power Users Meetup マニア向け活用オフ会。業務自動化・CSV連携・ブラウザ操作・フォルダ管理などの実践事例を共有。CLI版がツール連携・データ処理で優れる認識で一致。「一人会社モデル」（部署・役割分担でフォルダを構成）が共有された。">
+          <td class="date"><div class="d-md">4/10</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code Power Users Meetup</span><div class="tsum">マニア向け活用オフ会。業務自動化・CSV連携・ブラウザ操作・フォルダ管理などの実践事例を共有。CLI版がツール連携・データ処理で優れる認識で一致。「一人会社モデル」（部署・役割分担でフォルダを構成）が共有された。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code / Cowork 初心者オフ会 全員Macユーザー。Wi-Fiが重くClaude Codeインストールが完了しなかった参加者もいたが、Coworkでのフォルダ操作・ファイル作成・旅行プランのホームページ作成まで体験。Aqua Voice音声入力アプリ推奨。">
+          <td class="date"><div class="d-md">4/10</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code / Cowork 初心者オフ会</span><div class="tsum">全員Macユーザー。Wi-Fiが重くClaude Codeインストールが完了しなかった参加者もいたが、Coworkでのフォルダ操作・ファイル作成・旅行プランのホームページ作成まで体験。Aqua Voice音声入力アプリ推奨。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">7名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code AIエージェント入門オフ会 セットアップからファイル操作・ウェブページ作成・ブラウザ自動操作まで体験。エージェント型AIを「家に住み込みで働いてくれる妖精」と表現。Wi-Fiやサーバー重さでエラー多発も「慌てなくて大丈夫」と強調。">
+          <td class="date"><div class="d-md">4/9</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code AIエージェント入門オフ会</span><div class="tsum">セットアップからファイル操作・ウェブページ作成・ブラウザ自動操作まで体験。エージェント型AIを「家に住み込みで働いてくれる妖精」と表現。Wi-Fiやサーバー重さでエラー多発も「慌てなくて大丈夫」と強調。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">8名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code ハンズオンオフ会 参加者全員がインストール済みだったため例回より進んだ内容（HP作成・Chrome拡張・スキル登録）まで実施。おけもんが主催、ITエンジニアのサン君がサポート参加。">
+          <td class="date"><div class="d-md">4/8</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code ハンズオンオフ会</span><div class="tsum">参加者全員がインストール済みだったため例回より進んだ内容（HP作成・Chrome拡張・スキル登録）まで実施。おけもんが主催、ITエンジニアのサン君がサポート参加。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">9名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude活用 初心者シェア会 with ちーちゃん インスタフリーランスのちーちゃんと共同開催。チャット・コアーク・Claude Codeの違い、スキルの作り方、インスタインサイト自動化の限界など、初心者がつまずきやすいポイントを整理。">
+          <td class="date"><div class="d-md">4/8</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude活用 初心者シェア会 with ちーちゃん</span><div class="tsum">インスタフリーランスのちーちゃんと共同開催。チャット・コアーク・Claude Codeの違い、スキルの作り方、インスタインサイト自動化の限界など、初心者がつまずきやすいポイントを整理。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code / Cowork 入門ハンズオン オフ会 ファイル作成・フォルダ整理・旅行計画HTMLページ作成・Chrome拡張・使用量の仕組みを一通りハンズオンで体験。会場のネットが重く実演が止まったが全員が基本操作を体験。">
+          <td class="date"><div class="d-md">4/7</div><div class="d-wd">火曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code / Cowork 入門ハンズオン オフ会</span><div class="tsum">ファイル作成・フォルダ整理・旅行計画HTMLページ作成・Chrome拡張・使用量の仕組みを一通りハンズオンで体験。会場のネットが重く実演が止まったが全員が基本操作を体験。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code 入門ハンズオン勉強会 全員がフォルダ設定から日記アプリ自作まで一通り体験。「育成ゲーム感覚で少しずつ情報を貯めていく」使い方を推奨。">
+          <td class="date"><div class="d-md">4/5</div><div class="d-wd">日曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 入門ハンズオン勉強会</span><div class="tsum">全員がフォルダ設定から日記アプリ自作まで一通り体験。「育成ゲーム感覚で少しずつ情報を貯めていく」使い方を推奨。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">10名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code & Co-arc ハンズオン勉強会 ファイル操作・サイト生成・ブラウザ自動操作・外部ツール連携まで一通り体験。ブラウザ版ではなくアプリ版のインストールが必須。">
+          <td class="date"><div class="d-md">4/5</div><div class="d-wd">日曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code & Co-arc ハンズオン勉強会</span><div class="tsum">ファイル操作・サイト生成・ブラウザ自動操作・外部ツール連携まで一通り体験。ブラウザ版ではなくアプリ版のインストールが必須。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">5名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude / Cowork 完全初心者向けハンズオン勉強会 神戸オフィスで開催（前日は梅田）。インストールと初期設定から始まり、フォルダ指定・ファイル操作・ブラウザ連携まで実際に手を動かしながら進行。">
+          <td class="date"><div class="d-md">4/3</div><div class="d-wd">金曜</div></td>
+          <td class="title-cell"><span class="tname">Claude / Cowork 完全初心者向けハンズオン勉強会</span><div class="tsum">神戸オフィスで開催（前日は梅田）。インストールと初期設定から始まり、フォルダ指定・ファイル操作・ブラウザ連携まで実際に手を動かしながら進行。</div></td>
+          <td><span class="tag tag-place">神戸</span></td>
+          <td><span class="tag tag-n">6名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude Code 初心者ハンズオン設定会 インストールからフォルダ設定、Claude in Chromeの設定まで一通り体験。エージェントがPC内のファイルを直接操作できることを実演。「店員 vs 家に住む養成さん」の比喩。">
+          <td class="date"><div class="d-md">4/2</div><div class="d-wd">木曜</div></td>
+          <td class="title-cell"><span class="tname">Claude Code 初心者ハンズオン設定会</span><div class="tsum">インストールからフォルダ設定、Claude in Chromeの設定まで一通り体験。エージェントがPC内のファイルを直接操作できることを実演。「店員 vs 家に住む養成さん」の比喩。</div></td>
+          <td><span class="tag tag-place">—</span></td>
+          <td><span class="tag tag-n">11名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+        <tr class="db-row" data-period="2026-04" data-saved="summary" data-search="Claude初期導入ハンズオンオフ会 おけもんさんホストのClaude初期導入ハンズオンオフ会。CoArc/Claude Codeをダウンロードから基本操作まで体験。AIエージェントの概念（「お店の店員」から「家に来てくれるお手伝いさん」への進化）を軸に、CoArc・Claude in Chrome・スマホ連携（Dispatch）・Claude Codeまで一通り触れた。">
+          <td class="date"><div class="d-md">4/1</div><div class="d-wd">水曜</div></td>
+          <td class="title-cell"><span class="tname">Claude初期導入ハンズオンオフ会</span><div class="tsum">おけもんさんホストのClaude初期導入ハンズオンオフ会。CoArc/Claude Codeをダウンロードから基本操作まで体験。AIエージェントの概念（「お店の店員」から「家に来てくれるお手伝いさん」への進化）を軸に、CoArc・Claude in Chrome・スマホ連携（Dispatch）・Claude Codeまで一通り触れた。</div></td>
+          <td><span class="tag tag-place">大阪推定</span></td>
+          <td><span class="tag tag-n">4名</span></td>
+          <td><span class="tag tag-summary">📝 要約</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section>
+  <h2>🔁 オフ会 → 虎の巻FAQ の昇格事例</h2>
+  <p class="h2-sub">現場で繰り返し出た質問が、本編の章・FAQに昇格していく流れ</p>
+  <div class="callout">
+    <strong>🥇 例：「許可ダイアログ難民」現象（5/18クロコオフ会発）</strong><br>
+    8名参加のクロコオフ会で「許可していいの？」「無限ループから抜けられない」「課金されない？」が <strong>5回以上 繰り返し発生</strong>。<br>
+    → 虎の巻本編のFAQ-05だけでは弱いと判明 → <strong>権限モードを独立章へ格上げ予定</strong>
+  </div>
+  <div class="callout">
+    <strong>🥈 例：「魔法の呪文どこ？」迷子現象（5/18クロコオフ会発）</strong><br>
+    主催者本人がライブで「魔法の呪文どこだ…」と<strong>3回</strong>繰り返した → トップから1クリックで呪文ページへ飛ぶボタン追加が必要と判明
+  </div>
+  <div class="callout">
+    <strong>🥉 例：「APIキーちょっとややこしいから今日は置いとこう」現象（複数オフ会発）</strong><br>
+    YouTube API・Transcript API の話題で毎回スルーされる → 別冊形式の「APIキー入門ページ」が必要と判明 → <strong>2026-05-21 に APIキー取得5stepガイド追加（commit d55093c）</strong>
+  </div>
+</section>
+<section style="border-bottom:none">
+  <div class="cta-block">
+    <h3>📣 次のオフ会で会いましょう🌳</h3>
+    <p>毎週リベシティで開催中。<strong>「ゼロから一緒に触る」</strong>から、「<strong>業務に組み込む応用編</strong>」まで、レベル別で動いてます。<br>「初心者だけど大丈夫？」「APIってなに？」レベルも大歓迎です。</p>
+    <div class="cta-btns">
+      <a href="https://libecity.com/room_list?room_id=m74BCueTGd0wL6uxHCCZ" class="cta-btn" target="_blank" rel="noopener">💬 初心者向けチャット（みずやん共同運営）</a>
+      <a href="index.html" class="cta-btn alt">📘 虎の巻 本編に戻る</a>
+    </div>
+  </div>
+</section>
+  </div>
+</main>
+<footer>
+  <div class="wrap">© 2026 おけもん × みずやん共同編集 | 最終更新 2026-05-23 | 別冊⑨ オフ会アーカイブ v0.1 草案</div>
+</footer>
+<script>
+(function(){
+  const rows=document.querySelectorAll(".db-row");
+  const buttons=document.querySelectorAll(".ctrl-btn");
+  const search=document.getElementById("ctrlSearch");
+  const counter=document.getElementById("dbCount");
+  const state={period:"all",saved:"all",q:""};
+  function update(){
+    let count=0;
+    rows.forEach(r=>{
+      const p=r.dataset.period,s=r.dataset.saved,d=r.dataset.search.toLowerCase();
+      const okP=state.period==="all"||p===state.period;
+      const okS=state.saved==="all"||s===state.saved;
+      const okQ=!state.q||d.includes(state.q);
+      if(okP&&okS&&okQ){r.classList.remove("hidden");count++;}else{r.classList.add("hidden");}
+    });
+    counter.textContent=count+" 件";
+  }
+  buttons.forEach(b=>{
+    b.addEventListener("click",()=>{
+      const f=b.dataset.filter,v=b.dataset.value;
+      document.querySelectorAll(`.ctrl-btn[data-filter="${f}"]`).forEach(x=>x.classList.remove("active"));
+      b.classList.add("active");
+      state[f]=v;update();
+    });
+  });
+  search.addEventListener("input",e=>{state.q=e.target.value.toLowerCase();update();});
+})();
+</script>
+</body>
+</html>
