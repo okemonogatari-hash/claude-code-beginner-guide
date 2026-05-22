@@ -1,0 +1,1942 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>別冊⑩ みんなはこうやってAI使って稼いでるよ！｜虎の巻</title>
+<meta name="description" content="学長ライブで報告された198件のAI活用リアル事例DB。トップ20＋収益別＋業種別＋やり方別＋初心者入口＋学長名言で「自分にもできるかも」を見つける別冊。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--main:#b58a4a;--main-deep:#8a6a30;--accent:#e8b57a;--accent-deep:#c89758;--ink:#2f2a24;--muted:#746d64;--line:#ead9bf;--ribbon:#d68f4a;--bg-soft:#fff8ed;--bg-page:#fdfaf2;--yaku:#7BAEC4;--gen:#A8C4A0;--coin:#C89758}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",sans-serif;background:linear-gradient(180deg,var(--bg-page) 0%,#fbfaf7 44%,#fff 100%);color:var(--ink);line-height:1.85}
+a{color:var(--main-deep);font-weight:700;text-underline-offset:4px;text-decoration:none}
+a:hover{color:var(--accent-deep);text-decoration:underline}
+.wrap{width:min(1180px,94vw);margin:0 auto}
+
+/* Header */
+header{padding:64px 0 38px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+header::before{content:"";position:absolute;top:-40px;right:-40px;width:280px;height:280px;background:radial-gradient(circle,rgba(232,181,122,.25),transparent 70%);border-radius:50%}
+header::after{content:"";position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(123,174,196,.15),transparent 70%);border-radius:50%}
+.eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--main-deep);font-weight:900;margin-bottom:14px;position:relative;z-index:2}
+h1{font-family:"Noto Serif JP",serif;font-size:clamp(28px,5vw,52px);line-height:1.25;color:var(--ink);position:relative;z-index:2}
+.title-em{background:linear-gradient(180deg,transparent 60%,#f8e5c4 60%);padding:0 6px}
+.lead{margin-top:24px;font-size:16px;color:var(--muted);max-width:860px;position:relative;z-index:2;line-height:1.95}
+.kicker{font-family:"Caveat",cursive;font-size:22px;color:var(--coin);margin-top:10px;position:relative;z-index:2}
+.metrics{display:flex;gap:32px;flex-wrap:wrap;margin-top:28px;position:relative;z-index:2}
+.metric{display:flex;flex-direction:column;gap:4px}
+.metric .v{font-family:"Noto Serif JP",serif;font-size:38px;font-weight:900;color:var(--main-deep);line-height:1;letter-spacing:-.02em}
+.metric .l{font-size:12px;color:var(--muted);letter-spacing:.06em}
+.back{display:inline-flex;align-items:center;margin-top:30px;padding:10px 20px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font-size:14px;font-weight:600;transition:.3s;position:relative;z-index:2}
+.back:hover{background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none}
+
+main{padding:42px 0 60px}
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+section:last-child{border-bottom:none}
+h2{font-family:"Noto Serif JP",serif;font-size:28px;line-height:1.4;margin-bottom:6px;color:var(--ink);display:flex;align-items:center;gap:12px}
+.h2-sub{font-size:14px;color:var(--muted);margin-bottom:28px;font-weight:400}
+
+/* Callout */
+.callout{background:var(--bg-soft);border-left:4px solid var(--accent);padding:20px 26px;border-radius:8px;color:#6b5742;margin:24px 0;font-size:14.5px;line-height:1.9}
+.callout strong{color:var(--main-deep)}
+
+/* Top20 cards */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-top:24px}
+.case-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 6px 18px rgba(181,138,74,.07);transition:.3s;display:flex;flex-direction:column;gap:8px;position:relative}
+.case-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(181,138,74,.14)}
+.top-card{padding-top:26px}
+.rank-badge{position:absolute;top:-10px;right:18px;background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;font-family:"Noto Serif JP",serif;font-weight:900;font-size:14px;padding:6px 12px;border-radius:999px;letter-spacing:.04em;box-shadow:0 4px 10px rgba(138,106,48,.25)}
+.case-date{font-size:12px;color:var(--main-deep);font-weight:700;letter-spacing:.04em}
+.case-title{font-family:"Noto Serif JP",serif;font-size:16px;line-height:1.5;color:var(--ink);margin:2px 0}
+.case-income{font-family:"Noto Serif JP",serif;font-size:18px;font-weight:900;color:var(--coin)}
+.case-summary{font-size:13.5px;color:#4a4540;line-height:1.75}
+.case-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tool-chip{font-size:11px;background:#f0e8d8;color:var(--main-deep);padding:3px 9px;border-radius:999px;font-weight:600}
+.case-fit{font-size:12px;background:#fff8ed;border-left:3px solid var(--accent);padding:8px 12px;color:#6b5742;margin-top:8px;border-radius:4px;line-height:1.6}
+
+/* Income Map */
+.income-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;margin-top:24px}
+.income-block{background:#fff;border:1px solid var(--line);border-left:6px solid var(--main);border-radius:10px;padding:20px 22px}
+.ib-head{margin-bottom:14px}
+.ib-label{font-family:"Noto Serif JP",serif;font-size:18px;font-weight:900}
+.ib-sub{font-size:12px;color:var(--muted);margin-left:6px}
+.income-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.income-case{font-size:13.5px;line-height:1.65;color:#4a4540;border-bottom:1px dashed #f0e6cf;padding-bottom:8px}
+.income-case:last-child{border-bottom:none}
+.ic-date{display:inline-block;font-size:11px;font-weight:700;color:var(--main-deep);background:#fff8ed;padding:2px 7px;border-radius:4px;margin-right:6px}
+.ic-title{font-weight:700;color:var(--ink);display:inline}
+.ic-summary{display:block;color:var(--muted);font-size:12.5px;margin-top:3px;line-height:1.7}
+.ic-empty{color:var(--muted);font-size:12.5px;font-style:italic}
+
+/* Industry */
+.accordion-stack{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.industry-block,.method-block{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.industry-block[open],.method-block[open]{box-shadow:0 6px 18px rgba(181,138,74,.08)}
+.ind-summary,.mth-summary{padding:16px 22px;cursor:pointer;display:flex;align-items:center;gap:14px;font-weight:700;font-size:15px;color:var(--ink);list-style:none;background:#fffefa;transition:.2s}
+.ind-summary:hover,.mth-summary:hover{background:var(--bg-soft)}
+.ind-summary::-webkit-details-marker,.mth-summary::-webkit-details-marker{display:none}
+.ind-icon,.mth-icon{font-size:22px}
+.ind-name,.mth-name{flex:1;font-family:"Noto Serif JP",serif;font-size:17px}
+.ind-count,.mth-count{font-size:12px;background:var(--accent);color:#fff;padding:3px 10px;border-radius:999px;font-weight:700}
+.industry-list,.method-list{list-style:none;padding:16px 26px 20px;margin:0;display:flex;flex-direction:column;gap:12px;background:#fbfaf7}
+.ind-case,.mth-case{font-size:13.5px;line-height:1.75;color:#4a4540;border-bottom:1px dashed #ead9bf;padding-bottom:10px}
+.ind-case:last-child,.mth-case:last-child{border-bottom:none}
+.mth-desc{padding:14px 26px;background:var(--bg-soft);color:#6b5742;font-size:13.5px;line-height:1.85;border-top:1px solid var(--line)}
+
+/* Entry5 */
+.entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:24px}
+.entry-card{background:linear-gradient(135deg,#fff,#fffaf0);border:1.5px solid var(--accent);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:.3s;position:relative}
+.entry-card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(232,181,122,.25)}
+.entry-num{font-family:"Caveat",cursive;font-size:22px;color:var(--accent-deep);font-weight:700}
+.entry-title{font-family:"Noto Serif JP",serif;font-size:17px;line-height:1.5;color:var(--ink)}
+.entry-date{font-size:11.5px;color:var(--main-deep);font-weight:700}
+.entry-summary{font-size:13.5px;color:#4a4540;line-height:1.75;margin-top:4px}
+.entry-why{font-size:12.5px;background:#fff;border-left:3px solid var(--accent-deep);padding:9px 13px;color:#6b5742;border-radius:4px;margin-top:6px;line-height:1.7}
+
+/* Quotes */
+.quotes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:24px}
+.quote-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 26px;border-left:5px solid var(--coin);transition:.3s}
+.quote-card:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(181,138,74,.1)}
+.quote-text{font-family:"Noto Serif JP",serif;font-size:15.5px;line-height:1.85;color:var(--ink);font-weight:500}
+.quote-meta{font-size:11.5px;color:var(--muted);margin-top:10px;letter-spacing:.04em}
+
+/* Tool chart */
+.tool-chart{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 28px}
+.tool-row{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;margin-bottom:11px}
+.tool-name{font-size:13.5px;font-weight:700;color:var(--ink)}
+.tool-bar-wrap{position:relative;height:26px;background:#fbfaf7;border-radius:6px;overflow:hidden}
+.tool-bar{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--accent),var(--main));border-radius:6px;transition:.4s}
+.tool-num{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11.5px;color:#4a4540;font-weight:700;z-index:2}
+
+/* Industry distribution */
+.dist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-top:18px}
+.dist-row{background:#fff;border:1px solid var(--line);border-radius:8px;padding:11px 16px;display:flex;justify-content:space-between;font-size:13px}
+.d-name{color:var(--ink);font-weight:600}
+.d-val{color:var(--main-deep);font-weight:700}
+
+/* Operations */
+.op-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:18px}
+.op-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 22px}
+.op-card h4{font-family:"Noto Serif JP",serif;font-size:15px;color:var(--main-deep);margin-bottom:8px}
+.op-card p{font-size:13px;color:#4a4540;line-height:1.75}
+.op-examples{margin-top:8px;padding-left:18px;font-size:12px;color:var(--muted)}
+
+/* Warnings */
+.warn-box{background:#fdf3e6;border:1px solid #f0c890;border-radius:10px;padding:20px 26px;margin-top:18px}
+.warn-box h3{font-family:"Noto Serif JP",serif;font-size:16px;color:#8a5a20;margin-bottom:10px}
+.warn-box ul{padding-left:22px;font-size:13.5px;color:#6b4f24;line-height:1.85}
+
+/* Milestones */
+.ms-list{list-style:none;padding:0;margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.ms-list li{font-size:13.5px;color:#4a4540;line-height:1.75;padding:10px 16px;background:#fffefa;border-left:3px solid var(--accent);border-radius:4px}
+.ms-date{display:inline-block;font-size:11.5px;font-weight:700;color:var(--main-deep);background:#fff8ed;padding:2px 8px;border-radius:4px;margin-right:8px}
+
+/* CTA / Related */
+.related-block{background:linear-gradient(135deg,#fff8ed,#fdf0dc);border-radius:18px;padding:34px 40px;margin-top:32px}
+.related-block h3{font-family:"Noto Serif JP",serif;font-size:21px;color:var(--ink);margin-bottom:12px;text-align:center}
+.related-block p{color:#4a4540;font-size:14.5px;text-align:center;margin-bottom:20px}
+.cta-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.cta-btn{display:inline-block;padding:12px 24px;background:linear-gradient(135deg,var(--main),var(--main-deep));color:#fff;border-radius:999px;font-weight:700;font-size:13.5px;transition:.3s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(138,106,48,.3);color:#fff;text-decoration:none}
+.cta-btn.alt{background:#fff;color:var(--main-deep);border:1.5px solid var(--main)}
+.cta-btn.alt:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+footer{padding:38px 0 56px;color:var(--muted);font-size:13px;text-align:center;background:var(--bg-soft);margin-top:40px}
+
+@media(max-width:680px){
+  header{padding-top:42px}
+  .metrics{gap:18px}
+  .metric .v{font-size:26px}
+  .cards-grid,.income-grid,.entry-grid,.quotes-grid,.dist-grid,.op-grid{grid-template-columns:1fr}
+  .tool-row{grid-template-columns:1fr;gap:6px}
+  section{padding:38px 0}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Bonus Chapter 10 · everyone's AI usage</div>
+    <h1>みんなはこうやって<br><span class="title-em">AI使って稼いでるよ！</span></h1>
+    <p class="lead">
+      学長ライブで報告された <strong>198件のリアル事例</strong>を、トップ20＋収益額別＋業種別＋やり方別＋初心者入口＋学長名言の<strong>6軸で整理</strong>したDB。<br>
+      「Claude Code触ったけど何作ればいいかわからない…」が、ここを読んだら 1個は <strong>「これやってみよう」</strong>に変わる別冊。
+    </p>
+    <p class="kicker">"AIは関係しますか？じゃなくて、関係させていくもの" — 両学長</p>
+    <div class="metrics">
+      <div class="metric"><span class="v">198</span><span class="l">CASES</span></div>
+      <div class="metric"><span class="v">44</span><span class="l">DAYS COVERED</span></div>
+      <div class="metric"><span class="v">11</span><span class="l">INDUSTRIES</span></div>
+      <div class="metric"><span class="v">10</span><span class="l">PATTERNS</span></div>
+      <div class="metric"><span class="v">25</span><span class="l">QUOTES</span></div>
+    </div>
+    <a href="index.html" class="back">← 虎の巻トップへ戻る</a>
+  </div>
+</header>
+
+<main>
+
+<!-- 🏆 TOP20 -->
+<section id="top20">
+  <div class="wrap">
+    <h2>🏆 おけもん厳選トップ20</h2>
+    <p class="h2-sub">198件から「再現性・インパクト・自分にもできるかも感」で厳選した今すぐ動ける事例。</p>
+    <div class="callout">
+      <strong>選定基準：</strong>①再現性高い ②収益・時短のインパクト大 ③おけもんカンパニーが提供するコーチング／irodori／AI業務代行と接続できる ④「自分にもできるかも」と思える親近感
+    </div>
+    <div class="cards-grid">
+      
+        <article class="case-card top-card">
+          <div class="rank-badge">#1</div>
+          <div class="case-date">4/22</div>
+          <h3 class="case-title">電気工事士がClaude Codeで本業現場営業 → 1ヶ月で190万円受注</h3>
+          <div class="case-income">¥1,900,000（1ヶ月・2社合計）</div>
+          <p class="case-summary">朝の学長ライブ視聴後即セットアップ。本業の現場で会う取引先・職人に『AIで作ったチラシ・HP』を泥臭く見せて回り、2社合計190万円を獲得。『AIだけ』でも『知識だけ』でもなく『本業の人脈×AIの試作物』が決定打。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：コーチング×AI研修の根拠事例トップ。介護×AI/コーチ×AIに同じ構造で転用可能</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#2</div>
+          <div class="case-date">4/3</div>
+          <h3 class="case-title">AIだけでECブランド全構築、1ヶ月で売上30万超→年商1億円規模見込み</h3>
+          <div class="case-income">¥300,000+/月（年商1億円規模見込み）</div>
+          <p class="case-summary">毛布ブランケットECサイトをロゴ・HP・商品ページ・モデル画像・広告まで全部AI1ヶ月で完結。通常工程ごとに10〜50万円×複数の外注費が全部0円に。</p>
+          <div class="case-tools"><span class="tool-chip">Claude（複合）</span></div>
+          <div class="case-fit">💡 おけもん視点：起業コーチングの最強実例。『AIで1ヶ月でEC事業立ち上げた人がいますよ』</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#3</div>
+          <div class="case-date">4/3</div>
+          <h3 class="case-title">1300件データ収集を20万円受注・1週間→1時間/3時間で7割完了</h3>
+          <div class="case-income">¥200,000（1案件）</div>
+          <p class="case-summary">通常230時間の手作業を1〜3時間で完結。学長が『ウハウハ・ボーナスタイム』と最強事例として連日繰り返し言及。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：AI業務代行/irodori提案の鉄板ベンチマーク。生産性77倍</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#4</div>
+          <div class="case-date">4/21</div>
+          <h3 class="case-title">リベ大クリニックの非エンジニア職員が医療現場用シフト管理アプリを1日で自作</h3>
+          <div class="case-income">コスト削減：キングオブタイム月額500円×人数→0円</div>
+          <p class="case-summary">非エンジニアスタッフがClaude CodeでシフトアプリをCloudflare Access認証付きで開発。スマホでシフト閲覧・希望休提出・申請フロー・自動生成・有休管理・計画的付与までフル実装。本来エンジニアでも1ヶ月かかる作業が1日で完成。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span><span class="tool-chip">Cloudflare Access</span></div>
+          <div class="case-fit">💡 おけもん視点：福祉施設キャリア16年×irodoriのド真ん中。介護・GH・障害福祉に同型展開可能</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#5</div>
+          <div class="case-date">4/20</div>
+          <h3 class="case-title">税理士1人で顧問先60社をClaude Codeで回す（業界標準10社の6倍）</h3>
+          <div class="case-income">業界標準10社→60社（6倍生産性）</div>
+          <p class="case-summary">スタッフ0で1人60社運用。税理士業界で大反響。『これからのプロフェッショナル業界の標準形』と学長コメント。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：士業向けirodori営業の最強根拠。コーチング×AI個別研修商品の根拠データ</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#6</div>
+          <div class="case-date">4/16</div>
+          <h3 class="case-title">蜂駆除副業：初日にAI HP+LINE+Googleビジネスで案件受注、利益3万円</h3>
+          <div class="case-income">¥30,000（初日）</div>
+          <p class="case-summary">Claude Codeでホームページ・公式LINE・Googleビジネスプロフィール・三マ登録を『2人3脚で8割クロコ』で実装。初日に案件受注。普通なら数十万円〜100万円かかる集客基盤がゼロ円で完成。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：『機械音痴×個人事業×AIで初日に現金化』の超実用ロールモデル。コーチング受講生の0→1ロードマップに</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#7</div>
+          <div class="case-date">4/21</div>
+          <h3 class="case-title">保険ユニットリンク見直し資料を10時間→10分で完成（中学生向けしおり付）</h3>
+          <div class="case-income">コーチング/相談案件化の入口</div>
+          <p class="case-summary">Claude Codeに保険証券・設計書を読ませて『保険と投資に分けた方がいいと納得できる資料』+『中学生にも分かるしおり』を10分で生成。本来10時間の作業。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：コーチング/FP相談のド真ん中。『同じ資料を中学生向け版も作って』はすべての説明資料に転用可能</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#8</div>
+          <div class="case-date">4/20</div>
+          <h3 class="case-title">ダニエル・ミリアン氏（米病理医）AIトレーナー副業で時給1〜3万円、年収+1100万円</h3>
+          <div class="case-income">$75,000/年（約¥11,000,000）追加収入</div>
+          <p class="case-summary">本業病理医、帰宅後4〜5時間でAIモデル評価副業。想定医療シナリオを作りAIの応答を評価。時給90〜200ドル。</p>
+          <div class="case-tools"><span class="tool-chip">AIモデル評価ツール</span></div>
+          <div class="case-fit">💡 おけもん視点：おけもんの介護福祉16年×AIトレーナー副業に直結。専門知識×AI評価は今後爆発する領域</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#9</div>
+          <div class="case-date">5/4</div>
+          <h3 class="case-title">おむすび屋『恵のまんま』がClaude CodeでHP自作→クリニックHP制作受注、月赤字脱却</h3>
+          <div class="case-income">クリニックHP受注+他事業多角化で月次黒字化</div>
+          <p class="case-summary">半年赤字のおむすび屋夫婦がClaude Code触り始め、見本HPをお客さんに見せた流れでクリニックHP受注。本業＋燻製ナッツ通販＋HP制作＋ソロバン教室FCで『一体何屋か分からん』状態に進化、年明けから黒字。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：電気工事士190万円事例と同じ『本業×AI×現場営業』の連続実証。おけもん事業に完全に重なる構造</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#10</div>
+          <div class="case-date">4/22</div>
+          <h3 class="case-title">Claude CodeでLINEスタンプを5分で20個生成→即販売開始</h3>
+          <div class="case-income">数十円〜小遣い化（複数事例で身内→他人へ販売)</div>
+          <p class="case-summary">デザイナー外注で1週間かかるLINEスタンプ作成が、Claude Code/ChatGPT Image 2.0で3〜5分で20個セット完成。ライブ中に視聴者が再現報告。4/22→4/24でIT苦手主婦も朝→夕方で承認まで到達。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span><span class="tool-chip">ChatGPT Image 2.0</span><span class="tool-chip">LINE Creators Studio</span></div>
+          <div class="case-fit">💡 おけもん視点：カンパニー11人キャラ全員のLINEスタンプ化に直結。最低コストの稼ぎ入口</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#11</div>
+          <div class="case-date">4/25</div>
+          <h3 class="case-title">Claude Code借り換え資料で年間100万円の利息減額（収益物件融資）</h3>
+          <div class="case-income">¥1,000,000/年（10年で1000万円相当）</div>
+          <p class="case-summary">自力では作れないレベルの収益物件借り換え提案資料をClaude Codeで作成→金融機関の借り換え承認。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：不動産・金融提案資料の自動化。irodori金融系顧客への高単価提案商品化候補</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#12</div>
+          <div class="case-date">5/6</div>
+          <h3 class="case-title">DistroKid×Suno AI月20万円・初月1500曲投稿の物量配信</h3>
+          <div class="case-income">¥200,000/月（1年継続）</div>
+          <p class="case-summary">DistroKidで楽曲配信。初月1500曲投入、数ヶ月継続で月20万円安定。学長『光が見えるかどうかで頑張れる頑張れないが全然違う』。</p>
+          <div class="case-tools"><span class="tool-chip">DistroKid</span><span class="tool-chip">Suno AI</span></div>
+          <div class="case-fit">💡 おけもん視点：AI物量勝負の参考値。おけもんカンパニーBGMチャンネル立ち上げ候補</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#13</div>
+          <div class="case-date">4/9</div>
+          <h3 class="case-title">学長実演：『ハエホテル』LPを5分で完成（公式級クオリティ）</h3>
+          <div class="case-income">—（公式デモ）</div>
+          <p class="case-summary">『素敵な日本のホテル代表的なものを読み込んでデザインMD作って』『お杉さんの写真3枚使ってハエホテル作って』で5分でLP完成。キャッチコピー・施設紹介・お客様の声・レスポンシブ対応すべて自動。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：あおいCDO lp-createスキルの学長公認。LP案件営業の鉄板デモ素材</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#14</div>
+          <div class="case-date">4/15</div>
+          <h3 class="case-title">完暦過ぎから副業で月30万円突破（去年12月開始）</h3>
+          <div class="case-income">¥300,000/月（4ヶ月で到達）</div>
+          <p class="case-summary">去年12月にClaude Code副業を始め、今月30万円突破。年配層がAI副業で結果を出すロールモデル。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：『年齢的にAI遅れた』反論への切り返し。コーチング40-60代女性層向けメッセージ</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#15</div>
+          <div class="case-date">4/16</div>
+          <h3 class="case-title">USJ周辺ホテルのキャンセル状況をクロコがGmail内で1分で抽出</h3>
+          <div class="case-income">—（時短）</div>
+          <p class="case-summary">Gmail内の予約・キャンセル確認をClaudeに依頼→1分で未キャンセル1件と判明＋キャンセル済みリストまで自動整理。『賢すぎて本当に驚きました』。</p>
+          <div class="case-tools"><span class="tool-chip">Claude（Gmail連携）</span></div>
+          <div class="case-fit">💡 おけもん視点：morning-todoスキルと完全一致。お客様連絡履歴整理に直接転用</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#16</div>
+          <div class="case-date">4/22</div>
+          <h3 class="case-title">Claude Code 教えるコンサル業（売上直結・需要しばらく当分ある）</h3>
+          <div class="case-income">コンサル単価化（おけもん3-4時間パッケージで即実装可）</div>
+          <p class="case-summary">Claude Code導入支援コンサルを単発で提供。学長公認『需要しばらく当分ある』。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code</span></div>
+          <div class="case-fit">💡 おけもん視点：おけもんが今すぐやれる商品。コーチング付加メニュー化</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#17</div>
+          <div class="case-date">4/26</div>
+          <h3 class="case-title">1枚画像→マッチングアプリLP→Cloudflare公開を30分以内（学長実演）</h3>
+          <div class="case-income">—（公式デモ）</div>
+          <p class="case-summary">ChatGPT Image 2.0で画像生成→Claude CodeでHTML化→Cloudflare Pagesデプロイまで30分弱で完成。『この年で本気で誰かを好きになってもいいですか？』のマッチングアプリLPが公開URL付きで本物のサイトに。</p>
+          <div class="case-tools"><span class="tool-chip">ChatGPT Image 2.0</span><span class="tool-chip">Claude Code</span><span class="tool-chip">Cloudflare Pages</span></div>
+          <div class="case-fit">💡 おけもん視点：コーチングLP・irodori案件・ハンドメイドショップLPを『30分で叩き台→修正』フローに乗せられる最重要事例</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#18</div>
+          <div class="case-date">4/17</div>
+          <h3 class="case-title">Freee×Claude API連携でAIで確定申告まで一気通貫（業界地殻変動）</h3>
+          <div class="case-income">—（業界全体への破壊力）</div>
+          <p class="case-summary">Freeeがクロードと連携してAIで確定申告完結。タックスナップ等の単機能アプリは食われる可能性。マネーフォワードも追随予定。</p>
+          <div class="case-tools"><span class="tool-chip">Freee × Claude</span></div>
+          <div class="case-fit">💡 おけもん視点：しーちゃんCFOの2027年確定申告自動化PJに直結。irodori財務サポート提案に転用</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#19</div>
+          <div class="case-date">4/24</div>
+          <h3 class="case-title">学長Claude Codeの『シニアプロダクトマネージャー』1セッション運用法（PdM）</h3>
+          <div class="case-income">—（運用ノウハウ）</div>
+          <p class="case-summary">『あなたはシニアプロダクトマネージャーです、今後全部あなたに頼む。他のAIを採用するか並列処理してください』と23行のプロンプトで責任者AI化→学長は1セッションのみで全社運用。</p>
+          <div class="case-tools"><span class="tool-chip">Claude Code (PdMロール)</span></div>
+          <div class="case-fit">💡 おけもん視点：おけもんカンパニー『はるか経由フロー』と完全一致の学長公認設計</div>
+        </article>
+
+        <article class="case-card top-card">
+          <div class="rank-badge">#20</div>
+          <div class="case-date">5/5</div>
+          <h3 class="case-title">海外個人AI架空アーティストで累計4億円・リベ会員でも月100万円到達多数</h3>
+          <div class="case-income">累計¥400,000,000（海外個人事例・要検証）/ 月¥1,000,000（リベ会員複数）</div>
+          <p class="case-summary">Suno AIで楽曲量産→DistroKid経由でSpotify/Apple Music等100超のプラットフォームに一斉配信。月100万到達者はリベ内に複数人。</p>
+          <div class="case-tools"><span class="tool-chip">Suno AI</span><span class="tool-chip">Spotify/Apple Music/DistroKid</span></div>
+          <div class="case-fit">💡 おけもん視点：AI音楽×プラットフォーム配信の規模感証明。BGMチャンネル立ち上げの根拠</div>
+        </article>
+    </div>
+  </div>
+</section>
+
+<!-- 💰 Income Map -->
+<section id="income">
+  <div class="wrap">
+    <h2>💰 収益額別マップ</h2>
+    <p class="h2-sub">「いくら稼げるか」から見つけるAI活用。¥0〜年商級までフラットに並べた現実的な見取り図。</p>
+    <div class="income-grid">
+      
+        <div class="income-block" style="border-left-color:#A8C4A0">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#A8C4A0">¥0〜¥1万</h3>
+            <span class="ib-sub">時短・自動化のみ / 25件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">4/6</span>
+              <span class="ic-title">公務員妻のExcel統計資料1日→20分</span>
+              <span class="ic-summary">県庁勤め妻のExcel統計資料化（コピペ＋sum関数）が1日→20分。生産性24倍。学長『洗濯板の中で全自動洗濯機』</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/6</span>
+              <span class="ic-title">メール返信15分→1分（リベ社内）</span>
+              <span class="ic-summary">全業種共通の痛点。AI導入支援『最初の5分時短デモ』素材</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/3</span>
+              <span class="ic-title">訪問リハビリ業の月末書類アプリ自作</span>
+              <span class="ic-summary">医療・介護業界の月末書類地獄を自作アプリで激減</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/14</span>
+              <span class="ic-title">Macメモ400件をブログテーマ自動仕分け</span>
+              <span class="ic-summary">半日→5分。手作業の桁違い時短</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/9</span>
+              <span class="ic-title">顧客情報スプシ自動入力（メイク中に完了）</span>
+              <span class="ic-summary">営業職向け象徴事例</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/3</span>
+              <span class="ic-title">建材業の顧客管理スプシ自作</span>
+              <span class="ic-summary">中小企業の永遠の課題を一瞬で解決</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/5</span>
+              <span class="ic-title">看護師の勤務表アプリ2時間で完成</span>
+              <span class="ic-summary">医療現場ルールに完全対応・話し言葉で指示OK</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/8</span>
+              <span class="ic-title">住宅ローン返済シミュアプリ自作</span>
+              <span class="ic-summary">ゲーム感覚で繰り上げ返済の効果可視化</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/10</span>
+              <span class="ic-title">履歴書作成・年月日逆算・写真貼付</span>
+              <span class="ic-summary">一気通貫でプリントアウト前まで</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/10</span>
+              <span class="ic-title">5年分3アカウント領収書を自動DL+仕分け</span>
+              <span class="ic-summary">個人＋マイクロ法人＋個人Gmail＝3アカウント5年分</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/11</span>
+              <span class="ic-title">自社開発で月額サブスク代替</span>
+              <span class="ic-summary">事業用予約アプリを自作してSaaS解約</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/17</span>
+              <span class="ic-title">GitHub設定スクショ送信で全自動</span>
+              <span class="ic-summary">初心者の最大の壁を撤廃</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">請求書ダウンロード→ラベリング自動化</span>
+              <span class="ic-summary">毎月の経理作業がほぼゼロ化</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">ブログ100記事の内部リンク自動生成</span>
+              <span class="ic-summary">数時間→数分</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">診断系資料（姿勢・カラー診断）の自動生成</span>
+              <span class="ic-summary">顧客カルテ＋資料テンプレを数分で個別生成</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/24</span>
+              <span class="ic-title">育休給与計算ソフト自作</span>
+              <span class="ic-summary">標準報酬月額と休業期間で出産手当金自動計算</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/26</span>
+              <span class="ic-title">バイパスモード設定で外出中作業継続</span>
+              <span class="ic-summary">夜間バッチ運用の土台</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/29</span>
+              <span class="ic-title">カレーうどん屋でHP+給料計算+シフトツール</span>
+              <span class="ic-summary">パソコン初心者が3つのアプリ実装</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/3</span>
+              <span class="ic-title">介護職員15人分シフト作成自動化</span>
+              <span class="ic-summary">わがまま条件・雇用形態の違いも吸収</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/8</span>
+              <span class="ic-title">楽天仕組み預金解約理由をAIに相談</span>
+              <span class="ic-summary">ライブ中に学長が実演。相続/差押え/人道的事情を提示</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/11</span>
+              <span class="ic-title">ChatGPTでLINEスタンプ初販売（身内以外）</span>
+              <span class="ic-summary">美術不得意でも初の他人購入</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/15</span>
+              <span class="ic-title">賃貸更新値上げ¥1,500の判断にAI相談</span>
+              <span class="ic-summary">日常浸透の典型例</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/8</span>
+              <span class="ic-title">旅行計画自動化（京都へ）</span>
+              <span class="ic-summary">雑な指示でも形になる</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/8</span>
+              <span class="ic-title">プレゼン資料の作り分け（Chat→Cowork）</span>
+              <span class="ic-summary">3兄弟の現実的ワークフロー</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/12</span>
+              <span class="ic-title">61歳定年退職おばば履歴書+市民大学レポート</span>
+              <span class="ic-summary">年齢関係なくAI活用</span>
+            </li></ul>
+        </div>
+
+        <div class="income-block" style="border-left-color:#7BAEC4">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#7BAEC4">¥1万〜¥10万</h3>
+            <span class="ib-sub">副収入入門 / 9件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">Claude CodeでLP受注（2万円）</span>
+              <span class="ic-summary">以前なら割に合わない単価をAIで秒で実装</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">結婚式の写真共有サービス自作→¥10,000売上</span>
+              <span class="ic-summary">特定イベント向けスモールビジネス</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/27</span>
+              <span class="ic-title">社内向け苦情受付アプリ開発</span>
+              <span class="ic-summary">社内ツール開発代行を商品化可能</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/29</span>
+              <span class="ic-title">LINEスタンプ翌日承認</span>
+              <span class="ic-summary">Claude Code+ChatGPTで画像描かず数時間で申請</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/2</span>
+              <span class="ic-title">クロード暮らしツール（買い物リスト・固定費管理）</span>
+              <span class="ic-summary">アドセンス収益化</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/27</span>
+              <span class="ic-title">EC運用代行の単価設計（月10万→拡張）</span>
+              <span class="ic-summary">相場・希望額・付加価値の3軸</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/14</span>
+              <span class="ic-title">アートカルチャー教室の生徒アンケートアプリ自作</span>
+              <span class="ic-summary">カルチャー教室のマイクロCRM</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/15</span>
+              <span class="ic-title">日本株10年後増配シミュレーションアプリ自作</span>
+              <span class="ic-summary">非エンジニアがClaude Codeで投資ツール公開</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/5</span>
+              <span class="ic-title">育休中主婦1日3時間×副業で月3万円達成</span>
+              <span class="ic-summary">隙間時間層への希望</span>
+            </li></ul>
+        </div>
+
+        <div class="income-block" style="border-left-color:#C8A86F">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#C8A86F">¥10万〜¥50万</h3>
+            <span class="ib-sub">副業安定 / 6件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">4/5</span>
+              <span class="ic-title">副業コンサル月100万円超え達成</span>
+              <span class="ic-summary">5年継続の積み上げ</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/15</span>
+              <span class="ic-title">完暦過ぎから副業30万円突破</span>
+              <span class="ic-summary">去年12月開始4ヶ月で</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/6</span>
+              <span class="ic-title">DistroKidで月20万円・初月1500曲</span>
+              <span class="ic-summary">AI物量勝負</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/5</span>
+              <span class="ic-title">MacBook購入のため3日で10万円売上</span>
+              <span class="ic-summary">投資資金を自力確保</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/25</span>
+              <span class="ic-title">ハンドメイドで1日1万円売上達成</span>
+              <span class="ic-summary">継続学習の典型成功例</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/9</span>
+              <span class="ic-title">アプリ開発が数十万円→数万円（学長見立て）</span>
+              <span class="ic-summary">単価交渉ベンチマーク</span>
+            </li></ul>
+        </div>
+
+        <div class="income-block" style="border-left-color:#D68F4A">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#D68F4A">¥50万〜¥100万</h3>
+            <span class="ib-sub">本業級 / 4件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">4/16</span>
+              <span class="ic-title">蜂駆除副業初日3万→継続ループ化</span>
+              <span class="ic-summary">発展して月単位で数十万円</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/3</span>
+              <span class="ic-title">データ収集案件20万円1案件</span>
+              <span class="ic-summary">1時間で7割完成</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/19</span>
+              <span class="ic-title">TikTokライバー月100万超え</span>
+              <span class="ic-summary">スマホだけで副業</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/21</span>
+              <span class="ic-title">AIアフィリエイトで月1000万円可能（学長言及）</span>
+              <span class="ic-summary">理論値だが2週間で0→1達成事例あり</span>
+            </li></ul>
+        </div>
+
+        <div class="income-block" style="border-left-color:#B58A4A">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#B58A4A">¥100万〜¥500万</h3>
+            <span class="ib-sub">事業級 / 5件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">5/4</span>
+              <span class="ic-title">電気工事士1ヶ月で190万円受注</span>
+              <span class="ic-summary">本業×AI×現場営業の最強事例</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">非エンジニア向けAI開発が数十万円→数万円</span>
+              <span class="ic-summary">市場価格破壊事例</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/25</span>
+              <span class="ic-title">借り換え資料で年間100万円利息減額</span>
+              <span class="ic-summary">累計1000万円以上</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/20</span>
+              <span class="ic-title">WSJ病理医AIトレーナー年+1100万円</span>
+              <span class="ic-summary">時給$90-200</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/22</span>
+              <span class="ic-title">サロンHP外注なら100万円超</span>
+              <span class="ic-summary">クロコで即実装</span>
+            </li></ul>
+        </div>
+
+        <div class="income-block" style="border-left-color:#8A6A30">
+          <header class="ib-head">
+            <h3 class="ib-label" style="color:#8A6A30">¥500万〜</h3>
+            <span class="ib-sub">年商級 / 4件</span>
+          </header>
+          <ul class="income-list">
+            <li class="income-case">
+              <span class="ic-date">4/3</span>
+              <span class="ic-title">AIだけでECブランド全構築・年商1億円見込み</span>
+              <span class="ic-summary">1ヶ月で売上30万超</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">5/5</span>
+              <span class="ic-title">海外個人AI架空アーティスト累計4億円</span>
+              <span class="ic-summary">Suno AI×100プラットフォーム配信（要検証）</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/20</span>
+              <span class="ic-title">税理士1人60社運用（業界6倍）</span>
+              <span class="ic-summary">プロフェッショナル業界の標準形</span>
+            </li>
+            <li class="income-case">
+              <span class="ic-date">4/23</span>
+              <span class="ic-title">クリニック開業HP外注200万円→AI内製化</span>
+              <span class="ic-summary">初期50万+月2.5万×5年の節約</span>
+            </li></ul>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- 🧑‍💼 Industry Catalog -->
+<section id="industry">
+  <div class="wrap">
+    <h2>🧑‍💼 業種・職業別カタログ</h2>
+    <p class="h2-sub">「自分の業界の人はどう使ってる？」を11業種から探せるアコーディオン。</p>
+    <div class="accordion-stack">
+      
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">会社員・大企業勤め</span>
+            <span class="ind-count">5件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/7</span>
+              <strong class="ic-title">公務員見積書→設計書3時間短縮</strong>
+              <span class="ic-summary">Claude Cowork導入で設計書自動生成</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">公務員妻のExcel統計1日→20分</strong>
+              <span class="ic-summary">夫が代わりに実行</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/24</span>
+              <strong class="ic-title">公務員副業禁止→家族名義LINEスタンプ販売</strong>
+              <span class="ic-summary">合法スキーム成立</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">職場でClaude Code禁止→Excelマクロ提案型AIで1週間→1時間</strong>
+              <span class="ic-summary">Claude AIチャット版</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/14</span>
+              <strong class="ic-title">公務員職場でクロコ使えなくなる→自宅運用+Copilot Agent</strong>
+              <span class="ic-summary">業務PC規制への現実解</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">公務員</span>
+            <span class="ind-count">3件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/7</span>
+              <strong class="ic-title">公務員業務見積書→設計書</strong>
+              <span class="ic-summary">Cowork使用</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/24</span>
+              <strong class="ic-title">病院勤務助産師（公務員）が家族名義でLINEスタンプ副業</strong>
+              <span class="ic-summary">副業規定回避案</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/7</span>
+              <strong class="ic-title">職場AI不可なら『私生活AI』で時間浮かす</strong>
+              <span class="ic-summary">学長アドバイス</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">主婦・パート・育休中</span>
+            <span class="ind-count">6件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/5</span>
+              <strong class="ic-title">育休中主婦1日3時間×副業で月3万円</strong>
+              <span class="ic-summary">隙間時間活用</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/24</span>
+              <strong class="ic-title">IT苦手主婦が朝→夕方でLINEスタンプ承認</strong>
+              <span class="ic-summary">審査まで1日で到達</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/29</span>
+              <strong class="ic-title">第三子出産＋Claude Codeで仕事仕組み化</strong>
+              <span class="ic-summary">育児中の継続稼働</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">育休中Claude Code遊び→業務復帰準備</strong>
+              <span class="ic-summary">『学長のおかげで仕事が楽しみ』</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">娘の勉強用カルタ一瞬で自作</strong>
+              <span class="ic-summary">子育てへのAI活用</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/1</span>
+              <strong class="ic-title">おやつやさっちゃん2ヶ月でリベ市場01達成</strong>
+              <span class="ic-summary">芋カ君（さつまいもチップス）出展</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">個人事業主・フリーランス</span>
+            <span class="ind-count">7件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/11</span>
+              <strong class="ic-title">5年分領収書3アカウント自動DL</strong>
+              <span class="ic-summary">マイクロ法人運営者</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/4</span>
+              <strong class="ic-title">営業職商談前準備（保険営業）</strong>
+              <span class="ic-summary">『次○○さんに打ち合わせ』→自動収集</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/16</span>
+              <strong class="ic-title">蜂駆除副業 初日3万円受注</strong>
+              <span class="ic-summary">HP+LINE+Googleビジネス</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/4</span>
+              <strong class="ic-title">電気工事士190万円受注</strong>
+              <span class="ic-summary">本業×AI現場営業</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">民泊予約管理＋スタッフシフト自作</strong>
+              <span class="ic-summary">市販SaaSでまかなえない</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">姿勢分析・カラー診断資料自動生成</strong>
+              <span class="ic-summary">顧客カルテ＋資料</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/8</span>
+              <strong class="ic-title">おむすび屋黒字化×クリニックHP受注</strong>
+              <span class="ic-summary">事業多角化</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">福祉医療系（看護師/介護/整骨院/サロン/クリニック）</span>
+            <span class="ind-count">10件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/3</span>
+              <strong class="ic-title">訪問リハビリ月末書類アプリ自作</strong>
+              <span class="ic-summary">月末地獄激減</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/5</span>
+              <strong class="ic-title">看護師勤務表アプリ自作（2時間で完成）</strong>
+              <span class="ic-summary">医療現場ルールに完全対応</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/15</span>
+              <strong class="ic-title">看護師長27名分シフト作成</strong>
+              <span class="ic-summary">条件追加で改善</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/18</span>
+              <strong class="ic-title">皮膚クリニック看護師シフト管理アプリ自作</strong>
+              <span class="ic-summary">非エンジニアがデプロイまで</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/21</span>
+              <strong class="ic-title">リベ大クリニック非エンジニアがシフト管理1日で実装</strong>
+              <span class="ic-summary">Cloudflare Access認証付き</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">デイサービスシフトテトリス問題解消</strong>
+              <span class="ic-summary">スタッフ能力・時給・条件考慮</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">1人サロン顧客カルテ自動生成＋アフターメッセージ</strong>
+              <span class="ic-summary">施術後の箇条書きから</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/3</span>
+              <strong class="ic-title">介護職員15人分シフト作成</strong>
+              <span class="ic-summary">わがまま条件吸収</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">動物看護師オフ会でClaude Code導入</strong>
+              <span class="ic-summary">非IT職の参入事例</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">整体フィットネス姿勢管理アプリ自作</strong>
+              <span class="ic-summary">既存アプリの代替</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">営業職</span>
+            <span class="ind-count">5件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/4</span>
+              <strong class="ic-title">保険営業の商談前準備</strong>
+              <span class="ic-summary">関連資料自動収集</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">飛び込み営業×Google Maps口コミ分析</strong>
+              <span class="ic-summary">S/A/B/C/Dランク自動付け</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">AI営業メール抽出 vs 電話営業</strong>
+              <span class="ic-summary">Google Map連携</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/4</span>
+              <strong class="ic-title">海外17歳屋根修理業者向けHP営業</strong>
+              <span class="ic-summary">Google口コミ読み込み→試作版送付</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/15</span>
+              <strong class="ic-title">土木業者向けHP売り込み→受注</strong>
+              <span class="ic-summary">本業コネ×AI</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">教育系</span>
+            <span class="ind-count">4件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">小学校朝礼アプリ自作</strong>
+              <span class="ic-summary">既存ツールがない/有料の代替</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">高2娘の進路相談壁打ち</strong>
+              <span class="ic-summary">頭の中整理</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/26</span>
+              <strong class="ic-title">小6がClaude Codeでゲーム制作</strong>
+              <span class="ic-summary">『小学生にも分かるように』プロンプトで突破</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/14</span>
+              <strong class="ic-title">アートカルチャー教室アンケートアプリ</strong>
+              <span class="ic-summary">生徒フィードバック収集</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">飲食・サービス業</span>
+            <span class="ind-count">8件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/12</span>
+              <strong class="ic-title">美容室ブッキング機能追加</strong>
+              <span class="ic-summary">Wix自作HPに追加</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">民泊予約一元管理＋シフト管理</strong>
+              <span class="ic-summary">自社専用システム</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">写真館の着物試着AIアプリ</strong>
+              <span class="ic-summary">売上に繋がる</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">結婚式写真共有サービス自作</strong>
+              <span class="ic-summary">1万円売上</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/29</span>
+              <strong class="ic-title">カレーうどん屋HP+給料計算+シフトツール</strong>
+              <span class="ic-summary">パソコン初心者</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/4</span>
+              <strong class="ic-title">焼き鳥屋モバイルオーダー自社開発</strong>
+              <span class="ic-summary">非エンジニアが現場特化</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/8</span>
+              <strong class="ic-title">おむすび屋HP+クリニックHP受注</strong>
+              <span class="ic-summary">事業多角化</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/20</span>
+              <strong class="ic-title">ラーメン店メニュー表AI作成相談</strong>
+              <span class="ic-summary">ChatGPT推奨</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">制作・クリエイター系</span>
+            <span class="ind-count">8件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/5</span>
+              <strong class="ic-title">デザイン制作Claude Code活用（リベ大公認）</strong>
+              <span class="ic-summary">トンマナ・スキル機能</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/16</span>
+              <strong class="ic-title">フリーランスライター記事執筆Chat+Code使い分け</strong>
+              <span class="ic-summary">リサーチはコード/執筆はチャット</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/17</span>
+              <strong class="ic-title">動画編集（Premiere Pro自動配置）</strong>
+              <span class="ic-summary">シーケンスに自動配置</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">動画自動カット+字幕入れツール→納品受注</strong>
+              <span class="ic-summary">YouTube運用代行のコア</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/23</span>
+              <strong class="ic-title">ChatGPT Image 2.0で偽セミナーチラシ・新聞・LINEスタンプ20個</strong>
+              <span class="ic-summary">画像生成のブレイクスルー</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/23</span>
+              <strong class="ic-title">リベシティ解放誌（フリーペーパー）1枚で完全再現</strong>
+              <span class="ic-summary">irodori紙媒体直結</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">HeyGenでアバター動画ライブ中生成</strong>
+              <span class="ic-summary">フリー素材おじさん</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">偽ニュースキャスター動画（Xでバズ）</strong>
+              <span class="ic-summary">ChatGPT image 2.0+HeyGen</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">IT既存従事者</span>
+            <span class="ind-count">4件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">Claude Code教えるコンサル業</strong>
+              <span class="ic-summary">売上直結</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/3</span>
+              <strong class="ic-title">スケジュールアプリ自作（月3000円でプロエンジニア）</strong>
+              <span class="ic-summary">環境に合わせたアプリ</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">責任者AIプロダクトマネージャーパターン</strong>
+              <span class="ic-summary">1セッション運用</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/27</span>
+              <strong class="ic-title">Claude→ChatGPT・Seedance呼び出し統合</strong>
+              <span class="ic-summary">AIハブ化</span>
+            </li></ul>
+        </details>
+
+        <details class="industry-block">
+          <summary class="ind-summary">
+            <span class="ind-icon">🧑‍💼</span>
+            <span class="ind-name">経営者・社長</span>
+            <span class="ind-count">6件</span>
+          </summary>
+          <ul class="industry-list">
+            <li class="ind-case">
+              <span class="ic-date">4/20</span>
+              <strong class="ic-title">税理士1人60社</strong>
+              <span class="ic-summary">業界標準10社の6倍</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">借り換え資料年100万円利息減</strong>
+              <span class="ic-summary">収益物件融資</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/27</span>
+              <strong class="ic-title">リベシティサミット議題整理</strong>
+              <span class="ic-summary">優先度高い議題抽出</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">4/3</span>
+              <strong class="ic-title">ECブランド全構築年商1億円見込み</strong>
+              <span class="ic-summary">AIだけで1ヶ月</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/13</span>
+              <strong class="ic-title">経営者会食でAI話題が当たり前</strong>
+              <span class="ic-summary">学長談</span>
+            </li>
+            <li class="ind-case">
+              <span class="ic-date">5/18</span>
+              <strong class="ic-title">学長Claudeに『ライブ配信ペース』相談</strong>
+              <span class="ic-summary">長期視点アドバイス</span>
+            </li></ul>
+        </details>
+    </div>
+  </div>
+</section>
+
+<!-- 🛠 Method Pattern -->
+<section id="method">
+  <div class="wrap">
+    <h2>🛠 やり方別パターン</h2>
+    <p class="h2-sub">「型」で分類した10パターン。LP制作・せどり自動化・AI業務代行など、まず1つ選んで掘る用。</p>
+    <div class="accordion-stack">
+      
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🎨</span>
+            <span class="mth-name">LP・HP制作</span>
+            <span class="mth-count">6件</span>
+          </summary>
+          <p class="mth-desc">AI（Claude Code or Codex）に既存HPテイストを読み込ませて『MD化→デザイン適用→デプロイ』を一気通貫で実行する型。Cloudflare Pagesに公開すれば無料で本格運用可能。クライアントへの提案は『現状URL→別案ドラフト』のテンプレートが鉄板。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/9</span>
+              <strong class="ic-title">ハエホテルLP5分で完成（学長実演）</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/9</span>
+              <strong class="ic-title">豆腐屋HPテンプレ→天名変更で営業</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/19</span>
+              <strong class="ic-title">リベシティ1番リニューアル案5分でドラフト</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/26</span>
+              <strong class="ic-title">マッチングアプリLP30分でCloudflare公開</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/4</span>
+              <strong class="ic-title">電気工事士サンプルHP→190万円受注</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/6</span>
+              <strong class="ic-title">Codex×Appleで架空Apple LP『Leofone』一発</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">📦</span>
+            <span class="mth-name">せどり・物販自動化</span>
+            <span class="mth-count">4件</span>
+          </summary>
+          <p class="mth-desc">メルカリ・Amazon・価格コム・ヤフオク等の価格データを自動スクレーピング→平均価格より高い商品の通知→在庫切れ監視→出品自動化までフルパッケージ化。在庫管理アプリ込みで仕入れ判断が早くなる。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">メルカリいいね商品の在庫切れ通知</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">スマホ撮影→Drive→メルカリ下書きまで全自動</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/18</span>
+              <strong class="ic-title">背取りメルカリ平均価格超過通知システム</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">背取り出品自動化+在庫管理アプリ</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🛠</span>
+            <span class="mth-name">AI業務代行・効率化請負</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">中小企業・個人事業者の事務作業を『見積→請求→領収書整理→顧客管理→シフト→補助金申請』まで丸ごとAI化代行。学長の副業19選にも『AI業務代行』として正式追加。オンライン秘書からの進化形ポジション。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/4</span>
+              <strong class="ic-title">保険営業の商談前準備自動化</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/9</span>
+              <strong class="ic-title">顧客情報スプシ自動入力（メイク中に完了）</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/20</span>
+              <strong class="ic-title">個人事業の書類・営業リスト・問い合わせ返信8割AI委任</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">請求書ダウンロード→ラベリング</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/28</span>
+              <strong class="ic-title">AI業務代行を副業19選に正式追加（学長）</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🎬</span>
+            <span class="mth-name">動画・BGMコンテンツ</span>
+            <span class="mth-count">6件</span>
+          </summary>
+          <p class="mth-desc">Suno AIで楽曲量産（月¥23,000で著作権自分のもの）→DistroKid経由でSpotify/Apple Music/YouTube Music等100超プラットフォームに一斉配信。HeyGenでアバター動画化、Seedance 2.0で1枚絵→動画化。学長自身がAI Musicプロデューサーデビュー。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/11</span>
+              <strong class="ic-title">SunoAIで『ハエホテル』テーマソング1分で生成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">Seedance 2.0で1枚絵→アニメ動画化</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">海外個人累計4億円・リベ会員月100万到達多数</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/5</span>
+              <strong class="ic-title">HeyGenアバター動画ライブ中生成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/6</span>
+              <strong class="ic-title">学長AI Musicプロデューサーデビュー（Suno×Code×DistroKid）</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/11</span>
+              <strong class="ic-title">学長『夏風ペダル』YouTube Music 2万回再生</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🛍</span>
+            <span class="mth-name">D2C（商品開発・販売）</span>
+            <span class="mth-count">3件</span>
+          </summary>
+          <p class="mth-desc">Claude AI壁打ち（シニアマーケター役）で商品企画→ChatGPT Image 2.0でパッケージ・LP画像生成→Claude CodeでLP HTML化→Cloudflare Pages公開→OEM工場検索→問い合わせメール台本生成までフルパイプライン。学長がライブで『ご馳ソ美り』ペット振りかけを30分で実演。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/3</span>
+              <strong class="ic-title">AIだけでECブランド構築年商1億円見込み</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/28</span>
+              <strong class="ic-title">ペット商品『ご馳ソ美り』ライブ実演</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/29</span>
+              <strong class="ic-title">OEM工場検索＋問い合わせメール＋電話台本</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">📊</span>
+            <span class="mth-name">コンサル・提案資料生成</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">保険証券・税法判例・融資資料・補助金申請・経営学者の過去データ分析等の専門資料をAIが一気生成。中学生向け版も同時生成可能。社労士・税理士の領域がAIで侵食される速度が加速。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/21</span>
+              <strong class="ic-title">ユニットリンク保険見直し10時間→10分</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">補助金リスト自動取得＋申請書作成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">借り換え資料（収益物件融資）</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/1</span>
+              <strong class="ic-title">経営学者過去数十年データ分析（50万円→数分）</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/17</span>
+              <strong class="ic-title">補助金申請を全自動リサーチ＋申請文章</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">⚙️</span>
+            <span class="mth-name">自社内省力化（経理・スケジュール等）</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">マネーフォワード/Freee連携で確定申告まで一気通貫。Excel統計1日→20分の生産性24倍。メール返信15分→1分。社内SaaS（月額1.67万円）の置き換え。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/17</span>
+              <strong class="ic-title">Freee×Claude API連携で確定申告完結</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/20</span>
+              <strong class="ic-title">マネーフォワード→支出管理スプシ自動連携</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/25</span>
+              <strong class="ic-title">PMOツール（月1.67万円）→Claude Code内製化</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">公務員Excel統計1日→20分</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">メール返信15分→1分</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🎓</span>
+            <span class="mth-name">教育・コーチング</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">AIをコーチング相手にして頭の中整理。診断シート自動生成・個別カスタマイズ・夢を叶える資金計画アプリでFP相談を楽しく。AIへの指示の出し方をAIに聞くメタ的活用も。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">夢を叶える資金計画アプリでFP相談</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">高2娘の進路相談壁打ち</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">姿勢分析・カラー診断個別資料生成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/11</span>
+              <strong class="ic-title">老け顔生成で貯金モチベ向上ワーク</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/18</span>
+              <strong class="ic-title">学長がClaudeに経営判断壁打ち</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">🔍</span>
+            <span class="mth-name">データ分析・スクレイピング</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">CSV読み込み→AI整形→評価レポート自動生成。GoogleMap口コミ→S/A/B/C/Dランク自動付け。1300件データ収集が手作業230時間→AIで3時間。学長公認『データ大量処理はAIが超得意』。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/3</span>
+              <strong class="ic-title">1300件データ収集20万円1案件・1時間で7割</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/6</span>
+              <strong class="ic-title">飛び込み営業×Google Maps口コミ分析</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/9</span>
+              <strong class="ic-title">税理士法人内CSV読み込み・判例分析</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/22</span>
+              <strong class="ic-title">証券CSV→NotebookLM→Claude Codeで点検評価</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/1</span>
+              <strong class="ic-title">経営学者過去データ50万円→数分</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+
+        <details class="method-block">
+          <summary class="mth-summary">
+            <span class="mth-icon">📱</span>
+            <span class="mth-name">アプリ・ツール自作</span>
+            <span class="mth-count">5件</span>
+          </summary>
+          <p class="mth-desc">整備工事業者・カルチャー教室・サロン・整体・焼き鳥屋・民泊・ラーメン店・看護師・介護職員と、業種×現場知識×Claude Codeで自社用アプリを1日〜1週間で自作。エンジニア依頼なら3ヶ月＋数十万円。</p>
+          <ul class="method-list">
+            <li class="mth-case">
+              <span class="ic-date">4/10</span>
+              <strong class="ic-title">整備工事業者の顧客管理アプリ1週間で完成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/15</span>
+              <strong class="ic-title">友人を保険から守る講習資料AI生成</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/21</span>
+              <strong class="ic-title">リベ大クリニックシフトアプリ非エンジニアが1日</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">5/4</span>
+              <strong class="ic-title">焼き鳥屋モバイルオーダー自社開発</strong>
+              <span class="ic-summary"></span>
+            </li>
+            <li class="mth-case">
+              <span class="ic-date">4/27</span>
+              <strong class="ic-title">社内苦情受付アプリ</strong>
+              <span class="ic-summary"></span>
+            </li></ul>
+        </details>
+    </div>
+  </div>
+</section>
+
+<!-- 🎯 Entry5 -->
+<section id="entry5">
+  <div class="wrap">
+    <h2>🎯 「自分にもできるかも」の入口5選</h2>
+    <p class="h2-sub">完全初心者OK・スキル不要・1日で手応えがある事例だけ抽出。最初の1個はここから。</p>
+    <div class="entry-grid">
+      
+        <article class="entry-card">
+          <div class="entry-num">入口 1</div>
+          <h3 class="entry-title">ChatGPTで老け顔の自分を生成（5分で完了）</h3>
+          <div class="entry-date">5/11</div>
+          <p class="entry-summary">学長がライブで実演。スマホで自分の写真をChatGPTに投げて『老けさせて』と一言。5分で『130億年生きてる』老け顔が完成。コーチング『未来の自分の写真ワーク』にも転用可能。**スマホ1台、無料枠でOK**</p>
+          
+        </article>
+
+        <article class="entry-card">
+          <div class="entry-num">入口 2</div>
+          <h3 class="entry-title">LINEスタンプを5分で自作→当日承認</h3>
+          <div class="entry-date">4/22, 4/24, 4/25</div>
+          <p class="entry-summary">ChatGPT Image 2.0で『可愛いハムスターのLINEスタンプ20個』と一言。1分で20種類生成、LINE Creators Studio提出で当日承認まで。IT苦手主婦も朝→夕方で家族にシェアまで到達。小遣い〜数万円の入金実績多数。</p>
+          
+        </article>
+
+        <article class="entry-card">
+          <div class="entry-num">入口 3</div>
+          <h3 class="entry-title">Gmail内の予約・キャンセル状況を1分で抽出</h3>
+          <div class="entry-date">4/16</div>
+          <p class="entry-summary">『USJ周辺ホテルの予約状況確認して』とClaudeに依頼するだけ。1分で未キャンセル件数＋キャンセル済みリスト整理。お客様連絡履歴・申し込みメール整理・領収書探しに即転用可能。</p>
+          
+        </article>
+
+        <article class="entry-card">
+          <div class="entry-num">入口 4</div>
+          <h3 class="entry-title">AIに『〇〇について損失額の幅をシナリオ別に試算して』と質問</h3>
+          <div class="entry-date">5/3</div>
+          <p class="entry-summary">学長提案。海外旅行の医療費・保険要否・固定費判断・移住先比較・事業リスク判断すべてに使える汎用フレーム。『起きた場合の損失幅』を出してもらえば理性的な意思決定ができる。プロンプト1行で誰でも今すぐできる。</p>
+          
+        </article>
+
+        <article class="entry-card">
+          <div class="entry-num">入口 5</div>
+          <h3 class="entry-title">履歴書・職務経歴書を写真貼付込みで一気通貫生成</h3>
+          <div class="entry-date">4/10</div>
+          <p class="entry-summary">Claude Codeに『履歴書作って、顔写真も貼って』と頼むだけ。年月日逆算・写真貼付・プリントアウト直前まで完成。転職活動の第一歩がスマホ＋AI20分で終わる。</p>
+          
+        </article>
+    </div>
+    <div class="related-block">
+      <h3>📘 もっとパターンを見たい人は</h3>
+      <p>別冊⑧「で、なに作る？」で<strong>5つのパターン</strong>に整理してある。気になるやつから一個ずつ。</p>
+      <div class="cta-btns">
+        <a href="whats-to-build.html" class="cta-btn">別冊⑧ で、なに作る？へ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 💌 Quotes -->
+<section id="quotes">
+  <div class="wrap">
+    <h2>💌 学長の名言・パワーワード集</h2>
+    <p class="h2-sub">44日分のライブから「これは保存版」を25本抽出。発信ネタにも自分の背中押しにも。</p>
+    <div class="quotes-grid">
+      
+        <blockquote class="quote-card">
+          <p class="quote-text">"AI使うリスク &lt; AI使わないリスク"</p>
+          <footer class="quote-meta">— 両学長 4/7 / AI使わないリスク論の総まとめ。学長の主要メッセージ</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"みんなが洗濯板で洗ってる中、自分だけ全自動洗濯機を持った"</p>
+          <footer class="quote-meta">— 両学長 4/6 / 公務員妻のExcel統計が1日→20分の生産性24倍</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"東大主席卒よりはるかに賢い人を月3000〜1万5000円で雇える。雇う以外の選択肢ないやんっていうね"</p>
+          <footer class="quote-meta">— 両学長 5/12 / AIサブスクへの投資判断ロジック</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"クロコがいなかったら今月の仕事回ってない"</p>
+          <footer class="quote-meta">— 両学長 4/14 / 学長自身のClaude Code依存度</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"月3000円でプロのエンジニアを雇える時代最高です"</p>
+          <footer class="quote-meta">— 両学長 4/3 / スケジュールアプリ自作した視聴者の感動</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"遅くてもいい。任せておけば自分の手が開く。食洗機と同じ"</p>
+          <footer class="quote-meta">— 両学長 4/17 / Claude in Chromeのメンタルモデル</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AIに1回断られたからって諦めちゃだめ。やり方を変えて聞き直す"</p>
+          <footer class="quote-meta">— 両学長 4/21 / Opus 4.7のセキュリティ縛り対策</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"個人がプロンプトだけでここまで作れる"</p>
+          <footer class="quote-meta">— 両学長 4/10 / 学長ハエホテルLP実演</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"今だったらロゴマークやホームページ制作はクロードコード使えば本当にコストをグッと抑えられる"</p>
+          <footer class="quote-meta">— 両学長 5/9 / 学長の直接アナウンス</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"クロードコード使ってる段階で世間の上位1%より早い"</p>
+          <footer class="quote-meta">— 両学長 5/6 / クロコ vs Codex比較で</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"クロコちゃんを使うか使わないかで本当に差が出る"</p>
+          <footer class="quote-meta">— 両学長 5/9 / 最入会組への学長コメント</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"情報のキャッチアップ早いなと思いながら聞いてた。使ってる使ってないでだいぶ差が出る"</p>
+          <footer class="quote-meta">— 両学長 5/13 / 経営者会食でAI話題が当たり前と聞いて</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AIエージェント型のAI使ってる使ってないでめちゃくちゃ差がつきますよね"</p>
+          <footer class="quote-meta">— 両学長 5/13 / 両学長公人発言・営業ピッチに直結</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"教科書はクロコで揃える"</p>
+          <footer class="quote-meta">— 両学長 5/2 / 学長のCodex vs Claude判定</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"とりあえず触って何か作っていったり自動化していったりする方が先"</p>
+          <footer class="quote-meta">— 両学長 5/11 / Claude Code導入論</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"クロコは別にPython触らなくても大丈夫。バイブコーディングだったら作れる"</p>
+          <footer class="quote-meta">— 両学長 5/12 / プログラミング未経験者の参入</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"魂を燃やして4年で終わるよりも、ペース調整しながら20年続けた方が、全体として救える人・力になれる人の総量は多い"</p>
+          <footer class="quote-meta">— 両学長 5/18 / 学長Claudeへの経営判断壁打ち</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"もう革命ですよ。AIエージェントもうどんどん出てきてる"</p>
+          <footer class="quote-meta">— 両学長 5/15 / 視聴者が日本株シミュアプリを公開した報告に対して</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AIスクール20万円なんてかける必要ない。まずはエージェント型AIを自分で使って覚えていくのが一番"</p>
+          <footer class="quote-meta">— 両学長 5/20 / AI高額情報商材への警告</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"情報はリベに全部ある。お金に関する情報はリベに全部ある"</p>
+          <footer class="quote-meta">— 両学長 5/10 / AI副業情報商材67万円事例への反応</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AI覚えていくのに、もう今は人に聞いた方がいい。絶対に人に聞いて、もう真横でね、教わるのが1番早い"</p>
+          <footer class="quote-meta">— 両学長 5/11 / 新宿西口オフィスのClaude Codeオフ会事例</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"判断のリソースを使いたくない"</p>
+          <footer class="quote-meta">— 両学長 4/14 / プロテイン・朝食を判断不要にセッティング済みのリアル秘書話</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"個人がAI×現場知識で作るプロダクトは差別化の塊"</p>
+          <footer class="quote-meta">— 両学長 5/4 / 焼き鳥屋自社モバイルオーダー事例</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AIで全員低リスクで社長になれる"</p>
+          <footer class="quote-meta">— 両学長 通底メッセージ / 学長のAI時代の稼ぎ方総まとめ思想</footer>
+        </blockquote>
+
+        <blockquote class="quote-card">
+          <p class="quote-text">"AIは関係しますか？じゃなくて関係させていくもの"</p>
+          <footer class="quote-meta">— 両学長 通底メッセージ / 業種・職種別の関係性論への学長の核心回答</footer>
+        </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- 📊 Stats -->
+<section id="stats">
+  <div class="wrap">
+    <h2>📊 全体統計：何が使われてる？誰が使ってる？</h2>
+    <p class="h2-sub">198件の事例から見えた、2026年Q2のAI活用の地形図。</p>
+
+    <h3 style="font-family:'Noto Serif JP',serif;font-size:18px;color:var(--main-deep);margin:30px 0 4px">🔧 ツール頻度ランキング</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:8px">学長ライブ報告で登場した回数（推定）。Claude Codeが圧倒的1位。</p>
+    <div class="tool-chart">
+      
+        <div class="tool-row">
+          <span class="tool-name">Claude in Chrome（クロコちゃん）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:100%"></div>
+            <span class="tool-num">ブラウザ自動操作。約40件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Claude AI（チャット）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:62%"></div>
+            <span class="tool-num">壁打ち・戦略。約25件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Codex（OpenAI）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:50%"></div>
+            <span class="tool-num">Claude Codeの兄弟。約20件で言及（5月以降増加）</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Cloudflare Pages / Access</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:50%"></div>
+            <span class="tool-num">公開インフラの学長公式推奨。約20件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Suno AI</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:37%"></div>
+            <span class="tool-num">音楽生成。約15件（5月集中）</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Seedance 2.0（バイトダンス）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:25%"></div>
+            <span class="tool-num">動画生成。約10件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Gemini / Nano Banana</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:20%"></div>
+            <span class="tool-num">画像生成・サブ。約8件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">DistroKid</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:12%"></div>
+            <span class="tool-num">音楽配信ハブ。約5件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">ChatGPT Image 2.0</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:10%"></div>
+            <span class="tool-num">画像生成の決定版（4/22以降）。約45件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Claude Design</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:10%"></div>
+            <span class="tool-num">デザイン特化4兄弟目。約8件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">HeyGen</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:10%"></div>
+            <span class="tool-num">AIアバター動画。約4件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Perplexity（パプちゃん）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:7%"></div>
+            <span class="tool-num">情報検索。約3件</span>
+          </div>
+        </div>
+
+        <div class="tool-row">
+          <span class="tool-name">Claude Code（クロコ）</span>
+          <div class="tool-bar-wrap">
+            <div class="tool-bar" style="width:5%"></div>
+            <span class="tool-num">圧倒的1位。約220件以上で言及。学長公認のメインエンジン</span>
+          </div>
+        </div>
+    </div>
+
+    <h3 style="font-family:'Noto Serif JP',serif;font-size:18px;color:var(--main-deep);margin:30px 0 4px">🧑‍💼 業種分布</h3>
+    <div class="dist-grid">
+      <div class="dist-row"><span class="d-name">個人事業主・フリーランス</span><span class="d-val">約70件（最多）</span></div>
+<div class="dist-row"><span class="d-name">会社員・大企業勤め</span><span class="d-val">約45件</span></div>
+<div class="dist-row"><span class="d-name">医療・介護・福祉系（看護師/介護/整骨院/サロン/クリニック）</span><span class="d-val">約40件</span></div>
+<div class="dist-row"><span class="d-name">建設・不動産・職人系（公務店/電気工事/屋根修理/整備工事）</span><span class="d-val">約30件</span></div>
+<div class="dist-row"><span class="d-name">主婦・育休中・パート</span><span class="d-val">約25件</span></div>
+<div class="dist-row"><span class="d-name">飲食・小売店オーナー（焼き鳥/おむすび/ラーメン/カレーうどん/サロン）</span><span class="d-val">約25件</span></div>
+<div class="dist-row"><span class="d-name">公務員・士業（税理士/社労士）</span><span class="d-val">約20件</span></div>
+<div class="dist-row"><span class="d-name">副業ブロガー・クリエイター・ライター</span><span class="d-val">約20件</span></div>
+<div class="dist-row"><span class="d-name">学長本人/リベ社内事例</span><span class="d-val">約30件</span></div>
+<div class="dist-row"><span class="d-name">経営者・社長</span><span class="d-val">約10件</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⚙️ Operation Patterns -->
+<section id="ops">
+  <div class="wrap">
+    <h2>⚙️ 学長たちの運用パターン（応用編）</h2>
+    <p class="h2-sub">「事例」より一歩深い、AIを"どう運用するか"の型。おけもんカンパニーの「はるか経由フロー」もこの一つ。</p>
+    <div class="op-grid">
+      
+                <article class="op-card">
+                  <h4>PdM_responsible_AI</h4>
+                  <p>Claude Codeを『あなたはシニアプロダクトマネージャーです』と設定→学長のセッションは1個だけ。PdMが裏で他のClaude Codeを採用・並列処理。複数CxOキャラ運用、はるか経由フローと完全一致。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>session_handoff_via_md</h4>
+                  <p>Claude Cowork（軽量）→Claude Code（重量）への移行時、CoworkでMD引き継ぎ書を作成→Codeに渡す。コンテキスト保全。おけ森v2のSTATE.md運用と一致。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>outside_self_drive</h4>
+                  <p>『今から出かけるから、あなたが1番ベストだと思う方法で承認作業で止めないで』と指示→帰宅時に作業完成。バイパスモード設定で外出中も継続。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>hybrid_human_check</h4>
+                  <p>AI下書き＋本人手直しのハイブリッド。学長マガジン執筆もこの方式。コピペそのままはしない。質問抽出は10個自動pick、整形まで自動、回答だけ手動。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>screenshot_to_AI</h4>
+                  <p>Cmd+Ctrl+Shift+4でクリップボードに保存→AIに直接Cmd+V。ゴミファイル削除作業ゼロ。AIへの画像投入の標準オペレーション。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>claude_md_magic_spell</h4>
+                  <p>CLAUDE.mdに『データ復旧不可能な削除・情報漏洩リスクに繋がる重大ミスを防いでください』の魔法呪文。学長マガジン2026-04-17公開。非エンジニア向けセキュリティ運用。</p>
+                  
+                </article>
+
+                <article class="op-card">
+                  <h4>claude_code_as_hub</h4>
+                  <p>Claude Codeが全AIサービスの窓口。画像はChatGPTに外注、動画はSeedance、音楽はSunoにAPI連携。学長は実質Claude Codeしか触らずに全AI機能を使う。</p>
+                  
+                </article>
+    </div>
+  </div>
+</section>
+
+<!-- ⚠️ Warnings -->
+<section id="warn">
+  <div class="wrap">
+    <h2>⚠️ 失敗・警告・落とし穴</h2>
+    <p class="h2-sub">学長ライブで学長や視聴者が「これはダメだった」と報告したやつ。先回りで踏むな。</p>
+    <div class="warn-box">
+      <ul>
+        <li><strong>info_business_scam</strong>：{&#x27;date&#x27;: &#x27;4/24&#x27;, &#x27;case&#x27;: &#x27;Codex一括講座17万円→LINE誘導→40〜50万円の塾&#x27;, &#x27;warning&#x27;: &#x27;リベシティ内勉強会無料で十分&#x27;} ／ {&#x27;date&#x27;: &#x27;4/25&#x27;, &#x27;case&#x27;: &#x27;CJ社長への『クロードコード自動化で金稼ぎ』フェイク動画情報商材&#x27;, &#x27;warning&#x27;: &#x27;全部フェイク。AI自動化で楽して稼げる系は詐欺&#x27;} ／ {&#x27;date&#x27;: &#x27;5/10&#x27;, &#x27;case&#x27;: &#x27;AI副業情報商材67万円→ノウハウ図書館の方が役立った&#x27;, &#x27;warning&#x27;: &#x27;その40万円をクロコとコデックスのサブスク費に回せ&#x27;} ／ {&#x27;date&#x27;: &#x27;5/20&#x27;, &#x27;case&#x27;: &#x27;AIスクール20万円課金&#x27;, &#x27;warning&#x27;: &#x27;いらない。エージェント型AIを自分で使って覚えるのが一番&#x27;}</li>
+<li><strong>ai_full_delegation_warning</strong>：{&#x27;date&#x27;: &#x27;5/9&#x27;, &#x27;case&#x27;: &#x27;ノウハウ図書館をクロコに読ませて副業BGM YouTubeを言いなりで進める&#x27;, &#x27;warning&#x27;: &#x27;最終判断・品質チェック・責任者の役割はAIにはできない。真似していい部分とダメな部分があるので人にも会え&#x27;} ／ {&#x27;date&#x27;: &#x27;5/14&#x27;, &#x27;case&#x27;: &#x27;クロコでDistrokid楽曲アップ→有料オプション自動課金事故・¥6,000請求&#x27;, &#x27;warning&#x27;: &#x27;決済・契約系の最終クリックは人間が押す。AI全自動は事故る&#x27;} ／ {&#x27;date&#x27;: &#x27;5/4&#x27;, &#x27;case&#x27;: &#x27;焼き鳥屋モバイルオーダー他者販売検討&#x27;, &#x27;warning&#x27;: &#x27;自社で使うのは最高、他者に売るのは早い。トラブル時のサポート・セキュリティ・現場で止まると業務影響大&#x27;}</li>
+<li><strong>model_limitations</strong>：{&#x27;date&#x27;: &#x27;5/12&#x27;, &#x27;case&#x27;: &#x27;保険ジャンルはAIに聞いてもハ切れの悪い回答&#x27;, &#x27;warning&#x27;: &#x27;AIの学習ソースが大手保険会社息のかかったSEOで埋め尽くされてる。AIだけでは判断できないジャンル&#x27;} ／ {&#x27;date&#x27;: &#x27;5/8&#x27;, &#x27;case&#x27;: &#x27;学長AIプロトタイプでハルシネーション&#x27;, &#x27;warning&#x27;: &#x27;個人情報そのものはガード→続けて根拠なく結婚言及。何にでも対応するように範囲広げると大変&#x27;}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 📅 Milestones -->
+<section id="milestones">
+  <div class="wrap">
+    <h2>📅 期間中（4/3〜5/20）のAI業界マイルストーン</h2>
+    <p class="h2-sub">事例の背景にある「なぜ今この活用が爆発したか」を時系列で。</p>
+    <ul class="ms-list">
+      
+    </ul>
+  </div>
+</section>
+
+<!-- Related -->
+<section id="related">
+  <div class="wrap">
+    <h2>🔗 関連別冊</h2>
+    <p class="h2-sub">事例を見たら次は「動く」。手を動かす入口はここから。</p>
+    <div class="related-block">
+      <h3>事例DB → 実装ステップへ</h3>
+      <p>「やってみたい」が見つかったら、別冊⑧で型に当てはめ、別冊⑥の仕組みで継続蓄積、別冊⑦で過去ライブを横断検索。</p>
+      <div class="cta-btns">
+        <a href="whats-to-build.html" class="cta-btn">別冊⑧ で、なに作る？</a>
+        <a href="gakucho-live-30days-database.html" class="cta-btn alt">別冊⑦ 30日DB</a>
+        <a href="gakucho-live-auto-process.html" class="cta-btn alt">別冊⑥ 自動取得の仕組み</a>
+        <a href="gakucho-live-may4-cases.html" class="cta-btn alt">別冊④ 5/4回 深掘り版</a>
+        <a href="libecity-learning-links.html" class="cta-btn alt">別冊⑤ ノウハウ図書館</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>別冊⑩ みんなはこうやってAI使って稼いでるよ！ ── 学長ライブAI活用事例DB</p>
+    <p style="margin-top:8px">© 2026 Okemon Company · Bonus Chapter 10 · 生成: 2026-05-23 06:25 / 44日分・198件構造化 / by はるか</p>
+    <p style="margin-top:6px;font-size:11.5px">データソース：学長ライブ 4/3〜5/20の活用事例MD（Vault: あおいCDO/活用事例/）／自動取得は別冊⑥参照</p>
+  </div>
+</footer>
+</body>
+</html>
