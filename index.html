@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>はじめての Claude Code｜リベ民のための やさしい導入＆活用ガイド</title>
 <meta name="description" content="Claude Codeを触ったことがない人が、これ1つ見たら「インストール→ちょっと触ってみたら楽しい」までたどり着ける、リベシティ会員向けの導入ガイド。">
+<meta name="version" content="v2.0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="はじめての Claude Code｜リベ民のための やさしい導入＆活用ガイド">
+<meta property="og:description" content="Claude Code初心者が、インストールから最初の一歩、権限モードの不安解消まで進めるリベシティ会員向けガイド。">
+<meta property="og:url" content="https://okemonogatari-hash.github.io/claude-code-beginner-guide/">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
@@ -184,7 +190,7 @@ section{padding:100px 24px;position:relative}
 .faq-item.open .faq-q .arrow{transform:rotate(45deg)}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;background:var(--c-bg)}
 .faq-item.open .faq-a{max-height:600px}
-.faq-item.long.open .faq-a{max-height:2400px}
+.faq-item.long.open .faq-a{max-height:7000px}
 .faq-quote{font-family:var(--font-serif);font-size:13.5px;line-height:1.95;color:var(--c-text);background:#fff;border-left:3px solid var(--c-accent);padding:12px 18px;margin:8px 0;border-radius:0 6px 6px 0}
 .faq-quote .ts{font-family:var(--font-en);font-size:11px;color:var(--c-accent-deep);letter-spacing:.06em;margin-right:6px;font-weight:600}
 .faq-quote em{color:var(--c-accent-deep);font-style:normal;font-weight:600;background:rgba(232,181,122,.15);padding:1px 4px;border-radius:3px}
@@ -317,9 +323,14 @@ section{padding:100px 24px;position:relative}
 .float-toc-drawer .ft-shortcut.shortcut-spell{background:linear-gradient(120deg,#FCEDD3,#F4DDB8);color:var(--c-accent-deep)}
 .float-toc-drawer .ft-shortcut.shortcut-permission{background:linear-gradient(120deg,#FBE0E0,#E6EEF3);color:#A26060}
 
-@media(max-width:1180px){
+@media(max-width:1180px) and (min-width:901px){
   .float-toc{display:none}
   .float-toc-fab{display:flex}
+}
+
+@media(max-width:900px){
+  .float-toc{display:none}
+  .float-toc-fab,.float-toc-drawer{display:none!important}
 }
 
 /* ========== クイックジャンプチップ（静的TOC直下） ========== */
@@ -407,6 +418,7 @@ section{padding:100px 24px;position:relative}
       皆さん向けに、いっちゃんやさしいルートだけ載せた導入＆活用ガイドや。
     </p>
     <div class="hero-meta">
+      <span>🆕 v2.0（2026-05-24更新）</span>
       <span>📖 7章構成</span>
       <span>⏱ 読了 30〜45分</span>
       <span>🛠 触りながら 約1時間</span>
@@ -1028,12 +1040,13 @@ section{padding:100px 24px;position:relative}
             → つまり <strong>プロプランでも、設定画面で「バイパス編集権限モード許可」にチェック入れたら使える</strong>、っていうのが配信中の最終結論や。
           </p>
 
-          <!-- v1.7.1 追記：2026-05-21 時点の公式仕様反映 -->
+          <!-- v2.0 追記：2026-05-24 時点の公式仕様反映 -->
           <div style="background:linear-gradient(135deg, #f0f7fb, #e6f0f5); border-left:5px solid #4F8CA8; padding:20px 24px; border-radius:12px; margin:24px 0;">
-            <p style="font-weight:700; color:#2a5670; margin-bottom:12px; font-size:15px;">📅 2026-05-21 時点での最新仕様（公式ドキュメント確認済）</p>
+            <p style="font-weight:700; color:#2a5670; margin-bottom:12px; font-size:15px;">📅 2026-05-24 時点での最新仕様（公式ドキュメント確認済）</p>
             <p style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; font-size:14px;">
-              学長の4/26配信のあとに <strong>新しく整理された情報</strong>がいくつかあるねん。<br>
-              実は学長が混乱してた「自動モード」と「バイパス権限モード」、<strong>これ別物</strong>やったんよ〜🌷
+              学長の4/26配信のあとに <strong>公式ドキュメント側の整理が進んでいる</strong>ところがあるねん。<br>
+              特に大事なんは、<strong>Proで使える「自動承認っぽいモード」と、本当の <code>auto</code>（自動モード）は別物</strong>ということやで。<br>
+              公式の <code>auto</code> は、2026-05-24確認時点では <strong>Max / Team / Enterprise / API が対象で、Proは対象外</strong>。ここを混ぜたら危ないから、表で分けて見てな〜🌷
             </p>
 
             <p style="font-weight:700; color:#2a5670; margin: 16px 0 8px; font-size:14px;">🌳 現在の Permission モード（6種類）</p>
@@ -1069,9 +1082,9 @@ section{padding:100px 24px;position:relative}
                   </tr>
                   <tr style="border-top:1px solid #d8e4ec; background:#fef9ec;">
                     <td style="padding:10px 12px;"><strong><code>auto</code></strong><br><span style="font-size:11px; color:#8b6914;">学長の言う「自動モード」</span></td>
-                    <td style="padding:10px 12px;"><strong>全部 ＋ 裏で分類器が安全チェック</strong></td>
+                    <td style="padding:10px 12px;"><strong>全部 ＋ 裏で分類器が安全チェック</strong><br><span style="font-size:11px;color:#6a7a85;">Claude Code v2.1.83以降／Max・Team・Enterprise・API対象</span></td>
                     <td style="padding:10px 12px; text-align:center; color:#c0392b; font-weight:700;">❌</td>
-                    <td style="padding:10px 12px; text-align:center;">✅<br><span style="font-size:10px;">(Opus 4.7限定)</span></td>
+                    <td style="padding:10px 12px; text-align:center;">✅<br><span style="font-size:10px;">条件あり</span></td>
                   </tr>
                   <tr style="border-top:1px solid #d8e4ec;">
                     <td style="padding:10px 12px;"><code>dontAsk</code></td>
@@ -1091,16 +1104,16 @@ section{padding:100px 24px;position:relative}
 
             <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">🎯 学長発言の最終訳：</p>
             <ul style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; padding-left:20px; font-size:13.5px;">
-              <li><strong>「自動モードはMaxプランだけ」</strong> ← これは <code>auto</code> モードの話。<strong>正しい</strong>（今もPro不可）</li>
+              <li><strong>「自動モードはMaxプランだけ」</strong> ← 公式の <code>auto</code> の話としては、2026-05-24時点でもだいたい合ってる。Proは対象外</li>
               <li><strong>「バイパスはプロプランでもできる」</strong> ← これは <code>bypassPermissions</code> モードの話。<strong>正しい</strong>（全プラン可）</li>
-              <li>つまり <strong>学長が混乱したのは、自動モードとバイパスモードを同じだと思ってたから</strong>。実は別物🌟</li>
+              <li>つまり <strong>Proで使える自動化寄りの選択肢は <code>acceptEdits</code> や <code>bypassPermissions</code> で、公式の <code>auto</code> とは別物</strong>。ここは名前がややこしいところやで🌟</li>
             </ul>
 
             <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">🌷 プラン別の現実的おすすめ運用</p>
             <ul style="line-height:1.95; color:#3d4f5c; margin-bottom:14px; padding-left:20px; font-size:13.5px;">
-              <li><strong>Pro ユーザ</strong> → 普段は <code>acceptEdits</code> モード（読み取り＋ファイル編集が自動）／長時間放置なら <code>bypassPermissions</code>（要・隔離環境）</li>
-              <li><strong>Max ユーザ</strong> → 普段は <code>auto</code> モード（分類器が裏で安全チェックしながら全自動・最強）</li>
-              <li>初心者は <strong>まず通常 <code>default</code> モードのまま使い、慣れたら呪文（別冊②）＋<code>acceptEdits</code> へ進む</strong> のが安全</li>
+              <li><strong>初心者</strong> → まずは <code>default</code> のまま。慣れたら呪文（別冊②）＋<code>acceptEdits</code> へ進むのが安全</li>
+              <li><strong>Pro ユーザ</strong> → 普段は <code>acceptEdits</code>。長時間放置で止まるのが困る場合だけ、隔離フォルダで <code>bypassPermissions</code> を検討</li>
+              <li><strong>Max ユーザ</strong> → <code>auto</code> が表示される環境なら、長めの作業で候補にしてOK。ただし出力チェックは人間が見る</li>
             </ul>
 
             <p style="font-weight:700; color:#2a5670; margin: 18px 0 8px; font-size:14px;">⚙️ モード切り替え方法</p>
@@ -1112,7 +1125,7 @@ section{padding:100px 24px;position:relative}
             </ul>
 
             <p style="font-size:12px; color:#6a7a85; margin-top:14px; padding-top:12px; border-top:1px dashed #c5d5dd;">
-              📚 出典：<a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener" style="color:#4F8CA8;">公式ドキュメント「Permission modes」</a>（2026-05-21 確認）
+              📚 出典：<a href="https://code.claude.com/docs/en/permission-modes" target="_blank" rel="noopener" style="color:#4F8CA8;">公式ドキュメント「Permission modes」</a>（2026-05-24 確認）
             </p>
           </div>
 
@@ -1126,11 +1139,11 @@ section{padding:100px 24px;position:relative}
               </tr>
               <tr>
                 <td>普段（パソコンの前にいる時）</td>
-                <td>自動モード <code>auto</code>（※Maxプランのみ）</td>
+                <td><code>default</code> → 慣れたら <code>acceptEdits</code>。Maxなら長めの作業で <code>auto</code> も候補</td>
               </tr>
               <tr>
                 <td>出かける時／作業止まったら困る時</td>
-                <td>許可をバイパスモード <code>bypassPermissions</code>（全プラン可）</td>
+                <td>Maxならまず <code>auto</code>。Proで止めたくない時の <code>bypassPermissions</code> は隔離環境だけ</td>
               </tr>
             </table>
           </div>
@@ -1202,7 +1215,7 @@ section{padding:100px 24px;position:relative}
             <span style="font-size:13px; color:#5a3030;">無料アカウントでログインできるんはチャット版の「claude.ai」だけ。Claude Code（パソコンの中で動くやつ）は <strong>Pro 以上の有料プラン</strong> が必須や。</span>
           </div>
           月20ドル（<strong>Pro</strong>）からスタートでええで。僕も「月20ドルで十分や」って言うとる。月3,000円弱で「遊び道具／仕事道具」として余裕で元取れるから、最初は Pro で全然OK。<br>
-          もっとガッツリ使いたい人は <strong>Max（月100ドル）</strong> 以上に上げると、長時間タスクを裏で動かす <code>auto</code>モード（<a href="#faq-answer-05">FAQ-05参照</a>）も解禁されるで。<br>
+          公式仕様では、本当の <code>auto</code> モードは <strong>Max / Team / Enterprise / API が対象で、Proは対象外</strong>やで。Proの人は、まず <code>acceptEdits</code> で「編集を自動承認」する運用が現実的。もし使用量が足りなくなったり、大きめの作業を毎日回したくなったら Max へのアップグレードを考えたらええ。詳しくは <a href="#faq-answer-05">FAQ-05参照</a> やで。<br>
           クレジットカードはプリペイドでも登録できるで。従量課金やないから、上限は決まっとる。安心してええよ。
         </div></div>
       </div>
@@ -1400,7 +1413,7 @@ section{padding:100px 24px;position:relative}
       </p>
       <ul style="margin-bottom:0;">
         <li>📦 <a href="https://chromewebstore.google.com/publisher/anthropic/u308d63ea0533efcf7ba778ad42da7390" target="_blank" rel="noopener" style="color:#7a6e58;font-weight:600;">Chrome Web Store(Anthropic公式)</a> ── ここからインストールしてな</li>
-        <li>📖 <a href="https://support.anthropic.com/en/articles/12012173-getting-started-with-claude-for-chrome" target="_blank" rel="noopener" style="color:#7a6e58;font-weight:600;">公式ガイド(はじめ方)</a> ── 最初の一歩はここを見たらええ</li>
+        <li>📖 <a href="https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome" target="_blank" rel="noopener" style="color:#7a6e58;font-weight:600;">公式ガイド(はじめ方)</a> ── 最初の一歩はここを見たらええ</li>
         <li>🔧 <a href="https://code.claude.com/docs/en/chrome" target="_blank" rel="noopener" style="color:#7a6e58;font-weight:600;">Claude Codeとつなぐ方法</a> ── Code側からChromeに指示する設定や</li>
       </ul>
     </div>
@@ -1596,7 +1609,7 @@ section{padding:100px 24px;position:relative}
     <p>リベシティ Claude Code 初心者部会 配布資料</p>
     <p>制作：おけもんカンパニー（はるかCEO × りんCMO × あおいCDO × きょうちゃん）</p>
     <p style="margin-top:14px">素材：AI仙人「Claude Code基礎解説」／ 両学長ライブ4/29 ／ 活用事例DB ／ オフ会原液20本ぶんのFAQ抽出</p>
-    <div class="footer-bottom">© 2026 Okemon Company  ·  Mock Build 2026-04-30</div>
+    <div class="footer-bottom">© 2026 Okemon Company  ·  v2.0 Updated 2026-05-24</div>
   </div>
 </footer>
 
@@ -1663,7 +1676,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
     const ans = document.getElementById(answerId);
     if(!ans) return;
     const item = ans.closest('.faq-item');
-    if(item && !item.classList.contains('open')){
+    if(item){
       item.classList.add('open');
       const trigger = item.querySelector('.faq-q');
       if(trigger) trigger.setAttribute('aria-expanded', 'true');
@@ -1674,16 +1687,21 @@ document.querySelectorAll('.faq-item').forEach(item => {
     }, 80);
   }
 
-  // ページロード時にハッシュが faq-answer-XX なら開く
-  if(location.hash && location.hash.startsWith('#faq-answer-')){
-    openFaqByAnswerId(location.hash.slice(1));
+  function openFaqFromCurrentHash(){
+    if(location.hash && location.hash.startsWith('#faq-answer-')){
+      openFaqByAnswerId(location.hash.slice(1));
+    }
   }
 
-  // data-open-faq 属性つきリンクのクリックハンドラ
-  document.querySelectorAll('a[data-open-faq]').forEach(a => {
+  // ページロード時にハッシュが faq-answer-XX なら開く
+  openFaqFromCurrentHash();
+  window.addEventListener('hashchange', openFaqFromCurrentHash);
+
+  // FAQ回答へのリンクは、data属性がなくても開く
+  document.querySelectorAll('a[data-open-faq], a[href^="#faq-answer-"]').forEach(a => {
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      const id = a.dataset.openFaq;
+      const id = a.dataset.openFaq || a.getAttribute('href').slice(1);
       openFaqByAnswerId(id);
       history.replaceState(null, '', '#' + id);
     });

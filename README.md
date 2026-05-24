@@ -29,6 +29,11 @@
 | 別冊3 | `boris-seminar-30min.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/boris-seminar-30min.html | Anthropic公式30分セミナーの初心者向け整理 |
 | 別冊4 | `gakucho-live-may4-cases.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/gakucho-live-may4-cases.html | AIで稼ぐ実例集。学長ライブ5/4ベース |
 | 別冊5 | `libecity-learning-links.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/libecity-learning-links.html | リベシティ宿題リスト、AI初心者サポートチャット投稿ログ、ノウハウ図書館への学習導線 |
+| 別冊6 | `gakucho-live-auto-process.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/gakucho-live-auto-process.html | 毎日の学長ライブを自動テキスト化・要約する仕組み |
+| 別冊7 | `gakucho-live-30days-database.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/gakucho-live-30days-database.html | 学長ライブ30日分データベース |
+| 別冊8 | `whats-to-build.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/whats-to-build.html | Claude Codeで何を作るか迷った人への入口 |
+| 別冊9 | `offkai-archive.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/offkai-archive.html | Claude Code関連オフ会アーカイブ |
+| 別冊10 | `everyone-ai-usage-list.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/everyone-ai-usage-list.html | 学長ライブのAI活用事例DB |
 
 ---
 
@@ -84,7 +89,12 @@ claude-code-beginner-guide/
 ├── gakucho-magic-spell.html          # 別冊2
 ├── boris-seminar-30min.html          # 別冊3
 ├── gakucho-live-may4-cases.html      # 別冊4
-└── libecity-learning-links.html      # 別冊5
+├── libecity-learning-links.html      # 別冊5
+├── gakucho-live-auto-process.html    # 別冊6
+├── gakucho-live-30days-database.html # 別冊7
+├── whats-to-build.html               # 別冊8
+├── offkai-archive.html               # 別冊9
+└── everyone-ai-usage-list.html       # 別冊10
 ```
 
 ---
@@ -99,6 +109,11 @@ claude-code-beginner-guide/
 | v1.3 | 2026-05-05 | 別冊4「AIで稼ぐ実例集」を追加 |
 | v1.4 | 2026-05-07 | 共同編集ルール、素材リンク集、別冊5「リベシティ学習リンク集」を追加 |
 | v1.5 | 2026-05-07 | 別冊5のトンマナ整備、AI初心者サポートチャットの記事投稿ログを追加 |
+| v1.6 | 2026-05-18 | 読み方ルート、見分けカード、権限モードFAQの導線を追加 |
+| v1.7 | 2026-05-21 | 別冊6〜8と、学長ライブ自動処理・30日DB・作るもの診断を追加 |
+| v1.8 | 2026-05-23 | 別冊9「オフ会アーカイブ」を追加 |
+| v1.9 | 2026-05-23 | 別冊10「みんなのAI活用事例DB」を追加 |
+| v2.0 | 2026-05-24 | 最新公式仕様に合わせてauto / acceptEdits / bypassPermissionsの違いを整理。FAQ自動展開、FAQ-05途中切れ、スマホ下部ナビ重なり、Chrome公式リンクを修正 |
 
 ---
 

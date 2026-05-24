@@ -57,7 +57,10 @@
 | Claude Desktop / Claude Code ダウンロード | https://claude.com/download |
 | Claude Code docs | https://code.claude.com/docs |
 | Claude Code setup | https://code.claude.com/docs/en/setup |
+| Claude Code permission modes | https://code.claude.com/docs/en/permission-modes |
+| Claude Code with Pro / Max plans | https://support.claude.com/ja/articles/11145838-pro-%E3%81%BE%E3%81%9F%E3%81%AF-max-%E3%83%97%E3%83%A9%E3%83%B3%E3%81%A7-claude-code-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B |
 | Claude in Chrome | https://chromewebstore.google.com/publisher/anthropic/u308d63ea0533efcf7ba778ad42da7390 |
+| Claude in Chrome support guide | https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome |
 
 ## 森側メモ
 

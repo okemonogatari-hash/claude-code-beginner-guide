@@ -170,6 +170,18 @@
       margin-left: auto;
       font-weight: bold;
     }
+
+    @media (max-width: 900px) {
+      #okemori-index-trigger {
+        right: 16px;
+        bottom: 82px;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+      #okemori-index-drawer {
+        width: min(360px, 90vw);
+      }
+    }
   `;
 
   // Menu items config
@@ -182,7 +194,9 @@
     { filename: 'libecity-learning-links.html', title: '🔗 別冊⑤：宿題＆リンク集', desc: 'リベシティ宿題リストと、ノウハウ図書館の記事キュレーション。', badge: '別冊⑤' },
     { filename: 'gakucho-live-auto-process.html', title: '📺 別冊⑥：ライブ自動処理', desc: '毎日12:00に自動で字幕取得・要約・事例抽出を行うスキルの仕組み。', badge: '別冊⑥' },
     { filename: 'gakucho-live-30days-database.html', title: '🗓️ 別冊⑦：30日分ライブDB', desc: '自動取得された29日分の実生データ一覧。タイトルやYouTubeリンク。', badge: '別冊⑦' },
-    { filename: 'whats-to-build.html', title: '🤔 別冊⑧：で、なに作る？', desc: '「インストールしたけれど何を作ればいいか分からない」人へのアイデア集。', badge: '別冊⑧' }
+    { filename: 'whats-to-build.html', title: '🤔 別冊⑧：で、なに作る？', desc: '「インストールしたけれど何を作ればいいか分からない」人へのアイデア集。', badge: '別冊⑧' },
+    { filename: 'offkai-archive.html', title: '🌳 別冊⑨：オフ会アーカイブ', desc: 'Claude Code関連オフ会・シェア会・勉強会の記録とFAQの育ち方。', badge: '別冊⑨' },
+    { filename: 'everyone-ai-usage-list.html', title: '🌟 別冊⑩：AI活用事例DB', desc: '学長ライブから抽出したAI活用事例198件の入口マップ。', badge: '別冊⑩' }
   ];
 
   // Insert CSS
