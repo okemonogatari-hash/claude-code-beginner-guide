@@ -1,0 +1,587 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3つでいい、タイムバケット</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap">
+<style>
+/* 虎の巻の配色トークンに準拠（PROJECT_RULES「デザイン方針は勝手に変えない」）
+   3つのバケツ＝近い未来から遠い未来へ。緑→金→青は既存の --c-sub / --c-accent / --c-main を使う */
+:root{
+  --paper:#FAF7F2; --sky:#F2EBDD; --card:#FFFFFF;
+  --ink:#3D3A35; --ink-2:#5C564C; --ink-3:#6B6459;
+  --rule:#E5DDC9; --rule-2:#D3C9AF;
+  --wakaba:#4E6E46; --wakaba-bg:#EDF2EA;
+  --yamabuki:#875D21; --yamabuki-bg:#F7EEDF;
+  --ai:#3D7391; --ai-bg:#E9F1F5;
+  --on-color:#ffffff;
+  --mincho:"Zen Old Mincho",serif;
+  --gothic:"Zen Kaku Gothic New",-apple-system,"Hiragino Sans",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--gothic);
+  font-size:19px;line-height:1.95;-webkit-text-size-adjust:100%}
+.page{max-width:800px;margin:0 auto;padding:0 22px 120px}
+
+.hero{padding:80px 0 54px;text-align:center}
+.buckets{display:flex;justify-content:center;gap:20px;margin:0 0 44px}
+.bk{width:80px}
+.bk svg{width:100%;height:auto;display:block}
+.bk .fill{transform-origin:50% 100%;animation:fillup 1.5s cubic-bezier(.2,.8,.3,1) both}
+.bk:nth-child(2) .fill{animation-delay:.28s}
+.bk:nth-child(3) .fill{animation-delay:.56s}
+@keyframes fillup{from{transform:scaleY(0);opacity:.2}to{transform:scaleY(1);opacity:1}}
+.bk p{margin:13px 0 0;font-size:15px;color:var(--ink-3);letter-spacing:.04em}
+h1{font-family:var(--mincho);font-weight:700;font-size:clamp(2.2rem,7.6vw,3.8rem);
+  line-height:1.38;letter-spacing:.02em;margin:0 0 28px;text-wrap:balance}
+h1 .n{color:var(--yamabuki)}
+.lede{font-size:1.1rem;color:var(--ink-2);margin:0 auto;max-width:30em;text-align:left}
+.byline{margin-top:36px;font-size:1rem;color:var(--ink-3);display:flex;gap:10px;
+  flex-wrap:wrap;justify-content:center}
+.byline span{background:var(--sky);border-radius:999px;padding:7px 18px}
+
+section{margin-top:78px}
+h2{font-family:var(--mincho);font-weight:600;font-size:clamp(1.55rem,4.4vw,2.15rem);
+  line-height:1.5;margin:0 0 12px;text-wrap:balance}
+.sub{color:var(--ink-3);font-size:1.04rem;margin:0 0 30px}
+h3{font-size:1.16rem;margin:36px 0 12px}
+p{margin:0 0 18px}
+
+.card{background:var(--card);border-radius:14px;padding:28px 30px;margin:24px 0;
+  border:1px solid var(--rule)}
+.card > :last-child{margin-bottom:0}
+.card h3{margin-top:0}
+.card.w{background:var(--wakaba-bg);border-color:transparent}
+.card.w h3{color:var(--wakaba)}
+.card.y{background:var(--yamabuki-bg);border-color:transparent}
+.card.y h3{color:var(--yamabuki)}
+.card.a{background:var(--ai-bg);border-color:transparent}
+.card.a h3{color:var(--ai)}
+
+.step{position:relative;padding-left:66px;margin:46px 0}
+.step .no{position:absolute;left:0;top:2px;width:46px;height:46px;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--mincho);font-size:1.35rem;
+  color:var(--on-color)}
+.step:nth-of-type(1) .no{background:var(--wakaba)}
+.step:nth-of-type(2) .no{background:var(--yamabuki)}
+.step:nth-of-type(3) .no{background:var(--ai)}
+.step:nth-of-type(4) .no{background:var(--ink-2)}
+.step h3{margin-top:4px}
+
+.prompt{position:relative;background:var(--sky);border:1px solid var(--rule);
+  border-radius:14px;margin:20px 0}
+.prompt pre{margin:0;padding:64px 24px 28px;font-family:var(--mono);font-size:15.5px;
+  line-height:1.95;white-space:pre-wrap;overflow-x:auto;color:var(--ink)}
+.copy{position:absolute;top:14px;right:14px;font-family:var(--gothic);font-size:1rem;
+  background:var(--ink);color:var(--on-color);border:0;border-radius:999px;
+  padding:9px 22px;cursor:pointer;transition:background .18s}
+.copy:hover{background:var(--yamabuki)}
+.copy:focus-visible{outline:3px solid var(--yamabuki);outline-offset:2px}
+.copy.done{background:var(--wakaba)}
+
+ul,ol{margin:0 0 18px;padding-left:1.4em}
+li{margin:11px 0}
+li::marker{color:var(--ink-3)}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 20px}
+.chip{font-size:16px;background:var(--card);border:1px solid var(--rule-2);
+  border-radius:999px;padding:6px 16px;color:var(--ink-2)}
+
+blockquote{margin:22px 0;padding:4px 0 4px 22px;border-left:3px solid var(--yamabuki);
+  font-family:var(--mincho);font-size:1.24rem;color:var(--ink)}
+blockquote p:last-child{margin-bottom:0}
+
+a{color:var(--ai);text-decoration:none;border-bottom:1.5px solid currentColor;
+  padding-bottom:1px;overflow-wrap:anywhere}
+a:hover{color:var(--yamabuki)}
+a:focus-visible{outline:3px solid var(--yamabuki);outline-offset:2px}
+
+.tbl{overflow-x:auto;margin:20px 0}
+table{border-collapse:collapse;width:100%;min-width:430px;font-size:1.02rem}
+th,td{text-align:left;padding:14px 16px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.96rem;color:var(--ink-3);font-weight:500;white-space:nowrap}
+tr td:first-child{color:var(--ink-2)}
+tr td:last-child{color:var(--wakaba);font-weight:500}
+code{font-family:var(--mono);font-size:.95em;background:var(--sky);
+  padding:3px 7px;border-radius:5px}
+
+footer{margin-top:96px;padding-top:30px;border-top:1px solid var(--rule);
+  color:var(--ink-2);font-size:1rem}
+footer p{margin:0 0 10px}
+
+
+/* ── 目次 ── */
+.toc{position:sticky;top:0;z-index:40;background:rgba(250,247,242,.94);
+  backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--rule)}
+.toc-in{max-width:800px;margin:0 auto;padding:10px 22px;display:flex;gap:6px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.toc-in::-webkit-scrollbar{display:none}
+.toc a{flex:0 0 auto;font-size:15px;color:var(--ink-2);border:1px solid var(--rule-2);
+  border-bottom-width:1px;border-radius:999px;padding:6px 15px;white-space:nowrap;
+  transition:background .18s,color .18s,border-color .18s}
+.toc a:hover{background:var(--sky);color:var(--ai);border-color:var(--ai)}
+.toc a.on{background:var(--ai);color:#fff;border-color:var(--ai)}
+.toc a:focus-visible{outline:3px solid var(--yamabuki);outline-offset:2px}
+section{scroll-margin-top:66px}
+.totop{position:fixed;right:18px;bottom:18px;z-index:41;background:var(--ink);color:#fff;
+  border:0;border-radius:999px;padding:11px 19px;font-family:var(--gothic);font-size:15px;
+  cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s}
+.totop.show{opacity:1;pointer-events:auto}
+.totop:hover{background:var(--yamabuki)}
+.totop:focus-visible{outline:3px solid var(--yamabuki);outline-offset:2px}
+@media(max-width:640px){ .toc-in{padding:9px 16px} .toc a{font-size:14.6px;padding:6px 13px} }
+@media (prefers-reduced-motion:reduce){.bk .fill{animation:none}
+  html{scroll-behavior:auto}}
+@media(max-width:640px){
+  body{font-size:18px}
+  .hero{padding:52px 0 36px}
+  .buckets{gap:13px} .bk{width:64px}
+  .step{padding-left:54px}
+  .step .no{width:40px;height:40px;font-size:1.15rem}
+  .prompt pre{padding:60px 16px 24px;font-size:14.6px}
+  .card{padding:22px 20px}
+}
+</style>
+
+<nav class="toc" aria-label="目次"><div class="toc-in"><a href="#know">はじめに</a><a href="#steps">手順</a><a href="#dig">肝</a><a href="#source">原文で確認</a><a href="#others">他の人の例</a><a href="#more">出典</a></div></nav>
+<div class="page">
+<div class="hero">
+  <div class="buckets"><div class="bk"><svg viewBox="0 0 60 66" aria-hidden="true"><clipPath id="c1"><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z"/></clipPath><g clip-path="url(#c1)"><rect class="fill" x="0" y="0" width="60" height="66" fill="#5C7E53"/></g><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z" fill="none" stroke="#3D3A35" stroke-width="2.4"/><rect x="2" y="8" width="56" height="9" rx="4" fill="#3D3A35"/></svg><p>近いうち</p></div><div class="bk"><svg viewBox="0 0 60 66" aria-hidden="true"><clipPath id="c2"><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z"/></clipPath><g clip-path="url(#c2)"><rect class="fill" x="0" y="0" width="60" height="66" fill="#B8873F"/></g><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z" fill="none" stroke="#3D3A35" stroke-width="2.4"/><rect x="2" y="8" width="56" height="9" rx="4" fill="#3D3A35"/></svg><p>いつか</p></div><div class="bk"><svg viewBox="0 0 60 66" aria-hidden="true"><clipPath id="c3"><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z"/></clipPath><g clip-path="url(#c3)"><rect class="fill" x="0" y="0" width="60" height="66" fill="#4F8CA8"/></g><path d="M6 14h48l-6 46a6 6 0 0 1-6 5H18a6 6 0 0 1-6-5z" fill="none" stroke="#3D3A35" stroke-width="2.4"/><rect x="2" y="8" width="56" height="9" rx="4" fill="#3D3A35"/></svg><p>ずっと先</p></div></div>
+  <h1><span class="n">3つ</span>でいい、<br>タイムバケット。</h1>
+  <p class="lede">やりたいことを100個ひねり出す会ではありません。3つ出して、いつやると一番おいしいかを決めて、今週の一歩をひとつ持って帰る。それだけで完成します。AIには、下の枠をコピーして貼るだけで頼めます。</p>
+  <div class="byline"><span>Claude Code / Codex / ChatGPT どれでも</span><span>準備・設定は要りません</span></div>
+</div>
+
+<section id="know">
+  <h2>先に、3つだけ知っておいてください</h2>
+  <p class="sub">両学長の作法です。ここを外すと、途中で手が止まります。</p>
+  <div class="card w"><h3>100個も書かなくて大丈夫です</h3>
+  <p>実際にリベシティに投稿されているタイムバケットは、<strong>3つから9つくらい</strong>が主流です。学長も「完璧なリストである必要はありません」「修正したらダメなものは何一つありません」と言っています。3つで完成します。</p></div>
+  <div class="card y"><h3>お金のことは、いま考えません</h3>
+  <p>「お金のことを考えると、このリストのワクワク感が消えちゃう」。お金の心配がない前提で書いて、実行プランを立てる時に初めて工面を考えます。</p></div>
+  <div class="card a"><h3>時期は締切ではなく、旬です</h3>
+  <p>いつまでに<em>やらなければいけないか</em>ではなく、いつまでなら<em>おいしく食べられるか</em>。大型犬を飼うなら体力と介護を考えて40代前半までに、映画をたくさん見るのは老後でもできる——そういう分け方です。</p></div>
+</section>
+
+<section id="steps">
+  <h2>手順は4つです</h2>
+  <p class="sub">①だけでタイムバケットは完成します。②以降はおまけです。</p>
+
+  <div class="step"><div class="no">1</div>
+    <h3>AIに、これを貼ってください</h3>
+    <p>丸ごとコピーして、そのまま送ります。AIが1問ずつ聞いてくれるので、思いついたまま答えてください。</p>
+    <div class="prompt"><button class="copy" type="button">コピー</button>
+<pre>あなたは、わたしのタイムバケット作りに付き合ってくれる相棒です。
+両学長の「タイムバケット」の作法に沿って進めてください。
+
+━━━ いちばん大事なこと ━━━
+**空欄のまま出すほうが、埋めて出すより良い成果物です。**
+形式を整えるために、わたしが言っていないことを足さないでください。
+「まだ空いています」と書かれた表は、失敗ではありません。完成です。
+━━━━━━━━━━━━━━━
+
+【進め方】
+・質問は一度に1つだけ。わたしの答えを待ってから次に進んでください。
+・「わからない」「特にない」「思いつかない」「言いたくない」「めんどくさい」も、
+　ぜんぶ正しい答えです。そのまま受け取って次へ進んでください。
+・同じ話題について聞き直していいのは1回までです。2回目は別の話題へ進んでください。
+・わたしが前の質問に後から答えることがあります。そのときは受け取ってかまいません。
+
+【最初にやること】
+1. 3つの作法を伝える
+   ・100個も書かなくて大丈夫。3個で完成します。1個でも書けたら前進です。
+   ・お金のことは考えません。お金の心配がない前提で答えてください。
+   ・あとから何度でも直せます。消しても足してもかまいません。
+2. 年齢を聞く（「時期を考えるのに使います。だいたいで大丈夫です」と添える）
+   答えが返ってこなくても、拒否されても、**1回だけで引いてください。**
+   「あとで教えてもらえたら大丈夫です」と言って先へ進みます。
+
+【聞く順番】
+(1) 最近「これは楽しかった、またやりたい」と思ったことを1つ聞く
+(2) その体験の「どこが一番よかったか」を1回だけ掘る
+    ただし、**まだやったことがない願望**が返ってきたら（「行きたいけど行けてない」など）
+    (2)は飛ばして(3)へ進んでください。体験していないことの感想は聞けません。
+(3) やりたいことをひろげる。角度を変えながら1問ずつ：
+    行きたい場所／大切な人と元気なうちにしたいこと／体力があるうちにしかできないこと／
+    食べたいもの・泊まりたい場所／学びたいこと・作りたいもの／誰かのためにしたいこと／
+    お金の心配がない一日があったら朝から何をするか
+
+【★願いが1つ出たら、その場で時期を聞いてください（あとでまとめて聞かないこと）】
+会話は途中で終わります。**時期を最後に回すと、聞けないまま終わります。**
+だから、場面が思い浮かぶ願いが1つ出るたびに、**その場で1問だけ**こう聞いてください。
+
+「それ、いつごろ叶えたいですか？　
+　『◯歳までに』でも『◯代のうちに』でも『親が元気なうちに』でも大丈夫です。
+　決まらなければ空けておきます」
+
+・答えが返ったら、そのまま時期として採用してください。
+・「決められない」「わからない」でも、**話がそれても、答えが返ってこなくても**、
+　どれも同じ扱いです。**1回で引いて空欄**にし、すぐ次の願いへ進んでください。
+・**年齢や年代を知っていても、そこから時期をあなたが決めないでください。**
+
+【何を「やりたいこと1つ」と数えるか（ここを間違えないでください）】
+数えてよいのは、**それをしている場面が思い浮かぶもの**だけです。
+　○ 数える：「京都に行きたい」「母と温泉」「痩せたい」「推しのライブ」
+　× 数えない：「旅行」だけ／「どこでも」／「金」／「別に」／「知らん」
+　　→ これらは**まだ願いになっていません。**表の「やりたいこと」に入れないでください。
+　　　1回だけ「たとえばどんな？」と聞いて、それでも具体にならなければ、そこは置いて次へ。
+**投げやりな一語を数で埋めないでください。** 1個でも、場面が浮かぶものがあれば十分です。
+
+**ただし「聞く」ことは、埋めることではありません。**
+わたしが話した中に願いになりそうなものがあれば、勝手に表へ入れず、こう聞いてください。
+「さっきの『◯◯』も、やりたいことに入れていいですか？」
+わたしが「はい」と言えば、それはわたしの願いです。「いや」と言えば入れないでください。
+**はいとも いいえとも読めない返事だったら、表に「（入れるか未確認）」と添えて残してください。**
+消さないでください。わたしが後で決めます。
+そのとき出た「お金がない」「時間がない」も、その行の「必要な条件」に一緒に残してください。
+
+【手が止まったとき（字句ではなく、中身で判断してください）】
+**「その質問に対する具体的な答えが返ってこない」返事が2回続いたら**、
+（**同じ質問への2回でなくてかまいません。**別々の質問への空振りが連続した時も含みます）
+（「うーん」でも、話がそれても、「めんどくさ」でも、忙しさの話でも、同じ扱いです）
+**わたしが何か言うのを待たずに、あなたから**こう切り出してください。
+
+「候補を並べますね。ピンとくるものがあれば教えてください。無ければ無いで大丈夫です」
+旅行／食べ物／学び／家族／仲間／仕事／健康／住まい／自然／推し活／挑戦／貢献
+
+それでも止まったままなら、**そこで発散を終えて次へ進んでください。**粘らないでください。
+
+【願いの下の願いを掘る】
+出てきた願いが1つ以上あれば、**どれをもう少し話したいか、わたしに選ばせてください。**
+（あなたが「いちばん熱がありそう」と判断して選ばないでください。それも推測です）
+願いが1つしかなければ、選ばせずにそのまま聞いてかまいません。
+同意がはっきりしない返事なら、**そのまま1回だけ聞いてみてください。**拒まれたら引きます。
+選ばれたものについて、次のどちらかを聞いてください。
+・「それが叶った瞬間、誰といて、どんな気持ちでいたいですか？」
+・「その場所そのものと、そこで得たい感覚と、どちらが本命ですか？」
+はぐらかされたら、別の型でもう1回だけ。2回目でもダメなら、
+**最初に出た願いをそのまま採用して先へ進んでください。**掘れなかったことは失敗ではありません。
+
+【時期を決める】
+・5年か10年区切りのバケツを提案し、**候補は2つまで**。選ぶのはわたしです。
+・次の3つは、どれも**正式な時期**です。
+　① 年齢：「45歳までに」
+　② 年代の幅：「40代のうちに」
+　③ 出来事：「娘が結婚したら」「親が元気なうちに」「体力があるうちに」
+・**わたしが時期を選んでいない項目は、空欄のままにしてください。**
+　年齢を知っていても、そこから「◯代のうちに」を**あなたが決めないでください。**
+　時期の話をする前に会話が終わったら、時期は**全部空欄で正解**です。
+・時期の理由を、わたしの発言から**推測して書かないでください。**
+　（例：わたしが「母は80近い」と言っただけで、「だから急ぐべき」とは書かないでください）
+・お金・時間・体力で「無理そう」と**わたしが言い出したら**、それは削除理由ではありません。
+　その言葉をそのまま「必要な条件」の欄へ移して、「消さずに残しますね」と伝えてください。
+・それでもわたしが「書いていいんですか、実現しないですよ」と言ったら、こう返してください。
+　「**書くのは叶える約束ではありません。浮かんだことを残しておくだけです。**
+　　あとから何度でも消せますし、足せます」
+
+【最後に出してほしいもの】
+1. 表：時期／やりたいこと（わたしの言葉のまま）／なぜその時期か／必要な条件／最初の一歩
+   **埋まらない欄は「まだ空いています」と書いてください。**
+2. 出たものの中から、近いうちに叶えたいものを**最大3つ**。
+   ・**わたしが時期を選んだものだけ**、上の①②③のどれかの形で書いてください。
+   ・**時期を選んでいないものは、時期なしで願いだけを書いてください。**
+   　例：「京都に旅行に行く（時期はまだ決めていません）」
+   ・**これで条件を満たします。**無理に「◯歳までに」の形にしないでください。
+   ・3つに届かなければ「あと◯つは、また今度」と添えてください。
+3. そのうち1つについて、今週できる一歩を1つだけ
+   （「予約する」「調べる」「あの人に話す」くらい小さく）
+   ・**わたしが別々に話した2つを、1つの行動にまとめないでください。**
+   　（例：「京都に行きたい」と「娘と何かしたい」を「娘に京都の話をする」にしない）
+   ・出なければ「今週の一歩は、まだ決めていません」と書いてください。
+
+【最後に必ず伝えてほしいこと】
+・空いている欄があっても、それで完成です。作り直せます。
+・大切な人に見せると、一緒に叶えたいことが見つかることがあります。
+
+それでは、まず3つの作法から始めてください。</pre></div>
+  </div>
+
+  <div class="step"><div class="no">2</div>
+    <h3>リベシティに出すなら、続けてこれを貼ってください</h3>
+    <p>手順は2つです。<strong>①運営のテンプレ画像を手に入れる → ②AIに文章と文字入れの指示を作ってもらう。</strong>先に画像がないと、②を貼っても進めません。</p>
+    <div class="card y">
+      <h3>先に、運営のテンプレ画像を手に入れてください</h3>
+      <p>ステップ2は「新しく画像を作る」のではなく、<strong>運営が配ったテンプレ画像に文字を入れる</strong>のが条件です。先に画像を取ってきてください。</p>
+      <ol>
+        <li><a href="https://libecity.com/room_list?room_id=Liberal-City&amp;comment_id=2g33VUdF0WPFRsu1RcxE" target="_blank" rel="noopener">キャンペーンの告知を開く</a>（要ログイン。<strong>1回目は別の告知に着地することがあるので、その時はもう一度同じURLを開き直してください</strong>）</li>
+        <li>下へスクロールして <strong>「✅ステップ2：AIを使って画像に文字を入れる」→「① 以下の画像をダウンロードする」</strong> を探す</li>
+        <li>そのすぐ下にある横長の画像を、<strong>右クリック →「名前をつけて画像を保存」</strong>（画像をコピーして使ってもOKと運営が書いています）</li>
+      </ol>
+      <p style="margin-bottom:0"><strong>どんな画像か：</strong>「今こそ作ろう タイムバケット」のタイトルとライオンのキャラがいて、その下に<strong>青いバケツが3つ横に並んでいる</strong>横長の絵です。この3つのバケツに、あなたの3つを入れます。</p>
+    </div>
+
+    <div class="prompt"><button class="copy" type="button">コピー</button>
+<pre>いまの3つを、リベシティの「つぶやき」に投稿する形に整えてください。
+
+・3つを「◯歳までに△△する」の形で並べる
+・そのうち1つを実現するために「今取り組むこと」を1行つける
+・ハッシュタグ #タイムバケット を入れる
+・わたしが言っていないことを足さないでください
+
+あわせて、運営が配布しているバケツの画像に文字を入れてもらうための
+指示文も作ってください。画像はわたしがAIに添付します（3つのバケツが横に並んだ絵です）。
+「左のバケツには『◯◯（◯歳）』、中央のバケツには……と文字を入れて」
+のように、3つのやりたいことを画像のどこに置くかまで書いてください。</pre></div>
+    <div class="card a"><h3>投稿の条件（2026年8月時点）</h3>
+      <div class="chips"><span class="chip">応援会員のみ</span><span class="chip">つぶやきに投稿</span><span class="chip">#タイムバケット</span><span class="chip">配布画像に文字入れ</span><span class="chip">今取り組むこと</span><span class="chip">8/31 23:59まで</span></div>
+      <p>チャットのコメントではなく<strong>「つぶやき」</strong>です。画像は<strong>新しく生成するのではなく、告知に貼ってあるバケツの画像をダウンロードして、AIでそこに3つの文字を入れます</strong>。使うAIの指定はありません。</p>
+      <p>条件を満たすと50pt（投稿から1週間ほどで送付・1人1回限り）、さらに抽選30名に1,000pt（9月6日までに送付）。新入生会員・こども会員は対象外です。予算上限に達し次第、早期終了する可能性があります。</p>
+      <p style="margin-bottom:0"><strong>ここに書いた条件は書き写しです。</strong>下の「条件は、AIに読みに行かせてください」から、<strong>告知の原文をあなたのAIに読ませてください。</strong></p>
+    </div>
+  </div>
+
+  
+  <div class="step"><div class="no">3</div>
+    <h3>できた3つを、1枚のHTMLにしてもらえます</h3>
+    <p>タイムバケットを作った<strong>同じチャットの続き</strong>に貼るだけです。<strong>写真はAIがUnsplashから探してきます。</strong>手元の写真があれば、そちらが優先されます。</p>
+    <div class="prompt"><button class="copy" type="button">コピー</button>
+<pre>さっき一緒に作ったタイムバケットを、1枚のHTMLにしてください。
+
+━━━ このページのゴール ━━━
+**わたしが開いたときに、「これは自分のページだ」と思えること。**
+
+そう思えるのは、次の3つが揃ったときです。
+・**もう叶えたことが、いちばん上にある**（これから叶えることより先に）
+・**わたしが言った言葉が、そのまま載っている**（きれいに直されていない）
+・**写真を見た瞬間に、その情景が浮かぶ**
+
+逆に、こうなっていたら届いていません。
+・文字だけで、絵が浮かばない
+・誰が書いても同じに見える
+・わたしが言っていないことが、きれいに埋まっている
+
+**空欄は、そのままで大丈夫です。** 空欄のあるページは未完成ではなく、
+「まだこれから」が見えているページです。
+━━━━━━━━━━━━━━━━
+
+【1つだけ聞いてください】
+手元に写真はありますか。あれば、そのファイルの場所を教えてください。
+無ければ、そう言ってもらえたら、あとはあなたが探します。
+
+【写真をそろえる】
+願い1つにつき、1枚。ここがこのページの半分です。
+
+■ わたしの写真がある願い
+　そちらを使ってください。**実物が1枚あるだけで、ページが自分のものになります。**
+
+■ 写真が無い願い → Unsplash から
+　1. 検索語は「**その瞬間の情景**」に変換してください。
+　　　「母と温泉」→ onsen japan steam winter evening
+　　　「ハワイで乾杯」→ hawaii beach sunset cheers glasses
+　　　「Kindle本を出す」→ writing desk night lamp notebook
+　　　願いの単語をそのまま英訳すると、他人の写真になります。
+　2. unsplash.com で検索し、Unsplash+（有料）以外から選ぶ
+　3. `images.unsplash.com` で始まる直リンクに `?fm=jpg&amp;q=80&amp;w=1600` を付けて、
+　　　そのまま img src に入れる（ダウンロードは不要です）
+　4. ページの最後に「撮影者名／Unsplash」とリンクを載せる
+
+■ 良い写真の見分け方
+　**わたしが「そこにいる自分」を思い浮かべられるか。** それだけです。
+　・引きの風景、手元、後ろ姿、物のアップ → 自分ごとになります
+　・顔が大きく写った人物 → その願いが、その人のものに見えてしまいます
+　・明るい写真 → 開いたときに気持ちが上がります
+　**1枚だけ、極端に大きく置いてください。** そこがこのページの主役になります。
+
+■ 合う写真が見つからなかった願い
+　似ているだけの写真より、**写真なしで余白を広く取ったほうが**、
+　その願いはまだ形になっていない、という正直な見え方になります。
+
+【ページの順番】
+1. 冒頭 ── わたしが言った言葉から、ひとことを大きく。背景に写真を1枚
+2. **もう叶えたこと** ── ここを最初に、いちばん大きく
+   （叶えたことが出ていなければ、この章は省いてください）
+3. 毎日のこと ── 日付が入らない願いがあれば
+4. 時期ごとのバケツ ── 近い順に。1項目1枚の写真。
+   時期が決まっていないものは「まだ空いています」
+5. 空いているバケツ ── 何も入っていない年代は、空のまま見せてください。
+   そこが見えることに意味があります
+6. 今週の一歩 ── 決まっていなければ「まだ決めていません」
+7. 写真クレジット
+
+**2番を最初に置くのが、このページのいちばん効くところです。**
+これから叶えることより先に、もう叶えたことを見せると、
+「自分にはまだ何もない」ではなく「もうここまで来ている」から読み始められます。
+
+【できあがりの目安】
+次の状態になっていれば到達です。
+
+・**スマホ（横375px）で読める** ── 横スクロールが出ない。
+　いちばん小さい文字も13px以上。文字と背景のコントラスト比は4.5以上
+　（明るい地に薄いグレーの文字がいちばん読めなくなります）
+・**写真の上の文字が、写真の明るい部分でも読める**
+　（写真の上に暗いグラデーションを敷いてから白文字にすると確実です）
+・**どの環境で開いても、同じ明るさで出る**
+　（ダークモード用のCSSを持たせなければ、そうなります。
+　　持たせると、読む人のパソコンが夜モードのとき暗く出ます）
+・**色は4種類まで**（本文・補助・見出し・アクセント1色）。
+　純白と純黒を少しだけ外すと、画面が優しくなります
+・**HTMLファイル1つで完結**。読み込む外部は Unsplash の画像と Google Fonts だけ
+・スクロールでふわっと現れる程度の動きはOK（prefers-reduced-motion に対応させる）
+
+【ここだけは、必ず守ってください】
+**わたしが言っていないことを、ページに書かないでください。**
+埋まらない欄は「まだ空いています」と書いてください。
+言い回しをきれいに整えるのも、しないでください。
+「痩せたい」を「健康的な身体づくり」にすると、わたしの言葉ではなくなります。
+
+【書き終わったら】
+ブラウザで開いて、実際に確かめて、結果を教えてください。
+・写真がすべて表示されているか
+・いちばん小さい文字が13px以上あるか
+・コントラスト比がすべて4.5以上あるか
+・写真の上の文字が読めるか
+割れているところは直してから渡してください。
+
+ファイル名は「私のタイムバケット.html」で、
+ダブルクリックで開ける状態にしてください。
+
+それでは、写真の1問からお願いします。</pre></div>
+    <div class="card w">
+      <h3>このページのゴールは「きれいに出来ていること」ではありません</h3>
+      <p><strong>開いた本人が「これは自分のページだ」と思えること。</strong>そのために必要なのは3つだけです。もう叶えたことが先にあること。本人の言葉がそのまま載っていること。写真を見た瞬間に情景が浮かぶこと。</p><p>だからプロンプトは、願い1つにつき1枚の絵を用意させ、検索語を「その瞬間の情景」に変換させ、そして<strong>もう叶えたことをページの最初に置かせています。</strong>「自分にはまだ何もない」ではなく「もうここまで来ている」から読み始められるからです。</p>
+      <p>2026年8月21日に実際に測って分かったことを、そのまま条件にしています。</p>
+      <ul>
+        <li><strong>「空欄のほうが良いページです」</strong>──「形を作れ」と命じると、AIは形のために事実を作ります。検証で実際に、55歳としか言っていない人の表に「50代のうちに」を創作しました</li>
+        <li><strong>「ダーク用CSSを書かない」</strong>──読む人のパソコンが夜モードだと、明るく設計したページが必ず暗く出ます</li>
+        <li><strong>「いちばん小さい文字も13px以上」</strong>──11.5pxと12pxが日本語の常習犯です。ラベル・日付・タグに出ます</li>
+        <li><strong>「文字色は4種類まで」</strong>──色の出口が4つなら、直す場所も4つで済みます</li>
+        <li><strong>「1枚だけ極端に大きく」</strong>──AIっぽさの正体は暗さではなく「均等」です。全部同じ大きさは、全部どうでもいいと同じです</li>
+      </ul>
+      <p style="margin-bottom:0"><strong>構成の②「もう叶えたことを最初に、いちばん大きく」が、この1枚の肝です。</strong>タイムバケットはふつう未来を並べますが、もう叶えたことを先に見せると、そのページが急に自分のものになります。</p>
+    </div>
+  </div>
+
+  <div class="step"><div class="no">4</div>
+    <h3>毎回使いたい人は、スキルにできます</h3>
+    <p>①の中身をファイルに置いておくと、次からは <code>/time-bucket</code> と打つだけで呼べます。うまくいかなくても大丈夫です。①を毎回貼れば、まったく同じことができます。</p>
+    <ol>
+      <li>ターミナルで <code>mkdir -p ~/.claude/skills/time-bucket</code></li>
+      <li><code>~/.claude/skills/time-bucket/SKILL.md</code> というファイルを作る</li>
+      <li>いちばん上に、区切り線 <code>---</code> ではさんで <code>name: time-bucket</code> と <code>description: タイムバケットを1問ずつの対話で作る</code> を書く</li>
+      <li>その下に、①の中身をまるごと貼る</li>
+      <li>Claude Code を開き直す</li>
+    </ol>
+  </div>
+</section>
+
+<section id="dig">
+  <h2>このプロンプトの肝は、1か所だけです</h2>
+  <p class="sub">「願いの下の願い」を掘るところ</p>
+  <p>ふつうに聞くと、出てくるのは<strong>思いつきやすい願い</strong>です。そこを1回だけ掘ると、本命が下から出てきます。</p>
+  <blockquote><p>「その場所そのものと、そこで得たい感覚と、どちらが本命ですか？」<br>「それが叶った瞬間、誰といて、どんな気持ちでいたいですか？」</p></blockquote>
+  <div class="card y">
+    <p>実際にあった例です。ある人が<strong>「毎日ふらっと飲みに行ける友達が欲しい」</strong>と答えました。掘ってみたら、本命は<strong>「ありのままでワイワイできる時間」</strong>でした。お酒でも、人数でもなかったのです。</p>
+    <p style="margin-bottom:0">「飲みに行く」で書いていたら、<strong>叶えても満たされない項目</strong>になっていました。掘る価値があるのは、こういうときです。</p>
+  </div>
+</section>
+
+<section id="source">
+  <h2>条件は、AIに読みに行かせてください</h2>
+  <p class="sub">この紙より、運営の告知そのもののほうが正しい</p>
+  <div class="card w">
+    <p>このページのキャンペーン条件は、2026年8月21日にリベシティの告知を読んで書いたものです。<strong>この先で変わるかもしれませんし、書き写した時点で間違っているかもしれません。</strong>実際にこの資料でも、いちど内容を間違えて書いていました。</p>
+    <p style="margin-bottom:0">なので、<strong>あなたのAIに、告知そのものを読みに行かせてください。</strong>そのほうが確実です。</p>
+  </div>
+  <h3>告知の場所</h3>
+  <ul><li><a href="https://libecity.com/room_list?room_id=Liberal-City&amp;comment_id=2g33VUdF0WPFRsu1RcxE" target="_blank" rel="noopener">【今こそ作ろうタイムバケット】キャンペーン開催のお知らせ</a><br>
+  <span style="font-size:.96rem;color:var(--ink-3)">運営からのお知らせチャット・2026/08/15 09:00　※要ログイン</span></li></ul>
+  <div class="card"><p style="margin-bottom:0"><strong>この告知リンクにはクセがあります。</strong>1回目に開くと<strong>別の告知に着地することがあります</strong>（実際に8月16日のClaude合宿の告知に飛びました）。<strong>もう一度同じURLを開き直す</strong>と目的の投稿に着地します。AIにもそう伝えてください。</p></div>
+  <h3>AIに読ませるための指示</h3>
+  <p>ブラウザを操作できるAI（Claude Code のブラウザ機能や、ログイン済みChromeにつないだ状態）に貼ってください。</p>
+  <div class="prompt"><button class="copy" type="button">コピー</button>
+<pre>リベシティにログイン済みのブラウザで、次のURLを開いて、
+キャンペーンの条件を原文から読み取ってください。
+
+https://libecity.com/room_list?room_id=Liberal-City&amp;comment_id=2g33VUdF0WPFRsu1RcxE
+
+【注意】
+1回目のアクセスでは別の告知に着地することがあります。
+着地した投稿の日付が「2026/08/15」で、タイトルに「今こそ作ろうタイムバケット」が
+入っているかを必ず確かめてください。違っていたら、同じURLをもう一度開き直してください。
+
+【読み取ってほしいこと】
+・対象者（どの会員種別が対象で、どれが対象外か）
+・応募期間（終了日時。早期終了の条件があるか）
+・ステップ1〜3で、それぞれ何をするか
+　※特にステップ2で扱う画像が「新しく生成するもの」なのか
+　　「運営が配布している画像に文字を入れるもの」なのかを、原文の言葉で確認してください
+・投稿に含める必要があるもの
+・ポイントの金額と、いつ届くか
+
+【答え方】
+読み取った内容を、原文の言葉のまま箇条書きにしてください。
+あなたが知っている一般論で補わないでください。
+読み取れなかった項目は「原文に記載を確認できず」と書いてください。</pre></div>
+  <div class="card a"><h3>同じ日に、公式の合宿もあります</h3>
+    <p style="margin-bottom:0"><strong>リベシティオンラインスクール（合宿）「Claude Codeをもっと使いこなす合宿」</strong><br>
+    8月22日（土）9:00〜18:00（2時間×4コマ）／oviceイベントアリーナ＋YouTube同時配信<br>
+    1コマ目 CLAUDE.md ／ 2コマ目 スキルとセキュリティ ／ 3コマ目 Git ／ 4コマ目 GitHub<br>
+    <span style="font-size:.96rem;color:var(--ink-3)">1コマから参加できます。告知は運営からのお知らせチャット（2026/08/16 12:00）にあります。</span></p></div>
+</section>
+
+<section id="others">
+  <h2>他の人は、こんなふうに書いています</h2>
+  <p class="sub">#タイムバケット のつぶやきから</p>
+  <p>共通しているのは、<strong>大きな夢を、今できる一歩まで分けている</strong>ところです。</p>
+  <div class="tbl"><table>
+    <tr><th>大きな夢</th><th>今できる一歩</th></tr>
+    <tr><td>43歳までに、娘と富士山の頂に立つ</td><td>まずは娘と近くの山へ登る</td></tr>
+    <tr><td>60代で、子や孫と食卓を囲める場所を作る</td><td>息子たちに迷惑をかけない貯蓄をする</td></tr>
+    <tr><td>50代後半から80歳までに、行きたい場所を旅する</td><td>すぐ実現できる1つ目を実行しながら、あと2年働いて資金を作る</td></tr>
+  </table></div>
+  <blockquote><p>「50代で登れる自信がないので、早め早めに」</p></blockquote>
+  <p>この一言が、タイムバケットの本体です。<strong>いつやるかではなく、いつまでならおいしいか</strong>で決める。それが旬を外さないということです。</p>
+</section>
+
+<section id="more">
+  <h2>もっと知りたくなったら</h2>
+  <p class="sub">出典です。まず動画1本で足ります。</p>
+  <ul>
+    <li><a href="https://www.youtube.com/watch?v=mAtehQ95cW0" target="_blank" rel="noopener">両学長「タイムバケットって何？3つのメリットと作り方を解説」</a><br>いちばん見やすい版です。まずこれ1本で足ります。</li>
+    <li><a href="https://www.youtube.com/watch?v=in0GDXJfX4c" target="_blank" rel="noopener">第112回・オリジナル非アニメ版</a><br>この回にだけ、学長が「リベシティ内でタイムバケットを作って公開しあう企画をしても面白いかも」と話す場面があります。5年越しで実現したのが、いまのキャンペーンです。</li>
+    <li><a href="https://liberaluni.com/time-bucket" target="_blank" rel="noopener">リベ大公式ブログ「タイムバケット」</a>（ログイン不要）</li>
+    <li><a href="https://libecity.com/mypage/fiveforces" target="_blank" rel="noopener">五つの力の宿題リスト</a>（要ログイン）<br>「タイムバケットを作って1つ実行しよう」。<strong>作るだけでなく、1つ実行するまでが宿題です。</strong></li>
+  </ul>
+</section>
+
+<footer>
+  <p><strong>出典について</strong>　学長の言葉は、公式動画の字幕とリベ大公式ブログにあるものだけを引用しています。会員のつぶやきは要旨のみを紹介しており、本人確認はしていないため、参考としてご覧ください。</p>
+  <p>キャンペーンの条件は2026年8月21日にリベシティの告知原文を確認して書いていますが、<strong>書き写しである以上ずれる可能性があります。</strong>実際にこの資料も一度間違えて修正しています。最終的な条件は、必ず告知そのものでご確認ください。</p>
+  <p>2026年8月22日　AI×タイムバケット オフ会の配布資料</p>
+</footer>
+</div>
+
+
+<button class="totop" type="button" id="totop">↑ 目次へ</button>
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var map={}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)]=a; });
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      var a=map[e.target.id]; if(!a) return;
+      if(e.isIntersecting){ links.forEach(function(x){x.classList.remove('on');}); a.classList.add('on'); }
+    });
+  },{rootMargin:'-70px 0px -70% 0px'});
+  Object.keys(map).forEach(function(id){ var el=document.getElementById(id); if(el) io.observe(el); });
+  var btn=document.getElementById('totop');
+  addEventListener('scroll',function(){ btn.classList.toggle('show', scrollY>600); },{passive:true});
+  btn.addEventListener('click',function(){ scrollTo({top:0,behavior:'smooth'}); });
+})();
+</script>
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var pre = btn.parentElement.querySelector('pre');
+    var text = pre.innerText;
+    var done = function(){ btn.textContent='コピーしました'; btn.classList.add('done');
+      setTimeout(function(){ btn.textContent='コピー'; btn.classList.remove('done'); }, 1900); };
+    var fb = function(){ var r=document.createRange(); r.selectNodeContents(pre);
+      var s=getSelection(); s.removeAllRanges(); s.addRange(r);
+      try{ document.execCommand('copy'); done(); }catch(e){ btn.textContent='選択しました。⌘Cでコピー'; } };
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done,fb); } else { fb(); }
+  });
+});
+</script>
+<script src="index-menu.js"></script>

@@ -34,6 +34,7 @@
 | 別冊8 | `whats-to-build.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/whats-to-build.html | Claude Codeで何を作るか迷った人への入口 |
 | 別冊9 | `offkai-archive.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/offkai-archive.html | Claude Code関連オフ会アーカイブ |
 | 別冊10 | `everyone-ai-usage-list.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/everyone-ai-usage-list.html | 学長ライブのAI活用事例DB |
+| 別冊11 | `timebucket.html` | https://okemonogatari-hash.github.io/claude-code-beginner-guide/timebucket.html | 学長のタイムバケットをAIと作る。1問ずつ聞いてもらうプロンプト、リベシティ投稿用、1枚のHTMLにする手順 |
 
 ---
 

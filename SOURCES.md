@@ -62,6 +62,20 @@
 | Claude in Chrome | https://chromewebstore.google.com/publisher/anthropic/u308d63ea0533efcf7ba778ad42da7390 |
 | Claude in Chrome support guide | https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome |
 
+## タイムバケット（別冊⑪）の参照元
+
+| 参照元 | URL |
+|---|---|
+| 両学長「タイムバケットって何？3つのメリットと作り方を解説」（再放送・アニメ版） | https://www.youtube.com/watch?v=mAtehQ95cW0 |
+| 同 第112回・オリジナル非アニメ版（この回にだけ「リベシティ内で公開しあう企画」の発案がある） | https://www.youtube.com/watch?v=in0GDXJfX4c |
+| 同 第98回・オリジナルアニメ版 | https://www.youtube.com/watch?v=2wYHlBF93K4 |
+| リベ大公式ブログ「タイムバケット」 | https://liberaluni.com/time-bucket |
+| リベシティ運営「今こそ作ろうタイムバケット」キャンペーン告知（2026/08/15・要ログイン） | https://libecity.com/room_list?room_id=Liberal-City&comment_id=2g33VUdF0WPFRsu1RcxE |
+| 五つの力の宿題リスト「タイムバケットを作って1つ実行しよう」（要ログイン） | https://libecity.com/mypage/fiveforces |
+
+キャンペーンの条件は2026-08-21に告知原文を直接確認したもの。書き写しである以上ずれる可能性があるため、
+ページ内に「原文をAIに読ませるプロンプト」を同梱している。会員のつぶやきは要旨のみ、全文転載していない。
+
 ## 森側メモ
 
 | メモ | 位置づけ |

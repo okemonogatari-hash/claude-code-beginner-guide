@@ -196,7 +196,8 @@
     { filename: 'gakucho-live-30days-database.html', title: '🗓️ 別冊⑦：30日分ライブDB', desc: '自動取得された29日分の実生データ一覧。タイトルやYouTubeリンク。', badge: '別冊⑦' },
     { filename: 'whats-to-build.html', title: '🤔 別冊⑧：で、なに作る？', desc: '「インストールしたけれど何を作ればいいか分からない」人へのアイデア集。', badge: '別冊⑧' },
     { filename: 'offkai-archive.html', title: '🌳 別冊⑨：オフ会アーカイブ', desc: 'Claude Code関連オフ会・シェア会・勉強会の記録とFAQの育ち方。', badge: '別冊⑨' },
-    { filename: 'everyone-ai-usage-list.html', title: '🌟 別冊⑩：AI活用事例DB', desc: '学長ライブから抽出したAI活用事例198件の入口マップ。', badge: '別冊⑩' }
+    { filename: 'everyone-ai-usage-list.html', title: '🌟 別冊⑩：AI活用事例DB', desc: '学長ライブから抽出したAI活用事例198件の入口マップ。', badge: '別冊⑩' },
+    { filename: 'timebucket.html', title: '🪣 別冊⑪：3つでいいタイムバケット', desc: 'AIに1問ずつ聞いてもらって、やりたいことを3つ決める。プロンプト4本つき。', badge: '別冊⑪' }
   ];
 
   // Insert CSS
