@@ -27,8 +27,8 @@ from pathlib import Path
 from datetime import date, datetime, timedelta, timezone
 
 # ==================== 設定 ====================
-VAULT_DIR = Path(os.environ.get("VAULT_DIR", "/Users/monoke/Library/CloudStorage/GoogleDrive-okemonogatari@gmail.com/マイドライブ/000 おけ森"))
-REPO_DIR = Path(os.environ.get("REPO_DIR", "/Users/monoke/Downloads/claude_tmp/claude-code-beginner-guide"))
+VAULT_DIR = Path(os.environ.get("VAULT_DIR", "/Users/monoke/Okemori"))
+REPO_DIR = Path(os.environ.get("REPO_DIR", "/Users/monoke/claude-code-beginner-guide"))
 HTML_PATH = REPO_DIR / "gakucho-live-30days-database.html"
 
 API_KEY = os.environ.get("YOUTUBE_API_KEY")
@@ -270,27 +270,55 @@ def git_push(yn, gn, nn, total, saved_count):
     log(f"✅ push成功: {cm.stdout.split()[1] if 'main' in cm.stdout else 'commit OK'}")
     return True
 
+# ==================== 0. LINE通知（失敗時のみ） ====================
+def notify_line_failure(reason: str):
+    """失敗時にLINE通知（既存 line-notify スキル利用）。通知自体の失敗は握りつぶし、二次障害にしない。
+    2026-08-25 判明：本スクリプトはdocstringに『失敗時はLINE通知』と書かれていたが実装が1行も無く、
+    launchdが落ちても無通知だった（あおいCDO・配線修理4件セット）。"""
+    try:
+        send_line_path = VAULT_DIR / "あおいCDO/各種ツール/line-notify/send_line.py"
+        if not send_line_path.exists():
+            log(f"⚠ LINE通知スキップ（send_line.py 不在）: {send_line_path}")
+            return
+        msg = f"🚨 学長ライブDB自動更新 失敗\n{reason}"
+        r = subprocess.run([sys.executable, str(send_line_path), msg], capture_output=True, text=True, timeout=30)
+        log("📲 LINE通知送信済み" if r.returncode == 0 else f"⚠ LINE通知送信失敗: {r.stderr[:200]}")
+    except Exception as e:
+        log(f"⚠ LINE通知処理自体が例外: {str(e)[:200]}")
+
 # ==================== main ====================
 def main():
-    if not API_KEY:
-        log("❌ YOUTUBE_API_KEY 未設定")
-        sys.exit(1)
-    if not HTML_PATH.exists():
-        log(f"❌ HTMLが見つからない: {HTML_PATH}")
-        sys.exit(1)
+    try:
+        if not API_KEY:
+            log("❌ YOUTUBE_API_KEY 未設定")
+            sys.exit(1)
+        if not HTML_PATH.exists():
+            log(f"❌ HTMLが見つからない: {HTML_PATH}")
+            sys.exit(1)
 
-    log("=== 学長ライブDB 自動更新 開始 ===")
-    lives = get_morning_lives_30days()
-    if not lives:
-        log("⚠ 朝ライブ取得ゼロ・終了"); sys.exit(0)
-    yaku_map, gen_map = scan_vault()
-    log(f"Vault スキャン: 📝要約{len(yaku_map)} / 📜原液{len(gen_map)}")
-    saved = fetch_missing_transcripts(lives, gen_map)
-    log(f"原液救済: +{saved}本")
-    yn, gn, nn = update_html(lives, yaku_map, gen_map)
-    log(f"HTML更新: 📝{yn} / 📜{gn} / ⚠{nn} （{len(lives)}本中）")
-    pushed = git_push(yn, gn, nn, len(lives), saved)
-    log(f"=== 完了 (pushed={pushed}) ===")
+        log("=== 学長ライブDB 自動更新 開始 ===")
+        lives = get_morning_lives_30days()
+        if not lives:
+            log("⚠ 朝ライブ取得ゼロ・終了"); sys.exit(0)
+        yaku_map, gen_map = scan_vault()
+        log(f"Vault スキャン: 📝要約{len(yaku_map)} / 📜原液{len(gen_map)}")
+        saved = fetch_missing_transcripts(lives, gen_map)
+        log(f"原液救済: +{saved}本")
+        yn, gn, nn = update_html(lives, yaku_map, gen_map)
+        log(f"HTML更新: 📝{yn} / 📜{gn} / ⚠{nn} （{len(lives)}本中）")
+        pushed = git_push(yn, gn, nn, len(lives), saved)
+        log(f"=== 完了 (pushed={pushed}) ===")
+    except SystemExit as e:
+        # sys.exit(0)（朝ライブ0本など正常系）は通知しない。0以外だけ失敗として通知する
+        if e.code not in (0, None):
+            notify_line_failure(f"sys.exit({e.code})（YOUTUBE_API_KEY未設定 or HTML欠落など想定内の異常終了。詳細は直前のログ行）")
+        raise
+    except Exception as e:
+        import traceback
+        log(f"❌ 予期しない例外で終了: {e}")
+        log(traceback.format_exc())
+        notify_line_failure(f"{type(e).__name__}: {str(e)[:300]}")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
