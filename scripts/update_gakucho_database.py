@@ -287,8 +287,28 @@ def notify_line_failure(reason: str):
         log(f"⚠ LINE通知処理自体が例外: {str(e)[:200]}")
 
 # ==================== main ====================
+NETWORK_DOWN_EXIT = 75   # EX_TEMPFAIL。ネットが無くて走れなかった＝壊れたのではない（起動時の一覧で⚪になる）
+
+
+def wait_for_network(host="www.googleapis.com", tries=4, wait_sec=300):
+    """名前解決できるまで最大15分待つ。移動中・回線切替の一時的な断で🔴とLINEを出さないため（2026-09-24）"""
+    import socket, time
+    for i in range(tries):
+        try:
+            socket.getaddrinfo(host, 443)
+            return True
+        except OSError:
+            if i < tries - 1:
+                log(f"… ネットに繋がらない（{host}）。{wait_sec // 60}分待って確かめ直す（{i + 1}/{tries - 1}）")
+                time.sleep(wait_sec)
+    return False
+
+
 def main():
     try:
+        if not wait_for_network():
+            log("⚪ ネットに繋がらないので今回は見送り（壊れてはいない・次の回で30日分をまとめて埋める）")
+            sys.exit(NETWORK_DOWN_EXIT)
         if not API_KEY:
             log("❌ YOUTUBE_API_KEY 未設定")
             sys.exit(1)
@@ -310,7 +330,7 @@ def main():
         log(f"=== 完了 (pushed={pushed}) ===")
     except SystemExit as e:
         # sys.exit(0)（朝ライブ0本など正常系）は通知しない。0以外だけ失敗として通知する
-        if e.code not in (0, None):
+        if e.code not in (0, None, NETWORK_DOWN_EXIT):
             notify_line_failure(f"sys.exit({e.code})（YOUTUBE_API_KEY未設定 or HTML欠落など想定内の異常終了。詳細は直前のログ行）")
         raise
     except Exception as e:
