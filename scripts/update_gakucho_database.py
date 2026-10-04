@@ -14,7 +14,8 @@
   6. git add → commit → push（差分があるときだけ）
 
 設定：
-  - 環境変数 YOUTUBE_API_KEY 必須（Meet to YouTube プロジェクト）
+  - OKEMORI_YOUTUBE_AUTH=keychain でおけ森の限定YouTubeクライアントを使用
+  - 既定の従来経路では YOUTUBE_API_KEY を使用（Meet to YouTube プロジェクト）
   - VAULT_DIR / REPO_DIR は環境変数 or 既定値
   - 失敗時は LINE通知（既存 line-notify スキル利用）
 
@@ -32,6 +33,8 @@ REPO_DIR = Path(os.environ.get("REPO_DIR", "/Users/monoke/claude-code-beginner-g
 HTML_PATH = REPO_DIR / "gakucho-live-30days-database.html"
 
 API_KEY = os.environ.get("YOUTUBE_API_KEY")
+YOUTUBE_AUTH = os.environ.get("OKEMORI_YOUTUBE_AUTH", "legacy")
+KEYCHAIN_ADAPTER_DIR = VAULT_DIR / "あおいCDO/AI運用/scripts"
 CHANNEL_UPLOADS_PL = "UU67Wr_9pA4I0glIxDt_Cpyw"  # 両学長アップロードプレイリスト
 PODCASTS_PL = "PLpwLNivKud-h_pNKrmLiV67hhhpeI5fts"  # 過去ライブ救済用
 
@@ -44,14 +47,27 @@ LOG_PREFIX = f"[{datetime.now(JST).strftime('%Y-%m-%d %H:%M:%S JST')}]"
 def log(msg): print(f"{LOG_PREFIX} {msg}", flush=True)
 
 # ==================== 1. YouTube Data API ====================
+def youtube_get(endpoint, **params):
+    if YOUTUBE_AUTH == "keychain":
+        if str(KEYCHAIN_ADAPTER_DIR) not in sys.path:
+            sys.path.insert(0, str(KEYCHAIN_ADAPTER_DIR))
+        from youtube_keychain_adapter import keychain_api_get
+        return keychain_api_get(endpoint, **params)
+    if YOUTUBE_AUTH != "legacy":
+        raise RuntimeError("YOUTUBE_AUTH_MODE_UNSUPPORTED")
+    if not API_KEY:
+        raise RuntimeError("YOUTUBE_API_KEY_MISSING")
+    params["key"] = API_KEY
+    url = f"https://www.googleapis.com/youtube/v3/{endpoint}?" + urllib.parse.urlencode(params)
+    with urllib.request.urlopen(url, timeout=15) as response:
+        return json.load(response)
+
 def fetch_playlist_items(playlist_id, max_pages=4):
     items, token = [], None
     for _ in range(max_pages):
-        params = {"part":"snippet,contentDetails", "playlistId":playlist_id, "maxResults":50, "key":API_KEY}
+        params = {"part":"snippet,contentDetails", "playlistId":playlist_id, "maxResults":50}
         if token: params["pageToken"] = token
-        url = "https://www.googleapis.com/youtube/v3/playlistItems?" + urllib.parse.urlencode(params)
-        with urllib.request.urlopen(url, timeout=15) as r:
-            data = json.loads(r.read().decode("utf-8"))
+        data = youtube_get("playlistItems", **params)
         items.extend(data.get("items", []))
         token = data.get("nextPageToken")
         if not token: break
@@ -60,10 +76,8 @@ def fetch_playlist_items(playlist_id, max_pages=4):
 def fetch_video_details(video_ids):
     out = []
     for i in range(0, len(video_ids), 50):
-        params = {"part":"snippet,contentDetails", "id":",".join(video_ids[i:i+50]), "key":API_KEY}
-        url = "https://www.googleapis.com/youtube/v3/videos?" + urllib.parse.urlencode(params)
-        with urllib.request.urlopen(url, timeout=15) as r:
-            out.extend(json.loads(r.read().decode("utf-8")).get("items", []))
+        params = {"part":"snippet,contentDetails", "id":",".join(video_ids[i:i+50])}
+        out.extend(youtube_get("videos", **params).get("items", []))
     return out
 
 def iso_to_minutes(iso):
@@ -309,7 +323,10 @@ def main():
         if not wait_for_network():
             log("⚪ ネットに繋がらないので今回は見送り（壊れてはいない・次の回で30日分をまとめて埋める）")
             sys.exit(NETWORK_DOWN_EXIT)
-        if not API_KEY:
+        if YOUTUBE_AUTH not in ("legacy", "keychain"):
+            log("❌ YouTube認証モードが不明")
+            sys.exit(1)
+        if YOUTUBE_AUTH == "legacy" and not API_KEY:
             log("❌ YOUTUBE_API_KEY 未設定")
             sys.exit(1)
         if not HTML_PATH.exists():
